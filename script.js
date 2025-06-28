@@ -184,5 +184,6 @@ window.addEventListener('resize', function() {
   effect.canvasWidth = canvas.width;
   effect.canvasHeight = canvas.height;
   effect.wrapText(textInput.value); // Re-render text on resize
+  
 });
 });
