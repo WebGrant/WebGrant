@@ -89,9 +89,9 @@ window.addEventListener('load', function() {
         this.context.imageSmoothingEnabled = false;
         const edge = this.canvasWidth * 0.2;
         const gradient = this.context.createLinearGradient(edge, edge, this.canvasWidth - edge, this.canvasHeight - edge);
-        gradient.addColorStop(0, '#FF6B6B');
-        gradient.addColorStop(0.5, '#FFD93D');
-        gradient.addColorStop(1, '#6BCB77');
+        gradient.addColorStop(0, '#00BFFF');
+        gradient.addColorStop(0.5, '#39FF14');
+        gradient.addColorStop(1, '#FFD700');
         this.context.fillStyle = gradient;
         let linesArray = [];
         let words = text.split(' ');
