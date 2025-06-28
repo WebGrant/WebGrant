@@ -86,7 +86,7 @@ window.addEventListener('load', function() {
       // Helper function to calculate responsive font size
       getResponsiveFontSize() {
         if (this.canvasWidth < 768) { // For mobile screens
-          return this.canvasWidth * 0.1; // Smaller font size on mobile
+          return this.canvasWidth * 0.15; // Smaller font size on mobile
         } else { // For larger screens
           return 100; // Original font size for desktop
         }
