@@ -118,6 +118,7 @@ window.addEventListener('load', function() {
         this.context.textBaseline = 'middle';
         this.context.strokeStyle = '#F8F0E3';
         this.context.lineWidth = 2;
+                this.context.lineWidth = this.canvasWidth < 768 ? 1 : 2;
         this.context.letterSpacing = "10px"; // experimental property
         this.context.imageSmoothingEnabled = false;
         const edge = this.canvasWidth * 0.2;
