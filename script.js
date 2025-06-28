@@ -151,11 +151,11 @@ window.addEventListener('load', function() {
     }
     animate();
 
-    window.addEventListener('resize', function(){
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      effect = new Effect(ctx, canvas.width, canvas.height);
-      effect.wrapText(effect.textInput.value);
-      console.log('resize')
-    });
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  effect.canvasWidth = canvas.width;
+  effect.canvasHeight = canvas.height;
+  effect.wrapText(textInput.value); // Re-render text
+});
 });
