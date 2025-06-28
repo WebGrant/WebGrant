@@ -31,18 +31,18 @@ ul {
   background-image: url(IMG_2391.GIF);
   background-size: cover;
   background-position: center;
-  height: 70px;
-  width: 96%; /* Adjusted for a bit more padding on very small screens */
+  height: 70px; /* Keep fixed height for desktop */
+  width: 96%;
   max-width: 950px;
   margin: 0 auto;
-  left: 2%; /* Add left and right to ensure it's centered with width: 96% */
+  left: 2%;
   right: 2%;
   border-radius: 20px;
   z-index: 1000;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
-  padding: 0 10px; /* Add some padding to the menu itself */
+  flex-wrap: wrap;
+  padding: 0 10px;
 }
 
 ul li {
@@ -52,13 +52,13 @@ ul li {
 
 ul li a {
   display: block;
-  padding: 20px 25px; /* Reduced horizontal padding for smaller screens */
+  padding: 20px 25px;
   color: #FFF;
   text-decoration: none;
   text-align: center;
   font-size: 20px;
   border-radius: 20px;
-  white-space: nowrap; /* Prevents menu items from breaking into multiple lines */
+  white-space: nowrap;
 }
 
 ul li a:hover {
@@ -97,24 +97,23 @@ canvas {
   flex-direction: column;
   z-index: 2;
   position: relative;
-  /* margin-top will be handled by the .hero-content for positioning */
 }
 
 .hero-content {
   background: rgba(0, 0, 0, 0.5);
   padding: 40px;
   border-radius: 20px;
-  margin-top: 55vh; /* Use viewport height to push it down relative to screen size */
-  max-width: 90%; /* Ensure content doesn't overflow horizontally */
-  box-sizing: border-box; /* Include padding in the width calculation */
+  margin-top: 55vh; /* This will be adjusted in media queries */
+  max-width: 90%;
+  box-sizing: border-box;
 }
 
 .hero-content h1 {
-  font-size: 2.5em; /* Use relative units for font size */
+  font-size: 2.5em;
 }
 
 .hero-content p {
-  font-size: 1.2em; /* Use relative units for font size */
+  font-size: 1.2em;
 }
 
 /* Scroll down button */
@@ -152,48 +151,57 @@ canvas {
 }
 
 /* Responsive styles for smaller screens */
-@media (max-width: 768px) { /* Adjusted breakpoint for tablets and phones */
+@media (max-width: 768px) {
   ul {
-    width: 96vw;
-    height: auto; /* Allow height to adjust based on content */
-    top: 10px;
-    border-radius: 10px; /* Slightly smaller border radius */
-    padding: 5px 0; /* Reduced padding */
-    flex-direction: column; /* Stack menu items vertically */
-    align-items: center; /* Center items when stacked */
+    width: 90vw; /* Use viewport width for menu on mobile */
+    height: auto;
+    top: 10px; /* Adjusted position */
+    border-radius: 10px;
+    padding: 5px 0;
+    flex-direction: column;
+    align-items: center;
+    left: 5vw; /* Center horizontally with viewport width */
+    right: 5vw;
   }
 
   ul li {
-    width: 100%; /* Make each list item take full width */
+    width: 100%;
     text-align: center;
   }
 
   ul li a {
-    padding: 10px 0; /* Adjust padding for stacked items */
-    font-size: 18px; /* Slightly smaller font size for menu items */
+    padding: 8px 0; /* Reduced padding for more compact vertical menu */
+    font-size: 16px; /* Slightly smaller font size for mobile menu */
   }
 
+  /* Adjustments for the canvas text and hero content on smaller screens */
   .hero-content {
-    margin-top: 40vh; /* Adjust margin for smaller screens */
-    padding: 20px; /* Smaller padding on hero content */
+    margin-top: 50vh; /* Adjust margin for mobile to push it below the canvas text */
+    padding: 20px;
   }
 
   .hero-content h1 {
-    font-size: 1.8em; /* Further reduce heading font size */
+    font-size: 1.8em;
   }
 
   .hero-content p {
-    font-size: 1em; /* Further reduce paragraph font size */
+    font-size: 1em;
   }
 }
 
-@media (max-width: 480px) { /* Even smaller screens (e.g., small phones) */
+@media (max-width: 480px) {
+  ul {
+    width: 95vw; /* Slightly wider menu for very small screens */
+    left: 2.5vw;
+    right: 2.5vw;
+  }
+
   ul li a {
-    font-size: 16px; /* Even smaller font size for menu items */
+    font-size: 15px; /* Even smaller font size for very small mobile menu */
   }
 
   .hero-content {
-    margin-top: 35vh; /* Adjust margin for very small screens */
+    margin-top: 45vh; /* Further adjust for very small screens */
     padding: 15px;
   }
 }
