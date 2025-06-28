@@ -205,3 +205,63 @@ canvas {
     padding: 15px;
   }
 }
+
+/* Hide the checkbox */
+#menu-toggle {
+  display: none;
+}
+
+/* Hamburger icon styling */
+.menu-icon {
+  display: none; /* hidden on desktop */
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  /* Show hamburger */
+  .menu-icon {
+    display: block;
+  }
+
+  /* Hide the menu by default */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-image: url(IMG_2391.GIF);
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 60px; /* below hamburger */
+    right: 2%;
+    width: 90vw;
+    max-width: 300px;
+    border-radius: 20px;
+    padding: 10px 0;
+    box-shadow: 0 0 10px #03e9f4;
+  }
+
+  /* Show menu when checkbox checked */
+  #menu-toggle:checked + .menu-icon + nav ul {
+    display: flex;
+  }
+
+  /* Menu list items full width */
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  nav ul li a {
+    padding: 12px 0;
+    font-size: 18px;
+    display: block;
+  }
+}
