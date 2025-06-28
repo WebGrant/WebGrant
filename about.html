@@ -10,12 +10,15 @@
 
 <nav class="navbar">
   <div class="nav-logo">WebGrant</div>
-  <ul class="nav-links">
+
+  <button class="hamburger" id="hamburger">&#9776;</button> <!-- The three lines icon -->
+
+  <ul class="nav-links" id="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="service.html">Services</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Contact</a></li>
   </ul>
 </nav>
 
@@ -84,5 +87,15 @@
     </a>
   </p>
 </footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
 </body>
 </html>
