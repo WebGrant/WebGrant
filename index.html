@@ -2,46 +2,518 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebGrant</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebGrant - Galactic Startup Partner</title>
+  <style>
+    /* === Reset and base === */
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+    body {
+      background:
+        radial-gradient(ellipse at center, #1a1a2e 0%, #000010 80%),
+        #000010;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      padding-top: 60px; /* For navbar space */
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* Scroll animation styles */
+.animate-fade-slide {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-fade-slide.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    /* === Navbar === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(10,10,30, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid #0ff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 10000;
+      box-shadow: 0 0 10px #00fff7;
+    }
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: #00fff7;
+      text-shadow: 0 0 6px #00fff7;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul li {
+      position: relative;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    nav ul li:hover,
+    nav ul li:focus-within {
+      color: #ff00c8;
+      text-shadow: 0 0 10px #ff00c8;
+    }
+    nav ul li::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+    nav ul li:hover::after,
+    nav ul li:focus-within::after {
+      width: 100%;
+    }
+
+    nav ul li.active {
+  color: #ff00c8;
+  text-shadow: 0 0 10px #ff00c8;
+}
+
+nav ul li.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #00fff7, #ff00c8);
+  border-radius: 1px;
+}
+
+    /* === Starfield background === */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        url('https://raw.githubusercontent.com/joshwcomeau/starfield/master/starfield.png') repeat;
+      background-size: contain;
+      opacity: 0.25;
+      z-index: 0;
+      animation: twinkle 15s linear infinite alternate;
+      pointer-events: none;
+    }
+    /* A subtle twinkle effect */
+    @keyframes twinkle {
+      0%   {opacity: 0.2;}
+      50%  {opacity: 0.35;}
+      100% {opacity: 0.2;}
+    }
+
+    /* === Parallax star layers === */
+    #parallax-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .parallax-layer {
+      position: absolute;
+      width: 200vw; height: 200vh;
+      background-repeat: repeat;
+      background-size: contain;
+      opacity: 0.15;
+      will-change: transform;
+      filter: drop-shadow(0 0 3px #00fff7);
+    }
+    .stars-1 {
+      background-image: url('https://media.istockphoto.com/id/1403817732/video/flying-away-from-the-nebula.jpg?s=640x640&k=20&c=_Va4HotgrhAlB7kDRPTknSX0Cb1TbhsB51VcYBK27n0=');
+      top: -50vh; left: -50vw;
+      z-index: 1;
+      opacity: 0.12;
+    }
+    .stars-2 {
+      background-image: url('https://media.istockphoto.com/id/1403817732/video/flying-away-from-the-nebula.jpg?s=640x640&k=20&c=_Va4HotgrhAlB7kDRPTknSX0Cb1TbhsB51VcYBK27n0=');
+      top: -60vh; left: -40vw;
+      z-index: 2;
+      opacity: 0.07;
+    }
+
+    /* === Header section === */
+    header {
+      padding: 3rem 2rem 5rem;
+        margin-top: 190px; /* or any value that fits */
+      text-align: center;
+      z-index: 10;
+      position: relative;
+      user-select: none;
+    }
+    header .glow-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 10px #00fff7,
+        0 0 20px #ff00c8,
+        0 0 30px #ff00c8,
+        0 0 40px #ff00c8;
+      animation: neonGlow 3s ease-in-out infinite alternate;
+      margin-bottom: 0.5rem;
+    }
+    @keyframes neonGlow {
+      0% {
+        text-shadow:
+          0 0 5px #00fff7,
+          0 0 15px #00fff7,
+          0 0 20px #ff00c8,
+          0 0 25px #ff00c8;
+      }
+      100% {
+        text-shadow:
+          0 0 15px #00fff7,
+          0 0 30px #00fff7,
+          0 0 40px #ff00c8,
+          0 0 50px #ff00c8;
+      }
+    }
+    header p {
+      font-size: 1.3rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      color: #ccc;
+      text-shadow: 0 0 3px #000;
+    }
+    .btn-neon {
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      border: none;
+      border-radius: 30px;
+      padding: 1.2rem 3rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #111;
+      cursor: pointer;
+      box-shadow:
+        0 0 10px #00fff7,
+        0 0 20px #ff00c8,
+        inset 0 0 8px #00fff7;
+      transition: transform 0.2s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      outline-offset: 4px;
+    }
+    .btn-neon:hover,
+    .btn-neon:focus-visible {
+      transform: scale(1.08);
+      box-shadow:
+        0 0 20px #00fff7,
+        0 0 40px #ff00c8,
+        inset 0 0 15px #00fff7;
+      outline: none;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      font-size: 3rem;
+      margin-top: 4rem;
+      animation: bounceDown 1.6s ease-in-out infinite alternate;
+      color: #ff00c8;
+      user-select: none;
+      filter: drop-shadow(0 0 6px #ff00c8);
+    }
+    @keyframes bounceDown {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(20px);}
+    }
+
+    /* === Sections === */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      position: relative;
+      z-index: 10;
+    }
+    .glow-text {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px #00fff7, 0 0 20px #ff00c8;
+    }
+
+    /* Cards container */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+      z-index: 10;
+    }
+    .card {
+      background: rgba(10, 10, 30, 0.85);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow:
+        0 0 15px #00fff7,
+        inset 0 0 15px #ff00c8;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+      text-align: center;
+    }
+    .card i {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+      color: #ff00c8;
+      filter: drop-shadow(0 0 6px #ff00c8);
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #00fff7;
+      text-shadow: 0 0 8px #00fff7;
+    }
+    .card p {
+      color: #ddd;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        0 0 30px #ff00c8,
+        inset 0 0 20px #00fff7;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      padding: 2rem 0;
+      z-index: 10;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 4px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      transform: translateY(-50%);
+      border-radius: 2px;
+      filter: drop-shadow(0 0 8px #ff00c8);
+      z-index: 0;
+    }
+    .timeline-step {
+      position: relative;
+      flex: 1;
+      text-align: center;
+      font-weight: 700;
+      color: #fff;
+      padding: 0 1rem;
+      user-select: none;
+      cursor: default;
+      font-size: 1.1rem;
+      z-index: 1;
+    }
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #00fff7, #ff00c8);
+  box-shadow: 0 0 10px #ff00c8;
+}
+
+    /* Contact section */
+    #contact p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      text-align: center;
+      color: #ddd;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      user-select: none;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1.2rem;
+      }
+      nav .logo {
+        font-size: 1.3rem;
+      }
+      header .glow-text {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+      }
+      .timeline {
+        flex-direction: column;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .timeline-step {
+        margin-bottom: 1.8rem;
+      }
+      .timeline::before {
+        display: none;
+      }
+    }
+  </style>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
 </head>
 <body>
 
-  <canvas id="canvas1"></canvas>
-  <input id="textInput" value="W e b  G r a n t" />
-
-  <script src="script.js"></script>
-
-  <!-- Menu bar -->
-   <input type="checkbox" id="menu-toggle" />
-<label for="menu-toggle" class="menu-icon">&#9776;</label>
-
   <nav>
+    <div class="logo">WebGrant</div>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li>
-        <a href="portfolio.html">Portfolio </a>
-      </li>
-      <li><a href="about.html">About us</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
+    <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="portfolio.html" tabindex="2">Portfolio</a></li>
+      <li><a href="about.html" tabindex="3">About Us</a></li>
+      <li><a href="contact.html" tabindex="4">Contact Us</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>We Design Beautiful, Functional Websites</h1>
-      <p>Results-driven. Sydney-based.</p>
-      <a href="#services" class="scroll-down">&#8675; Scroll Down</a>
-    </div>
+  <div id="parallax-container" aria-hidden="true">
+    <div class="parallax-layer stars-1"></div>
+    <div class="parallax-layer stars-2"></div>
+  </div>
+
+  <header id="home" role="banner" aria-label="Welcome section">
+    <h1 class="glow-text">WebGrant</h1>
+    <p>Your galactic startup partner — ready for cosmic success.</p>
+    <button class="btn-neon" aria-label="Get started with WebGrant">Get Started</button>
+    <div class="scroll-indicator" aria-hidden="true">⬇️</div>
   </header>
 
-  <!-- Section to scroll to -->
-  <section id="services" style="height: 100vh; background: #111; color: white; display: flex; justify-content: center; align-items: center;">
-    <h2>Our Services</h2>
+  <section id="portfolio" aria-label="Portfolio">
+    <section id="services">
+    <div class="card-container" role="list">
+      <article class="card" role="listitem">
+        <i class="fas fa-rocket" aria-hidden="true"></i>
+        <h3>Stunning Designs</h3>
+        <p>Crafted with creativity and style to make your business stand out from the crowd. 100% unique, every time.</p>
+      </article>
+<article class="card" role="listitem">
+  <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+  <h3>Mobile Optimized</h3>
+  <p>Look amazing on every device. Your website will shine on phones, tablets, and desktops alike.</p>
+</article>
+      <article class="card" role="listitem">
+        <i class="fas fa-chart-line" aria-hidden="true"></i>
+        <h3>Blazing Fast</h3>
+        <p>Lightning-fast load times with smooth animations to leave a lasting impression and keep visitors engaged.</p>
+      </article>
+    </section>
+    </div>
   </section>
+
+  <section id="about" aria-label="About WebGrant">
+    <h2 class="glow-text">About Us</h2>
+    <p style="max-width: 720px; margin: 0 auto; font-size: 1.2rem; line-height: 1.6;">
+      WebGrant was founded in 2023 to empower visionary founders with expert technology,
+      marketing, and growth support — making the complex simple and the impossible possible.
+      We’re your cosmic co-pilot on the journey to startup stardom.
+    </p>
+    <div class="timeline" aria-hidden="true">
+      <div class="timeline-step">Concept</div>
+      <div class="timeline-step">Launch</div>
+      <div class="timeline-step">Growth</div>
+      <div class="timeline-step">Success</div>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact Us">
+    <h2 class="glow-text">Get in Touch</h2>
+    <p>Reach out to discuss your project or just say hello — we’re always ready to collaborate.</p>
+    <p>Email: <a href="mailto:contact@webgrant.io" style="color:#0ff; text-decoration:underline;">contact@webgrant.io</a></p>
+    <p>Phone: <a href="tel:+1234567890" style="color:#0ff; text-decoration:underline;">+1 (234) 567-890</a></p>
+  </section>
+
+  <footer role="contentinfo">
+    &copy; 2025 WebGrant. All rights reserved.
+  </footer>
+
+<script>
+    document.querySelector('.btn-neon').addEventListener('click', function () {
+    window.scrollBy({
+      top: 600, // Change this value to scroll more or less
+      left: 0,
+      behavior: 'smooth' // Makes the scroll smooth
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const animatedElements = document.querySelectorAll('.card, section');
+
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '0px 0px -100px 0px', // trigger just before fully visible
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target); // Animate once only
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(el => {
+      el.classList.add('animate-fade-slide'); // start hidden + shifted down
+      observer.observe(el);
+    });
+  });
+</script>
 
 </body>
 </html>
