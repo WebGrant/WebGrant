@@ -71,7 +71,7 @@ window.addEventListener('load', function() {
         });
 
         this.particles = [];
-        this.gap = 3;
+        this.gap = this.canvasWidth < 768 ? 6 : 3; // Use gap of 6 on mobile
         this.mouse = {
             radius: 20000,
             x: 0,
