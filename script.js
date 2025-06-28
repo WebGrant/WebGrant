@@ -108,6 +108,12 @@ window.addEventListener('load', function() {
         this.lineHeight = this.fontSize * 1.2;
 
         this.context.font = this.fontSize + 'px Bangers';
+                let finalFontSize = this.fontSize;
+        if (text.trim().toLowerCase() === "webgrant" && this.canvasWidth < 768) {
+          finalFontSize = 50; // or any other smaller size you'd like for mobile
+        }
+        this.context.font = finalFontSize + 'px Bangers';
+
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
         this.context.strokeStyle = '#F8F0E3';
