@@ -23,6 +23,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 999;
+  position: relative; /* add this */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -295,9 +296,14 @@ footer a:hover {
     text-align: center;
     border-top: 1px solid #03e9f4;
     box-shadow: 0 5px 10px rgba(3, 233, 244, 0.3);
+    z-index: 1000; /* add this */
+      max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   }
 
   .nav-links.active {
+    max-height: 300px; /* enough height to show all links */
     display: flex;
   }
 
