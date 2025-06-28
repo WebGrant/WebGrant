@@ -102,6 +102,10 @@ window.addEventListener('load', function() {
       }
 
       wrapText(text){
+        // Remove spaces on mobile devices
+if (this.canvasWidth < 768) {
+  text = text.replace(/\s+/g, '');
+}
         // Recalculate font size and vertical offset on resize
         this.fontSize = this.getResponsiveFontSize();
         this.textVerticalOffset = this.getResponsiveTextVerticalOffset();
