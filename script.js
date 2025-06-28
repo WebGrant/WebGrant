@@ -56,11 +56,14 @@ window.addEventListener('load', function() {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.maxTextWidth = this.canvasWidth * 0.8;
-        this.fontSize = this.canvasWidth * 0.1; // Make font size responsive (adjust multiplier as needed)
-        this.textVerticalOffset = -this.fontSize * 1.5; // Adjust offset based on font size
+
+        // Initial font size and offset calculation
+        this.fontSize = this.getResponsiveFontSize();
+        this.textVerticalOffset = this.getResponsiveTextVerticalOffset();
         this.lineHeight = this.fontSize * 1.2;
         this.textX = this.canvasWidth / 2;
         this.textY = this.canvasHeight / 2 - this.lineHeight / 2;
+
         this.textInput = document.getElementById('textInput');
         this.textInput.addEventListener('keyup', e => {
             this.context.clearRect(0, 0, canvas.width, canvas.height);
@@ -79,11 +82,30 @@ window.addEventListener('load', function() {
             this.mouse.y = e.y;
         });
       }
+
+      // Helper function to calculate responsive font size
+      getResponsiveFontSize() {
+        if (this.canvasWidth < 768) { // For mobile screens
+          return this.canvasWidth * 0.1; // Smaller font size on mobile
+        } else { // For larger screens
+          return 100; // Original font size for desktop
+        }
+      }
+
+      // Helper function to calculate responsive text vertical offset
+      getResponsiveTextVerticalOffset() {
+        if (this.canvasWidth < 768) { // For mobile screens
+          return -this.fontSize * 0.5; // Adjust offset to move it higher on mobile
+        } else { // For larger screens
+          return -150; // Original offset for desktop
+        }
+      }
+
       wrapText(text){
-        // Adjust font size and vertical offset on resize
-        this.fontSize = this.canvasWidth * 0.1; // Recalculate font size
-        this.textVerticalOffset = -this.fontSize * 1.5; // Recalculate offset
-        this.lineHeight = this.fontSize * 1.2; // Recalculate line height
+        // Recalculate font size and vertical offset on resize
+        this.fontSize = this.getResponsiveFontSize();
+        this.textVerticalOffset = this.getResponsiveTextVerticalOffset();
+        this.lineHeight = this.fontSize * 1.2;
 
         this.context.font = this.fontSize + 'px Bangers';
         this.context.textAlign = 'center';
