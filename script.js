@@ -56,8 +56,8 @@ window.addEventListener('load', function() {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.maxTextWidth = this.canvasWidth * 0.8;
-        this.fontSize = 100;
-        this.textVerticalOffset = -150;
+        this.fontSize = this.canvasWidth * 0.1; // Make font size responsive (adjust multiplier as needed)
+        this.textVerticalOffset = -this.fontSize * 1.5; // Adjust offset based on font size
         this.lineHeight = this.fontSize * 1.2;
         this.textX = this.canvasWidth / 2;
         this.textY = this.canvasHeight / 2 - this.lineHeight / 2;
@@ -80,6 +80,11 @@ window.addEventListener('load', function() {
         });
       }
       wrapText(text){
+        // Adjust font size and vertical offset on resize
+        this.fontSize = this.canvasWidth * 0.1; // Recalculate font size
+        this.textVerticalOffset = -this.fontSize * 1.5; // Recalculate offset
+        this.lineHeight = this.fontSize * 1.2; // Recalculate line height
+
         this.context.font = this.fontSize + 'px Bangers';
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
@@ -156,6 +161,6 @@ window.addEventListener('resize', function() {
   canvas.height = window.innerHeight;
   effect.canvasWidth = canvas.width;
   effect.canvasHeight = canvas.height;
-  effect.wrapText(textInput.value); // Re-render text
+  effect.wrapText(textInput.value); // Re-render text on resize
 });
 });
