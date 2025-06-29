@@ -272,18 +272,23 @@ nav ul li.active::after {
   <main>
     <h1>Contact Us</h1>
     <p>We would love to hear from you. Please fill out the form below and we'll get back to you soon!</p>
-    <form>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
+<form action="https://formsubmit.co/webgrant25@gmail.com" method="POST">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required />
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+  <label for="message">Message</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
 
-      <button type="submit">Send Message</button>
-    </form>
+<input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
+
+  <button type="submit">Send Message</button>
+
+  <!-- Optional: prevent spam -->
+  <input type="hidden" name="_captcha" value="false">
+</form>
   </main>
 
   <script>
