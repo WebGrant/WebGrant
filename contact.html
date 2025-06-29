@@ -218,49 +218,40 @@ nav ul li.active::after {
       }
     }
 
-   /* Hamburger styles */
 .hamburger {
   display: none;
   flex-direction: column;
-  gap: 6px;
   cursor: pointer;
+  gap: 6px;
   z-index: 10001;
-
-  position: relative;  /* add positioning */
-  top: -5px;           /* move it up by 5px */
-  right: -10px;        /* move it right by 10px */
-  background: none;    /* make sure no background gradient */
-  box-shadow: none;    /* remove any shadow if present */
 }
 
 .hamburger span {
-  width: 30px;       /* bigger width */
-  height: 4px;       /* thicker bars */
-  background: #fff;  /* white color */
+  height: 4px;
+  width: 30px; /* Bigger width */
+  background-color: white; /* Make it white */
   border-radius: 2px;
-  transition: all 0.3s ease;
-  box-shadow: none;  /* no shadow */
+  transition: 0.3s ease;
 }
 
-/* Responsive navbar */
+/* Show hamburger only on small screens */
 @media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
   nav ul {
+    display: none; /* Hide menu on small screens */
+    flex-direction: column;
+    background-color: rgba(10, 10, 30, 0.95);
     position: absolute;
     top: 60px;
     right: 0;
-    background: rgba(10,10,30, 0.95);
-    flex-direction: column;
     width: 200px;
     padding: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    box-shadow: -5px 0 10px #00fff7;
-  }
-  nav ul.show {
-    transform: translateX(0);
   }
 
-  .hamburger {
+  nav ul.show {
     display: flex;
   }
 }
@@ -273,9 +264,12 @@ nav ul li.active::after {
   WebGrant
 </div>
 
-<button class="hamburger" aria-label="Toggle navigation">
-  &#9776;
-</button>
+<div class="hamburger" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
 <ul id="nav-links">
   <li><a href="index.html">Home</a></li>
   <li><a href="services.html">Services</a></li>
@@ -307,13 +301,10 @@ nav ul li.active::after {
 </form>
   </main>
 
-  <script>
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.getElementById('nav-links');
-
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
+<script>
+  function toggleMenu() {
+    document.querySelector('nav ul').classList.toggle('show');
+  }
 </script>
 
 </body>
