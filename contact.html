@@ -228,10 +228,20 @@ nav ul li.active::after {
   z-index: 10001;
 }
 
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #00fff7;
+  cursor: pointer;
+  z-index: 10001;
+}
+
 @media (max-width: 600px) {
   .hamburger {
     display: block;
-    box-shadow: 0 0 6px #00fff7; /* Smaller, cleaner glow */
+    /* box-shadow removed */
   }
 
   nav ul {
@@ -262,10 +272,10 @@ nav ul li.active::after {
   &#9776;
 </button>
 <ul id="nav-links">
-  <li><a href="#">Home</a></li>
-  <li><a href="#services">Services</a></li>
-  <li><a href="#portfolio">Portfolio</a></li>
-  <li><a href="#team">Team</a></li>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="services.html">Services</a></li>
+  <li><a href="portfolio.html">Portfolio</a></li>
+  <li><a href="about.html">About us</a></li>
   <li class="active"><a href="#contact">Contact</a></li>
 </ul>
 </nav>
