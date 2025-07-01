@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebGrant Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #0b0f1a, #000);
+  color: #000000;
+  padding-top: 80px; /* This creates space for the fixed navbar */
+  padding-left: 2rem;   /* Keep your existing left padding */
+  padding-right: 2rem;  /* Keep your existing right padding */
+  padding-bottom: 2rem; /* Keep your existing bottom padding */
+  overflow-x: hidden;
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+}
+ a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+.hero .container {
+  padding-top: 60px; /* add this */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+  /* === Navbar === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(10,10,30, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid #0ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 10000;
+    box-shadow: 0 0 10px #00fff7;
+  }
+  nav .logo {
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: #00fff7;
+    text-shadow: 0 0 6px #00fff7;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+  nav ul li {
+    position: relative;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+  nav ul li:hover,
+  nav ul li:focus-within {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8;
+  }
+  nav ul li::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    transition: width 0.3s ease;
+    border-radius: 1px;
+  }
+  nav ul li:hover::after,
+  nav ul li:focus-within::after {
+    width: 100%;
+  }
+  nav ul li.active {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8;
+  }
+  nav ul li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    border-radius: 1px;
+  }
+
+  /* === Hamburger styles === */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 11000;
+  }
+  .hamburger div {
+    width: 28px;
+    height: 3px;
+    background: #00fff7;
+    border-radius: 2px;
+    box-shadow:
+      0 0 6px #00fff7,
+      inset 0 0 4px #00fff7;
+    transition: all 0.3s ease;
+  }
+  /* Hamburger animation when active */
+  .hamburger.active div:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active div:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* === Responsive === */
+  @media (max-width: 768px) {
+    nav ul {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      height: calc(100vh - 60px);
+      background: rgba(10,10,30, 0.95);
+      backdrop-filter: blur(8px);
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+      width: 220px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: -5px 0 15px #00fff7;
+    }
+    nav ul.open {
+      transform: translateX(0);
+    }
+    nav ul li {
+      font-size: 1.3rem;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+    
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: neon-glow 2s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #88ccff;
+      text-shadow: 0 0 0px #00f7ff, 0 0 20px #074244;
+    }
+
+    header p {
+      color: #aaa;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .portfolio-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+      backdrop-filter: blur(10px);
+      background: rgba(22, 27, 41, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      animation: slide-in 1s ease-out forwards;
+      position: relative;
+      z-index: 2;
+    }
+
+    .portfolio-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+
+    .portfolio-info {
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .portfolio-info h3 {
+      color: #00f7ff;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 0px #00f7ff;
+    }
+
+    .portfolio-info p {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .live-button {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(45deg, #00cfff, #0040ff);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .live-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      animation: hologramPulse 1s infinite alternate;
+    }
+
+    @keyframes hologramPulse {
+      0% { box-shadow: 0 0 5px #00f7ff88, 0 0 15px #00f7ff44; }
+      100% { box-shadow: 0 0 15px #00f7ffcc, 0 0 30px #00f7ffaa; }
+    }
+
+    .portfolio-images {
+      display: flex;
+      gap: 1rem;
+      flex: 2;
+      flex-wrap: wrap;
+      animation: fade-in 1s ease-in;
+    }
+
+    .portfolio-images img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid #2a2f45;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .portfolio-images img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    @media screen and (max-width: 768px) {
+      .portfolio-item {
+        flex-direction: column;
+        align-items: center;
+      }
+      .portfolio-images {
+        justify-content: center;
+      }
+    }
+
+    @keyframes neon-glow {
+      0% { text-shadow: 0 0 5px #00f7ff; }
+      100% { text-shadow: 0 0 20px #00f7ff; }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+    }
+
+    .gradient-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #001f3f, #003f5c, #1a1a40, #000);
+      background-size: 600% 600%;
+      animation: gradientShift 20s ease infinite;
+      z-index: -1;
+      opacity: 0.4;
+      pointer-events: none;
+      background: linear-gradient(135deg, #001520, #002844, #0a0a20, #000000);
+      opacity: 0.25;
+      animation: gradientShift 25s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    canvas#matrix-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -3;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="matrix-rain"></canvas>
+  <div class="gradient-overlay"></div>
+
+<nav>
+  <div class="logo">WebGrant</div>
+  <ul id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="service.html">Services</a></li>
+    <li class="active"><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li><a href="contact.html">Contact us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+
+  <header>
+    <h1>WebGrant's Portfolio</h1>
+    <p>Browse my futuristic work for real businesses</p>
+  </header>
+
+  <section class="portfolio-item">
+    <div class="portfolio-info">
+      <h3>NovaTech Systems</h3>
+      <p>Corporate site for a futuristic cybersecurity startup. Built with HTML, CSS, and React.</p>
+      <a href="https://example.com" target="_blank" class="live-button">View Live</a>
+    </div>
+    <div class="portfolio-images">
+      <img src="https://via.placeholder.com/200x130.png?text=NovaTech+1" alt="NovaTech Screenshot 1">
+      <img src="https://via.placeholder.com/200x130.png?text=NovaTech+2" alt="NovaTech Screenshot 2">
+      <img src="https://via.placeholder.com/200x130.png?text=NovaTech+3" alt="NovaTech Screenshot 3">
+    </div>
+  </section>
+
+  <section class="portfolio-item">
+    <div class="portfolio-info">
+      <h3>GlowSkin</h3>
+      <p>Landing page for a premium skincare brand. Sleek animations, smooth layout, Shopify-powered.</p>
+      <a href="https://example.com" target="_blank" class="live-button">View Live</a>
+    </div>
+    <div class="portfolio-images">
+      <img src="https://via.placeholder.com/200x130.png?text=GlowSkin+1" alt="GlowSkin Screenshot 1">
+      <img src="https://via.placeholder.com/200x130.png?text=GlowSkin+2" alt="GlowSkin Screenshot 2">
+      <img src="https://via.placeholder.com/200x130.png?text=GlowSkin+3" alt="GlowSkin Screenshot 3">
+    </div>
+  </section>
+
+  <section class="portfolio-item">
+    <div class="portfolio-info">
+      <h3>QuantumFleet AI</h3>
+      <p>Dashboard interface for a smart fleet management platform using AI optimization algorithms. Built with React, TailwindCSS, and D3.js.</p>
+      <a href="https://example.com" target="_blank" class="live-button">View Live</a>
+    </div>
+    <div class="portfolio-images">
+      <img src="https://via.placeholder.com/200x130.png?text=QuantumFleet+1" alt="QuantumFleet Screenshot 1">
+      <img src="https://via.placeholder.com/200x130.png?text=QuantumFleet+2" alt="QuantumFleet Screenshot 2">
+      <img src="https://via.placeholder.com/200x130.png?text=QuantumFleet+3" alt="QuantumFleet Screenshot 3">
+    </div>
+  </section>
+
+<script>
+
+      const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  // Optional: close menu when clicking a link (mobile)
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if(window.innerWidth <= 768) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+
+function toggleMenu() {
+  const navUl = document.querySelector('nav ul');
+  navUl.classList.toggle('show');
+}
+  
+// Aurora reactive background
+
+const canvas = document.getElementById("matrix-rain");
+const ctx = canvas.getContext("2d");
+
+let width, height;
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+}
+resize();
+
+window.addEventListener("resize", resize);
+
+let mouse = { x: width/2, y: height/2 };
+window.addEventListener("mousemove", e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+// Utility: Simplex noise for smooth waves (using noisejs library)
+// Instead of external, here's a minimal simplex noise implementation inline
+class SimplexNoise {
+  constructor() {
+    this.grad3 = [
+      [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
+      [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
+      [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]
+    ];
+    this.p = [];
+    for (let i=0; i<256; i++) this.p[i] = Math.floor(Math.random()*256);
+    this.perm = [];
+    for(let i=0; i<512; i++) this.perm[i]=this.p[i & 255];
+  }
+  dot(g, x, y) { return g[0]*x + g[1]*y; }
+  noise(xin, yin) {
+    let F2 = 0.5*(Math.sqrt(3.0)-1.0);
+    let s = (xin+yin)*F2;
+    let i = Math.floor(xin+s);
+    let j = Math.floor(yin+s);
+    let G2 = (3.0-Math.sqrt(3.0))/6.0;
+    let t = (i+j)*G2;
+    let X0 = i-t;
+    let Y0 = j-t;
+    let x0 = xin-X0;
+    let y0 = yin-Y0;
+    let i1, j1;
+    if(x0>y0) { i1=1; j1=0; }
+    else { i1=0; j1=1; }
+    let x1 = x0 - i1 + G2;
+    let y1 = y0 - j1 + G2;
+    let x2 = x0 - 1.0 + 2.0*G2;
+    let y2 = y0 - 1.0 + 2.0*G2;
+    let ii = i & 255;
+    let jj = j & 255;
+    let gi0 = this.perm[ii+this.perm[jj]] % 12;
+    let gi1 = this.perm[ii+i1+this.perm[jj+j1]] % 12;
+    let gi2 = this.perm[ii+1+this.perm[jj+1]] % 12;
+    let n0, n1, n2;
+    let t0 = 0.5 - x0*x0 - y0*y0;
+    if(t0<0) n0=0.0;
+    else {
+      t0 *= t0;
+      n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
+    }
+    let t1 = 0.5 - x1*x1 - y1*y1;
+    if(t1<0) n1=0.0;
+    else {
+      t1 *= t1;
+      n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
+    }
+    let t2 = 0.5 - x2*x2 - y2*y2;
+    if(t2<0) n2=0.0;
+    else {
+      t2 *= t2;
+      n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
+    }
+    return 70.0 * (n0 + n1 + n2);
+  }
+}
+
+const noise = new SimplexNoise();
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+let time = 0;
+
+function drawAurora() {
+  ctx.clearRect(0, 0, width, height);
+
+  const layers = 6;
+  for(let layer = 0; layer < layers; layer++) {
+    ctx.beginPath();
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
+    // Base Y wave height changes with layer
+    let baseY = height * (0.3 + layer * 0.1);
+
+    // Wave points
+    const points = 30;
+    const waveWidth = width + 100;
+    ctx.moveTo(-50, height);
+
+    for(let i = 0; i <= points; i++) {
+      let x = (i / points) * waveWidth - 50;
+
+      // Calculate noise input, offset by layer and time
+      let noiseX = i * 0.2 + time * 0.0006 + layer * 5;
+      let noiseY = noise.noise(noiseX, layer * 10);
+
+      // React to mouse X position - offset waves horizontally
+      let offsetX = (mouse.x / width - 0.5) * 100 * (layer + 1) / layers;
+
+      // Vertical position with layered noise + mouse Y influence
+      let y = baseY + noiseY * 80 + (mouse.y / height - 0.5) * 30;
+
+      ctx.lineTo(x + offsetX, y);
+    }
+
+    ctx.lineTo(width + 50, height);
+    ctx.closePath();
+
+    // Gradient color for each layer - pastel blues, greens, purples
+    let gradient = ctx.createLinearGradient(0, baseY - 80, 0, height);
+    let colorStops = [
+      ['#3ae3ff55', '#14ffcc44'],
+      ['#3affc455', '#ccff0055'],
+      ['#b38aff55', '#e055ff44'],
+      ['#3ae3ff33', '#14ffcc22'],
+      ['#1affcc55', '#0055ff33'],
+      ['#aa33ff44', '#5533ff22']
+    ];
+
+    let c1 = colorStops[layer % colorStops.length][0];
+    let c2 = colorStops[layer % colorStops.length][1];
+
+    gradient.addColorStop(0, c1);
+    gradient.addColorStop(1, c2);
+
+    ctx.fillStyle = gradient;
+    ctx.shadowColor = c1;
+    ctx.shadowBlur = 40 - layer * 5;
+    ctx.fill();
+  }
+}
+
+function animate() {
+  time += 1;
+  drawAurora();
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
