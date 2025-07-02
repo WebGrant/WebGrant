@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | WebGrant</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, #000010 80%), #000010;
+      font-family: Arial, sans-serif;
+      color: #e0e0e0;
+      padding-top: 60px;
+    }
+
+       .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 6px #00fff7);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(10,10,30, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid #0ff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 10000;
+      box-shadow: 0 0 10px #00fff7;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: #00fff7;
+      text-shadow: 0 0 6px #00fff7;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      margin-left: auto;
+    }
+
+    nav ul li {
+      position: relative;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav ul li:hover a,
+    nav ul li:focus-within a {
+      color: #ff00c8;
+      text-shadow: 0 0 10px #ff00c8;
+    }
+
+    nav ul li::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+
+    nav ul li:hover::after,
+    nav ul li:focus-within::after {
+      width: 100%;
+    }
+
+    nav ul li.active a {
+      color: #ff00c8;
+      text-shadow: 0 0 10px #ff00c8;
+    }
+
+    nav ul li.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      border-radius: 1px;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      background: linear-gradient(to right, #000010, #1a1a2e);
+      text-align: center;
+      padding: 100px 20px 40px;
+      color: #fff;
+    }
+    header h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 15px #ff00c8;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    section.packages {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .package {
+      background: #0a0a0a;
+      border: 1px solid #03e9f4;
+      border-left: 6px solid #00fff7;
+      border-radius: 12px;
+      padding: 25px;
+      width: 350px;
+      box-shadow: 0 0 15px #00fff7;
+      transition: transform 0.3s ease;
+    }
+    .package:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00fff7;
+    }
+    .package h2 {
+      color: #03e9f4;
+      margin-bottom: 10px;
+      text-shadow: 0 0 6px #ff00c8;
+      font-size: 1.5rem;
+    }
+    .package ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .package ul li {
+      margin-bottom: 10px;
+      list-style: square;
+    }
+    .package .price {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00fff7;
+    }
+    section.transparency, section.extras {
+      max-width: 1000px;
+      margin: 0 auto 50px;
+      background: #111;
+      border: 1px solid #03e9f4;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00fff7;
+    }
+    section.transparency h2,
+    section.extras h2 {
+      color: #03e9f4;
+      margin-bottom: 15px;
+    }
+    section.transparency p,
+    section.extras p {
+      margin-bottom: 12px;
+      line-height: 1.5;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #fff;
+      border-top: 2px solid #03e9f4;
+    }
+    footer a {
+      color: #03e9f4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
+      WebGrant
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li class="active"><a href="#">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Services | WebGrant</h1>
+    <p>We design and deliver websites that are simple, smart, and made for growth.</p>
+  </header>
+
+  <section class="packages">
+    <div class="package">
+      <h2>Basic Website</h2>
+      <ul>
+        <li>Basic single-page design</li>
+        <li>Includes all key info: About, Services/Menu, Contact</li>
+        <li>Images included</li>
+        <li>Lightweight, quick delivery</li>
+        <li>Mobile-friendly</li>
+      </ul>
+      <p class="price">Price: $300 – $800</p>
+    </div>
+
+    <div class="package">
+      <h2>Basic Pro Website</h2>
+      <ul>
+        <li>2–3 pages (Home, About, Services/Menu)</li>
+        <li>Images + social media buttons</li>
+        <li>Email & phone visible</li>
+        <li>No animations</li>
+        <li>Basic branding applied</li>
+      </ul>
+      <p class="price">Price: $600 – $1200</p>
+    </div>
+
+    <div class="package">
+      <h2>Standard Website</h2>
+      <ul>
+        <li>Up to 6 pages</li>
+        <li>Professional custom design</li>
+        <li>Contact form & Google Map</li>
+        <li>Business hours & address shown</li>
+        <li>SEO (titles & meta descriptions)</li>
+        <li>1–2 updates/month</li>
+        <li>Update costs: $30+ depending on complexity</li>
+      </ul>
+      <p class="price">Price: $1000 – $2500</p>
+    </div>
+  </section>
+
+  <section class="transparency">
+    <h2>What Counts as an Update?</h2>
+    <p>Simple text/image edits: $30–$75<br>Layout/content tweaks: $75–$150<br>New features/sections: $150+</p>
+    <p>Requests must be emailed to <strong>webgrant25@gmail.com</strong>. Turnaround: 3–5 business days.</p>
+  </section>
+
+  <section class="extras">
+    <h2>Why Choose WebGrant?</h2>
+    <p>✔️ Transparent pricing<br>
+       ✔️ Preview before payment<br>
+       ✔️ Fast turnaround (avg. 1–2 weeks)<br>
+       ✔️ Friendly help for non-tech-savvy clients<br>
+       ✔️ Honest communication + future support</p>
+  </section>
+
+  <footer>
+    <p>Need help choosing the right plan? <a href="contact.html">Get in touch</a> — we're happy to help.</p>
+    <p>&copy; 2025 WebGrant. All rights reserved.</p>
+  </footer>
+</body>
+</html>
