@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Basic Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #fefcf9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-image: linear-gradient(rgba(0, 127, 42, 0.5), rgba(0, 50, 23, 0.5)), url('logo.png');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #f7f7f7;
+    }
+
+    nav {
+      background-color: #231f20;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 25px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4b774;
+    }
+
+    section {
+      padding: 70px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      margin-bottom: 25px;
+      color: #2f2f2f;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .image {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-item {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .menu-item h4 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #222;
+    }
+
+    .menu-item span {
+      font-weight: bold;
+      color: #d4b774;
+    }
+
+    footer {
+      background-color: #231f20;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+      }
+
+      nav a {
+        margin: 10px 0;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Local Café (Demo)</h1>
+    <p>Where flavor meets comfort, every day.</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#location">Visit Us</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Local Café</h2>
+    <p>Welcome to Local Café — a cozy retreat for coffee lovers and foodies alike. We serve freshly brewed coffee, hearty breakfast options, and artisan baked goods in a warm, welcoming space. Whether you're meeting friends or just grabbing your favorite brew, we’re here to make your day better.</p>
+    <img src="cafeinterior.jpeg" alt="Inside the cafe" class="image" />
+  </section>
+
+  <section id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h4>Espresso</h4>
+        <span>$3.50</span>
+      </div>
+      <div class="menu-item">
+        <h4>Flat White</h4>
+        <span>$4.20</span>
+      </div>
+      <div class="menu-item">
+        <h4>Cold Brew</h4>
+        <span>$4.00</span>
+      </div>
+      <div class="menu-item">
+        <h4>Almond Croissant</h4>
+        <span>$3.80</span>
+      </div>
+      <div class="menu-item">
+        <h4>Avocado Toast</h4>
+        <span>$6.90</span>
+      </div>
+      <div class="menu-item">
+        <h4>Breakfast Wrap</h4>
+        <span>$7.50</span>
+      </div>
+    </div>
+    <img src="food.webp" alt="Coffee and food" class="image" />
+  </section>
+
+  <section id="location">
+    <h2>Visit Us</h2>
+    <p>Find us nestled in the heart of the neighborhood. We’re open daily from 7 AM to 6 PM. Drop in for a hot drink or grab a bite — we can’t wait to see you!</p>
+    <img src="cafe.jpg" alt="Cafe exterior" class="image" />
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Local Café(demo) — All rights reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Tavola Italiana - Menu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, #8a2f1f, #3a1a0f),
+        url('background-italian.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff8f0;
+      min-height: 100vh;
+      padding: 80px 20px 40px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(30, 12, 7, 0.9);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 2px 8px #350e04;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #ff5f1f;
+      text-shadow: 0 0 6px #ff5f1f;
+      letter-spacing: 1.5px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: #fff8f0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li.active a {
+      color: #ff5f1f;
+      text-shadow: 0 0 10px #ff5f1f;
+    }
+
+    /* Hamburger for mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .menu-toggle div {
+      width: 28px;
+      height: 3px;
+      background: #ff5f1f;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #ff5f1f;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive nav */
+    @media (max-width: 720px) {
+      nav ul {
+        position: fixed;
+        top: 60px; right: 0;
+        background: rgba(30,12,7,0.95);
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem;
+        width: 200px;
+        height: calc(100vh - 60px);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -3px 0 15px #ff5f1f;
+      }
+      nav ul.open {
+        transform: translateX(0);
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      text-shadow: 0 0 10px #ff5f1f;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.25rem;
+      color: #ffb28c;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #ffd9b3;
+    }
+
+    /* Menu grid */
+    .menu-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 30px;
+    }
+
+    .menu-item {
+      background: rgba(255 255 255 / 0.05);
+      border: 2px solid #ff5f1f;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #ff5f1f44;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+    .menu-item:hover {
+      background: rgba(255 255 255 / 0.15);
+      box-shadow: 0 0 25px #ff5f1fcc;
+    }
+
+    .menu-item img {
+      width: 100%;
+      max-width: 240px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 12px #ff5f1fbb;
+    }
+
+    .menu-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: #ffb28c;
+    }
+
+    .menu-item p {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: #ffd9b3;
+    }
+
+    .menu-item .price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #ff5f1f;
+      letter-spacing: 1.2px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: #ffb28c;
+      border-top: 1px solid #ff5f1f55;
+      padding: 25px 15px;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: #ff5f1f;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 0.8rem;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #ffd9b3;
+    }
+
+    /* Contact info */
+    .contact-info {
+      margin-top: 40px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #ffb28c;
+      letter-spacing: 0.04em;
+    }
+
+    /* Social icons */
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .social-icons a {
+      color: #ff5f1f;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #ffd9b3;
+    }
+  </style>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <nav>
+    <div class="logo">La Tavola Italiana</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="nav-menu">
+      <li><a href="demo2.html">Home</a></li>
+      <li><a href="italiandemo.html">About</a></li>
+      <li class="active"><a href="italianaMenu.html">Menu</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Our Menu</h1>
+    <p>Delicious Italian fast food, made fresh daily</p>
+  </header>
+
+  <main class="menu-container">
+
+    <article class="menu-item">
+      <img src="pizza.webp" alt="Margherita Pizza" />
+      <h3>Margherita Pizza</h3>
+      <p>Classic tomato sauce, fresh mozzarella, and basil leaves.</p>
+      <div class="price">$12.99</div>
+    </article>
+
+    <article class="menu-item">
+      <img src="pizza2.png" alt="Pepperoni Pizza" />
+      <h3>Pepperoni Pizza</h3>
+      <p>Spicy pepperoni, mozzarella, and rich tomato sauce.</p>
+      <div class="price">$14.99</div>
+    </article>
+
+    <article class="menu-item">
+      <img src="lasagna.jpg" alt="Lasagna" />
+      <h3>Lasagna</h3>
+      <p>Layers of pasta, bolognese, béchamel sauce, and cheese.</p>
+      <div class="price">$16.99</div>
+    </article>
+
+    <article class="menu-item">
+      <img src="risotto.jpeg" alt="Mushroom Risotto" />
+      <h3>Mushroom Risotto</h3>
+      <p>Creamy risotto with fresh mushrooms and parmesan cheese.</p>
+      <div class="price">$15.99</div>
+    </article>
+
+    <article class="menu-item">
+      <img src="tiramisu.jpg" alt="Tiramisu" />
+      <h3>Tiramisu</h3>
+      <p>Classic Italian dessert with mascarpone and espresso.</p>
+      <div class="price">$8.99</div>
+    </article>
+
+    <article class="menu-item">
+      <img src="espresso.webp" alt="Espresso" />
+      <h3>Espresso</h3>
+      <p>Rich and bold single shot espresso coffee.</p>
+      <div class="price">$3.50</div>
+    </article>
+
+  </main>
+
+  <section class="contact-info">
+    <div>📞 Phone: <a style="color:#ff5f1f;">+1 (234) 567-890</a></div>
+    <div>✉️ Email: <a style="color:#ff5f1f;">example@gmail.com</a></div>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank" aria-label="Twitter" rel="noopener"><i class="fab fa-twitter"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 BellaFresco Italian Fast Food. All rights reserved.
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    toggle.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
