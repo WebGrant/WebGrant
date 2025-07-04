@@ -425,9 +425,7 @@ input, textarea, select {
 </body>
 
 <script>
-
-
-      const hamburger = document.getElementById('hamburger');
+  const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
 
   hamburger.addEventListener('click', () => {
@@ -435,14 +433,7 @@ input, textarea, select {
     navLinks.classList.toggle('open');
   });
 
-function toggleMenu() {
-  const navUl = document.querySelector('nav ul');
-  navUl.classList.toggle('show');
-}
-  
-
   const budgetInput = document.getElementById('budget');
-
   budgetInput.addEventListener('keydown', function (e) {
     const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
     
