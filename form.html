@@ -426,6 +426,15 @@ input, textarea, select {
 
 <script>
 
+
+      const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
 function toggleMenu() {
   const navUl = document.querySelector('nav ul');
   navUl.classList.toggle('show');
