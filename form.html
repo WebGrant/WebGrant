@@ -426,6 +426,12 @@ input, textarea, select {
 
 <script>
 
+function toggleMenu() {
+  const navUl = document.querySelector('nav ul');
+  navUl.classList.toggle('show');
+}
+  
+
   const budgetInput = document.getElementById('budget');
 
   budgetInput.addEventListener('keydown', function (e) {
