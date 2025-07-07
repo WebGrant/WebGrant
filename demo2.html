@@ -4,244 +4,262 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>La Tavola Italiana - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* Reset & base */
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Georgia', serif;
     }
+
     body {
-      background: url('https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.42), rgba(0,0,0,0.9)), 
+        url('https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
-      color: #f7f1e3;
-      min-height: 100vh;
+      color: #fdfaf6;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
+
     header {
-      background: rgba(156, 40, 12, 0.85);
-      padding: 20px 40px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+      background-color: rgba(156, 40, 12, 0.95);
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 10;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
     }
-    header .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: #f7f1e3;
+
+    .logo {
       font-family: 'Brush Script MT', cursive;
-      text-shadow: 1px 1px 5px #000;
+      font-size: 2rem;
+      color: #fff4e0;
+      text-shadow: 1px 1px 4px #000;
     }
+
     nav ul {
       list-style: none;
       display: flex;
       gap: 25px;
     }
-    nav ul li a {
-      color: #f7f1e3;
+
+    nav a {
+      color: #fff4e0;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-      text-shadow: 0 0 3px #000;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: 0.3s;
     }
-    nav ul li a:hover {
-      color: #ff4c00;
-      text-shadow: 0 0 12px #ff4c00;
+
+    nav a:hover {
+      color: #ff8c42;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: #fff4e0;
+      cursor: pointer;
     }
 
     main {
       flex-grow: 1;
-      background: rgba(0,0,0,0.5);
-      margin: 40px auto;
-      max-width: 1100px;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(156,40,12,0.8);
-    }
-    main h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
       text-align: center;
-      text-shadow: 2px 2px 8px #000;
-      font-family: 'Brush Script MT', cursive;
-      color: #ff4c00;
-    }
-    main p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto 30px auto;
-      text-align: center;
-      text-shadow: 0 0 5px #000;
-    }
-    .btn {
-      display: block;
-      width: 200px;
-      margin: 0 auto 40px auto;
-      padding: 12px 0;
-      background: #ff4c00;
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 40px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 0 10px #ff4c00;
-      transition: background 0.3s ease;
-      text-decoration: none;
-    }
-    .btn:hover {
-      background: #e03e00;
-      box-shadow: 0 0 20px #e03e00;
     }
 
-    footer {
-      background: rgba(156, 40, 12, 0.85);
-      color: #f7f1e3;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.7);
-      margin-top: 40px;
+    h1 {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 3.2rem;
+      color: #ff8c42;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px #000;
     }
-    footer a {
-      color: #ff4c00;
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff8c42;
+      padding: 12px 30px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 10px #ff8c42;
       text-decoration: none;
-      font-weight: 600;
-      margin-left: 10px;
-      text-shadow: 0 0 5px #000;
+      transition: 0.3s;
     }
-    footer a:hover {
-      text-decoration: underline;
+
+    .btn:hover {
+      background: #e76f33;
+      box-shadow: 0 0 15px #e76f33;
     }
 
     .contact-info {
-      margin-top: 20px;
-      text-align: center;
+      margin-top: 40px;
       font-size: 1rem;
-      letter-spacing: 1.2px;
     }
 
-    /* Social media buttons */
     .socials {
       margin-top: 20px;
-      text-align: center;
-      gap: 25px;
-      font-size: 1.5rem;
-    }
-    .socials a {
-      color: #ff4c00;
-      text-decoration: none;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-      filter: drop-shadow(0 0 2px #000);
-    }
-    .socials a:hover {
-      color: #f7f1e3;
-      filter: drop-shadow(0 0 8px #ff4c00);
+      font-size: 1.6rem;
     }
 
-    /* Responsive */
+    .socials a {
+      color: #ff8c42;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #fff4e0;
+    }
+
+    footer {
+      background: rgba(156, 40, 12, 0.9);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Navigation */
     @media (max-width: 720px) {
       nav ul {
-        flex-direction: column;
-        background: rgba(156, 40, 12, 0.95);
-        position: fixed;
-        top: 70px;
-        right: 0;
-        width: 180px;
-        padding: 20px;
-        border-radius: 8px 0 0 8px;
         display: none;
+        flex-direction: column;
+        background: rgba(156, 40, 12, 0.98);
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 15px;
+        border-radius: 8px;
       }
+
       nav ul.show {
         display: flex;
       }
-      nav ul li {
-        margin-bottom: 15px;
-      }
+
       .menu-toggle {
         display: block;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #f7f1e3;
-        user-select: none;
-      }
-      header {
-        flex-wrap: wrap;
-        justify-content: space-between;
       }
     }
 
-    .menu-toggle {
-  display: none; /* Hide by default (desktop) */
+    .highlight-email {
+  color: #00a6ff; /* change this to whatever color you want */
+  font-weight: bold;
 }
 
-@media (max-width: 720px) {
-  .menu-toggle {
-    display: block; /* Show only on mobile */
-  }
+.phone{
+    color: #00a6ff; /* change this to whatever color you want */
+  font-weight: bold;
 }
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Apply animations */
+header {
+  animation: slideDown 0.8s ease-out;
+}
+
+main {
+  animation: fadeIn 1s ease-out;
+}
+
+.btn {
+  transition: transform 0.3s ease;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.socials a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.socials a:hover {
+  animation: bounce 0.5s ease;
+}
+
+nav ul li a {
+  transition: opacity 0.3s ease;
+}
+nav ul li a:hover {
+  opacity: 0.8;
+}
+
   </style>
-  <!-- FontAwesome for social icons -->
-  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<header>
-  <div class="logo">La Tavola Italiana</div>
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
-  <nav>
-    <ul id="nav-links">
-      <li><a href="" class="active">Home</a></li>
-      <li><a href="italiandemo.html">About</a></li>
-      <li><a href="italianaMenu.html">Menu</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <div class="logo">La Tavola Italiana</div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="italiandemo.html">About</a></li>
+        <li><a href="italianaMenu.html">Menu</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main>
-  <h1>Welcome to La Tavola Italiana</h1>
-  <p>Authentic Italian flavors, right in the heart of your neighborhood. Enjoy classic recipes made with fresh, quality ingredients and a passion for tradition.</p>
-  <a href="italianaMenu.html" class="btn">Explore Our Menu</a>
+  <main>
+    <h1>Welcome to La Tavola Italiana</h1>
+    <p>Authentic Italian flavors, right in the heart of your neighborhood. Enjoy classic recipes made with fresh, quality ingredients and a passion for tradition.</p>
+    <a href="italianaMenu.html" class="btn">Explore Our Menu</a>
 
-  <div class="contact-info">
-    <p><strong>Phone:</strong> +61 123 456 789</p>
-    <p><strong>Email:</strong> example@gmail.com</p>
-  </div>
+    <div class="contact-info">
+      <p><strong>Phone:</strong> <a href class="phone">+61 123 456 789</a></p>
+      <p><strong>Email:</strong> <a href class="highlight-email">example@gmail.com</a></p>
+    </div>
 
-  <div class="socials" aria-label="Social media links">
-    <a href="https://facebook.com/latavolaitaliana" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-    <a href="https://instagram.com/latavolaitaliana" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://twitter.com/latavolaitaliana" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-  </div>
-</main>
+    <div class="socials">
+      <a href="https://facebook.com/latavolaitaliana" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/latavolaitaliana" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com/latavolaitaliana" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </main>
 
-<footer>
-  &copy; 2025 La Tavola Italiana. All rights reserved.
-</footer>
+  <footer>
+    &copy; 2025 La Tavola Italiana. All rights reserved.
+  </footer>
 
-<script>
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('menu-toggle');
-  const navLinks = document.getElementById('nav-links');
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
 
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
-</script>
-
-<!-- FontAwesome CDN for social icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
 </body>
 </html>
