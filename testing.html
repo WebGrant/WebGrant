@@ -418,7 +418,7 @@
   /* Mobile nav hidden by default */
   #nav-links {
     position: fixed;
-    top: 60px; /* adjust if your header is taller */
+    top: 40px; /* adjust if your header is taller */
     right: 0;
     background-color: rgba(0, 0, 0, 0.95);
     width: 250px;
@@ -431,6 +431,7 @@
     transform: translateX(100%); /* hide off screen */
     transition: transform 0.3s ease-in-out;
     z-index: 999;
+    box-shadow: -4px 0 15px rgba(0, 255, 255, 0.6); /* Glow on the left edge */
   }
 
   /* When hamburger is clicked */
