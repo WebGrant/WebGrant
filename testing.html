@@ -185,7 +185,7 @@
         
         .hero h1 {
             font-family: 'Orbitron', monospace;
-            font-size: 50px;
+            font-size: clamp(1.5rem, 5vw, 4rem); /* adjusts between small and large automatically */
             font-weight: 900;
             margin-bottom: 2rem;
             background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
@@ -537,7 +537,6 @@
       color: #00fff7;
       text-shadow: 0 0 6px #00fff7;
     }
-  }
 
   @media (max-width: 480px) {
   .hero h1 {
@@ -626,9 +625,6 @@
                     <p>Experience the most advanced parallax effects in the digital universe</p>
                     <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 3rem;">Where reality bends and imagination takes flight through infinite dimensions</p>
                     <div>
-                        <a href="tel:+1234567890" class="btn btn-cosmic">
-                            📞 Call Us Now
-                        </a>
                         <a href="#experience" class="btn btn-neon animate-pulse">
                             ✨ Explore Universe
                         </a>
