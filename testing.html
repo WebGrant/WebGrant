@@ -1,1109 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Depth Dreamscapes - God Level Parallax</title>
-    <meta name="description" content="Experience the most advanced parallax effects in the digital universe" />
-    <meta name="keywords" content="parallax, advanced website, cosmic design, 3D effects, interactive" />
-    <meta name="author" content="Depth Dreamscapes" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --deep-space: hsl(210, 100%, 6%);
-            --space-blue: hsl(220, 100%, 15%);
-            --neon-cyan: hsl(180, 100%, 50%);
-            --neon-purple: hsl(270, 100%, 70%);
-            --neon-pink: hsl(330, 100%, 70%);
-            --cosmic-glow: hsl(200, 100%, 80%);
-        }
-        
-        body {
-            font-family: 'Exo 2', sans-serif;
-            background: var(--deep-space);
-            color: var(--cosmic-glow);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.5);
-        }
-        
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-            width: 0%;
-            transition: width 0.25s ease-out;
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-        
-        /* Header */
-        header {
-            position: fixed;
-            top: 4px;
-            left: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(15, 23, 42, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 229, 255, 0.2);
-            z-index: 999;
-            transition: all 0.5s ease;
-        }
-        
-        header.scrolled {
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 8px 32px rgba(0, 229, 255, 0.3);
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
-            letter-spacing: 2px;
-        }
-        
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: var(--cosmic-glow);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--neon-cyan);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Particle Canvas */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
-        }
-        
-        /* Parallax Container */
-        .parallax-container {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .parallax-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120%;
-            height: 120%;
-            background-size: cover;
-            background-position: center;
-            will-change: transform;
-        }
-        
-        /* Hero Section */
-        .hero {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 1000px;
-            padding: 2rem;
-        }
-        
-        .hero-card {
-            background: rgba(15, 23, 42, 0.1);
-            border: 2px solid rgba(0, 229, 255, 0.3);
-            border-radius: 20px;
-            padding: 4rem 3rem;
-            backdrop-filter: blur(20px);
-            box-shadow: 
-                0 0 50px rgba(0, 229, 255, 0.3),
-                inset 0 0 50px rgba(255, 255, 255, 0.05);
-            transition: all 0.5s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .hero-card:hover {
-            box-shadow: 
-                0 0 80px rgba(0, 229, 255, 0.6),
-                0 0 120px rgba(270, 100%, 70%, 0.4),
-                inset 0 0 80px rgba(255, 255, 255, 0.1);
-        }
-        
-        .hero h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(1.5rem, 5vw, 4rem); /* adjusts between small and large automatically */
-            font-weight: 900;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--neon-cyan);
-            letter-spacing: 3px;
-        }
-        
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 3rem;
-            color: var(--cosmic-glow);
-            opacity: 0.9;
-        }
-        
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-cosmic {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            color: var(--deep-space);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-        }
-        
-        .btn-cosmic:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.8);
-        }
-        
-        .btn-neon {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-        }
-        
-        .btn-neon:hover {
-            background: var(--neon-cyan);
-            color: var(--deep-space);
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.8);
-        }
-        
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            opacity: 0.6;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .floating-element:nth-child(even) {
-            animation-direction: reverse;
-            animation-duration: 8s;
-        }
-        
-        /* Sections */
-        .section {
-            position: relative;
-            min-height: 100vh;
-            padding: 5rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .section-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .section h2 {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--neon-cyan);
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .card {
-            background: rgba(15, 23, 42, 0.1);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-            animation: fadeInUp 1s ease forwards;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.3);
-            border-color: var(--neon-cyan);
-        }
-        
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .card-icon {
-            width: 4rem;
-            height: 4rem;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-        }
-        
-        /* Map Container */
-        .map-container {
-            border: 2px solid rgba(0, 229, 255, 0.3);
-            border-radius: 16px;
-            overflow: hidden;
-            height: 400px;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            filter: hue-rotate(180deg) saturate(1.5) brightness(0.8);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--space-blue);
-            border-top: 2px solid rgba(0, 229, 255, 0.3);
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .footer-logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
-            margin-bottom: 1rem;
-        }
-        
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                box-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-purple);
-                transform: scale(1.05);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes drift {
-            0% { transform: translateX(-100px) translateY(0px); }
-            50% { transform: translateX(100px) translateY(-50px); }
-            100% { transform: translateX(-100px) translateY(0px); }
-        }
-        
-        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-drift { animation: drift 20s ease-in-out infinite; }
-        
-        @media (max-width: 768px) {
-  /* Mobile nav hidden by default */
-  #nav-links {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NovaTech Solutions - Next Level Parallax</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin:0; padding:0;
+    font-family: 'Inter', sans-serif;
+    background: #0e0f1a;
+    color: #eee;
+    overflow-x: hidden;
+  }
+  header {
     position: fixed;
-    top: 0px; /* adjust if your header is taller */
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    width: 250px;
-    height: 100vh;
+    top: 0; left: 0; right: 0;
+    height: 70px;
+    background: rgba(14,15,26,0.85);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 2rem;
-    transform: translateX(100%); /* hide off screen */
-    transition: transform 0.3s ease-in-out;
-    z-index: 999;
-    box-shadow: -4px 0 15px rgba(0, 255, 255, 0.6); /* Glow on the left edge */
+    padding: 0 30px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    z-index: 1000;
+    transition: background 0.3s ease;
+  }
+  header.scrolled {
+    background: rgba(14,15,26,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  main {
+    padding-top: 80px;
   }
 
-  /* When hamburger is clicked */
-  #nav-links.open {
-    transform: translateX(0); /* bring menu on screen */
-  }
-
-  /* Keep your other mobile tweaks */
-  .hero-card {
-    padding: 2rem 1.5rem;
-  }
-
-  .section {
-    padding: 3rem 1rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  .parallax-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  will-change: transform;
+  background-clip: padding-box;
+  box-shadow: none;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  /* Make sure they are behind the text */
+  z-index: 0;
 }
-        
-        /* Aurora Effect */
-        .aurora {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                rgba(0, 229, 255, 0.1), 
-                rgba(147, 51, 234, 0.1), 
-                rgba(236, 72, 153, 0.1)
-            );
-            opacity: 0.3;
-            animation: aurora 12s ease-in-out infinite;
-        }
-        
-        @keyframes aurora {
-            0%, 100% { opacity: 0.3; transform: translateX(-50%); }
-            50% { opacity: 0.8; transform: translateX(50%); }
-        }
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background-color: #0a0a23;
+  color: white;
+}
 
-        /* === Hamburger styles === */
-  .hamburger {
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.6;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 1; /* Lower than navbar */
+}
+
+.parallax-layer.one {
+  background: #ff0080;
+  width: 400px;
+  height: 400px;
+  top: 40%;
+  left: 40%;
+}
+
+.parallax-layer.two {
+  background: #00ffff;
+  width: 300px;
+  height: 300px;
+  top: 60%;
+  left: 55%;
+}
+
+.parallax-layer.three {
+  background: #ffff00;
+  width: 350px;
+  height: 350px;
+  top: 45%;
+  left: 65%;
+}
+
+.services {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #111;  /* Dark background for contrast */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;  /* Space for heading */
+}
+
+.services h2 {
+  color: white;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.card {
+  position: absolute;
+  width: 280px;
+  height: 320px;
+  background: white;
+  border-radius: 20px;
+  top: 100%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+    .circle {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  z-index: 0; /* Push behind everything */
+  pointer-events: none;
+}
+
+  
+  .card {
+    background: #111422;
+    border-radius: 20px;
+    padding: 30px;
+    width: 300px;
+    box-shadow:
+      0 0 15px rgba(0, 255, 231, 0.25),
+      0 20px 40px rgba(0, 255, 231, 0.1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition:
+      box-shadow 0.4s ease,
+      transform 0.4s ease;
+  }
+  .card:hover {
+    box-shadow:
+      0 0 25px #00ffe7,
+      0 30px 50px #00ffe7;
+    transform: translateY(-10px) rotateX(10deg) rotateY(10deg) scale(1.05);
+  }
+  .card h3 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #00ffe7;
+  }
+  .card p {
+    font-weight: 400;
+    line-height: 1.4;
+    color: #ccc;
+  }
+
+  /* About Section */
+  section.about {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto 120px;
+    padding: 0 20px;
+    gap: 60px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .about-text {
+    flex: 1 1 480px;
+    color: #ddd;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+  }
+  .about-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #00ffe7;
+  }
+  .about-image {
+    flex: 1 1 480px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow:
+      0 0 20px #00ffe7;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+  }
+  .about-image.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .about-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Footer */
+  footer {
+    background: #05060a;
+    color: #555;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Fade & scale in on scroll */
+  .fade-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.7s ease;
+  }
+  .fade-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+    section.about {
+      flex-direction: column;
+    }
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(10,10,30, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid #0ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 10000;
+    box-shadow: 0 0 10px #00fff7;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+  nav ul li {
+    position: relative;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+  nav ul li:hover,
+  nav ul li:focus-within {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8;
+  }
+  nav ul li::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    transition: width 0.3s ease;
+    border-radius: 1px;
+  }
+  nav ul li:hover::after,
+  nav ul li:focus-within::after {
+    width: 100%;
+  }
+  nav ul li.active {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8;
+  }
+  nav ul li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    border-radius: 1px;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: rgba(14,15,26,0.85);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+header.scrolled {
+  background: rgba(14,15,26,1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.logo {
+  color: #00ffe7;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  cursor: default;
+}
+
+nav ul.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* Pushes nav links to the right */
+  align-items: center;
+}
+
+nav ul.nav-links li a {
+  color: #eee;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul.nav-links li a:hover,
+nav ul.nav-links li a:focus {
+  background-color: #00000000;
+  color: #00c3ff;
+  outline: none;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 40px;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+.card.rainbow {
+  transition: transform 0.3s ease;
+}
+
+/* Hamburger icon styles */
+.hamburger {
     display: none;
     flex-direction: column;
-    gap: 6px;
+    justify-content: space-around;
+    width: 25px;
+    height: 22px;
     cursor: pointer;
-    z-index: 11000;
   }
   .hamburger div {
-    width: 28px;
+    width: 100%;
     height: 3px;
-    background: #00fff7;
+    background: #00ffe7;
     border-radius: 2px;
-    box-shadow:
-      0 0 6px #00fff7,
-      inset 0 0 4px #00fff7;
     transition: all 0.3s ease;
   }
-  /* Hamburger animation when active */
+
+  /* When hamburger is active (open) */
   .hamburger.active div:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: rotate(45deg) translate(5px, 5px);
   }
   .hamburger.active div:nth-child(2) {
     opacity: 0;
   }
   .hamburger.active div:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
-  .contact-grid {
-  grid-template-columns: 1fr 1fr;
-}
-@media (max-width: 768px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .parallax-layer {
-    width: 150%;
-    height: 150%;
-  }
-}
-
-  nav ul {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-}
-
-@media (max-width: 768px) {
-  nav ul {
-    position: fixed;
-    top: 60px;
-    right: 0;
-    background: rgba(0, 0, 0, 0.9);
-    width: 250px;
-    height: calc(100vh - 60px);
-    flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    padding: 2rem;
-    z-index: 999;
-  }
-
-  nav ul.open {
-    transform: translateX(0);
-  }
-
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-  }
-
-  .hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-  }
-}
-
-    nav .logo {
-        font-size: 1.3rem;
-      }
-      nav .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      color: #00fff7;
-      text-shadow: 0 0 6px #00fff7;
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav ul.nav-links {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      height: calc(100% - 70px);
+      width: 200px;
+      background: rgba(14,15,26,0.95);
+      flex-direction: column;
+      gap: 20px;
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: -2px 0 8px rgba(0,255,231,0.3);
+      z-index: 9999;
+    }
+    nav ul.nav-links.open {
+      transform: translateX(0);
+    }
+    nav ul.nav-links li a {
+      font-size: 1.25rem;
+      padding: 10px;
+      display: block;
     }
 
-  @media (max-width: 480px) {
-  .hero h1 {
-    font-size: 2rem;
+    .hamburger {
+      display: flex;
+    }
   }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 0.8rem 1.5rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    padding: 1.5rem 1rem;
-  }
-
-  .section {
-    padding: 2rem 1rem;
-  }
-
-  .map-container {
-    height: 250px;
-  }
-}
-    </style>
+</style>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress">
-        <div class="scroll-progress-bar" id="progressBar"></div>
+
+
+  <header id="header">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
+  </header>
 
-    <!-- Particle Canvas -->
-    <canvas id="particle-canvas"></canvas>
+<main>
 
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-          <div class="logo">DEPTH DREAMSCAPES</div>
-          <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <nav>
-            <ul id="nav-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#experience">Experience</a></li>
-            </ul>
-          </nav>
+  <section class="hero">
+    <!-- Glowing Parallax Circles -->
+    <div class="parallax-layer one"></div>
+    <div class="parallax-layer two"></div>
+    <div class="parallax-layer three"></div>
+  
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1>NEXT-GEN IT SERVICES</h1>
+      <p>Innovative, scalable, and secure technology solutions tailored for your business.</p>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="card-wrapper">
+      <div class="card">
+        <div class="tilt-inner" data-tilt>
+          <h3>Cloud Integration</h3>
+          <p>Seamlessly connect your infrastructure with scalable cloud platforms.</p>
         </div>
-      </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="parallax-container">
-            <!-- Parallax Background Layers -->
-            <div class="parallax-layer" id="bg-layer-1" style="background: linear-gradient(135deg, var(--deep-space), var(--space-blue));"></div>
-            <div class="parallax-layer" id="bg-layer-2" style="background: radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.1), transparent 50%), radial-gradient(circle at 70% 60%, rgba(147, 51, 234, 0.1), transparent 50%);"></div>
-            <div class="parallax-layer" id="bg-layer-3" style="background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.05), transparent 70%);"></div>
-            
-            <!-- Aurora Effect -->
-            <div class="aurora"></div>
-            
-            <!-- Floating Elements -->
-            <div class="floating-element" style="width: 20px; height: 20px; top: 20%; left: 10%; animation-delay: 0s;"></div>
-            <div class="floating-element" style="width: 15px; height: 15px; top: 60%; left: 80%; animation-delay: 2s;"></div>
-            <div class="floating-element" style="width: 25px; height: 25px; top: 80%; left: 20%; animation-delay: 4s;"></div>
-            <div class="floating-element" style="width: 10px; height: 10px; top: 30%; left: 70%; animation-delay: 6s;"></div>
-            <div class="floating-element" style="width: 18px; height: 18px; top: 70%; left: 60%; animation-delay: 8s;"></div>
-            
-            <!-- Hero Content -->
-            <div class="hero">
-                <div class="hero-card" id="heroCard">
-                    <h1>DEPTH DREAMSCAPES</h1>
-                    <p>Experience the most advanced parallax effects in the digital universe</p>
-                    <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 3rem;">Where reality bends and imagination takes flight through infinite dimensions</p>
-                    <div>
-                        <a href="#experience" class="btn btn-neon animate-pulse">
-                            ✨ Explore Universe
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="parallax-layer" style="background: radial-gradient(circle at 20% 80%, rgba(0, 229, 255, 0.05), transparent 50%);"></div>
-            <div class="section-content">
-                <h2>About Our Universe</h2>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">👁️</div>
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">Immersive Vision</h3>
-                        <p>Experience depth like never before with our advanced 3D parallax technology that responds to your every movement.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🌌</div>
-                        <h3 style="color: var(--neon-purple); margin-bottom: 1rem;">Multi-Dimensional</h3>
-                        <p>Multiple layers create infinite depth and stunning visual experiences that transport you to other worlds.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">⚡</div>
-                        <h3 style="color: var(--neon-pink); margin-bottom: 1rem;">Lightning Fast</h3>
-                        <p>Optimized performance ensures smooth 60fps animations across all devices without compromise.</p>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">We specialize in creating otherworldly digital experiences that transport users beyond the boundaries of traditional web design into realms of infinite possibility.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="section">
-            <div class="parallax-layer" style="background: radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.05), transparent 50%);"></div>
-            <div class="section-content">
-                <h2>Our Services</h2>
-                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 3rem; color: var(--cosmic-glow);">Transform your digital presence with our advanced parallax and immersive design solutions</p>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">🎨</div>
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">Cosmic Design</h3>
-                        <p>Create stunning visual experiences that transcend dimensional boundaries and captivate your audience.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">💻</div>
-                        <h3 style="color: var(--neon-purple); margin-bottom: 1rem;">Advanced Development</h3>
-                        <p>Cutting-edge code that powers immersive digital universes with unparalleled performance.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🚀</div>
-                        <h3 style="color: var(--neon-pink); margin-bottom: 1rem;">Performance Optimization</h3>
-                        <p>Lightning-fast loading and smooth 60fps animations guaranteed across all platforms.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🌍</div>
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">Universal Compatibility</h3>
-                        <p>Seamless experience across all devices and platforms with responsive design.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">✨</div>
-                        <h3 style="color: var(--neon-purple); margin-bottom: 1rem;">Interactive Magic</h3>
-                        <p>Mouse-responsive parallax and real-time particle systems that react to user interaction.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">⚡</div>
-                        <h3 style="color: var(--neon-pink); margin-bottom: 1rem;">Future Technology</h3>
-                        <p>Tomorrow's web technology available today with cutting-edge effects and animations.</p>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="#contact" class="btn btn-cosmic animate-pulse">Start Your Project</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="parallax-layer" style="background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.05), transparent 70%);"></div>
-            <div class="section-content">
-                <h2>Contact Us</h2>
-                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 3rem; color: var(--cosmic-glow);">Ready to embark on a journey through digital dimensions? Let's create something extraordinary together.</p>
-                
-                <div class="grid contact-grid">
-                    <div class="card">
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 2rem; font-size: 1.8rem;">Get In Touch</h3>
-                        <div style="space-y: 1.5rem;">
-                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                                <span style="font-size: 1.5rem; margin-right: 1rem;">📞</span>
-                                <div>
-                                    <p style="opacity: 0.8;">Call us directly</p>
-                                    <a href="tel:+1234567890" style="color: var(--neon-cyan); font-size: 1.2rem; text-decoration: none;">+1 (234) 567-890</a>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                                <span style="font-size: 1.5rem; margin-right: 1rem;">📧</span>
-                                <div>
-                                    <p style="opacity: 0.8;">Email us</p>
-                                    <a href="mailto:hello@depthdreamscapes.com" style="color: var(--neon-purple); font-size: 1.2rem; text-decoration: none;">hello@depthdreamscapes.com</a>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 2rem;">
-                                <span style="font-size: 1.5rem; margin-right: 1rem;">📍</span>
-                                <div>
-                                    <p style="opacity: 0.8;">Visit us</p>
-                                    <p style="color: var(--neon-pink); font-size: 1.2rem;">Digital Universe, Dimension X</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="tel:+1234567890" class="btn btn-cosmic" style="width: 100%;">📞 Call Now</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 1rem;">Our Location</h3>
-                        <div class="map-container">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d53002.50918777646!2d151.1645140220156!3d-33.87273404536484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney!3m2!1d-33.8727409!2d151.2057136!4m5!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney%20NSW!3m2!1d-33.8727409!2d151.2057136!5e0!3m2!1sen!2sau!4v1753420364256!5m2!1sen!2sau"
-                                allowfullscreen=""
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="section" style="min-height: 50vh;">
-            <div class="section-content" style="text-align: center;">
-                <h2>Experience the Future</h2>
-                <p style="font-size: 1.3rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Move your mouse around to see the magic happen. Watch as particles dance and layers shift in perfect harmony.
-                </p>
-                <div class="btn btn-cosmic animate-pulse" style="pointer-events: none;">
-                    ✨ Interactive Parallax Active ✨
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">DEPTH DREAMSCAPES</div>
-            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Creating extraordinary digital experiences that transcend the boundaries of reality</p>
-            <p>&copy; 2025 Depth Dreamscapes — Crafted with ❤️ in the digital universe</p>
-            <p style="opacity: 0.7; margin-top: 0.5rem;">All rights reserved. Experience the future of web design.</p>
+      </div>
+      <div class="card">
+        <div class="tilt-inner" data-tilt>
+          <h3>Cybersecurity</h3>
+          <p>Advanced security strategies to protect your digital assets from evolving threats.</p>
         </div>
-    </footer>
+      </div>
+      <div class="card">
+        <div class="tilt-inner" data-tilt>
+          <h3>Data Analytics</h3>
+          <p>Gain actionable insights by transforming your raw data into smart decisions.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tilt-inner" data-tilt>
+          <h3>AI & Automation</h3>
+          <p>Implement intelligent automation to streamline your workflows.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tilt-inner" data-tilt>
+          <h3>Consulting</h3>
+          <p>Strategic IT consulting to optimize your tech investments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-  const hamburger = document.getElementById('hamburger');
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>About NovaTech</h2>
+      <p>Founded in 2010, NovaTech Solutions pioneers cutting-edge technology services that help companies transform digitally.</p>
+      <p>Our expert team combines deep industry knowledge with the latest trends to deliver innovative and reliable IT solutions.</p>
+      <p>We believe in a customer-first approach, ensuring every project aligns with your vision and goals.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Team working on software" />
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; 2025 NovaTech Solutions. All rights reserved.</footer>
+
+<!-- GSAP & ScrollTrigger CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Vanilla-tilt for subtle 3D tilt on cards -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
 
-  // Toggle menu open/close on hamburger click
-  hamburger.addEventListener('click', () => {
+  function toggleMenu() {
+    const isOpen = navLinks.classList.toggle('open');
     hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
   });
 
-  // Optional: close menu when clicking a nav link on mobile
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Header background change on scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Parallax Layers on hero
+  gsap.to(".parallax-layer.one", {
+    yPercent: -30,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    }
+  });
+  gsap.to(".parallax-layer.two", {
+    yPercent: -50,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    }
+  });
+  gsap.to(".parallax-layer.three", {
+    yPercent: -40,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    }
+  });
+
+  // Fade & scale in services cards staggered on scroll (optional)
+  gsap.utils.toArray(".fade-scale").forEach((card, i) => {
+    gsap.fromTo(card,
+      { opacity: 0, scale: 0.8, y: 40 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        delay: i * 0.15
       }
-    });
+    );
   });
-    
-        // Particle System
-        class ParticleSystem {
-            constructor() {
-                this.canvas = document.getElementById('particle-canvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.particles = [];
-                this.mouse = { x: 0, y: 0 };
-                this.init();
-            }
 
-            init() {
-                this.resizeCanvas();
-                this.createParticles();
-                this.animate();
-                this.bindEvents();
-            }
+  // Fade in About text and image
+  gsap.fromTo(".about-text",
+    { opacity: 0, y: 80 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".about-text",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    }
+  );
+  gsap.fromTo(".about-image",
+    { opacity: 0, y: 80 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".about-image",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    }
+  );
 
-            resizeCanvas() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
+  // ✅ VanillaTilt only on tilt-inner to avoid animation reset
+  VanillaTilt.init(document.querySelectorAll(".tilt-inner"), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.25,
+    scale: 1.05,
+  });
 
-            createParticles() {
-                const particleCount = Math.min(100, Math.floor(window.innerWidth / 15));
-                this.particles = [];
+  // Card animation: left → center → right
+  const cards = gsap.utils.toArray(".services .card");
+  const stackStartY = 40; // raised start
+  const startX = 100;        // shifted right
+  const centerX = window.innerWidth / 2 - 100; // better center
+  const rightStackX = centerX + 350;           // shifted right
+  const verticalSpacing = 80;
 
-                for (let i = 0; i < particleCount; i++) {
-                    this.particles.push({
-                        x: Math.random() * this.canvas.width,
-                        y: Math.random() * this.canvas.height,
-                        vx: (Math.random() - 0.5) * 0.5,
-                        vy: (Math.random() - 0.5) * 0.5,
-                        size: Math.random() * 3 + 1,
-                        opacity: Math.random() * 0.8 + 0.2,
-                        hue: 180 + Math.random() * 90
-                    });
-                }
-            }
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".services",
+      start: "top top",
+      end: "+=" + (cards.length * 600),
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+    }
+  });
 
-            animate() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  cards.forEach((card, i) => {
+    // Start stacked, raised, shifted right
+    tl.set(card, {
+      x: startX,
+      y: stackStartY,
+      scale: 0.8,
+      opacity: 1,
+      zIndex: cards.length - i,
+    }, i === 0 ? 0 : `>+=0.2`);
 
-                this.particles.forEach((particle, index) => {
-                    // Update position
-                    particle.x += particle.vx;
-                    particle.y += particle.vy;
+    // Move to center
+    tl.to(card, {
+      duration: 0.7,
+      x: centerX,
+      y: -180, // raised center
+      ease: "power1.out",
+      opacity: 1,
+      scale: 0.8,
+    }, ">");
 
-                    // Mouse interaction
-                    const dx = this.mouse.x - particle.x;
-                    const dy = this.mouse.y - particle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+    // Scale up
+    tl.to(card, {
+      duration: 0.5,
+      scale: 1.2,
+      ease: "power1.out",
+    }, ">");
 
-                    if (distance < 150) {
-                        particle.x -= dx * 0.001;
-                        particle.y -= dy * 0.001;
-                    }
+    // Move to right stack
+    tl.to(card, {
+      duration: 1,
+      x: rightStackX,
+      y: -i * verticalSpacing - 40, // slightly raised landing
+      ease: "power1.inOut",
+      opacity: 1,
+      scale: 0.8,
+    }, ">");
+  });
+</script>
 
-                    // Bounce off edges
-                    if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-                    if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
-
-                    // Pulsing opacity
-                    particle.opacity = 0.5 + Math.sin(Date.now() * 0.003 + index) * 0.3;
-
-                    // Draw particle
-                    this.ctx.beginPath();
-                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `hsla(${particle.hue}, 100%, 70%, ${particle.opacity})`;
-                    this.ctx.shadowBlur = 20;
-                    this.ctx.shadowColor = `hsl(${particle.hue}, 100%, 70%)`;
-                    this.ctx.fill();
-                    this.ctx.shadowBlur = 0;
-
-                    // Connect nearby particles
-                    this.particles.slice(index + 1).forEach(otherParticle => {
-                        const dx = particle.x - otherParticle.x;
-                        const dy = particle.y - otherParticle.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 100) {
-                            this.ctx.beginPath();
-                            this.ctx.moveTo(particle.x, particle.y);
-                            this.ctx.lineTo(otherParticle.x, otherParticle.y);
-                            this.ctx.strokeStyle = `hsla(${(particle.hue + otherParticle.hue) / 2}, 100%, 70%, ${(1 - distance / 100) * 0.2})`;
-                            this.ctx.lineWidth = 0.5;
-                            this.ctx.stroke();
-                        }
-                    });
-                });
-
-                requestAnimationFrame(() => this.animate());
-            }
-
-            bindEvents() {
-                window.addEventListener('mousemove', (e) => {
-                    this.mouse.x = e.clientX;
-                    this.mouse.y = e.clientY;
-                });
-
-                window.addEventListener('resize', () => {
-                    this.resizeCanvas();
-                    this.createParticles();
-                });
-            }
-        }
-
-        // Parallax Controller
-        class ParallaxController {
-            constructor() {
-                this.mouse = { x: 0, y: 0 };
-                this.scrollY = 0;
-                this.init();
-            }
-
-            init() {
-                this.bindEvents();
-                this.animate();
-            }
-
-            bindEvents() {
-                window.addEventListener('scroll', () => {
-                    this.scrollY = window.scrollY;
-                    this.updateScrollProgress();
-                    this.updateHeader();
-                });
-
-                window.addEventListener('mousemove', (e) => {
-                    this.mouse.x = e.clientX;
-                    this.mouse.y = e.clientY;
-                    this.updateMouseParallax();
-                });
-            }
-
-            updateScrollProgress() {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercent = (scrollTop / docHeight) * 100;
-                document.getElementById('progressBar').style.width = scrollPercent + '%';
-            }
-
-            updateHeader() {
-                const header = document.getElementById('header');
-                if (this.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-
-            updateMouseParallax() {
-                const mouseParallaxX = (this.mouse.x / window.innerWidth - 0.5) * 30;
-                const mouseParallaxY = (this.mouse.y / window.innerHeight - 0.5) * 30;
-
-                // Update hero card 3D effect
-                const heroCard = document.getElementById('heroCard');
-                if (heroCard) {
-                    const rect = heroCard.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const rotateX = (this.mouse.y - centerY) / rect.height * -10;
-                    const rotateY = (this.mouse.x - centerX) / rect.width * 10;
-                    
-                    heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                }
-            }
-
-            animate() {
-                const parallaxOffset = this.scrollY * 0.5;
-                const mouseParallaxX = (this.mouse.x / window.innerWidth - 0.5) * 20;
-                const mouseParallaxY = (this.mouse.y / window.innerHeight - 0.5) * 20;
-
-                // Update parallax layers
-                const bgLayer1 = document.getElementById('bg-layer-1');
-                const bgLayer2 = document.getElementById('bg-layer-2');
-                const bgLayer3 = document.getElementById('bg-layer-3');
-
-                if (bgLayer1) {
-                    bgLayer1.style.transform = `translateY(${parallaxOffset * 0.2}px) translateX(${mouseParallaxX * 0.1}px)`;
-                }
-                if (bgLayer2) {
-                    bgLayer2.style.transform = `translateY(${parallaxOffset * 0.4}px) translateX(${mouseParallaxX * 0.2}px)`;
-                }
-                if (bgLayer3) {
-                    bgLayer3.style.transform = `translateY(${parallaxOffset * 0.6}px) translateX(${mouseParallaxX * 0.3}px)`;
-                }
-
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-
-        // Intersection Observer for animations
-        class AnimationController {
-            constructor() {
-                this.init();
-            }
-
-            init() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, { threshold: 0.1 });
-
-                document.querySelectorAll('.card').forEach(card => {
-                    observer.observe(card);
-                });
-            }
-        }
-
-        // Smooth scrolling for navigation links
-        function smoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new ParticleSystem();
-            new ParallaxController();
-            new AnimationController();
-            smoothScroll();
-
-            // Add some random floating elements
-            setInterval(() => {
-                const colors = ['var(--neon-cyan)', 'var(--neon-purple)', 'var(--neon-pink)'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const floater = document.createElement('div');
-                floater.style.cssText = `
-                    position: fixed;
-                    width: 4px;
-                    height: 4px;
-                    background: ${randomColor};
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 5;
-                    box-shadow: 0 0 10px ${randomColor};
-                    left: ${Math.random() * 100}vw;
-                    top: 100vh;
-                    animation: float-up 8s linear forwards;
-                `;
-                
-                document.body.appendChild(floater);
-                
-                setTimeout(() => {
-                    floater.remove();
-                }, 8000);
-            }, 2000);
-        });
-
-        // Add CSS for floating up animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float-up {
-                to {
-                    transform: translateY(-100vh) translateX(${Math.random() * 200 - 100}px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
