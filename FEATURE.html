@@ -507,6 +507,48 @@ footer {
     align-items: center;
   }
 }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    flex-direction: column;
+    background: var(--glass);
+    border: 2px solid #00ffe722;
+    border-radius: 16px;
+    padding: 1rem;
+    gap: 1.2rem;
+    backdrop-filter: blur(12px);
+    z-index: 150;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+}
   </style>
 </head>
 <body>
@@ -540,6 +582,11 @@ footer {
   <header>
     <div class="nav">
       <div class="logo">NextGen</div>
+      <button class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav>
         <ul>
           <li><a href="TESTIN.HTML">Home</a></li>
@@ -613,6 +660,14 @@ footer {
     &copy; 2025 NextGen. Crafted for the bold. All rights reserved.
   </footer>
   <script>
+
+const hamburger = document.querySelector('.hamburger');
+const navList = document.querySelector('nav ul');
+
+hamburger.addEventListener('click', () => {
+  navList.classList.toggle('show');
+});
+
     function parallaxCards() {
   const section = document.querySelector('.parallax-section');
   if (!section) return;
