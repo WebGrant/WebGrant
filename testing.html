@@ -356,7 +356,7 @@ html {
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 70px;
+  height: 60px;
   background: rgba(14,15,26,0.85);
   display: flex;
   justify-content: space-between;
@@ -367,6 +367,11 @@ header {
   letter-spacing: 0.1em;
   z-index: 1000;
   transition: background 0.3s ease;
+  display: flex;
+  justify-content: space-between; /* already present */
+  align-items: center;
+  padding: 0 20px; /* reduce side padding on mobile */
+  box-sizing: border-box;
 }
 
 header.scrolled {
@@ -426,12 +431,12 @@ nav ul.nav-links li a:focus {
 
 /* Hamburger icon styles */
 .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 25px;
-    height: 22px;
-    cursor: pointer;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   }
   .hamburger div {
     width: 100%;
@@ -481,7 +486,24 @@ nav ul.nav-links li a:focus {
     .hamburger {
       display: flex;
     }
+    .card-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 20px;
+    padding: 20px 0;
   }
+  .card {
+    position: relative; /* override absolute */
+    width: 90%; /* more responsive */
+    height: auto; /* let height grow naturally */
+    transform: none; /* cancel translate */
+    top: auto;
+    left: auto;
+  }
+}
 </style>
 </head>
 <body>
