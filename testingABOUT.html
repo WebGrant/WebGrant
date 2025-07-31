@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | NextGen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #fff;
+  --accent: #ff00cc;
+  --accent2: #3333ff;
+  --bg: linear-gradient(135deg, #090d13 0%, #181f2a 100%);
+  --glass: rgba(20,30,60,0.22);
+  --radius: 32px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: black;
+  color: var(--primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 20% 30%, #ff00cc33 0%, transparent 60%),
+              radial-gradient(circle at 80% 70%, #3333ff33 0%, transparent 60%);
+  animation: bgmove 12s linear infinite alternate, bgspin 18s linear infinite;
+  opacity: 0.18;
+  filter: blur(16px) brightness(0.7) contrast(1.2);
+  pointer-events: none;
+}
+@keyframes bgspin {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  50% { filter: hue-rotate(90deg) brightness(1.2);}
+  100% { filter: hue-rotate(360deg) brightness(1);}
+}
+@keyframes bgmove {
+  0% { background-position: 20% 30%, 80% 70%; }
+  100% { background-position: 40% 60%, 60% 40%; }
+}
+header {
+  background: var(--glass);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid #fff2;
+}
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+}
+.logo {
+  font-weight: 900;
+  font-size: 2.3rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px #ff00cc88);
+  animation: logoPulse 2.5s infinite alternate;
+}
+@keyframes logoPulse {
+  0% { filter: drop-shadow(0 2px 8px #ff00cc88);}
+  100% { filter: drop-shadow(0 8px 24px #3333ff88);}
+}
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+nav a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff00cc22, #3333ff22);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+nav a:hover, nav a.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 2px 16px #ff00cc44;
+}
+@media (max-width: 900px) {
+  .nav { padding: 1rem; }
+  nav ul {
+    position: absolute;
+    top: 70px;
+    right: 2rem;
+    background: var(--glass);
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: none;
+    backdrop-filter: blur(24px);
+    border: 2px solid #fff2;
+  }
+  nav ul.open { display: flex; }
+}
+main {
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background: none;
+}
+.about-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  z-index: 1;
+  overflow: visible;
+  padding: 6rem 1rem 4rem 1rem;
+}
+.about-hero h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 24px #ff00cc44;
+  opacity: 0.98;
+  will-change: transform, opacity, filter;
+  transition: filter 0.4s, opacity 0.4s;
+}
+.about-content {
+  background: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 48px #ff00cc33, 0 2px 16px #3333ff22;
+  padding: 3rem 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 2px solid #ff00cc44;
+  backdrop-filter: blur(16px);
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+.about-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.about-content a:hover {
+  color: var(--accent2);
+}
+.about-hero p, .about-hero ul {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 12px #3333ff44;
+  opacity: 0.96;
+  will-change: transform, opacity, filter;
+  transition: filter 0.4s, opacity 0.4s;
+}
+.about-hero ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto 0 auto;
+  max-width: 600px;
+  text-align: left;
+}
+.about-hero li {
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  position: relative;
+  padding-left: 2.2rem;
+}
+.about-hero li::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.7rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 2px 8px #ff00cc44;
+}
+@media (max-width: 700px) {
+  .about-hero h1 { font-size: 2.2rem; }
+  .about-content { padding: 1.2rem 0.5rem; }
+  .about-hero p, .about-hero ul { font-size: 1.1rem; }
+}
+footer {
+  background: var(--glass);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin-top: 4rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-top: 2px solid #fff2;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 16px #ff00cc22;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">NextGen</div>
+      <nav>
+        <ul>
+          <li><a href="TESTIN.html">Home</a></li>
+          <li><a href="FEATURE.html">Features</a></li>
+          <li><a href="testingABOUT.html" class="active">About</a></li>
+          <li><a href="testCONTACT.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="about-hero">
+      <h1>We Are NextGen</h1>
+      <div class="about-content">
+        <p>
+          NextGen is not just a brand—it's a movement. We blend technology, art, and bold vision to create digital experiences that are <b>impossible to ignore</b>.
+        </p>
+        <ul>
+          <li>🚀 Relentless innovation, every single day</li>
+          <li>🎨 Design that inspires and electrifies</li>
+          <li>⚡ Performance that feels like magic</li>
+          <li>🛡️ Privacy and security, always first</li>
+          <li>🌎 Built for everyone, everywhere</li>
+        </ul>
+        <p>
+          Our team is obsessed with pushing boundaries. We believe the web should be <b>alive</b>—responsive, immersive, and unforgettable.
+        </p>
+        <p>
+          <a href="mailto:hello@nextgen.com">Contact us</a> to join the movement or collaborate.
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 NextGen. Crafted for the bold. All rights reserved.
+  </footer>
+  <script>
+    // Aggressive, smooth parallax for About page
+    function parallaxAbout() {
+  const hero = document.querySelector('.about-hero');
+  const heroTitle = hero.querySelector('h1');
+  const heroContent = hero.querySelector('.about-content');
+  const wh = window.innerHeight;
+  const rect = hero.getBoundingClientRect();
+  const progress = Math.min(1.2, Math.max(0, (wh - rect.top) / (wh + rect.height)));
+
+  // Aggressive, layered transforms (NO BLUR)
+  heroTitle.style.transform =
+    `translateY(${-120 * progress}px) scale(${1 + 0.22 * progress}) skewY(${-12 * progress}deg) rotate(${8 * progress}deg)`;
+  heroTitle.style.filter =
+    `brightness(${1 + 0.4 * progress})`;
+  heroTitle.style.opacity = 0.6 + 0.4 * progress;
+
+  heroContent.style.transform =
+    `translateY(${60 * (1-progress)}px) scale(${1 + 0.09 * progress}) skewX(${-8 * (1-progress)}deg)`;
+  heroContent.style.filter = `none`;
+  heroContent.style.opacity = 0.5 + 0.5 * progress;
+
+  // Background parallax
+  document.body.style.backgroundPosition = `0px ${-220 * progress}px`;
+}
+window.addEventListener('scroll', () => {
+  window.requestAnimationFrame(parallaxAbout);
+});
+window.addEventListener('DOMContentLoaded', parallaxAbout);
+  </script>
+</body>
+</html>

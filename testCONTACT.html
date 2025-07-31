@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | NextGen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #eaf6fb;
+      --accent: #00ffe7;
+      --accent2: #3333ff;
+      --accent3: #ff00cc;
+      --bg: linear-gradient(135deg, #0a101a 0%, #181f2a 60%, #1a0a1a 100%);
+      --glass: rgba(30,40,80,0.28);
+      --radius: 32px;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Animated SVG blobs background */
+    #bg-blobs {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    /* Glassy hero section */
+    .contact-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 1rem 4rem 1rem;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(10px) saturate(1.1);
+    }
+    .contact-hero h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #00ffe7, #3333ff, #ff00cc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 24px #3333ff44;
+      opacity: 0.98;
+      will-change: transform, opacity, filter;
+      transition: filter 0.4s, opacity 0.4s;
+    }
+    .contact-hero p {
+      font-size: 1.3rem;
+      color: #eaf6fb;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 2px 12px #3333ff44;
+      opacity: 0.96;
+      max-width: 500px;
+      text-align: center;
+      will-change: transform, opacity, filter;
+      transition: filter 0.4s, opacity 0.4s;
+    }
+    .contact-hero form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      background: var(--glass);
+      border-radius: 40px;
+      box-shadow: 0 8px 48px #00ffe733, 0 2px 16px #ff00cc22, 0 0 0 4px rgba(255,255,255,0.08) inset;
+      padding: 3.5rem 3rem;
+      border: 3px solid transparent;
+      background-clip: padding-box, border-box;
+      position: relative;
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+      transition: box-shadow 0.3s, border 0.3s;
+      overflow: hidden;
+    }
+    .contact-hero form::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: 1;
+      border-radius: 44px;
+      padding: 2px;
+      background: linear-gradient(120deg, #00ffe7 0%, #3333ff 100%);
+      filter: blur(2px) brightness(1.2);
+      opacity: 0.85;
+      animation: borderGlow 3s linear infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes borderGlow {
+      0% { filter: blur(2px) brightness(1.2);}
+      100% { filter: blur(4px) brightness(1.4);}
+    }
+    .contact-hero form::after {
+      content: "";
+      position: absolute;
+      left: -75%;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 0%, #fff8 50%, transparent 100%);
+      opacity: 0.18;
+      transform: skewX(-20deg);
+      animation: glassShine 3.5s infinite linear;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @keyframes glassShine {
+      0% { left: -75%; }
+      100% { left: 120%; }
+    }
+    .contact-hero form > * {
+      position: relative;
+      z-index: 3;
+    }
+    .contact-hero input, .contact-hero textarea {
+      font-size: 1.1rem;
+      padding: 1.2rem;
+      border-radius: 18px;
+      border: none;
+      outline: none;
+      background: rgba(34,42,52,0.65);
+      color: #fff;
+      box-shadow: 0 2px 12px #00ffe733, 0 1px 8px #ff00cc22;
+      margin-bottom: 0.5rem;
+      transition: box-shadow 0.2s, background 0.2s, border 0.2s;
+      border: 2px solid transparent;
+      backdrop-filter: blur(6px) saturate(1.2);
+      resize: vertical;
+    }
+    .contact-hero input:focus, .contact-hero textarea:focus {
+      background: rgba(51,51,255,0.18);
+      border: 2px solid #00ffe7;
+      box-shadow: 0 4px 24px #00ffe744, 0 2px 16px #ff00cc44;
+    }
+    .contact-hero button {
+      background: linear-gradient(90deg, #00ffe7, #3333ff, #ff00cc);
+      background-size: 200% 200%;
+      color: #181f2a;
+      padding: 1.1rem 2.8rem;
+      border: none;
+      border-radius: 999px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 24px #00ffe744, 0 0 0 2px #00ffe7 inset;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+      letter-spacing: 1px;
+      animation: btnGradientMove 3s linear infinite alternate;
+    }
+    @keyframes btnGradientMove {
+      0% { background-position: 0% 50%;}
+      100% { background-position: 100% 50%;}
+    }
+    .contact-hero button:hover {
+      background: linear-gradient(90deg, #3333ff, #00ffe7, #ff00cc);
+      color: #fff;
+      transform: translateY(-2px) scale(1.06) rotate(-2deg);
+    }
+    @media (max-width: 900px) {
+      .contact-hero form {
+        max-width: 98vw;
+        padding: 2rem 0.5rem;
+      }
+      .contact-hero h1 { font-size: 2.2rem; }
+    }
+
+    header {
+  background: rgba(30,40,80,0.22);
+  box-shadow: 0 8px 32px #00ffe733;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid #00ffe733;
+}
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+}
+.logo {
+  font-weight: 900;
+  font-size: 2.3rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #00ffe7, #3333ff, #ff00cc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px #00ffe788);
+}
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+nav a {
+  text-decoration: none;
+  color: #eaf6fb;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00ffe722, #3333ff22, #ff00cc22);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+nav a:hover, nav a.active {
+  background: linear-gradient(90deg, #00ffe7, #3333ff, #ff00cc);
+  color: #181f2a;
+  box-shadow: 0 2px 16px #00ffe744;
+}
+@media (max-width: 900px) {
+  .nav { padding: 1rem; }
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 32px;
+    box-shadow: 0 8px 32px #00ffe733;
+    background: rgba(30,40,80,0.22);
+    position: absolute;
+    top: 70px;
+    right: 2rem;
+    display: none;
+  }
+  nav ul.open { display: flex; }
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+  margin-left: 1rem;
+}
+.nav-toggle span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: linear-gradient(90deg, #00ffe7, #3333ff, #ff00cc);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 900px) {
+  .nav {
+    padding: 1rem;
+    position: relative;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 32px;
+    box-shadow: 0 8px 32px #00ffe733;
+    background: rgba(30,40,80,0.95);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    left: 0;
+    margin: 0 1rem;
+    display: none;
+    z-index: 150;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  nav ul.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Animated SVG blobs background -->
+  <svg id="bg-blobs" width="100vw" height="100vh">
+    <defs>
+      <radialGradient id="blobGrad1" cx="50%" cy="50%" r="80%">
+        <stop offset="0%" stop-color="#00ffe7" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#3333ff" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="blobGrad2" cx="50%" cy="50%" r="80%">
+        <stop offset="0%" stop-color="#ff00cc" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#3333ff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g>
+      <ellipse id="blob1" cx="30vw" cy="40vh" rx="320" ry="180" fill="url(#blobGrad1)">
+        <animate attributeName="cx" values="30vw;40vw;25vw;30vw" dur="18s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="40vh;30vh;50vh;40vh" dur="22s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse id="blob2" cx="70vw" cy="70vh" rx="220" ry="120" fill="url(#blobGrad2)">
+        <animate attributeName="cx" values="70vw;60vw;75vw;70vw" dur="19s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="70vh;80vh;60vh;70vh" dur="21s" repeatCount="indefinite"/>
+      </ellipse>
+    </g>
+  </svg>
+   <header>
+    <div class="nav">
+      <div class="logo">NextGen</div>
+      <button class="nav-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="TESTIN.html">Home</a></li>
+          <li><a href="FEATURE.html">Features</a></li>
+          <li><a href="testingABOUT.html">About</a></li>
+          <li><a href="testCONTACT.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="contact-hero">
+      <h1>Contact NextGen</h1>
+      <p>We love bold ideas and creative minds. Drop us a message and let’s build something extraordinary together.</p>
+      <form autocomplete="off">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    // Parallax hero animation
+    function parallaxContact() {
+      const hero = document.querySelector('.contact-hero');
+      const heroTitle = hero.querySelector('h1');
+      const heroP = hero.querySelector('p');
+      const form = hero.querySelector('form');
+      const wh = window.innerHeight;
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (wh - rect.top) / (wh + rect.height)));
+      heroTitle.style.transform = `translateY(${-60 * progress}px) scale(${1 + 0.08 * progress})`;
+      heroTitle.style.filter = `brightness(${1 + 0.1 * progress})`;
+      heroTitle.style.opacity = 0.85 + 0.15 * progress;
+      heroP.style.transform = `translateY(${30 * (1-progress)}px) scale(${1 + 0.03 * progress})`;
+      heroP.style.opacity = 0.7 + 0.3 * progress;
+      form.style.transform = `translateY(${60 * (1-progress)}px)`;
+      form.style.opacity = 0.6 + 0.4 * progress;
+    }
+    window.addEventListener('scroll', () => requestAnimationFrame(parallaxContact));
+    window.addEventListener('DOMContentLoaded', parallaxContact);
+
+    // Reactive blobs on mouse move
+    document.addEventListener('mousemove', e => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      const blob1 = document.getElementById('blob1');
+      const blob2 = document.getElementById('blob2');
+      if (blob1 && blob2) {
+        blob1.setAttribute('cx', `${30 + x * 10}vw`);
+        blob1.setAttribute('cy', `${40 + y * 8}vh`);
+        blob2.setAttribute('cx', `${70 + x * 8}vw`);
+        blob2.setAttribute('cy', `${70 + y * 10}vh`);
+      }
+    });
+    const navToggle = document.querySelector('.nav-toggle');
+const navUl = document.querySelector('nav ul');
+navToggle.addEventListener('click', () => {
+  navUl.classList.toggle('open');
+  navToggle.classList.toggle('open');
+});
+// Optional: close menu on link click (mobile UX)
+navUl.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navUl.classList.remove('open');
+    navToggle.classList.remove('open');
+  });
+});
+  </script>
+</body>
+</html>
