@@ -14,10 +14,13 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      background-color: #000;
-      color: #fff;
+      background:
+        radial-gradient(ellipse at center, #1a1a2e 0%, #000010 80%),
+        #000010;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 60px 20px 40px;
+      position: relative;
     }
 
        .logo {
@@ -165,7 +168,7 @@
       font-size: 2rem;
       margin-bottom: 20px;
       color: #03e9f4;
-      text-shadow: 0 0 10px #ff00c8;
+      text-shadow: 0 0 10px #0099ff;
     }
 
     .about-section p,
@@ -251,7 +254,8 @@
       box-shadow:
         0 2px 6px rgba(3, 233, 244, 0.2),
         0 10px 18px rgba(0, 0, 0, 0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.6s ease;
+      will-change: transform;
     }
 
     .values > div:hover {
@@ -338,6 +342,28 @@
     transform: translateX(0);
   }
 }
+
+@keyframes floatCircle {
+  0%   { transform: translate(0, 0); }
+  12.5% { transform: translate(7px, -7px); }
+  25%  { transform: translate(14px, 0); }
+  37.5% { transform: translate(7px, 7px); }
+  50%  { transform: translate(0, 14px); }
+  62.5% { transform: translate(-7px, 7px); }
+  75%  { transform: translate(-14px, 0); }
+  87.5% { transform: translate(-7px, -7px); }
+  100% { transform: translate(0, 0); }transform: translate(0, 0);
+  }
+
+.founder-card {
+  animation: floatCircle 30s ease-in-out infinite;
+}
+.founder-card:nth-child(1) {
+  animation-delay: 0s;
+}
+.founder-card:nth-child(2) {
+  animation-delay: 3s;
+}
   </style>
 </head>
 
@@ -358,9 +384,9 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="service.html">Services</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
-    <li class="active"><a href="about.html">About Us</a></li>
-    <li><a href="contact.html">Contact Us</a></li>
-    <li><a href="terms.html">T&Cs</a></li>
+    <li class="active"><a href="#">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="terms.html" tabindex="5">T&Cs</a></li>
           <li><a href="form.html" tabindex="6">Request a Website</a></li>
   </ul>
 </nav>
@@ -384,11 +410,11 @@
     <div class="founder-cards">
       <div class="founder-card">
         <h3>Om Verma</h3>
-        <p>Business Management & Design & Frontend Developer</p>
+        <p>Business Management & Sales & Developer</p>
       </div>
       <div class="founder-card">
         <h3>Ritvik Barot</h3>
-        <p>Finance & Design & Client Relations</p>
+        <p>Finance & Marketing & Developer</p>
       </div>
     </div>
   </section>
@@ -406,15 +432,15 @@
   <section class="about-section">
     <h2>Our Values</h2>
     <div class="values">
-      <div>
+      <div class="value-transparency">
         <h4>Transparency</h4>
         <p>No hidden fees. Clear packages. Honest work.</p>
       </div>
-      <div>
+      <div class="value-reliability">
         <h4>Reliability</h4>
         <p>We deliver what we promise — on time.</p>
       </div>
-      <div>
+      <div class="value-creativity">
         <h4>Creativity</h4>
         <p>Every business is unique, and so is every website.</p>
       </div>
@@ -432,9 +458,39 @@
   </footer>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('show');
-  }
+    function toggleMenu() {
+      document.getElementById('nav-links').classList.toggle('show');
+    }
+
+    function parallaxValues() {
+      const section = document.querySelector('.values');
+      if (!section) return;
+      const cards = section.querySelectorAll('div');
+      const rect = section.getBoundingClientRect();
+      const winH = window.innerHeight;
+
+      if (rect.top < winH && rect.bottom > 0) {
+        const progress = Math.min(1, Math.max(0, (winH - rect.top) / (winH + rect.height)));
+        cards.forEach((card, i) => {
+          const direction = (i - 1); // -1 for left, 0 for center, 1 for right
+          const xOffset = direction * 50 * progress;
+          const yOffset = -20 * progress;
+          const scale = 1 + 0.1 * progress;
+          const rotate = direction * 8 * progress;
+
+          card.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${scale}) rotate(${rotate}deg)`;
+        });
+      } else {
+        cards.forEach(card => card.style.transform = '');
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(parallaxValues);
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      parallaxValues();
+    });
   </script>
 </body>
 </html>
