@@ -462,35 +462,6 @@
       document.getElementById('nav-links').classList.toggle('show');
     }
 
-    function parallaxValues() {
-      const section = document.querySelector('.values');
-      if (!section) return;
-      const cards = section.querySelectorAll('div');
-      const rect = section.getBoundingClientRect();
-      const winH = window.innerHeight;
-
-      if (rect.top < winH && rect.bottom > 0) {
-        const progress = Math.min(1, Math.max(0, (winH - rect.top) / (winH + rect.height)));
-        cards.forEach((card, i) => {
-          const direction = (i - 1); // -1 for left, 0 for center, 1 for right
-          const xOffset = direction * 50 * progress;
-          const yOffset = -20 * progress;
-          const scale = 1 + 0.1 * progress;
-          const rotate = direction * 8 * progress;
-
-          card.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${scale}) rotate(${rotate}deg)`;
-        });
-      } else {
-        cards.forEach(card => card.style.transform = '');
-      }
-    }
-
-    window.addEventListener('scroll', () => {
-      requestAnimationFrame(parallaxValues);
-    });
-    window.addEventListener('DOMContentLoaded', () => {
-      parallaxValues();
-    });
   </script>
 </body>
 </html>
