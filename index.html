@@ -282,6 +282,7 @@ nav ul li.active::after {
       grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
       gap: 2rem;
       z-index: 10;
+      margin-top: 2rem;
     }
     .card {
       background: rgba(10, 10, 30, 0.85);
@@ -614,6 +615,7 @@ nav ul li.active::after {
 
   // Parallax Cards scroll handler
   function parallaxCards() {
+    if (window.innerWidth <= 768) return;
     const section = document.querySelector('#services');
     if (!section) return;
     const cards = section.querySelectorAll('.card');
