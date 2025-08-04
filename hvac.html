@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FrostAir Experts | Ultimate Air Conditioning Solutions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Open+Sans&display=swap');
+    /* Parallax container and content tweaks */
+    .parallax-section {
+      will-change: transform, opacity;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .parallax-scale {
+      transform-origin: center center;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #f5f5f5;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      padding: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease-out;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    nav a {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #ffeb3b;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    nav a:hover {
+      color: #ffeb3b;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+            nav a.active {
+      color: #90e0ef;
+      text-decoration: underline;
+    }
+
+    .hero {
+      height: 100vh;
+      background-image: url('inverter.avif');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(120deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+      animation: backgroundPulse 8s infinite ease-in-out;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      animation: fadeInZoom 2s ease forwards;
+    }
+
+    h1, h2 {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: slideUp 1.5s ease-in-out;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      animation: fadeIn 3s ease;
+    }
+
+    section {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .service {
+      max-width: 350px;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #e0e0e0;
+      margin: 30px;
+      padding: 40px 35px;
+      border-radius: 20px;
+      box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.25),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
+      animation: floatIn 2s ease forwards;
+      opacity: 0;
+      will-change: transform, opacity;
+      text-align: center;
+    }
+
+    .service img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .service:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow:
+        0 20px 40px 0 rgba(0, 255, 255, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .parallax {
+      background-image: url('acservice.jpg');
+      min-height: 60vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    footer {
+      background: #00264d;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes floatIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      0% {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInUp {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInDown {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .animate-left {
+      opacity: 0;
+      animation: slideInLeft 0.5s forwards;
+      animation-play-state: paused;
+    }
+
+    .animate-right {
+      opacity: 0;
+      animation: slideInRight 0.5s forwards;
+      animation-play-state: paused;
+    }
+
+    .animate-up {
+      opacity: 0;
+      animation: slideInUp 0.5s forwards;
+      animation-play-state: paused;
+    }
+
+    .animate-down {
+      opacity: 0;
+      animation: slideInDown 0.5s forwards;
+      animation-play-state: paused;
+    }
+
+    @keyframes backgroundPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.3; }
+    }
+
+    .scroll-animate-left {
+      opacity: 0;
+      transform: translateX(-100px);
+      animation: slideInLeft 1s ease forwards;
+    }
+
+    .scroll-animate-right {
+      opacity: 0;
+      transform: translateX(100px);
+      animation: slideInRight 1s ease forwards;
+    }
+
+    #features {
+      padding: 60px 40px;
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+      color: white;
+      text-align: center;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 280px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00ffe5;
+    }
+
+    .feature-card .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    #testimonials {
+      padding: 60px 40px;
+      background: #1a1a2e;
+      color: #00ffe5;
+      text-align: center;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 700px;
+      margin: 40px auto 0;
+      overflow: hidden;
+    }
+
+    .testimonial {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+      font-style: italic;
+      pointer-events: none;
+    }
+    .testimonial.active {
+      opacity: 1;
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .testimonial span {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00c6ff;
+    }
+
+    .rating {
+      color: #FFD700; /* Gold */
+      font-size: 1.5rem;
+      margin: 8px 0;
+      letter-spacing: 3px;
+      user-select: none;
+    }
+
+    #cta-banner {
+      background: #00c6ff;
+      color: #00264d;
+      padding: 50px 40px;
+      text-align: center;
+      margin: 60px 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,198,255,0.4);
+    }
+
+    #cta-banner .btn {
+      background: #00264d;
+      color: white;
+      padding: 14px 30px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 15px;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    #cta-banner .btn:hover {
+      background: #004080;
+    }
+
+    #faq {
+      padding: 60px 40px;
+      background: #0f2027;
+      color: #c0c0c0;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.3);
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #00c6ff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 12px 0;
+      border-bottom: 1px solid #00c6ff;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: #00ffe5;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding-top 0.35s cubic-bezier(0.4,0,0.2,1);
+      color: #e0f7fa;
+      padding-left: 10px;
+      padding-top: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding-top: 10px;
+    }
+
+    #contact {
+      max-width: 500px;
+      margin: 0 auto 60px;
+      text-align: left;
+    }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #contact input, #contact textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    #contact button.btn {
+      background: #00c6ff;
+      color: #00264d;
+      font-weight: bold;
+      padding: 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease;
+    }
+
+    #contact button.btn:hover {
+      background: #0072ff;
+    }
+    /* Background for Welcome to FrostAir Experts and similar animate-left sections (except commit-quality) */
+    section.animate-left:not(#commit-quality) {
+      background: linear-gradient(to right, #0f2027, #203a43);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      max-width: 900px;
+      margin: 20px auto;
+      color: #eee;
+    }
+
+    /* Background for Our Services section */
+    #services {
+      background: linear-gradient(135deg, #004080, #007acc);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      color: white;
+      max-width: 1100px;
+      margin: 20px auto;
+    }
+
+    /* Background for Committed to Quality section */
+    #commit-quality {
+      background: linear-gradient(135deg, #67000d, #a50f15);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+      color: #fff;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    /* Responsive styles for mobile */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+
+      .services {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-card {
+        max-width: 90%;
+      }
+
+      #faq {
+        padding: 30px 20px;
+      }
+
+      section {
+        padding: 40px 20px;
+      }
+
+      #contact {
+        padding: 0 20px;
+      }
+
+      .testimonial-slider {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>FrostAir Experts</h1>
+  <nav>
+          <a href="hvac.html" class="active">Home</a>
+          <a href="hvacservice.html">Services</a>
+          <a href="hvaccontact.html">Contact</a>
+          <a href="hvacBOOK.html">Book Now</a>
+  </nav>
+</header>
+
+<div class="hero" id="home">
+  <div class="hero-content">
+    <h2>Ultimate Air Conditioning Comfort</h2>
+    <p>Experience modern cooling and unbeatable efficiency with FrostAir Experts.</p>
+  </div>
+</div>
+
+<section class="animate-left">
+  <h2>Welcome to FrostAir Experts</h2>
+  <p>Your trusted partner for advanced air conditioning solutions that keep you comfortable year-round.</p>
+</section>
+
+<section id="services" class="animate-right">
+  <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Our Services</h2>
+  <div class="services">
+    <div class="service" style="animation-delay: 0.2s;">
+      <img src="installation.webp" alt="AC Installation" />
+      AC Installation
+    </div>
+    <div class="service" style="animation-delay: 0.4s;">
+      <img src="M&R.jpg" alt="Maintenance & Repairs" />
+      Maintenance & Repairs
+    </div>
+    <div class="service" style="animation-delay: 0.6s;">
+      <img src="commerical.jpg" alt="Commercial Cooling" />
+      Commercial Cooling
+    </div>
+    <div class="service" style="animation-delay: 0.8s;">
+      <img src="dust.jpeg" alt="Duct Cleaning" />
+      Duct Cleaning
+    </div>
+  </div>
+</section>
+
+<section class="animate-left" id="commit-quality">
+  <h2>Committed to Quality</h2>
+  <p>Our team ensures every project is completed with precision and care, delivering lasting comfort and reliability.</p>
+</section>
+
+<div class="parallax"></div>
+
+<section>
+  <h2>Why Choose Us</h2>
+  <p>We bring reliable and efficient cooling to homes and businesses with cutting-edge solutions and 24/7 support.</p>
+</section>
+
+<section class="animate-left parallax-section parallax-scale" id="features">
+  <h2>Why FrostAir?</h2>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">❄️</div>
+      <h3>Cutting-Edge Technology</h3>
+      <p>We use the latest AC systems for maximum efficiency and comfort.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⚡</div>
+      <h3>Energy Efficient</h3>
+      <p>Reduce your electricity bills with our eco-friendly solutions.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔧</div>
+      <h3>Expert Service</h3>
+      <p>Our certified technicians ensure flawless installation and maintenance.</p>
+    </div>
+  </div>
+</section>
+
+<section class="animate-right parallax-section parallax-scale" id="testimonials">
+  <h2>What Our Customers Say</h2>
+  <div class="testimonial-slider">
+    <div class="testimonial active">
+      <p>"FrostAir made my home so comfortable, and their service was outstanding!"</p>
+      <div class="rating">★★★★★</div>
+      <span>- Sarah L.</span>
+    </div>
+    <div class="testimonial">
+      <p>"Professional, prompt, and friendly team. Highly recommend FrostAir!"</p>
+      <div class="rating">★★★★☆</div>
+      <span>- Mark D.</span>
+    </div>
+    <div class="testimonial">
+      <p>"Our office cooling system has never worked better thanks to FrostAir experts."</p>
+      <div class="rating">★★★★★</div>
+      <span>- Corporate Client</span>
+    </div>
+  </div>
+</section>
+
+<section class="animate-up parallax-section parallax-scale" id="cta-banner">
+  <h2>Ready to Beat the Heat?</h2>
+  <p>Schedule your free consultation with FrostAir Experts today!</p>
+  <a href="#contact" class="btn">Book Now</a>
+</section>
+
+<section class="animate-down parallax-section parallax-scale" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <button class="faq-question">How often should I service my AC?</button>
+    <div class="faq-answer">
+      <p>We recommend servicing your AC at least once a year to ensure optimal performance.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Do you offer commercial installations?</button>
+    <div class="faq-answer">
+      <p>Yes! We handle both residential and commercial AC installations and maintenance.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Are your technicians certified?</button>
+    <div class="faq-answer">
+      <p>Absolutely, all our technicians are fully certified and trained professionals.</p>
+    </div>
+  </div>
+</section>
+
+<section class="animate-left parallax-section parallax-scale" id="contact">
+  <h2>Contact Us</h2>
+  <form onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will contact you soon.');">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</section>
+
+<!-- Google Map Section -->
+<section class="animate-up parallax-section parallax-scale" id="location" style="padding: 0; margin: 0; border: none;">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.2781946317146!2d151.20476307575447!3d-33.86882007325927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3d7253d49b%3A0x5017d681632c5b0!2sSydney%20CBD%20New%20South%20Wales%202000%2C%20Australia!5e0!3m2!1sen!2sus!4v1691234567890!5m2!1sen!2sus"
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</section>
+
+<footer>
+  &copy; 2025 FrostAir Experts — Keeping You Cool.
+</footer>
+
+<script>
+  // Ensure scripts run after DOM is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    // Service card animation on reveal
+    const services = document.querySelectorAll('.service');
+    const observer = new window.IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animationName = 'floatIn';
+          entry.target.style.opacity = 1;
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    services.forEach(function(service) {
+      observer.observe(service);
+    });
+
+    // Animate directional sections on scroll into view (left, right, up, down)
+    const directionClasses = ['animate-left', 'animate-right', 'animate-up', 'animate-down'];
+    const allAnimElems = document.querySelectorAll(directionClasses.map(c => '.' + c).join(','));
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          directionClasses.forEach(cls => {
+            if (entry.target.classList.contains(cls)) {
+              entry.target.style.animationPlayState = 'running';
+            }
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    allAnimElems.forEach(el => scrollObserver.observe(el));
+
+    // Smooth scroll effect for .service cards using requestAnimationFrame
+    let lastServiceTranslate = 0;
+    function updateServiceCards() {
+      const scrollY = window.scrollY;
+      const servicesSection = document.getElementById('services');
+      const commitSection = document.getElementById('commit-quality');
+      if (!servicesSection || !commitSection) return;
+      const servicesTop = servicesSection.offsetTop;
+      const commitTop = commitSection.offsetTop;
+      const viewportHeight = window.innerHeight;
+      const maxTranslate = 100;
+      const scrollStart = servicesTop - viewportHeight / 2;
+      const scrollEnd = commitTop - viewportHeight;
+      let progress = (scrollY - scrollStart) / (scrollEnd - scrollStart);
+      progress = Math.max(0, Math.min(progress, 1));
+      const translateY = maxTranslate * progress;
+      if (Math.abs(translateY - lastServiceTranslate) > 0.5) {
+        document.querySelectorAll('.service').forEach(function(card) {
+          card.style.transform = `translateY(${translateY}px)`;
+        });
+        lastServiceTranslate = translateY;
+      }
+      window.requestAnimationFrame(updateServiceCards);
+    }
+    window.requestAnimationFrame(updateServiceCards);
+
+    // Testimonial slider cycling
+    let testimonialIndex = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+    setInterval(function() {
+      testimonials[testimonialIndex].classList.remove('active');
+      testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+      testimonials[testimonialIndex].classList.add('active');
+    }, 5000);
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(function(button) {
+      button.addEventListener('click', function() {
+        const item = button.parentElement;
+        item.classList.toggle('open');
+      });
+    });
+
+    // Parallax layered scroll effect using requestAnimationFrame
+    function lerp(start, end, t) {
+      return start + (end - start) * t;
+    }
+    const parallaxSections = document.querySelectorAll('.parallax-section');
+    function updateParallaxSections() {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      parallaxSections.forEach(function(section, index) {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top + scrollY;
+        const sectionHeight = section.offsetHeight;
+        let progress = (scrollY + viewportHeight - sectionTop) / (viewportHeight + sectionHeight);
+        progress = Math.min(Math.max(progress, 0), 1);
+        const speed = 30 + index * 10;
+        const direction = index % 2 === 0 ? 1 : -1;
+        const translateY = direction * speed * (1 - progress);
+        const scale = lerp(0.95, 1, progress);
+        const opacity = lerp(0, 1, progress);
+        section.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        section.style.opacity = opacity;
+      });
+      window.requestAnimationFrame(updateParallaxSections);
+    }
+    window.requestAnimationFrame(updateParallaxSections);
+  });
+</script>
+
+</body>
+</html>

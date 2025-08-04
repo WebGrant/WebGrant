@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book an Appointment - FrostAir HVAC Experts</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      color: #333;
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+
+header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      padding: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease-out;
+      flex-wrap: wrap;
+    }
+
+    .header-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+      padding-right: 50px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    nav a {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #ffeb3b;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    nav a:hover {
+      color: #ffeb3b;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+        nav a.active {
+      color: #90e0ef;
+      text-decoration: underline;
+    }
+
+    .booking-container {
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #ffffffee;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1.2s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #0077b6;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, #00b4d8, #0077b6);
+      margin: 10px auto 0;
+      border-radius: 4px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    input, select, textarea {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #00b4d8;
+      box-shadow: 0 0 0 3px rgba(0, 183, 255, 0.15);
+      outline: none;
+    }
+
+    button {
+      background: #00b4d8;
+      color: white;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0077b6;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #0077b6;
+      color: white;
+      margin-top: 3rem;
+    }
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      nav a {
+        padding: 6px 12px;
+        font-size: 0.95rem;
+      }
+
+      .booking-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+
+      form {
+        gap: 1rem;
+      }
+
+      input, select, textarea, button {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+      <div class="header-content">
+        <h1>FrostAir Experts</h1>
+        <nav>
+          <a href="hvac.html">Home</a>
+          <a href="hvacservice.html">Services</a>
+          <a href="hvaccontact.html">Contact</a>
+          <a href="hvacBOOK.html" class="active">Book Now</a>
+        </nav>
+      </div>
+    </header>
+
+  <div class="booking-container">
+    <h2>Book Your Appointment</h2>
+    <form onsubmit="event.preventDefault(); alert('Thank you! Your appointment has been scheduled.')">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <select required>
+        <option value="">Select Service</option>
+        <option>Heating Installation</option>
+        <option>Air Conditioning Repair</option>
+        <option>Energy Audit</option>
+        <option>Emergency Visit</option>
+      </select>
+      <input type="date" required />
+      <textarea rows="4" placeholder="Additional Notes (optional)"></textarea>
+      <button type="submit">Confirm Appointment</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 FrostAir HVAC Experts. All rights reserved.
+  </footer>
+</body>
+</html>

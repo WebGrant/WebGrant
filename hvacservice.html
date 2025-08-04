@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HVAC Services - Professional HVAC Solutions</title>
+<style>
+
+    /* Animated gradient underline for headings */
+h2 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.75rem;
+  color: #222;
+  text-shadow: 0 0 8px #81d4fa;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #00b4d8, #0077b6, #00b4d8);
+  border-radius: 10px;
+  animation: gradientSlide 3s ease infinite;
+}
+
+@keyframes gradientSlide {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Icons inside headings */
+.icon {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 0 2px #00b4d8);
+}
+
+/* Glow and scale hover effect */
+.service-card:hover,
+.floating-card:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 12px 48px 0 rgba(0, 180, 216, 0.6),
+    inset 0 0 90px 4px rgba(0, 180, 216, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Floating decorative shapes */
+.floating-shapes {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -2;
+  overflow: visible;
+}
+
+.shape {
+  position: absolute;
+  background: rgba(0, 180, 216, 0.15);
+  filter: blur(15px);
+  border-radius: 50%;
+  animation: floatMove 15s ease-in-out infinite alternate;
+}
+
+.circle { width: 180px; height: 180px; top: 20%; left: 10%; animation-delay: 0s; }
+.polygon {
+  width: 120px; height: 120px; top: 50%; left: 80%;
+  clip-path: polygon(50% 0%, 90% 35%, 75% 95%, 25% 95%, 10% 35%);
+  background: rgba(0,180,216,0.2);
+  animation-delay: 4s;
+}
+.small-circle { width: 80px; height: 80px; top: 80%; left: 30%; animation-delay: 7s; }
+.ellipse {
+  width: 200px; height: 100px; top: 40%; left: 50%;
+  border-radius: 100px / 50px;
+  animation-delay: 10s;
+}
+
+@keyframes floatMove {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(20px) translateX(20px); }
+}
+
+/* CTA Button */
+.cta-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00b4d8;
+  animation: pulse 2.5s infinite;
+  transition: box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  box-shadow: 0 0 25px #0077b6, 0 0 45px #00b4d8;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 15px #00b4d8; }
+  50% { box-shadow: 0 0 40px #00b4d8; }
+}
+
+/* Back to top button */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #00b4d8;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00b4d8;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 1000;
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Footer */
+footer {
+  background: #0077b6;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00b4d8;
+}
+
+  /* #interactive-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  } */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  /* Reset and base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('logo.png');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: gradientShift 30s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  .hero-text {
+    position: relative;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+    overflow: hidden;
+    height: 4.5rem;
+  }
+
+  .hero-text span {
+    display: inline-block;
+    animation: slideInText 1.2s ease forwards;
+    opacity: 0;
+  }
+  .hero-text span:nth-child(1) { animation-delay: 0.2s; }
+  .hero-text span:nth-child(2) { animation-delay: 0.5s; }
+  .hero-text span:nth-child(3) { animation-delay: 0.8s; }
+
+  @keyframes slideInText {
+    0% {
+      opacity: 0;
+      transform: translateX(-40px) skewX(15deg) scale(0.85);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) skewX(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* SVG Shape Dividers */
+  svg.shape-divider {
+    display: block;
+    width: 100%;
+    height: 100px;
+  }
+
+  /* Services Section */
+  .services {
+    position: relative;
+    background: linear-gradient(to bottom, #ffffff, #e0f7fa);
+    padding: 5rem 2rem 6rem 2rem;
+    overflow: visible;
+  }
+
+  .services h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 2.75rem;
+    margin-bottom: 3rem;
+    color: #222;
+    text-shadow: 0 0 8px #81d4fa;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    perspective: 1200px;
+  }
+
+  .service-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    width: 280px;
+    min-height: 380px;
+    padding: 2rem 1.5rem;
+    color: #333;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease;
+    will-change: transform;
+    cursor: default;
+    position: relative;
+    border: 2px solid;
+    border-image: linear-gradient(to right, #00b4d8, #0077b6) 1;
+  }
+  .service-card:hover {
+    box-shadow:
+      0 12px 48px 0 rgba(0, 180, 216, 0.6),
+      inset 0 0 90px 4px rgba(0, 180, 216, 0.5);
+  }
+
+  .service-card h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    color: #039be5;
+    text-shadow: 0 0 6px #81d4fa;
+  }
+
+  .service-card p {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #555;
+    user-select: none;
+  }
+
+  /* Scroll-triggered animation classes */
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-left,
+  .animate-right {
+    opacity: 0;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+  }
+
+  .animate-left {
+    animation-name: slideInLeft;
+  }
+
+  .animate-right {
+    animation-name: slideInRight;
+  }
+
+  /* Parallax floating cards container */
+  .floating-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    perspective: 1200px;
+    margin-top: 5rem;
+  }
+
+  .floating-card {
+    width: 280px;
+    min-height: 380px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.1);
+    color: #333;
+    padding: 2rem 1.5rem;
+    font-weight: 300;
+    font-size: 1rem;
+    transform-style: preserve-3d;
+    will-change: transform;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    border: 2px solid;
+    border-image: linear-gradient(to right, #00b4d8, #0077b6) 1;
+  }
+  .floating-card:hover {
+    box-shadow:
+      0 12px 48px 0 rgba(0, 180, 216, 0.6),
+      inset 0 0 90px 4px rgba(0, 180, 216, 0.5);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .floating-card h4 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #039be5;
+    text-shadow: 0 0 6px #81d4fa;
+  }
+  .floating-card p {
+    color: #555;
+  }
+
+  /* Scrollbar hide for WebKit */
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00b4d8cc;
+    border-radius: 10px;
+  }
+
+  /* Parallax Layers for Advanced Parallax Effects */
+  .parallax-layer {
+    will-change: transform, opacity;
+    transition: opacity 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 6px 12px;
+      font-size: 0.95rem;
+    }
+
+    .hero-text {
+      font-size: 2rem;
+      height: auto;
+      padding: 0 10px;
+    }
+
+    .service-card,
+    .floating-card {
+      width: 90%;
+      min-height: auto;
+      padding: 1.5rem 1rem;
+    }
+
+    .cards-container,
+    .floating-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .floating-cards {
+      gap: 2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .cta-button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+    }
+  }
+
+  header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      padding: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease-out;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    nav a {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #ffeb3b;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    nav a:hover {
+      color: #ffeb3b;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+        nav a.active {
+      color: #90e0ef;
+      text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<!-- <canvas id="interactive-bg"></canvas> -->
+<div class="floating-shapes" aria-hidden="true">
+  <div class="shape circle"></div>
+  <div class="shape polygon"></div>
+  <div class="shape small-circle"></div>
+  <div class="shape ellipse"></div>
+</div>
+
+<header>
+  <h1>FrostAir Experts</h1>
+  <nav>
+          <a href="hvac.html">Home</a>
+          <a href="hvacservice.html" class="active">Services</a>
+          <a href="hvaccontact.html">Contact</a>
+          <a href="hvacBOOK.html">Book Now</a>
+  </nav>
+</header>
+
+<section class="hero" aria-label="Hero section with animated gradient background and sliding text">
+  <div class="parallax-layer hero-layer">
+    <h1 class="hero-text" aria-live="polite" aria-atomic="true">
+      <span>Reliable HVAC</span>
+      <span>Expert Service</span>
+      <span>Comfort Delivered</span>
+    </h1>
+  </div>
+</section>
+
+<!-- SVG Shape Divider -->
+<div class="parallax-layer svg-layer">
+  <svg class="shape-divider" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0,0 C300,100 900,0 1200,100 L1200,0 L0,0 Z" fill="#ffffffee"></path>
+  </svg>
+</div>
+
+<section class="services" aria-label="Our HVAC Services">
+  <h2>Our Services</h2>
+  <div class="cards-container">
+    <div class="parallax-layer service-layer">
+      <article class="service-card animate-left" tabindex="0" aria-describedby="desc1">
+        <h3>🔥 Heating Installation</h3>
+        <p id="desc1">Professional installation of energy-efficient heating systems to keep your home warm and cozy all winter long.</p>
+      </article>
+    </div>
+    <div class="parallax-layer service-layer">
+      <article class="service-card animate-left" tabindex="0" aria-describedby="desc2">
+        <h3>❄️ Air Conditioning Repair</h3>
+        <p id="desc2">Fast and reliable repair services to restore your cooling system's performance during the hottest days.</p>
+      </article>
+    </div>
+    <div class="parallax-layer service-layer">
+      <article class="service-card animate-left" tabindex="0" aria-describedby="desc3">
+        <h3>🌀 Ventilation Cleaning</h3>
+        <p id="desc3">Improve indoor air quality with our thorough ventilation system cleaning and maintenance services.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="floating-cards" aria-hidden="true">
+    <div class="parallax-layer floating-layer">
+      <div class="floating-card animate-right">
+        <h4>📊 Energy Audits</h4>
+        <p>Comprehensive energy assessments to optimize your HVAC efficiency and reduce utility costs.</p>
+      </div>
+    </div>
+    <div class="parallax-layer floating-layer">
+      <div class="floating-card animate-right">
+        <h4>🌡️ Thermostat Upgrades</h4>
+        <p>Smart thermostat installation and programming for precise temperature control and convenience.</p>
+      </div>
+    </div>
+    <div class="parallax-layer floating-layer">
+      <div class="floating-card animate-right">
+        <h4>🚨 Emergency Services</h4>
+        <p>24/7 emergency HVAC repair to ensure your comfort and safety at any hour.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-container">
+    <a href="hvacBOOK.html">
+      <button class="cta-button" aria-label="Book a consultation with FrostAir experts">Book a Consultation</button>
+    </a>
+  </div>
+</section>
+
+<!-- SVG Shape Divider -->
+<div class="parallax-layer svg-layer">
+  <svg class="shape-divider" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0,100 C300,0 900,100 1200,0 L1200,100 L0,100 Z" fill="#f5f9fc"></path>
+  </svg>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const animateElements = document.querySelectorAll('.animate-left, .animate-right');
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  animateElements.forEach(el => observer.observe(el));
+});
+
+// Multi-layered Parallax Effects
+document.addEventListener('DOMContentLoaded', () => {
+  const heroLayer = document.querySelector('.hero-layer');
+  const serviceLayers = document.querySelectorAll('.service-layer');
+  const floatingLayers = document.querySelectorAll('.floating-layer');
+  const svgLayers = document.querySelectorAll('.svg-layer');
+  const canvas = document.getElementById('interactive-bg');
+  
+  let mouseX = 0, mouseY = 0;
+  let windowWidth = window.innerWidth;
+  let windowHeight = window.innerHeight;
+  
+  // Handle mouse move for hero text and cards
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / windowWidth) - 0.5;
+    mouseY = (e.clientY / windowHeight) - 0.5;
+  });
+  
+  function lerp(start, end, t) {
+    return start + (end - start) * t;
+  }
+  
+  // Smooth interpolation state
+  let heroX = 0, heroY = 0;
+  let serviceX = 0, serviceY = 0;
+  let floatingX = 0, floatingY = 0;
+  let svgX = 0;
+  let canvasX = 0, canvasY = 0;
+
+  function animate() {
+    // Smoothly interpolate mouse coords
+    heroX = lerp(heroX, mouseX, 0.07);
+    heroY = lerp(heroY, mouseY, 0.07);
+    serviceX = lerp(serviceX, mouseX, 0.05);
+    serviceY = lerp(serviceY, mouseY, 0.05);
+    floatingX = lerp(floatingX, mouseX, 0.03);
+    floatingY = lerp(floatingY, mouseY, 0.03);
+    svgX = lerp(svgX, mouseX, 0.02);
+    canvasX = lerp(canvasX, mouseX, 0.01);
+    canvasY = lerp(canvasY, mouseY, 0.01);
+
+    // Hero text 3D parallax (translate + rotate)
+    if (heroLayer) {
+      heroLayer.style.transform = `
+        translateX(${heroX * 20}px)
+        translateY(${heroY * 15}px)
+        rotateX(${heroY * 10}deg)
+        rotateY(${heroX * 15}deg)
+      `;
+    }
+
+    // Service cards translate and subtle rotation
+    serviceLayers.forEach((layer, i) => {
+      const depthFactor = 1 + i * 0.3;
+      layer.style.transform = `
+        translateX(${serviceX * 10 * depthFactor}px)
+        translateY(${serviceY * 10 * depthFactor}px)
+        rotateZ(${serviceX * 5 * depthFactor}deg)
+        scale(${1 + Math.abs(serviceX) * 0.05})
+      `;
+    });
+
+    // Floating cards translate with slower effect
+    floatingLayers.forEach((layer, i) => {
+      const depthFactor = 1 + i * 0.2;
+      layer.style.transform = `
+        translateX(${floatingX * 8 * depthFactor}px)
+        translateY(${floatingY * 6 * depthFactor}px)
+        rotateZ(${floatingX * 4 * depthFactor}deg)
+        scale(${1 + Math.abs(floatingX) * 0.04})
+      `;
+    });
+
+    // SVG shape divider horizontal parallax
+    svgLayers.forEach((layer, i) => {
+      layer.style.transform = `translateX(${svgX * 30 * (i % 2 === 0 ? 1 : -1)}px)`;
+    });
+
+    // Background canvas subtle slow parallax
+    if (canvas) {
+      canvas.style.transform = `
+        translateX(${canvasX * 40}px)
+        translateY(${canvasY * 25}px)
+      `;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+</script>
+
+</body>
+</html>
