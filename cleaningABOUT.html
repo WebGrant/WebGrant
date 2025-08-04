@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | ShinySpark Cleaning Co.</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #caf0f8, #ade8f4);
+      color: #023e8a;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+        header {
+      background: #0077b6;
+      color: white;
+      padding: 20px 40px;
+      animation: slideInTop 1s ease-out;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+    nav a.active {
+        color: rgb(255, 102, 0);
+      text-decoration: underline;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1581578852783-bb395b0d99a4?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+    .content {
+      max-width: 900px;
+      margin: 0 auto 60px auto;
+      background: rgba(255,255,255,0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    footer {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      .hero {
+        font-size: 1.8rem;
+        height: 200px;
+        padding: 0 10px;
+        text-align: center;
+      }
+      .content {
+        padding: 20px;
+      }
+      nav a {
+        margin-left: 10px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">ShinySpark</div>
+      <nav>
+        <a href="cleaningdemo.html">Home</a>
+      <a href="cleaningSERVICES.html">Services</a>
+      <a href="cleaningABOUT.html" class="active">About</a>
+      <a href="cleaningCONTACT.html">Contact</a>
+      <a href="cleaningAPPOINT.html">Book Now</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">About Us</section>
+  <main class="content">
+    <section class="section" id="company-overview">
+      <h2>Our Company</h2>
+      <p>ShinySpark Cleaning Co. is dedicated to providing top-notch residential and commercial cleaning services. We take pride in our attention to detail and commitment to customer satisfaction, ensuring every space we clean sparkles with freshness and care.</p>
+    </section>
+    <section class="section" id="values">
+      <h2>Our Values</h2>
+      <p>We believe in integrity, reliability, and professionalism. Our team is trained to use eco-friendly products and modern techniques to ensure a safe, healthy, and spotless environment for our clients.</p>
+    </section>
+    <section class="section" id="team">
+      <h2>Meet Our Team</h2>
+      <p>Our cleaning professionals are experienced, trustworthy, and passionate about what they do. Each team member undergoes thorough training and background checks to guarantee peace of mind for our customers.</p>
+    </section>
+    <section class="section" id="why-choose-us">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>Customized cleaning plans to fit your needs</li>
+        <li>Flexible scheduling for your convenience</li>
+        <li>Eco-friendly and safe cleaning products</li>
+        <li>Competitive pricing with no hidden fees</li>
+        <li>Customer satisfaction guaranteed</li>
+      </ul>
+    </section>
+  </main>
+  <footer id="contact-section">
+    <p>&copy; 2025 ShinySpark Cleaning Co. All rights reserved.</p>
+  </footer>
+</body>
+</html>

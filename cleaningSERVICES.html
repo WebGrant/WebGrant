@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Cleaning Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: #4a90e2; /* Ensure background remains visible when sticky */
+            color: white;
+            padding: 3rem 1rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: white;
+            border-radius: 50% / 100%;
+            animation: wave 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(50px); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+            nav a.active {
+        color: rgb(255, 102, 0);
+      text-decoration: underline;
+    }
+
+        main {
+            max-width: 1100px;
+            width: 90%;
+            margin: 2rem auto 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(74, 144, 226, 0.35);
+        }
+
+        .service-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #4a90e2;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem 1rem;
+            background: #4a90e2;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+            color: white;
+            max-width: 600px;
+            width: 90%;
+            transition: background 0.3s ease;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .cta a {
+            font-weight: 700;
+            color: #fff;
+            background: #f5a623;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 10px rgba(245, 166, 35, 0.4);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta a:hover {
+            background: #d48806;
+            box-shadow: 0 8px 15px rgba(212, 136, 6, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2.25rem;
+            }
+
+            main {
+                margin-top: -3rem;
+            }
+      .hero {
+        font-size: 1.8rem;
+        height: 200px;
+        padding: 0 10px;
+        text-align: center;
+      }
+      .content {
+        padding: 20px;
+      }
+      nav a {
+        margin-left: 10px;
+        font-size: 0.9rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Our Cleaning Services</h1>
+            <p>Professional, reliable, and tailored to your needs</p>
+        </div>
+        <nav>
+            <a href="cleaningdemo.html">Home</a>
+            <a href="cleaningSERVICES.html" class="active">Services</a>
+            <a href="cleaningABOUT.html">About</a>
+            <a href="#contact">Contact</a>
+            <a href="cleaningAPPOINT.html">Book Now</a>
+        </nav>
+    </header>
+    <main>
+        <div class="service-card">
+            <h3>Residential Cleaning</h3>
+            <p>From kitchens to bathrooms, we ensure your home is spotless and welcoming. Weekly, bi-weekly, or one-time services available.</p>
+        </div>
+        <div class="service-card">
+            <h3>Commercial Cleaning</h3>
+            <p>Keep your office or commercial space clean, healthy, and productive with our scheduled cleaning services.</p>
+        </div>
+        <div class="service-card">
+            <h3>End of Lease Cleaning</h3>
+            <p>Moving out? Let us handle the final clean so you can focus on settling into your new place. Satisfaction guaranteed!</p>
+        </div>
+        <div class="service-card">
+            <h3>Deep Cleaning</h3>
+            <p>For a thorough, top-to-bottom clean of your property, our deep cleaning service leaves no surface untouched.</p>
+        </div>
+        <div class="service-card">
+            <h3>Custom Packages</h3>
+            <p>Need something unique? We create cleaning packages tailored to your home or business needs and budget.</p>
+        </div>
+    </main>
+    <section class="cta">
+        <p>Ready to book a service or want to learn more?</p>
+        <a href="contact.html">Contact us today!</a>
+    </section>
+</body>
+</html>
