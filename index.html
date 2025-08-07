@@ -4,7 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WebGrant - Galactic Startup Partner</title>
+  <meta name="description" content="WebGrant: Your cosmic co-pilot in creating stunning, mobile-optimized, and blazing-fast websites.">
+  <meta name="keywords" content="Web design, Startup websites, Business growth, WebGrant, Mobile-optimized, Fast websites">
+  <meta name="author" content="WebGrant Team">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
+    .highlighted-text {
+      padding: 0.25em 0.5em;
+      border: 2px solid transparent;
+      border-image: linear-gradient(90deg, #00fff7, #ff00c8) 1;
+      border-radius: 8px;
+      display: inline-block;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.4), 0 0 18px rgba(255, 0, 200, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(0, 255, 247, 0.7), 0 0 30px rgba(255, 0, 200, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.4), 0 0 18px rgba(255, 0, 200, 0.3);
+      }
+    }
     /* === Reset and base === */
     * {
       box-sizing: border-box;
@@ -13,9 +36,8 @@
       color: #fff;
     }
     body {
-      background:
-        radial-gradient(ellipse at center, #1a1a2e 0%, #000010 80%),
-        #000010;
+      background: linear-gradient(to bottom, #0f172a, #1e293b);
+      color: #f1f5f9;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
@@ -124,7 +146,7 @@ nav ul li.active::after {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        url('https://raw.githubusercontent.com/joshwcomeau/starfield/master/starfield.png') repeat;
+        url('trial.gif') repeat;
       background-size: contain;
       opacity: 0.25;
       z-index: 0;
@@ -148,15 +170,15 @@ nav ul li.active::after {
     }
     .parallax-layer {
       position: absolute;
-      width: 200vw; height: 200vh;
+      width: 200vw;
+      height: 200vh;
       background-repeat: repeat;
       background-size: contain;
-      opacity: 0.15;
       will-change: transform;
-      filter: drop-shadow(0 0 3px #00fff7);
+      pointer-events: none;
     }
     .stars-1 {
-      background-image: url('https://media.istockphoto.com/id/1403817732/video/flying-away-from-the-nebula.jpg?s=640x640&k=20&c=_Va4HotgrhAlB7kDRPTknSX0Cb1TbhsB51VcYBK27n0=');
+      background-image: url('celestial-background.png');
       top: -50vh; left: -50vw;
       z-index: 1;
       opacity: 0.12;
@@ -168,6 +190,75 @@ nav ul li.active::after {
       opacity: 0.07;
     }
 
+    .stars-3 {
+      background-image: url('https://images.unsplash.com/photo-1526403226-b1d6f7e81f2a?auto=format&fit=crop&w=1350&q=80');
+      top: -70vh;
+      left: -70vw;
+      z-index: 3;
+      opacity: 0.1;
+      mix-blend-mode: screen;
+    }
+
+    .nebula {
+      background-image: url('https://images.unsplash.com/photo-1614064548237-096f6733c73a?auto=format&fit=crop&w=1350&q=80');
+      top: -80vh;
+      left: -80vw;
+      z-index: 4;
+      opacity: 0.2;
+      filter: blur(2px);
+      mix-blend-mode: lighten;
+    }
+
+    .aurora {
+      background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1470&q=80');
+      top: -100vh;
+      left: -100vw;
+      z-index: 5;
+      opacity: 0.15;
+      mix-blend-mode: screen;
+    }
+
+    .deep-space {
+      background-image: url('https://images.unsplash.com/photo-1608569046376-fbb7f8c9819b?auto=format&fit=crop&w=1470&q=80');
+      top: -120vh;
+      left: -90vw;
+      z-index: 6;
+      opacity: 0.12;
+      filter: blur(3px);
+    }
+
+    .celestial-bg {
+      background-image: url('celestial-background.png');
+      top: -130vh;
+      left: -100vw;
+      z-index: 7;
+      opacity: 0.1;
+      background-size: cover;
+      background-repeat: no-repeat;
+      mix-blend-mode: screen;
+      filter: blur(2px);
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 30px); }
+    }
+
+    @keyframes pulseNebula {
+      0% { opacity: 0.15; transform: scale(1); }
+      100% { opacity: 0.3; transform: scale(1.05); }
+    }
+
+    @keyframes floatAurora {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 20px) scale(1.05); }
+    }
+
+    @keyframes pulseSpace {
+      0% { opacity: 0.1; transform: scale(1); }
+      100% { opacity: 0.2; transform: scale(1.07); }
+    }
+
     /* === Header section === */
     header {
       padding: 3rem 2rem 5rem;
@@ -177,21 +268,87 @@ nav ul li.active::after {
       position: relative;
       user-select: none;
     }
-    header .glow-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(3rem, 8vw, 5rem);
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Subtle horizontal sliding text effect */
+    @keyframes textGlide {
+      0% {
+        letter-spacing: 1px;
+        transform: translateX(0);
+      }
+      50% {
+        letter-spacing: 3px;
+        transform: translateX(5px);
+      }
+      100% {
+        letter-spacing: 1px;
+        transform: translateX(0);
+      }
+    }
+
+    .glow-title {
+      font-size: 4rem;
       font-weight: 900;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
-      background-clip: text;
+      background: linear-gradient(270deg, #00fff7, #ff00c8, #00fff7);
+      background-size: 400% 400%;
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      animation: gradientShift 8s linear infinite, floatTitle 6s ease-in-out infinite;
+      transition: transform 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+    .glow-title::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       color: transparent;
-      text-shadow:
-        0 0 10px #00fff7,
-        0 0 20px #ff00c8,
-        0 0 30px #ff00c8,
-        0 0 40px #ff00c8;
-      animation: neonGlow 3s ease-in-out infinite alternate;
-      margin-bottom: 0.5rem;
+      -webkit-text-stroke: 1px #00fff7;
+      animation: flickerStroke 2s infinite ease-in-out;
+      z-index: -1;
+    }
+
+    .glow-title:hover {
+      transform: rotateY(6deg) rotateX(3deg);
+    }
+
+    @keyframes flickerStroke {
+      0%, 100% {
+        opacity: 0.9;
+      }
+      45% {
+        opacity: 0.4;
+      }
+      60% {
+        opacity: 0.6;
+      }
+      80% {
+        opacity: 0.3;
+      }
     }
     @keyframes neonGlow {
       0% {
@@ -217,32 +374,45 @@ nav ul li.active::after {
       text-shadow: 0 0 3px #000;
     }
     .btn-neon {
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
-      border: none;
-      border-radius: 30px;
-      padding: 1.2rem 3rem;
-      font-weight: 700;
-      font-size: 1.25rem;
+      background: linear-gradient(135deg, #00fff7, #ff00c8);
       color: #111;
+      border: none;
+      border-radius: 10px;
+      padding: 0.9rem 2.2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
       cursor: pointer;
-      box-shadow:
-        0 0 10px #00fff7,
-        0 0 20px #ff00c8,
-        inset 0 0 8px #00fff7;
-      transition: transform 0.2s ease;
-      user-select: none;
       position: relative;
       overflow: hidden;
-      outline-offset: 4px;
+      box-shadow: 0 0 10px #00fff7, 0 0 20px #ff00c8, inset 0 0 5px #fff;
+      transition: all 0.3s ease;
     }
+
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #ff00c8, #00fff7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+
+    .btn-neon:hover::before {
+      opacity: 0.15;
+    }
+
     .btn-neon:hover,
     .btn-neon:focus-visible {
-      transform: scale(1.08);
-      box-shadow:
-        0 0 20px #00fff7,
-        0 0 40px #ff00c8,
-        inset 0 0 15px #00fff7;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff00c8, 0 0 30px #00fff7;
       outline: none;
+    }
+
+    .btn-neon span {
+      position: relative;
+      z-index: 1;
     }
 
     /* Scroll indicator */
@@ -270,10 +440,10 @@ nav ul li.active::after {
     .glow-text {
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      color: #fff;
+      color: #38bdf8;
       text-align: center;
       margin-bottom: 2rem;
-      text-shadow: 0 0 10px #00fff7, 0 0 20px #ff00c8;
+      text-shadow: none;
     }
 
     /* Cards container */
@@ -285,40 +455,92 @@ nav ul li.active::after {
       margin-top: 2rem;
     }
     .card {
-      background: rgba(10, 10, 30, 0.85);
-      border-radius: 16px;
+      position: relative;
+      background: radial-gradient(circle at top left, #1e3a8a, #0f172a);
+      border-radius: 20px;
       padding: 2rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow:
-        0 0 15px #00fff7,
-        inset 0 0 15px #ff00c8;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: default;
-      user-select: none;
-      text-align: center;
+        0 0 20px rgba(0, 255, 247, 0.2),
+        0 0 40px rgba(255, 0, 200, 0.15),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+      overflow: hidden;
+      z-index: 1;
+      background-size: 200% 200%;
+      animation: cardGradientAnim 7s ease-in-out infinite alternate;
+      opacity: 0;
+      transform: translateY(60px);
+      min-height: 340px;
     }
-    .card i {
-      font-size: 3rem;
-      display: block;
-      margin-bottom: 1rem;
-      color: #ff00c8;
-      filter: drop-shadow(0 0 6px #ff00c8);
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
+
+    /* Parallax card animation styles */
+    .card.parallax-animate {
+      transform: translateY(80px) scale(0.95) rotateX(15deg);
+      opacity: 0;
+      transition: all 1s ease-out;
+      perspective: 800px;
+    }
+
+    .card.parallax-animate.visible {
+      transform: translateY(0) scale(1) rotateX(0deg);
+      opacity: 1;
+    }
+    @keyframes cardGradientAnim {
+      0% { background-position: 0% 100%; }
+      100% { background-position: 100% 0%; }
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
+      background: conic-gradient(from 0deg, #00fff7, #ff00c8, #00fff7);
+      animation: rotateGlow 5s linear infinite;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .card:hover {
+      transform: scale(1.05) rotateX(6deg) rotateY(6deg);
+      box-shadow:
+        0 0 40px rgba(0, 255, 247, 0.4),
+        0 0 80px rgba(255, 0, 200, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .card i, .card h3, .card p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card p {
+      background: linear-gradient(90deg, #ff8ae2, #7ee8fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
     .card h3 {
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: #00fff7;
-      text-shadow: 0 0 8px #00fff7;
     }
-    .card p {
-      color: #ddd;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow:
-        0 0 30px #ff00c8,
-        inset 0 0 20px #00fff7;
+
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Timeline */
@@ -344,29 +566,62 @@ nav ul li.active::after {
       filter: drop-shadow(0 0 8px #ff00c8);
       z-index: 0;
     }
-    .timeline-step {
-      position: relative;
-      flex: 1;
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
-      padding: 0 1rem;
-      user-select: none;
-      cursor: default;
-      font-size: 1.1rem;
-      z-index: 1;
-    }
-.timeline-step::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #00fff7, #ff00c8);
-  box-shadow: 0 0 10px #ff00c8;
+.timeline-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  position: relative;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 1rem;
+  user-select: none;
+  cursor: default;
+  font-size: 1.1rem;
+  z-index: 1;
+  text-shadow:
+    0 0 4px #ff00c8,
+    0 0 8px #00fff7;
+}
+  .timeline-step::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff00c8 0%, #00fff7 100%);
+    box-shadow:
+      0 0 25px rgba(255, 0, 200, 0.4),
+      0 0 45px rgba(0, 255, 247, 0.3),
+      0 0 60px rgba(0, 255, 247, 0.2);
+    z-index: -1;
+    animation: pulseRays 3s ease-in-out infinite;
+  }
+@keyframes pulseRays {
+  0% {
+    box-shadow:
+      0 0 20px rgba(122, 0, 112, 0.3),
+      0 0 35px rgba(0, 61, 58, 0.2),
+      0 0 50px rgba(0, 255, 247, 0.1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(122, 0, 112, 0.5),
+      0 0 70px rgba(0, 61, 58, 0.4),
+      0 0 100px rgba(0, 255, 247, 0.2);
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  100% {
+    box-shadow:
+      0 0 20px rgba(122, 0, 112, 0.3),
+      0 0 35px rgba(0, 61, 58, 0.2),
+      0 0 50px rgba(0, 255, 247, 0.1);
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
     /* Contact section */
@@ -472,6 +727,45 @@ nav ul li.active::after {
     display: flex;
   }
 }
+
+.glow-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.glow-title {
+  opacity: 0;
+  transform: translateX(-100vw);
+  animation: slideInWithTrail 2s ease-out forwards;
+}
+
+@keyframes slideInWithTrail {
+  0% {
+    opacity: 0;
+    transform: translateX(-100vw);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(20px);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Particle trail canvas for heading */
+#textTrail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  z-index: 1;
+  pointer-events: none;
+}
   </style>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -504,12 +798,19 @@ nav ul li.active::after {
   <div id="parallax-container" aria-hidden="true">
     <div class="parallax-layer stars-1"></div>
     <div class="parallax-layer stars-2"></div>
+    <div class="parallax-layer stars-3"></div>
+    <div class="parallax-layer nebula"></div>
+    <div class="parallax-layer aurora"></div>
+    <div class="parallax-layer deep-space"></div>
+    <div class="parallax-layer celestial-bg"></div>
   </div>
 
   <header id="home" role="banner" aria-label="Welcome section">
-    <h1 class="glow-text">WebGrant</h1>
+<div class="glow-wrapper">
+  <h1 class="glow-title" data-text="WebGrant">WebGrant</h1>
+</div>
     <p>Your galactic startup partner — ready for cosmic success.</p>
-<a href="form.html" class="btn-neon" aria-label="Get started with WebGrant">Get Started</a>
+<a href="form.html" class="btn-neon" aria-label="Get started with WebGrant"><span>Get Started</span></a>
     <div class="scroll-indicator" aria-hidden="true">⬇️</div>
   </header>
 
@@ -533,6 +834,7 @@ nav ul li.active::after {
       </article>
     </div>
     </section>
+    <canvas id="cardTrail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;"></canvas>
   </section>
 
   <section id="about" aria-label="About WebGrant">
@@ -550,12 +852,34 @@ nav ul li.active::after {
     </div>
   </section>
 
+    <section id="why-choose-us" aria-label="Why Choose Us">
+    <h2 class="glow-text">Why Choose WebGrant?</h2>
+    <div class="card-container" role="list">
+      <article class="card" role="listitem">
+        <i class="fas fa-user-shield" aria-hidden="true"></i>
+        <h3>Trusted Partner</h3>
+        <p>We're committed to your long-term growth. Clients trust us for reliability, transparency, and results.</p>
+      </article>
+      <article class="card" role="listitem">
+        <i class="fas fa-tools" aria-hidden="true"></i>
+        <h3>Tailored Solutions</h3>
+        <p>Every business is unique — and your website should be too. We customize each design to fit your vision.</p>
+      </article>
+      <article class="card" role="listitem">
+        <i class="fas fa-headset" aria-hidden="true"></i>
+        <h3>Ongoing Support</h3>
+        <p>Our support doesn’t end after launch. We're here for updates, fixes, and advice anytime you need.</p>
+      </article>
+    </div>
+  </section>
+
   <section id="contact" aria-label="Contact Us">
     <h2 class="glow-text">Get in Touch</h2>
     <p>Reach out to discuss your project or just say hello — we’re always ready to collaborate.</p>
     <p>Email: <a href="mailto:webgrant25@gmail.com" style="color:#0ff; text-decoration:underline;">webgrant25@gmail.com</a></p>
     <p>Follow us on Instagram: <a href="https://www.instagram.com/webgrantofficial/" style="color:#0ff; text-decoration:underline;">@webgrantofficial</a></p>
   </section>
+
 
   <footer role="contentinfo">
     &copy; 2025 WebGrant. All rights reserved.
@@ -624,11 +948,11 @@ nav ul li.active::after {
     if (rect.top < winH && rect.bottom > 0) {
       const progress = Math.min(1.2, Math.max(0, (winH - rect.top) / (winH + rect.height)));
       cards[0].style.transform =
-        `translate(${-120 * progress}%, ${-80 * progress}%) scale(${1 + 0.35 * progress}) rotate(${-30 * progress}deg) skewY(${-10 * progress}deg)`;
+        `translate(${-60 * progress}%, ${-40 * progress}%) scale(${1 + 0.175 * progress}) rotate(${-15 * progress}deg) skewY(${-5 * progress}deg)`;
       cards[1].style.transform =
-        `translateY(${-180 * progress}%) scale(${1 + 0.5 * progress}) rotate(${25 * progress}deg) skewX(${10 * progress}deg)`;
+        `translateY(${-90 * progress}%) scale(${1 + 0.25 * progress}) rotate(${12.5 * progress}deg) skewX(${5 * progress}deg)`;
       cards[2].style.transform =
-        `translate(${120 * progress}%, ${80 * progress}%) scale(${1 + 0.35 * progress}) rotate(${30 * progress}deg) skewY(${10 * progress}deg)`;
+        `translate(${60 * progress}%, ${40 * progress}%) scale(${1 + 0.175 * progress}) rotate(${15 * progress}deg) skewY(${5 * progress}deg)`;
     } else {
       cards.forEach(card => card.style.transform = '');
     }
@@ -639,7 +963,234 @@ nav ul li.active::after {
   window.addEventListener('DOMContentLoaded', () => {
     parallaxCards();
   });
+
+function updateParallaxLayers() {
+  const scrollY = window.scrollY;
+  const layers = document.querySelectorAll('.parallax-layer');
+  const viewportHeight = window.innerHeight;
+
+  layers.forEach((layer, index) => {
+    // Space out each layer's reveal more
+    const revealStart = viewportHeight * index * 0.9;
+    const revealEnd = revealStart + viewportHeight * 2.0; // wider range for smoother reveal
+
+    if (scrollY < revealStart) {
+      // Before the reveal
+      layer.style.opacity = 0;
+      layer.style.transform = `translateY(60px)`;
+      layer.style.pointerEvents = 'none';
+    } else if (scrollY > revealEnd) {
+      // After reveal range
+      layer.style.opacity = 1; // Keep visible
+      layer.style.transform = `translateY(0px)`; // Lock in position
+      layer.style.pointerEvents = 'none';
+    } else {
+      // During reveal
+      const progress = (scrollY - revealStart) / (revealEnd - revealStart);
+      layer.style.opacity = Math.min(1, progress * 1.5); // Fade in faster
+      layer.style.transform = `translateY(${(1 - progress) * 40}px)`; // More depth effect
+      layer.style.pointerEvents = 'none';
+    }
+  });
+}
+
+window.removeEventListener('scroll', updateParallaxLayers);
+window.addEventListener('scroll', () => {
+  requestAnimationFrame(updateParallaxLayers);
+});
+window.addEventListener('DOMContentLoaded', updateParallaxLayers);
+// === Particle trail for heading (rocket-like scattered pixels) ===
+window.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("textTrail");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = 300;
+
+  const particles = [];
+  const maxParticles = 100;
+  const glowEl = document.querySelector(".glow-title");
+
+  function createParticle(x, y) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 2 + 1;
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      alpha: 1,
+      radius: Math.random() * 2 + 1,
+      color: `rgba(${Math.random() > 0.5 ? '0,255,247' : '255,0,200'},${Math.random() * 0.8 + 0.2})`
+    });
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, index) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.alpha -= 0.02;
+      if (p.alpha <= 0) particles.splice(index, 1);
+      else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color.replace(')', `,${p.alpha})`);
+        ctx.fill();
+      }
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  function emitTrailParticles() {
+    const rect = glowEl.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    for (let i = 0; i < 6; i++) {
+      createParticle(x, y);
+    }
+  }
+
+  let emitted = false;
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !emitted) {
+      emitted = true;
+      const interval = setInterval(() => {
+        emitTrailParticles();
+        if (particles.length > maxParticles) {
+          clearInterval(interval);
+        }
+      }, 50);
+      animateParticles();
+    }
+  });
+
+  observer.observe(glowEl);
+});
+// === Particle animation for cards on scroll ===
+window.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("cardTrail");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let particles = [];
+
+  function createParticle(x, y, targetX, targetY) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 3 + 1;
+    return {
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      alpha: 1,
+      radius: Math.random() * 2 + 1,
+      targetX,
+      targetY
+    };
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      const dx = p.targetX - p.x;
+      const dy = p.targetY - p.y;
+      p.vx += dx * 0.01;
+      p.vy += dy * 0.01;
+      p.vx *= 0.92;
+      p.vy *= 0.92;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,255,247,${p.alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2 + window.scrollY;
+        for (let i = 0; i < 120; i++) {
+          particles.push(createParticle(cardCenterX, canvas.height, cardCenterX, cardCenterY));
+        }
+        card.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card').forEach(card => {
+    cardObserver.observe(card);
+  });
+
+  animate();
+});
 </script>
 
+  <canvas id="textTrail"></canvas>
 </body>
+  <button id="backToTop" title="Back to Top" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    color: #111;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 12px #ff00c8;
+    cursor: pointer;
+    display: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  ">↑</button>
+  <script>
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.card').forEach(card => {
+        card.classList.add('parallax-animate');
+        cardObserver.observe(card);
+      });
+    });
+  </script>
+  <style>
+    #backToTop:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #38bdf8;
+    }
+  </style>
 </html>
