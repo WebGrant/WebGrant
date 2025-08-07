@@ -9,6 +9,16 @@
   <meta name="author" content="WebGrant Team">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
+  #scrollProgressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    width: 0%;
+    z-index: 10001;
+    transition: width 0.25s ease-out;
+  }
     .highlighted-text {
       padding: 0.25em 0.5em;
       border: 2px solid transparent;
@@ -803,6 +813,8 @@ nav ul li.active::after {
 </head>
 <body>
 
+  <div id="scrollProgressBar"></div>
+
   <nav>
     <div class="logo">
     <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
@@ -1215,6 +1227,13 @@ window.addEventListener("DOMContentLoaded", () => {
         cardObserver.observe(card);
       });
     });
+
+      window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollProgressBar').style.width = `${scrollPercent}%`;
+  });
   </script>
   <style>
     #backToTop:hover {
