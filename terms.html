@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Terms & Conditions - WebGrant</title>
   <style>
+    /* Font stack and base styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,8 +19,12 @@
       min-height: 100vh;
       overflow-x: hidden;
       padding: 60px 20px 40px;
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
       color: #e0e0e0;
+      line-height: 1.8;
+      font-size: 18px;
+      background-attachment: fixed;
     }
 
 nav {
@@ -28,13 +33,17 @@ nav {
       height: 60px;
       background: rgba(10,10,30, 0.85);
       backdrop-filter: blur(8px);
-      border-bottom: 2px solid #0ff;
+      border-bottom: 2px solid #00fff7;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
       z-index: 10000;
-      box-shadow: 0 0 10px #00fff7;
+      box-shadow: 0 0 15px #00fff7;
+      text-shadow: 0 0 4px #00fff7;
+      font-weight: 600;
+      font-size: 1.15rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     .logo {
@@ -42,7 +51,7 @@ nav {
       align-items: center;
       gap: 0.5rem;
       font-weight: 900;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       letter-spacing: 2px;
       color: #00fff7;
       text-shadow: 0 0 6px #00fff7;
@@ -59,26 +68,27 @@ nav {
 nav ul {
       list-style: none;
       display: flex;
-      gap: 2.5rem;
+      gap: 3rem;
       margin-left: auto;
     }
 
     nav ul li {
       position: relative;
       font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
+      font-size: 1.15rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     nav ul li:hover a,
     nav ul li:focus-within a {
-      color: #ff00c8;
-      text-shadow: 0 0 10px #ff00c8;
+      color: #00fff7;
+      text-shadow: none;
     }
 
     nav ul li::after {
@@ -88,9 +98,10 @@ nav ul {
       left: 0;
       width: 0%;
       height: 2px;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      background: linear-gradient(90deg, #00fff7, #00fff7);
       transition: width 0.3s ease;
       border-radius: 1px;
+      box-shadow: 0 0 6px #00fff7;
     }
 
     nav ul li:hover::after,
@@ -99,8 +110,8 @@ nav ul {
     }
 
     nav ul li.active a {
-      color: #ff00c8;
-      text-shadow: 0 0 10px #ff00c8;
+      color: #00fff7;
+      text-shadow: none;
     }
 
     nav ul li.active::after {
@@ -110,8 +121,9 @@ nav ul {
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      background: linear-gradient(90deg, #00fff7, #00fff7);
       border-radius: 1px;
+      box-shadow: 0 0 8px #00fff7;
     }
 
        /* === Hamburger styles === */
@@ -153,7 +165,7 @@ nav ul {
       background: rgba(10,10,30, 0.95);
       backdrop-filter: blur(8px);
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.5rem;
       padding: 2rem;
       width: 220px;
       transform: translateX(100%);
@@ -164,7 +176,7 @@ nav ul {
       transform: translateX(0);
     }
     nav ul li {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
     .hamburger {
       display: flex;
@@ -175,7 +187,7 @@ nav ul {
       }
       nav .logo {
       font-weight: 900;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       letter-spacing: 2px;
       color: #00fff7;
       text-shadow: 0 0 6px #00fff7;
@@ -183,76 +195,212 @@ nav ul {
   }
 
     header {
-      background-color: #0a0a0a98;
-      color: #03e9f4;
+      background: linear-gradient(135deg, rgba(0,255,247,0.15), rgba(3,233,244,0.1));
+      color: #00fff7;
       text-align: center;
-      padding: 60px 20px;
-      border-bottom: 2px solid #03e9f4;
+      padding: 80px 20px 70px;
+      border-bottom: 2px solid #00fff7;
       box-shadow:
-        0 4px 10px rgba(3, 233, 244, 0.2),
-        0 2px 4px rgba(0, 0, 0, 0.3);
+        0 6px 20px rgba(0, 255, 247, 0.25),
+        0 3px 8px rgba(0, 255, 247, 0.15);
+      text-shadow: 0 0 6px #00fff7;
+      font-weight: 700;
+      letter-spacing: 1.5px;
     }
 
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      text-shadow: 0 0 15px #ff00c8;
+      font-size: 3.6rem;
+      margin-bottom: 18px;
+      text-shadow: 0 0 6px #00fff7;
+      line-height: 1.1;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #a0f0ff;
+      text-shadow: 0 0 6px #00fff7;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
     }
 
     .terms-section {
-      padding: 50px 20px;
-      max-width: 1000px;
-      margin: 40px auto;
-      background-color: #0a0a0a67;
-      border-radius: 12px;
-      border: 1px solid #03e9f4;
-      box-shadow: 0 0 12px #ff00c8;
+      padding: 50px 40px;
+      max-width: 960px;
+      margin: 50px auto 70px;
+      background-color: rgba(10, 10, 10, 0.85);
+      border-radius: 16px;
+      border: 2px solid #00fff7;
+      box-shadow:
+        0 0 30px rgba(0, 255, 247, 0.7),
+        0 8px 32px rgba(0, 255, 247, 0.2);
+      color: #d0f7ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
     }
 
     .terms-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #03e9f4;
-      text-shadow: 0 0 10px #0099ff;
+      font-size: 2.6rem;
+      margin-bottom: 28px;
+      color: #00fff7;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
     }
 
     .terms-section ul {
-      list-style: disc;
-      padding-left: 40px;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 48px;
     }
 
-    .terms-section li {
-      margin-bottom: 15px;
+    /* Custom neon checkmark bullet */
+    .terms-section ul li {
+      position: relative;
+      padding-left: 34px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      cursor: default;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      border-radius: 6px;
+    }
+    .terms-section ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00fff7;
+      text-shadow:
+        0 0 3px #00fff7;
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+    .terms-section ul li:hover,
+    .terms-section ul li:focus {
+      color: #00fff7;
+      text-shadow:
+        0 0 4px #00fff7;
+      outline: none;
+      background: rgba(0, 255, 247, 0.1);
+      transition: color 0.4s ease, text-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    /* Spacing between paragraphs inside list items if any */
+    .terms-section ul li p {
+      margin-top: 8px;
+      font-weight: 400;
+      color: #b0eaff;
+      line-height: 1.7;
     }
 
     footer {
       text-align: center;
-      padding: 25px 15px;
+      padding: 30px 20px;
       background-color: #000;
-      color: #fff;
-      border-top: 2px solid #03e9f4;
+      color: #00fff7;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: inset 0 1px 0 #00fff7;
+      letter-spacing: 0.05em;
     }
 
     footer a {
-      color: #03e9f4;
+      color: #00fff7;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease, text-shadow 0.3s ease;
+      text-shadow: 0 0 4px #00fff7;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      border-color: #00fff7;
+      text-shadow: 0 0 6px #00fff7;
+      outline: none;
     }
 
     #background-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: transparent;
-  pointer-events: none;
-}
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: transparent;
+      pointer-events: none;
+      filter: blur(1.5px) brightness(0.85);
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* New scroll animation classes */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-slide.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Button styles for future use */
+    .btn {
+      display: inline-block;
+      background-color: #00fff7;
+      color: #000;
+      padding: 0.75em 1.5em;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00fff7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn:hover,
+    .btn:focus {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 15px #00fff7,
+        0 0 25px #00fff7;
+      outline: none;
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background-color: #00fff7;
+      z-index: 12000;
+      transition: width 0.25s ease;
+    }
   </style>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
+    <div id="scroll-progress"></div>
   <nav>
     <div class="logo">
       <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
@@ -263,7 +411,7 @@ nav ul {
       <li><a href="service.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="about.html">About Us</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
       <li class="active"><a href="#">T&amp;Cs</a></li>
             <li><a href="form.html" tabindex="6">Request a Website</a></li>
     </ul>
@@ -280,59 +428,59 @@ nav ul {
   </header>
 
   <section class="terms-section">
-    <h2>What We Offer</h2>
+    <h2 class="fade-slide">What We Offer</h2>
     <ul>
-      <li>Custom-designed websites tailored to your business</li>
-      <li>Clear previews before final payment</li>
-      <li>Fast delivery: usually within 1–2 weeks</li>
-      <li>Minor support and updates post-delivery (if agreed)</li>
+      <li class="fade-slide">Custom-designed websites tailored to your business</li>
+      <li class="fade-slide">Clear previews before final payment</li>
+      <li class="fade-slide">Fast delivery: usually within 1–2 weeks</li>
+      <li class="fade-slide">Minor support and updates post-delivery (if agreed)</li>
     </ul>
 
-    <h2>Payment Policy</h2>
+    <h2 class="fade-slide">Payment Policy</h2>
     <ul>
-      <li>A deposit of 35% is required to begin any project</li>
-      <li>Example: for a $600 AUD website, deposit is $210 AUD</li>
-      <li>The remaining balance is paid after preview but before handover</li>
-      <li>We only accept bank transfers. No cash or non-verifiable payment apps</li>
+      <li class="fade-slide">A deposit of 35% is required to begin any project</li>
+      <li class="fade-slide">Example: for a $600 AUD website, deposit is ~$200 AUD</li>
+      <li class="fade-slide">The remaining balance is paid after preview but before handover</li>
+      <li class="fade-slide">We only accept bank transfers. No cash or non-verifiable payment apps</li>
     </ul>
 
-    <h2>Cancellation Policy</h2>
+    <h2 class="fade-slide">Cancellation Policy</h2>
     <ul>
-      <li>If the client cancels after the deposit, the deposit is non-refundable</li>
-      <li>If WebGrant cancels, 100% of any payment received will be refunded</li>
-      <li>Cancellations must be communicated via email</li>
+      <li class="fade-slide">If the client cancels after the deposit, the deposit is non-refundable</li>
+      <li class="fade-slide">If WebGrant cancels, 100% of any payment received will be refunded</li>
+      <li class="fade-slide">Cancellations must be communicated via email</li>
     </ul>
 
-    <h2>Deadlines & Communication</h2>
+    <h2 class="fade-slide">Deadlines & Communication</h2>
     <ul>
-      <li>Clients must provide timely feedback and assets (e.g. logos, content)</li>
-      <li>Delays from the client’s side may push back the delivery date</li>
-      <li>We aim to respond to all emails within 24 hours</li>
+      <li class="fade-slide">Clients must provide timely feedback and assets (e.g. logos, content)</li>
+      <li class="fade-slide">Delays from the client’s side may push back the delivery date</li>
+      <li class="fade-slide">We aim to respond to all emails within 24 hours</li>
     </ul>
 
-      <h2>Payment Instructions</h2>
+      <h2 class="fade-slide">Payment Instructions</h2>
   <ul>
-    <li>Clients must pay using bank transfer only</li>
-    <li>Bank details will be provided on the day of delivery</li>
+    <li class="fade-slide">Clients must pay using bank transfer only</li>
+    <li class="fade-slide">Bank details will be provided on the day of delivery</li>
   </ul>
 
-  <h2>Ownership & Usage Rights</h2>
+  <h2 class="fade-slide">Ownership & Usage Rights</h2>
 <ul>
-  <li>Full ownership of the final website is transferred to the client after full payment</li>
-  <li>Until full payment is made, all materials remain the property of WebGrant</li>
-    <li>The client is supposed to receive their website in a zip file via Email.</li>
+  <li class="fade-slide">Full ownership of the final website is transferred to the client after full payment</li>
+  <li class="fade-slide">Until full payment is made, all materials remain the property of WebGrant</li>
+  <li class="fade-slide">The client is supposed to receive their website in a zip file via Email.</li>
 </ul>
 
-<h2>Revisions Policy</h2>
+<h2 class="fade-slide">Revisions Policy</h2>
 <ul>
-  <li>Up to 2 rounds of minor revisions are included</li>
-  <li>Major changes or extra revisions may incur additional charges</li>
+  <li class="fade-slide">Up to 2 rounds of minor revisions are included</li>
+  <li class="fade-slide">Major changes or extra revisions may incur additional charges</li>
 </ul>
 
-<h2>Third-Party Tools & Hosting</h2>
+<h2 class="fade-slide">Third-Party Tools & Hosting</h2>
 <ul>
-  <li>WebGrant is not responsible for issues caused by third-party services, such as hosting providers or plugins</li>
-  <li>We can offer recommendations, but the client is responsible for choosing a hosting service</li>
+  <li class="fade-slide">WebGrant is not responsible for issues caused by third-party services, such as hosting providers or plugins</li>
+  <li class="fade-slide">We can offer recommendations, but the client is responsible for choosing a hosting service</li>
 </ul>
   </section>
 
@@ -397,6 +545,61 @@ function animateParticles() {
 
 createParticles(80);
 animateParticles();
+
+// Mousemove interaction for particles
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  const radius = 100;
+
+  particles.forEach(p => {
+    const dx = p.x - mouseX;
+    const dy = p.y - mouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < radius && dist > 0) {
+      // Calculate normalized vector away from mouse
+      const nx = dx / dist;
+      const ny = dy / dist;
+      // Gently alter velocity to move away
+      p.dx += nx * 0.05;
+      p.dy += ny * 0.05;
+      // Limit velocity magnitude to reasonable max to avoid runaway speed
+      const maxSpeed = 1.5;
+      const speed = Math.sqrt(p.dx * p.dx + p.dy * p.dy);
+      if (speed > maxSpeed) {
+        p.dx = (p.dx / speed) * maxSpeed;
+        p.dy = (p.dy / speed) * maxSpeed;
+      }
+    }
+  });
+});
+
+// IntersectionObserver for fade-slide elements
+const fadeSlideElements = document.querySelectorAll('.fade-slide');
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+fadeSlideElements.forEach(el => {
+  observer.observe(el);
+});
+
+// Scroll progress bar update
+const progressBar = document.getElementById('scroll-progress');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrollPercent + '%';
+});
 </script>
 </body>
 </html>
