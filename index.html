@@ -145,9 +145,8 @@ nav ul li.active::after {
       content: "";
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background:
-        url('trial.gif') repeat;
-      background-size: contain;
+      background: url('trial.gif') no-repeat center center;
+      background-size: cover;
       opacity: 0.25;
       z-index: 0;
       animation: twinkle 15s linear infinite alternate;
@@ -182,12 +181,18 @@ nav ul li.active::after {
       top: -50vh; left: -50vw;
       z-index: 1;
       opacity: 0.12;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
     .stars-2 {
       background-image: url('goodbackground.jpg');
       top: -60vh; left: -40vw;
       z-index: 2;
       opacity: 0.07;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
     .stars-3 {
@@ -197,6 +202,9 @@ nav ul li.active::after {
       z-index: 3;
       opacity: 0.1;
       mix-blend-mode: screen;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
     .nebula {
@@ -207,6 +215,9 @@ nav ul li.active::after {
       opacity: 0.2;
       filter: blur(2px);
       mix-blend-mode: lighten;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
     .aurora {
@@ -216,6 +227,9 @@ nav ul li.active::after {
       z-index: 5;
       opacity: 0.15;
       mix-blend-mode: screen;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
     .deep-space {
@@ -225,6 +239,9 @@ nav ul li.active::after {
       z-index: 6;
       opacity: 0.12;
       filter: blur(3px);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
     .celestial-bg {
@@ -235,6 +252,7 @@ nav ul li.active::after {
       opacity: 0.1;
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center;
       mix-blend-mode: screen;
       filter: blur(2px);
     }
