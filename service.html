@@ -15,6 +15,8 @@
       font-family: Arial, sans-serif;
       color: #e0e0e0;
       padding-top: 60px;
+      font-size: 1.13rem; /* slightly larger font size */
+      line-height: 1.7;   /* improved readability */
     }
 
        .logo {
@@ -196,6 +198,10 @@
       text-align: center;
       padding: 100px 20px 40px;
       color: #fff;
+      border-radius: 0 0 22px 22px;
+      box-shadow: 0 4px 24px 0 #00fff73a, 0 2px 8px #00fff74a;
+      margin-bottom: 18px;
+      transition: box-shadow 0.3s;
     }
     header h1 {
       font-size: 3rem;
@@ -222,11 +228,26 @@
       padding: 25px;
       width: 350px;
       box-shadow: 0 0 15px #00fff7;
-      transition: transform 0.3s ease;
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
     }
     .package:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #00fff7;
+      transform: scale(1.035) translateY(-8px);
+      box-shadow: 0 0 36px 6px #00fff7, 0 0 6px #ff00c8;
+      z-index: 2;
+    }
+    /* === Scroll Progress Bar === */
+    #scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 5px;
+      background: linear-gradient(90deg, #00fff7 0%, #00fff7 100%);
+      box-shadow: 0 0 12px #00fff7, 0 0 20px #00fff7;
+      z-index: 20000;
+      border-radius: 0 0 5px 0;
+      transition: width 0.18s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
     }
     .package h2 {
       color: #03e9f4;
@@ -279,8 +300,10 @@
       text-decoration: none;
     }
   </style>
+  </style>
 </head>
 <body>
+  <div id="scroll-progress-bar"></div>
   <nav>
     <div class="logo">
       <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
@@ -363,7 +386,7 @@
       <li>✅ Google maps integration</li>
       <li>✅ SEO (titles & meta descriptions)</li>
       <li>✅ 2 updates/month FREE</li>
-      <li>✅ Additional Update pricing: $30+ depending on complexity</li>
+      <li>✅ Addiional Update pricing: $30+ depending on complexity</li>
     </ul>
     <p class="price">Price: $1200 – $2500 AUD</p>
   </div>
@@ -372,7 +395,7 @@
   <section class="transparency">
     <h2>What Counts as an Update?</h2>
     <p>Simple text/image edits: $30–$75 AUD<br>Layout/content tweaks: $75–$150 AUD<br>New features/sections: $150+ AUD</p>
-    <p>Requests must be emailed to <strong>webgrant25@gmail.com</strong>. Turnaround: 3–5 business days.</p>
+    <p>Requests must be emailed to <a href="mailto:webgrant25@gmail.com"><strong>webgrant25@gmail.com</strong></a>. Turnaround: 3–5 business days.</p>
   </section>
 
 <section class="extras">
@@ -401,14 +424,30 @@
     <p>&copy; 2025 WebGrant. All rights reserved.</p>
   </footer>
 
-  <script>
+</script>
+<script>
+  // Hamburger Menu
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.querySelector('nav ul');
-
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('open');
   });
+
+  // Scroll Progress Bar
+  const progressBar = document.getElementById('scroll-progress-bar');
+  function updateProgressBar() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let percent = 0;
+    if (docHeight > 0) {
+      percent = (scrollTop / docHeight) * 100;
+    }
+    progressBar.style.width = percent + "%";
+  }
+  window.addEventListener('scroll', updateProgressBar);
+  // On load, set progress bar
+  updateProgressBar();
 </script>
 </body>
 </html>
