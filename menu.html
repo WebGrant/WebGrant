@@ -324,6 +324,41 @@
           0% { text-shadow: 0 0 8px rgba(212,175,55,0.5); transform: translateX(0); }
           100% { text-shadow: 0 0 16px rgba(212,175,55,0.9); transform: translateX(2px); }
         }
+
+        .hamburger {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #111111;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: max-content;
+    border: 1px solid var(--primary);
+    padding: 1rem;
+    z-index: 1000;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
     </style>
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -331,16 +366,19 @@
 <body>
 
   <!-- Navigation -->
-  <nav>
-    <div class="nav-logo">Sydney Dine</div>
-    <div class="nav-links">
-      <a href="restraurant.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="restABOUT.html">About</a>
-      <a href="reserv.html">Reservation</a>
-      <a href="sydContact.html" class="active">Contact</a>
-    </div>
-  </nav>
+<nav class="navbar">
+  <div class="nav-logo">Sydney Dine</div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="restraurant.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="restABOUT.html">About</a>
+    <a href="reserv.html">Reservation</a>
+    <a href="sydContact.html" class="active">Contact</a>
+  </div>
+</nav>
 
 
     <!-- Hero Section -->
@@ -501,6 +539,11 @@
 
       initParticles(100);
       animateParticles();
+
+        function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("active");
+  }
     </script>
 </body>
 </html>
