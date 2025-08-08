@@ -28,6 +28,7 @@
       box-sizing: border-box; /* include padding in width */
       max-width: 1200px; /* optional max width */
       margin: 0 auto; /* center the navbar */
+      justify-content: space-between;
     }
 
     .logo {
@@ -44,6 +45,7 @@
       font-size: 1.8rem;
       color: gold;
       cursor: pointer;
+      margin-right: 0;
     }
 
     nav {
@@ -144,8 +146,9 @@
       }
 
       .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 0;
       }
 
