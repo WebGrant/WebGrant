@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | Sydney Dine</title>
+  <meta name="description" content="Sydney Dine - Elegant fine dining experience in the heart of Sydney. Discover our story, sustainability commitment, and luxury culinary artistry." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #000000);
+      font-family: 'Lato', sans-serif;
+      color: #f5f5dc;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #000, #222);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+      z-index: 1000;
+      border-bottom: 2px solid #D4AF37;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #D4AF37;
+      animation: logoSlideIn 1.5s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #D4AF37;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat Alternates', sans-serif;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5F5DC;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: #F5F5DC;
+      transform: translateY(-2px);
+    }
+
+    /* Header */
+    .main-header {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: #d4af37;
+      text-align: center;
+      margin: 120px 0 80px 0;
+      text-shadow: 0 0 20px #d4af37;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+
+    /* Card Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Card Variations */
+    .card {
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+      padding: 2rem 3rem;
+      line-height: 1.6;
+      font-size: 1.15rem;
+      color: #f5f5dc;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(60px) scale(0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card:hover {
+      box-shadow: 0 0 50px rgba(212, 175, 55, 1);
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    /* Large Cards */
+    .card-large {
+      grid-column: span 2;
+      padding: 3rem 4rem;
+      font-size: 1.25rem;
+    }
+
+    /* Feature Cards */
+    .card-feature {
+      background: linear-gradient(135deg, #111, #1a1a1a);
+      border: 2px solid #d4af37;
+      transform: translateY(80px) rotateX(15deg);
+    }
+
+    .card-feature.visible {
+      transform: translateY(0) rotateX(0deg);
+    }
+
+    /* Offset Cards */
+    .cards-offset {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin: 6rem 0;
+    }
+
+    .card-left {
+      align-self: flex-start;
+      max-width: 60%;
+      margin-left: 0;
+    }
+
+    .card-right {
+      align-self: flex-end;
+      max-width: 60%;
+      margin-right: 0;
+    }
+
+    .card-center {
+      align-self: center;
+      max-width: 80%;
+    }
+
+    /* Card Headers */
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: #d4af37;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px #d4af37;
+      position: relative;
+    }
+
+    .card h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #d4af37, transparent);
+      border-radius: 2px;
+    }
+
+    /* Parallax Background Elements */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .parallax-element {
+      position: absolute;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .parallax-element:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .parallax-element:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .parallax-element:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 80%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    /* Staggered Animation Grid */
+    .staggered-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin: 6rem 0;
+    }
+
+    .staggered-grid .card:nth-child(1) { animation-delay: 0.1s; }
+    .staggered-grid .card:nth-child(2) { animation-delay: 0.2s; }
+    .staggered-grid .card:nth-child(3) { animation-delay: 0.3s; }
+    .staggered-grid .card:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Animations */
+    @keyframes logoSlideIn {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      33% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+      66% {
+        transform: translateY(10px) rotate(-3deg);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 1.5rem 2rem;
+        font-size: 1rem;
+      }
+
+      .card-large {
+        grid-column: span 1;
+        padding: 2rem 2.5rem;
+      }
+
+      .card-left,
+      .card-right,
+      .card-center {
+        max-width: 90%;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .staggered-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        gap: 0.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .nav-logo {
+        font-size: 1.2rem;
+      }
+
+      .main-header {
+        font-size: 2rem;
+        margin: 100px 0 50px 0;
+      }
+
+      .card {
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .card h2 {
+        font-size: 1.4rem;
+      }
+
+      .card-left,
+      .card-right,
+      .card-center {
+        max-width: 100%;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax-bg">
+    <div class="parallax-element"></div>
+    <div class="parallax-element"></div>
+    <div class="parallax-element"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">Sydney Dine</div>
+    <div class="nav-links">
+      <a href="restraurant.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="restABOUT.html">About</a>
+      <a href="reserv.html">Reservation</a>
+      <a href="sydContact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Header -->
+  <header class="main-header">About Us</header>
+
+  <!-- Content Container -->
+  <div class="container">
+    <!-- Hero Cards Grid -->
+    <div class="cards-grid">
+      <div class="card card-large card-feature" data-animation="slideInLeft">
+        <h2>Welcome to Sydney Dine</h2>
+        <p>
+          Where dining transcends the ordinary into an unforgettable journey. Situated in the heart of Sydney, our restaurant embodies the perfect blend of tradition and modern elegance, offering guests a luxurious culinary experience unlike any other.
+        </p>
+      </div>
+
+      <div class="card" data-animation="fadeInUp">
+        <h2>Our Story</h2>
+        <p>
+          Our story began over a decade ago, driven by a passion to create exquisite dishes that celebrate both local and global flavors. Every plate is thoughtfully crafted using the finest, ethically sourced ingredients.
+        </p>
+      </div>
+    </div>
+
+    <!-- Offset Cards -->
+    <div class="cards-offset">
+      <div class="card card-left" data-animation="slideInLeft">
+        <h2>Sustainability & Quality</h2>
+        <p>
+          At Sydney Dine, we are committed to sustainability and supporting local farmers and producers. Our menu is designed to showcase seasonal ingredients, minimizing environmental impact while maximizing taste and creativity.
+        </p>
+      </div>
+
+      <div class="card card-right" data-animation="slideInRight">
+        <h2>Awards & Recognition</h2>
+        <p>
+          Over the years, Sydney Dine has been honored with numerous accolades including the prestigious "Best Fine Dining Experience" and recognition for our innovative wine pairings and outstanding customer service.
+        </p>
+      </div>
+
+      <div class="card card-center card-large card-feature" data-animation="fadeInUp">
+        <h2>The Sydney Dine Experience</h2>
+        <p>
+          Our elegant ambiance, attentive staff, and passion for culinary excellence invite you to savor every moment with us — whether it's a romantic dinner, a celebration, or a business gathering. Experience the art of fine dining at its finest.
+        </p>
+      </div>
+    </div>
+
+    <!-- Staggered Grid -->
+    <div class="staggered-grid">
+      <div class="card" data-animation="fadeInUp">
+        <h2>Meet Our Head Chef</h2>
+        <p>
+          Our Head Chef, with a background in world-renowned kitchens, brings an artistic touch to every dish, blending classic techniques with innovative flavors. The commitment to perfection extends beyond the plate to every detail.
+        </p>
+      </div>
+
+      <div class="card" data-animation="fadeInUp">
+        <h2>A Destination for Luxury</h2>
+        <p>
+          Sydney Dine is not just a restaurant — it's a destination for those who appreciate the finer things in life. Whether you are joining us for a special occasion or an everyday indulgence, we promise an unforgettable experience.
+        </p>
+      </div>
+
+      <div class="card card-feature" data-animation="fadeInUp">
+        <h2>Private Dining & Events</h2>
+        <p>
+          We also offer exclusive private dining rooms and curated tasting menus to cater to personalized events, ensuring an intimate and bespoke experience for our guests.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const animation = card.dataset.animation || 'fadeInUp';
+          
+          // Add visible class with animation
+          card.classList.add('visible');
+          
+          // Apply specific animation
+          if (animation === 'slideInLeft') {
+            card.style.animation = 'slideInLeft 0.8s ease-out forwards';
+          } else if (animation === 'slideInRight') {
+            card.style.animation = 'slideInRight 0.8s ease-out forwards';
+          } else {
+            card.style.animation = 'fadeInUp 0.8s ease-out forwards';
+          }
+          
+          observer.unobserve(card);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards
+    document.querySelectorAll('.card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Parallax effect for background elements
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelectorAll('.parallax-element');
+      
+      parallax.forEach((element, index) => {
+        const speed = 0.1 + (index * 0.05);
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.02}deg)`;
+      });
+    });
+
+    // Enhanced hover effects
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-15px) scale(1.03)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        if (card.classList.contains('visible')) {
+          card.style.transform = 'translateY(0) scale(1)';
+        }
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+      document.body.style.transition = 'opacity 0.5s ease-in';
+    });
+
+    // Initial body opacity
+    document.body.style.opacity = '0';
+  </script>
+</body>
+</html>

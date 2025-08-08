@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserve Your Table</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    header {
+      width: 100%;
+      background: #111;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 0 1.5rem; /* added padding to prevent overflow */
+      box-sizing: border-box; /* include padding in width */
+      max-width: 1200px; /* optional max width */
+      margin: 0 auto; /* center the navbar */
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: gold;
+      animation: shimmerText 4s infinite alternate;
+      margin-right: 0;
+    }
+
+    nav {
+      margin-left: auto; /* Push nav links to right */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem; /* increased spacing */
+    }
+
+    nav a {
+      color: gold;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: gold;
+    }
+
+    @keyframes shimmerText {
+      0% { text-shadow: 0 0 6px rgba(212,175,55,0.5); transform: translateX(0); }
+      100% { text-shadow: 0 0 14px rgba(212,175,55,0.9); transform: translateX(1px); }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #000000);
+      color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 110px 2rem 2rem 2rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: gold;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    form {
+      background: #1c1c1c;
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #ddd;
+      font-weight: 500;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #2c2c2c;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    button {
+      background: gold;
+      color: #111;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #e6c200;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        margin-right: 0;
+      }
+
+      nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+      }
+
+      nav a {
+        padding: 0.5rem 0;
+        font-size: 1.1rem;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin: 1rem 0 1.5rem 0;
+      }
+
+      form {
+        padding: 1.5rem 1rem;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      input, select, textarea {
+        font-size: 1rem;
+        padding: 0.7rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Sydney Dine</div>
+      <nav>
+      <a href="restraurant.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="restABOUT.html">About</a>
+      <a href="reserv.html">Reservation</a>
+      <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <h1>Reserve Your Table</h1>
+  <form>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required />
+
+    <label for="guests">Number of Guests</label>
+    <select id="guests" name="guests" required>
+      <option value="">Select</option>
+      <option value="1">1 Guest</option>
+      <option value="2">2 Guests</option>
+      <option value="3">3 Guests</option>
+      <option value="4">4 Guests</option>
+      <option value="5+">5+ Guests</option>
+    </select>
+
+    <label for="datetime">Date & Time</label>
+    <input type="datetime-local" id="datetime" name="datetime" required />
+
+    <label for="requests">Special Requests</label>
+    <textarea id="requests" name="requests" rows="3"></textarea>
+
+    <button type="submit">Confirm Reservation</button>
+  </form>
+</body>
+</html>

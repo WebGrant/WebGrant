@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | Sydney Dine</title>
+  <meta name="description" content="Contact Sydney Dine - Make reservations, get directions, and connect with our fine dining restaurant in the heart of Sydney." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #000000);
+      font-family: 'Lato', sans-serif;
+      color: #f5f5dc;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #000, #222);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+      z-index: 1000;
+      border-bottom: 2px solid #D4AF37;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #D4AF37;
+      animation: logoSlideIn 1.5s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #D4AF37;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat Alternates', sans-serif;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5F5DC;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: #F5F5DC;
+      transform: translateY(-2px);
+    }
+
+    .nav-links a.active {
+      color: #F5F5DC;
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Header */
+    .main-header {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: #d4af37;
+      text-align: center;
+      margin: 120px 0 80px 0;
+      text-shadow: 0 0 20px #d4af37;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+
+    /* Contact Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 6rem;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+      padding: 2rem 3rem;
+      line-height: 1.6;
+      font-size: 1.15rem;
+      color: #f5f5dc;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(60px) scale(0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card:hover {
+      box-shadow: 0 0 50px rgba(212, 175, 55, 1);
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: #d4af37;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px #d4af37;
+      position: relative;
+    }
+
+    .card h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #d4af37, transparent);
+      border-radius: 2px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: linear-gradient(135deg, #111, #1a1a1a);
+      border: 2px solid #d4af37;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #f5f5dc;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #d4af37, #f5f5dc);
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+      background: linear-gradient(135deg, #f5f5dc, #d4af37);
+    }
+
+    /* Contact Info */
+    .contact-info .info-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 15px;
+      border-left: 4px solid #d4af37;
+      transition: all 0.3s ease;
+    }
+
+    .contact-info .info-item:hover {
+      background: rgba(212, 175, 55, 0.2);
+      transform: translateX(10px);
+    }
+
+    .info-item h3 {
+      color: #d4af37;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-item p {
+      margin: 0.3rem 0;
+      font-size: 1.1rem;
+    }
+
+    .info-item a {
+      color: #f5f5dc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .info-item a:hover {
+      color: #d4af37;
+    }
+
+    /* Map Section */
+    .map-section {
+      margin: 6rem 0;
+      text-align: center;
+    }
+
+    .map-container {
+      background: #111;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s ease;
+    }
+
+    .map-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .map-placeholder {
+      height: 400px;
+      background: linear-gradient(135deg, #1a1a1a, #000);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #d4af37;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.1), transparent 50%);
+      animation: mapGlow 4s ease-in-out infinite alternate;
+    }
+
+    .map-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #d4af37;
+      text-shadow: 0 0 10px #d4af37;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Hours Section */
+    .hours-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin: 6rem 0;
+    }
+
+    .hours-card {
+      background: linear-gradient(135deg, #111, #1a1a1a);
+      border: 2px solid #d4af37;
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px) rotateY(15deg);
+      transition: all 0.8s ease;
+    }
+
+    .hours-card.visible {
+      opacity: 1;
+      transform: translateY(0) rotateY(0deg);
+    }
+
+    .hours-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 50px rgba(212, 175, 55, 1);
+    }
+
+    .hours-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px #d4af37;
+    }
+
+    .hours-list {
+      list-style: none;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      font-size: 1.1rem;
+    }
+
+    .hours-list li:last-child {
+      border-bottom: none;
+    }
+
+    .day {
+      font-weight: 600;
+    }
+
+    .time {
+      color: #d4af37;
+    }
+
+    /* Parallax Background */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .parallax-element {
+      position: absolute;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .parallax-element:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .parallax-element:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .parallax-element:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 80%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    /* Animations */
+    @keyframes logoSlideIn {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      33% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+      66% {
+        transform: translateY(10px) rotate(-3deg);
+      }
+    }
+
+    @keyframes mapGlow {
+      0% {
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .hours-section {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 1.5rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        gap: 0.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .map-placeholder {
+        height: 300px;
+      }
+    }
+
+    /* Extra mobile responsiveness for very small screens */
+    @media (max-width: 400px) {
+      .nav-logo {
+        font-size: 1.2rem;
+      }
+
+      .main-header {
+        font-size: 2rem;
+        margin: 100px 0 50px 0;
+      }
+
+      .form-group label {
+        font-size: 1rem;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.9rem;
+      }
+
+      .submit-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .info-item h3 {
+        font-size: 1.1rem;
+      }
+
+      .info-item p,
+      .info-item a {
+        font-size: 0.95rem;
+      }
+
+      .hours-card h3 {
+        font-size: 1.3rem;
+      }
+
+      .hours-list li {
+        font-size: 1rem;
+      }
+
+      .map-text {
+        font-size: 1.2rem;
+      }
+
+      .map-placeholder {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax-bg">
+    <div class="parallax-element"></div>
+    <div class="parallax-element"></div>
+    <div class="parallax-element"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">Sydney Dine</div>
+    <div class="nav-links">
+      <a href="restraurant.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="restABOUT.html">About</a>
+      <a href="reserv.html">Reservation</a>
+      <a href="sydContact.html" class="active">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Header -->
+  <header class="main-header">Contact Us</header>
+
+  <!-- Content Container -->
+  <div class="container">
+    <!-- Contact Grid -->
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="card contact-form" data-animation="slideInLeft">
+        <h2>Make a Reservation</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="time">Preferred Time</label>
+            <select id="time" name="time" required>
+              <option value="">Select Time</option>
+              <option value="17:30">5:30 PM</option>
+              <option value="18:00">6:00 PM</option>
+              <option value="18:30">6:30 PM</option>
+              <option value="19:00">7:00 PM</option>
+              <option value="19:30">7:30 PM</option>
+              <option value="20:00">8:00 PM</option>
+              <option value="20:30">8:30 PM</option>
+              <option value="21:00">9:00 PM</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="guests">Number of Guests</label>
+            <select id="guests" name="guests" required>
+              <option value="">Select Guests</option>
+              <option value="1">1 Guest</option>
+              <option value="2">2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
+              <option value="7">7 Guests</option>
+              <option value="8">8 Guests</option>
+              <option value="9+">9+ Guests</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Special Requests</label>
+            <textarea id="message" name="message" placeholder="Dietary restrictions, special occasions, seating preferences..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Reserve Table</button>
+        </form>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="card contact-info" data-animation="slideInRight">
+        <h2>Get in Touch</h2>
+        
+        <div class="info-item">
+          <h3>📍 Location</h3>
+          <p>123 Harbour Bridge Street</p>
+          <p>Sydney NSW 2000, Australia</p>
+        </div>
+        
+        <div class="info-item">
+          <h3>📞 Phone</h3>
+          <p><a href="tel:+61234567890">+61 (2) 3456-7890</a></p>
+          <p><a href="tel:+61234567891">+61 (2) 3456-7891</a> (Reservations)</p>
+        </div>
+        
+        <div class="info-item">
+          <h3>✉️ Email</h3>
+          <p><a href="mailto:info@sydneydine.com">info@sydneydine.com</a></p>
+          <p><a href="mailto:reservations@sydneydine.com">reservations@sydneydine.com</a></p>
+        </div>
+        
+        <div class="info-item">
+          <h3>🌐 Social Media</h3>
+          <p><a href="#" onclick="return false;">@SydneyDineOfficial</a></p>
+          <p><a href="#" onclick="return false;">Facebook | Instagram | Twitter</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operating Hours -->
+    <div class="hours-section">
+      <div class="hours-card" data-animation="fadeInUp">
+        <h3>Restaurant Hours</h3>
+        <ul class="hours-list">
+          <li><span class="day">Monday</span><span class="time">Closed</span></li>
+          <li><span class="day">Tuesday</span><span class="time">5:30 PM - 10:00 PM</span></li>
+          <li><span class="day">Wednesday</span><span class="time">5:30 PM - 10:00 PM</span></li>
+          <li><span class="day">Thursday</span><span class="time">5:30 PM - 10:00 PM</span></li>
+          <li><span class="day">Friday</span><span class="time">5:30 PM - 11:00 PM</span></li>
+          <li><span class="day">Saturday</span><span class="time">5:30 PM - 11:00 PM</span></li>
+          <li><span class="day">Sunday</span><span class="time">5:30 PM - 9:30 PM</span></li>
+        </ul>
+      </div>
+
+      <div class="hours-card" data-animation="fadeInUp">
+        <h3>Bar Hours</h3>
+        <ul class="hours-list">
+          <li><span class="day">Monday</span><span class="time">Closed</span></li>
+          <li><span class="day">Tuesday</span><span class="time">5:00 PM - 11:00 PM</span></li>
+          <li><span class="day">Wednesday</span><span class="time">5:00 PM - 11:00 PM</span></li>
+          <li><span class="day">Thursday</span><span class="time">5:00 PM - 11:00 PM</span></li>
+          <li><span class="day">Friday</span><span class="time">5:00 PM - 12:00 AM</span></li>
+          <li><span class="day">Saturday</span><span class="time">5:00 PM - 12:00 AM</span></li>
+          <li><span class="day">Sunday</span><span class="time">5:00 PM - 10:00 PM</span></li>
+        </ul>
+      </div>
+
+      <div class="hours-card" data-animation="fadeInUp">
+        <h3>Private Dining</h3>
+        <ul class="hours-list">
+          <li><span class="day">Available</span><span class="time">By Appointment</span></li>
+          <li><span class="day">Capacity</span><span class="time">Up to 20 Guests</span></li>
+          <li><span class="day">Notice</span><span class="time">48 Hours</span></li>
+          <li><span class="day">Deposit</span><span class="time">Required</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+      <div class="map-container" data-animation="fadeInUp">
+        <h2 style="color: #d4af37; font-family: 'Playfair Display', serif; margin-bottom: 2rem; text-shadow: 0 0 10px #d4af37;">Find Us</h2>
+        <div class="map-placeholder">
+          <div class="map-text">📍 Located in the Heart of Sydney
+                  <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d848300.8253314648!2d150.27255546310082!3d-33.84648855820782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney%20NSW!5e0!3m2!1sen!2sau!4v1754642046016!5m2!1sen!2sau"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+          </div>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+          Easily accessible via public transport. Valet parking available for dinner service.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set minimum date to today for reservations
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const animation = element.dataset.animation || 'fadeInUp';
+          
+          element.classList.add('visible');
+          
+          if (animation === 'slideInLeft') {
+            element.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            element.style.transform = 'translateX(0)';
+          } else if (animation === 'slideInRight') {
+            element.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            element.style.transform = 'translateX(0)';
+          } else {
+            element.style.animation = 'fadeInUp 0.8s ease-out forwards';
+          }
+          
+          observer.unobserve(element);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('[data-animation], .card, .hours-card, .map-container').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Parallax effect
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelectorAll('.parallax-element');
+      
+      parallax.forEach((element, index) => {
+        const speed = 0.1 + (index * 0.05);
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.02}deg)`;
+      });
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simple validation
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const guests = document.getElementById('guests').value;
+      
+      if (!name || !email || !date || !time || !guests) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      // Simulate form submission
+      const submitBtn = document.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        alert('Thank you for your reservation request! We will contact you within 24 hours to confirm your booking.');
+        this.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 2000);
+    });
+
+    // Enhanced hover effects
+    document.querySelectorAll('.card, .hours-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (card.classList.contains('visible')) {
+          card.style.transform = card.classList.contains('hours-card') 
+            ? 'translateY(-10px) scale(1.05)' 
+            : 'translateY(-15px) scale(1.03)';
+        }
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        if (card.classList.contains('visible')) {
+          card.style.transform = 'translateY(0) scale(1)';
+        }
+      });
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+      document.body.style.transition = 'opacity 0.5s ease-in';
+    });
+
+    document.body.style.opacity = '0';
+  </script>
+</body>
+</html>
