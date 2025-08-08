@@ -39,6 +39,13 @@
       margin-right: 0;
     }
 
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: gold;
+      cursor: pointer;
+    }
+
     nav {
       margin-left: auto; /* Push nav links to right */
       display: flex;
@@ -148,10 +155,26 @@
         margin-right: 0;
       }
 
+      .hamburger {
+        display: block;
+        margin-left: auto;
+      }
+
       nav {
+        display: none;
+        position: fixed;
+        top: 70px;
+        right: 0;
+        background: #111;
         flex-direction: column;
-        width: 100%;
+        width: 200px;
+        padding: 1rem;
         gap: 1rem;
+        z-index: 999;
+      }
+
+      nav.active {
+        display: flex;
       }
 
       nav a {
@@ -190,12 +213,13 @@
   <header>
     <div class="navbar">
       <div class="logo">Sydney Dine</div>
-      <nav>
-      <a href="restraurant.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="restABOUT.html">About</a>
-      <a href="reserv.html">Reservation</a>
-      <a href="#contact">Contact</a>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <nav id="mobileNav">
+        <a href="restraurant.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="restABOUT.html">About</a>
+        <a href="reserv.html">Reservation</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -228,5 +252,10 @@
 
     <button type="submit">Confirm Reservation</button>
   </form>
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileNav').classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
