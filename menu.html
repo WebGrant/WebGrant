@@ -65,7 +65,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 0.7rem 2rem;
-            position: relative;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .logo {
             font-family: 'Playfair Display', serif;
@@ -90,6 +92,7 @@
             color: var(--primary);
             position: relative;
             padding-bottom: 2px;
+            margin: 0 0.8rem;
         }
         nav a.active {
             color: var(--primary);
@@ -352,6 +355,7 @@
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     display: flex;
+    gap: 1.5rem;
   }
 
   .nav-links a {
@@ -365,6 +369,10 @@
     display: flex;
   }
 }
+
+        .nav-logo {
+            color: var(--primary);
+        }
     </style>
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
