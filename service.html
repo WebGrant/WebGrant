@@ -363,6 +363,11 @@
   color: #9a9a9a; /* light grey or white */
   box-shadow: 0 0 10px #00fff7; /* keep the cyan glow */
 }
+
+.info-icon.show-tooltip::after {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
   </style>
   </style>
 </head>
@@ -511,6 +516,24 @@
   window.addEventListener('scroll', updateProgressBar);
   // On load, set progress bar
   updateProgressBar();
+
+  // Mobile friendly tooltip toggle for info icons
+document.querySelectorAll('.info-icon').forEach(icon => {
+  icon.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Toggle the tooltip
+    icon.classList.toggle('show-tooltip');
+  });
+});
+
+// Optional: close tooltip if clicking outside
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('.info-icon.show-tooltip').forEach(icon => {
+    if (!icon.contains(e.target)) {
+      icon.classList.remove('show-tooltip');
+    }
+  });
+});
 </script>
 </body>
 </html>
