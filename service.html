@@ -299,6 +299,70 @@
       color: #03e9f4;
       text-decoration: none;
     }
+.info-icon {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background-color: #03e9f4;
+  cursor: pointer;
+  box-shadow: 0 0 6px #03e9f4;
+}
+
+.info-icon::before {
+  content: 'i';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  user-select: none;
+  line-height: 1;
+}
+
+.info-icon:hover {
+  background-color: #ff00c8;
+  box-shadow: 0 0 8px #ff00c8;
+}
+
+.info-icon::after {
+  font-style: italic;
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,10,30,0.95);
+  color: #9c9c9c;
+  padding: 10px 14px;          /* increased padding */
+  border-radius: 8px;
+  font-size: 0.9rem;
+  white-space: normal;         /* changed from nowrap to normal */
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 15px #00fff7;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+  width: max-content;
+  max-width: 250px;            /* slightly bigger max width */
+  text-align: center;
+  word-wrap: break-word;       /* allow breaking long words if needed */
+}
+
+.info-icon:hover::after {
+  opacity: 1;
+}
+
+.info-icon-starter::after {
+    text-shadow: none !important;
+  color: #9a9a9a; /* light grey or white */
+  box-shadow: 0 0 10px #00fff7; /* keep the cyan glow */
+}
   </style>
   </style>
 </head>
@@ -315,7 +379,7 @@
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="about.html">About Us</a></li>
       <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="form.html" tabindex="6">Request a Website</a></li>
+            <li><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#00fff7; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
     </ul>
   <div class="hamburger" id="hamburger">
     <div></div>
@@ -332,7 +396,7 @@
 
 <section class="packages">
   <div class="package">
-    <h2>Basic</h2>
+    <h2><b>Starter</b> <span class="info-icon info-icon-starter" data-tooltip="Perfect for small businesses or individuals who just need a clean, professional single page site."></span></h2>
     <ul>
       <li>✅ Single-page design</li>
       <li>✅ About, Services/Menu, Contact</li>
@@ -348,11 +412,11 @@
       <li>❌ Animations</li>
       <li>❌ Monthly updates</li>
     </ul>
-    <p class="price">Price: $400 – $700 AUD</p>
+    <p class="price"><em>Starting from: $300</em></p>
   </div>
 
   <div class="package">
-    <h2>Standard</h2>
+    <h2><b>Growth</b> <span class="info-icon info-icon-starter" data-tooltip="For business wanting more pages and better customer interaction."></span></h2>
     <ul>
       <li>✅ 2–3 pages (Home, About, Services/Menu)</li>
       <li>✅ Mobile-friendly</li>
@@ -367,11 +431,11 @@
       <li>❌ SEO setup</li>
       <li>❌ Monthly updates</li>
     </ul>
-    <p class="price">Price: $800 – $1100 AUD</p>
+    <p class="price"><em>Starting from: $700</em></p>
   </div>
 
   <div class="package">
-    <h2>Pro</h2>
+    <h2><b>Growth Plus</b> <span class="info-icon info-icon-starter" data-tooltip="For businesses serious about SEO, performance, and lead capture."></span></h2>
     <ul>
       <li>✅ Up to 6 pages</li>
       <li>✅ Mobile-friendly</li>
@@ -387,7 +451,7 @@
       <li>✅ 2 updates/month FREE</li>
       <li>✅ Addiional Update pricing: $30+ depending on complexity</li>
     </ul>
-    <p class="price">Price: $1200 – $2500 AUD</p>
+    <p class="price"><em>Starting from: $1100</em></p>
   </div>
 </section>
 
