@@ -855,13 +855,13 @@ button:active {
 }
 
 .user {
-    color: #00c8d6;
+    color: #03abb7;
     margin: 5px 0;
     font-weight: bold;
 }
 
 .ai {
-    color: #ff3b3b;
+    color: #aaa4a4;
     margin: 5px 0;
 }
 
@@ -1307,7 +1307,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //CODES FOR AI
 
-emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
 
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
@@ -1352,7 +1352,7 @@ function selectOption(option) {
             break;
         case "i want a quote":
             context.step = "quoteName";
-            addMessage("Great! Let's get started with your name, please.", "ai");
+            addMessage("Great! Let's get started. Your full name?", "ai");
             break;
         case "contact a team member":
             context.step = "confirmEmail";
@@ -1373,7 +1373,7 @@ function generateReply(input) {
             return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
         } else if (input.includes("quote") || input.includes("website design")) {
             context.step = "quoteName";
-            return "Great! Let's get started with your name, please.";
+            return "Great! Let's get started. Your full name?";
         } else {
             return "Please clarify if you want to see our packages or get a quote.";
         }
@@ -1388,7 +1388,7 @@ function generateReply(input) {
 
             context.step = "choosePackage";
             return "Would you like me to help you select a package based on your business size or needs? (yes/no)";
-        } else return "Please specify the type of website project you have in mind (portfolio, e-commerce, blog, business).";
+        } else return "Website type? (portfolio, e-commerce, blog, business)";
     }
 
     if (context.step === "choosePackage") {
@@ -1414,7 +1414,7 @@ function generateReply(input) {
             context.package = "Custom Package";
         }
         context.step = "askWebsiteStyle";
-        return `Based on your input, I suggest the ${context.package}. What style do you prefer for your website? (clean, modern, professional)`;
+        return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
     }
 
     if (context.step === "quoteName") {
@@ -1422,7 +1422,7 @@ function generateReply(input) {
             let name = input.split("my name is")[1]?.trim().split(' ')[0] || input.split("i am")[1]?.trim().split(' ')[0] || input.trim().split(' ')[0];
             context.userName = name.charAt(0).toUpperCase() + name.slice(1);
             context.step = "quoteProjectType";
-            return `Thanks, ${context.userName}! What type of website project are you planning? (portfolio, e-commerce, blog, business)`;
+            return `Thanks, ${context.userName}! Website type? (portfolio, e-commerce, blog, business)`;
         } else {
             context.step = "quoteProjectType";
             // Skip asking name, move to project type
@@ -1431,22 +1431,52 @@ function generateReply(input) {
                 if (context.websiteStyle) {
                     context.step = "quoteFeatures";
                     if (context.features) {
-                        context.step = "quoteEmail";
-                        if (context.email) {
-                            context.step = "completed";
-                            sendQuoteEmail();
-                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                        context.step = "quoteBudget";
+                        if (context.budget) {
+                            context.step = "quoteTimeline";
+                            if (context.timeline) {
+                                context.step = "quotePages";
+                                if (context.pages) {
+                                    context.step = "quoteColor";
+                                    if (context.color) {
+                                        context.step = "quoteCompetitor";
+                                        if (context.competitor) {
+                                            context.step = "quoteCMS";
+                                            if (context.cms) {
+                                                context.step = "quoteEmail";
+                                                if (context.email) {
+                                                    context.step = "completed";
+                                                    sendQuoteEmail();
+                                                    return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                                                } else {
+                                                    return `Your email?`;
+                                                }
+                                            } else {
+                                                return `Preferred platform? (WordPress, Shopify, custom)`;
+                                            }
+                                        } else {
+                                            return `Any sites you like?`;
+                                        }
+                                    } else {
+                                        return `Preferred colors?`;
+                                    }
+                                } else {
+                                    return `Number of pages/products?`;
+                                }
+                            } else {
+                                return `Timeline for launch?`;
+                            }
                         } else {
-                            return `Thanks! Could you provide your email for sending your personalized quote?`;
+                            return `Budget range?`;
                         }
                     } else {
-                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                        return `Any key features? (contact form, booking, store, etc.) or 'no'`;
                     }
                 } else {
-                    return `Great! What style do you prefer for your website? (clean, modern, professional)`;
+                    return `Website style? (clean, modern, professional)`;
                 }
             } else {
-                return `What type of website project are you planning? (portfolio, e-commerce, blog, business)`;
+                return `Website type? (portfolio, e-commerce, blog, business)`;
             }
         }
     }
@@ -1460,43 +1490,11 @@ function generateReply(input) {
                 else context.projectType = input.trim();
 
                 context.step = "quoteWebsiteStyle";
-                if (context.websiteStyle) {
-                    context.step = "quoteFeatures";
-                    if (context.features) {
-                        context.step = "quoteEmail";
-                        if (context.email) {
-                            context.step = "completed";
-                            sendQuoteEmail();
-                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-                        } else {
-                            return `Thanks! Could you provide your email for sending your personalized quote?`;
-                        }
-                    } else {
-                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
-                    }
-                } else {
-                    return `Great! What style do you prefer for your website? (clean, modern, professional)`;
-                }
-            } else return "Please tell me the type of website project you have in mind (portfolio, e-commerce, blog, business).";
+                return `Website style? (clean, modern, professional)`;
+            } else return "Website type? (portfolio, e-commerce, blog, business)";
         } else {
             context.step = "quoteWebsiteStyle";
-            if (context.websiteStyle) {
-                context.step = "quoteFeatures";
-                if (context.features) {
-                    context.step = "quoteEmail";
-                    if (context.email) {
-                        context.step = "completed";
-                        sendQuoteEmail();
-                        return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-                    } else {
-                        return `Thanks! Could you provide your email for sending your personalized quote?`;
-                    }
-                } else {
-                    return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
-                }
-            } else {
-                return `Great! What style do you prefer for your website? (clean, modern, professional)`;
-            }
+            return `Website style? (clean, modern, professional)`;
         }
     }
 
@@ -1506,38 +1504,16 @@ function generateReply(input) {
                 context.websiteStyle = input.match(/clean|modern|professional/)[0];
                 if (context.step === "quoteWebsiteStyle") {
                     context.step = "quoteFeatures";
-                    if (context.features) {
-                        context.step = "quoteEmail";
-                        if (context.email) {
-                            context.step = "completed";
-                            sendQuoteEmail();
-                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-                        } else {
-                            return `Thanks! Could you provide your email for sending your personalized quote?`;
-                        }
-                    } else {
-                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
-                    }
+                    return `Any key features? (contact form, booking, store, etc.) or 'no'`;
                 } else {
                     context.step = "completed";
                     return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
                 }
-            } else return "Please choose a style: clean, modern, or professional.";
+            } else return "Website style? (clean, modern, professional)";
         } else {
             if (context.step === "quoteWebsiteStyle") {
                 context.step = "quoteFeatures";
-                if (context.features) {
-                    context.step = "quoteEmail";
-                    if (context.email) {
-                        context.step = "completed";
-                        sendQuoteEmail();
-                        return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-                    } else {
-                        return `Thanks! Could you provide your email for sending your personalized quote?`;
-                    }
-                } else {
-                    return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
-                }
+                return `Any key features? (contact form, booking, store, etc.) or 'no'`;
             } else {
                 context.step = "completed";
                 return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
@@ -1549,23 +1525,120 @@ function generateReply(input) {
         if (!context.features) {
             if (/no|none/.test(input)) context.features = "no special features";
             else context.features = input.trim();
-            context.step = "quoteEmail";
-            if (context.email) {
-                context.step = "completed";
-                sendQuoteEmail();
-                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-            } else {
-                return `Thanks! Could you provide your email for sending your personalized quote?`;
+            context.step = "quoteBudget";
+            return `Budget range?`;
+        } else {
+            context.step = "quoteBudget";
+            return `Budget range?`;
+        }
+    }
+
+    if (context.step === "quoteBudget") {
+        if (!context.budget) {
+            context.budget = input.trim();
+            context.step = "quoteTimeline";
+            return `Timeline for launch?`;
+        } else {
+            context.step = "quoteTimeline";
+            return `Timeline for launch?`;
+        }
+    }
+
+    if (context.step === "quoteTimeline") {
+        if (!context.timeline) {
+            context.timeline = input.trim();
+            context.step = "quotePages";
+            return `Number of pages/products?`;
+        } else {
+            context.step = "quotePages";
+            return `Number of pages/products?`;
+        }
+    }
+
+    if (context.step === "quotePages") {
+        if (!context.pages) {
+            context.pages = input.trim();
+            context.step = "quoteColor";
+            return `Preferred colors?`;
+        } else {
+            context.step = "quoteColor";
+            return `Preferred colors?`;
+        }
+    }
+
+    if (context.step === "quoteColor") {
+        if (!context.color) {
+            context.color = input.trim();
+            context.step = "quoteCompetitor";
+            return `Any sites you like?`;
+        } else {
+            context.step = "quoteCompetitor";
+            return `Any sites you like?`;
+        }
+    }
+
+    // Handle "Any sites you like?" flow
+    if (context.step === "quoteCompetitor") {
+        // If the user hasn't answered yet
+        if (!context.competitor) {
+            // If the answer is yes, prompt for link(s)
+            if (/^yes\b|sure|yeah|yep|of course|i do|i have/i.test(input)) {
+                context.competitor = ""; // Mark as expecting links
+                context.step = "quoteCompetitorLinks";
+                return "Please paste the link(s) to the site(s) you like or consider as competitors:";
             }
+            // If the answer is no, go to preferred platform as usual
+            if (/^no\b|none|nope|don't|do not/i.test(input)) {
+                context.competitor = "no";
+                context.step = "quoteCMS";
+                return `Preferred platform? (WordPress, Shopify, custom)`;
+            }
+            // If user pastes a link directly, accept it and move to email
+            if (/https?:\/\/|www\./i.test(input)) {
+                context.competitor = input.trim();
+                context.step = "quoteEmail";
+                return `Your email?`;
+            }
+            // Otherwise, treat any other input as links and move to email
+            if (input.length > 3) {
+                context.competitor = input.trim();
+                context.step = "quoteEmail";
+                return `Your email?`;
+            }
+            // Otherwise, re-prompt
+            return `Any sites you like? (Reply "yes" to share, "no" to skip)`;
+        } else {
+            // Already have competitor info, go to next step
+            if (context.competitor !== "no") {
+                context.step = "quoteEmail";
+                return `Your email?`;
+            } else {
+                context.step = "quoteCMS";
+                return `Preferred platform? (WordPress, Shopify, custom)`;
+            }
+        }
+    }
+
+    // If expecting competitor links after "yes"
+    if (context.step === "quoteCompetitorLinks") {
+        if (input && input.length > 0) {
+            context.competitor = input.trim();
+            context.step = "quoteEmail";
+            return `Your email?`;
+        } else {
+            return "Please paste the link(s) to the site(s) you like or consider as competitors:";
+        }
+    }
+
+    // Only ask for preferred platform if we don't have competitor websites
+    if (context.step === "quoteCMS") {
+        if (!context.cms) {
+            context.cms = input.trim();
+            context.step = "quoteEmail";
+            return `Your email?`;
         } else {
             context.step = "quoteEmail";
-            if (context.email) {
-                context.step = "completed";
-                sendQuoteEmail();
-                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-            } else {
-                return `Thanks! Could you provide your email for sending your personalized quote?`;
-            }
+            return `Your email?`;
         }
     }
 
@@ -1597,19 +1670,19 @@ function generateReply(input) {
     if (context.step === "completed") {
         if (input.includes("quote") || input.includes("free quote")) {
             context.step = "quoteName";
-            return "Great! Let's get started with your name, please.";
+            return "Great! Let's get started. Your full name?";
         }
     }
 
     // Check for specific package price requests first
     if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
-        return "Our Basic Package starts at $XXX, ideal for small startups.";
+        return "Our Basic Package starts at $300, ideal for small startups.";
     }
     if ((input.includes("growth package") && !input.includes("growth plus")) || (input.includes("growth") && !input.includes("plus"))) {
-        return "Our Growth Package starts at $YYY, perfect for growing companies.";
+        return "Our Growth Package starts at $700, perfect for growing companies.";
     }
     if (input.includes("growth plus package") || input.includes("growth plus")) {
-        return "Our Growth Plus Package starts at $ZZZ, with full-featured priority support.";
+        return "Our Growth Plus Package starts at $1100, with full-featured priority support.";
     }
 
     // General package list
