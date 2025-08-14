@@ -805,6 +805,29 @@ nav ul li.active::after {
   z-index: 1;
   pointer-events: none;
 }
+
+        #chatBox { border: 2px solid #4A90E2; border-radius: 10px; padding: 10px; width: 90%; height: 450px; overflow-y: auto; margin-bottom: 10px; background: #fff; }
+        #userInput { width: 50%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; display: none; color: #000; }
+        button { padding: 10px 15px; border-radius: 5px; background: #4A90E2; color: white; border: none; cursor: pointer; margin: 5px 5px 5px 0; }
+        .user { color: #1A1A1A; margin: 5px 0; font-weight: bold; }
+        .ai { color: #4A90E2; margin: 5px 0; }
+        #chatPanel {
+            position: fixed;
+            top: 80px;
+            right: -600px;
+            width: 500px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        h10{
+          color: black;
+          font-size: 30px;
+        }
   </style>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -831,7 +854,7 @@ nav ul li.active::after {
       <li><a href="portfolio.html" tabindex="3">Portfolio</a></li>
       <li><a href="about.html" tabindex="4">About Us</a></li>
       <li><a href="contact.html" tabindex="5">Contact Us</a></li>
-      <li><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#00fff7; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
+<li><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#00fff7; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
     </ul>
   </nav>
 
@@ -853,6 +876,23 @@ nav ul li.active::after {
 <a href="form.html" class="btn-neon" aria-label="Get started with WebGrant"><span>Get Started</span></a>
     <div class="scroll-indicator" aria-hidden="true">⬇️</div>
   </header>
+
+  <div id="chatPanel">
+    <h10>Chat with our AI Assistant</h10>
+    <div id="chatBox">
+        <p>Please select a question to begin:</p>
+        <button onclick="selectOption('what services do you offer?')">What services do you offer?</button>
+        <button onclick="selectOption('which package is best for my business?')">Which package is best for my business?</button>
+        <button onclick="selectOption('i want a quote')">I want a quote</button>
+        <button onclick="selectOption('contact a team member')">Contact a team member</button>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="chat()" id="sendButton" style="display:none;">Send</button>
+</div>
+
+<button id="openChatBtn" style="position: fixed; right: 20px; bottom: 20px; border-radius: 50%; width: 60px; height: 60px; background: #4A90E2; color: white; font-size: 24px; border: none; cursor: pointer; z-index: 1001;">💬</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
   <section id="portfolio" aria-label="Portfolio">
     <section id="services">
@@ -1178,35 +1218,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   <canvas id="textTrail"></canvas>
 </body>
-  <button id="backToTop" title="Back to Top" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10000;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    color: #111;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
-    box-shadow: 0 0 12px #ff00c8;
-    cursor: pointer;
-    display: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  ">↑</button>
+
   <script>
-    const backToTopBtn = document.getElementById("backToTop");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
 
     window.addEventListener('DOMContentLoaded', () => {
       const cardObserver = new IntersectionObserver((entries) => {
@@ -1229,6 +1242,405 @@ window.addEventListener("DOMContentLoaded", () => {
     const scrollPercent = (scrollTop / docHeight) * 100;
     document.getElementById('scrollProgressBar').style.width = `${scrollPercent}%`;
   });
+
+
+
+
+//CODES FOR AI
+
+emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+
+const chatBox = document.getElementById("chatBox");
+const userInputField = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+
+let context = {
+    userName: "",
+    projectType: "",
+    package: "",
+    websiteStyle: "",
+    features: "",
+    email: "",
+    selectedOption: "",
+    step: "initial"
+};
+
+function addMessage(text, sender) {
+    const message = document.createElement("div");
+    message.className = sender;
+    message.innerText = (sender === "user" ? "You: " : "AI: ") + text;
+    chatBox.appendChild(message);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function selectOption(option) {
+    if(context.step !== "initial") return;
+
+    context.selectedOption = option;
+    addMessage(option.charAt(0).toUpperCase() + option.slice(1), "user");
+    userInputField.style.display = "inline-block";
+    sendButton.style.display = "inline-block";
+    userInputField.focus();
+
+    switch(option) {
+        case "what services do you offer?":
+            context.step = "postFAQ";
+            addMessage("We offer website design, development, SEO, mobile optimization, maintenance, and support services to help your business grow online. Would you like to see our packages or get a quote?", "ai");
+            break;
+        case "which package is best for my business?":
+            context.step = "askProjectTypeForPackage";
+            addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
+            break;
+        case "i want a quote":
+            context.step = "quoteName";
+            addMessage("Great! Let's get started with your name, please.", "ai");
+            break;
+        case "contact a team member":
+            context.step = "confirmEmail";
+            addMessage("Sure! Please provide your email address so a team member can reach out to you.", "ai");
+            break;
+        default:
+            addMessage("Hello! How can I assist you today?", "ai");
+    }
+}
+
+function generateReply(input) {
+    input = input.toLowerCase();
+
+    // Handle flow-based responses first
+    if (context.step === "postFAQ") {
+        if (input.includes("package")) {
+            context.step = "askProjectTypeForPackage";
+            return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
+        } else if (input.includes("quote") || input.includes("website design")) {
+            context.step = "quoteName";
+            return "Great! Let's get started with your name, please.";
+        } else {
+            return "Please clarify if you want to see our packages or get a quote.";
+        }
+    }
+
+    if (context.step === "askProjectTypeForPackage") {
+        if (/portfolio|e-commerce|blog|business|website/.test(input)) {
+            if (input.includes("portfolio")) context.projectType = "portfolio";
+            else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
+            else if (input.includes("blog")) context.projectType = "blog";
+            else context.projectType = input.trim();
+
+            context.step = "choosePackage";
+            return "Would you like me to help you select a package based on your business size or needs? (yes/no)";
+        } else return "Please specify the type of website project you have in mind (portfolio, e-commerce, blog, business).";
+    }
+
+    if (context.step === "choosePackage") {
+        if (input.includes("yes") || input.includes("sure") || input.includes("ok")) {
+            context.step = "choosePackageDetails";
+            return "Great! Can you tell me about your business size or needs? For example, small startup, growing company, or full-featured priority support.";
+        } else if (input.includes("no")) {
+            context.step = "completed";
+            return "No problem! If you have other questions or need assistance, just let me know.";
+        } else {
+            return "Please reply with 'yes' if you'd like help selecting a package, or 'no' if not.";
+        }
+    }
+
+    if (context.step === "choosePackageDetails") {
+        if (input.includes("small startup") || input.includes("startup") || input.includes("small")) {
+            context.package = "Basic Package";
+        } else if (input.includes("growing company") || input.includes("growing")) {
+            context.package = "Growth Package";
+        } else if (input.includes("full-featured") || input.includes("priority") || input.includes("support")) {
+            context.package = "Growth Plus Package";
+        } else {
+            context.package = "Custom Package";
+        }
+        context.step = "askWebsiteStyle";
+        return `Based on your input, I suggest the ${context.package}. What style do you prefer for your website? (clean, modern, professional)`;
+    }
+
+    if (context.step === "quoteName") {
+        if (!context.userName) {
+            let name = input.split("my name is")[1]?.trim().split(' ')[0] || input.split("i am")[1]?.trim().split(' ')[0] || input.trim().split(' ')[0];
+            context.userName = name.charAt(0).toUpperCase() + name.slice(1);
+            context.step = "quoteProjectType";
+            return `Thanks, ${context.userName}! What type of website project are you planning? (portfolio, e-commerce, blog, business)`;
+        } else {
+            context.step = "quoteProjectType";
+            // Skip asking name, move to project type
+            if (context.projectType) {
+                context.step = "quoteWebsiteStyle";
+                if (context.websiteStyle) {
+                    context.step = "quoteFeatures";
+                    if (context.features) {
+                        context.step = "quoteEmail";
+                        if (context.email) {
+                            context.step = "completed";
+                            sendQuoteEmail();
+                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                        } else {
+                            return `Thanks! Could you provide your email for sending your personalized quote?`;
+                        }
+                    } else {
+                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                    }
+                } else {
+                    return `Great! What style do you prefer for your website? (clean, modern, professional)`;
+                }
+            } else {
+                return `What type of website project are you planning? (portfolio, e-commerce, blog, business)`;
+            }
+        }
+    }
+
+    if (context.step === "quoteProjectType") {
+        if (!context.projectType) {
+            if (/portfolio|e-commerce|blog|business|website/.test(input)) {
+                if (input.includes("portfolio")) context.projectType = "portfolio";
+                else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
+                else if (input.includes("blog")) context.projectType = "blog";
+                else context.projectType = input.trim();
+
+                context.step = "quoteWebsiteStyle";
+                if (context.websiteStyle) {
+                    context.step = "quoteFeatures";
+                    if (context.features) {
+                        context.step = "quoteEmail";
+                        if (context.email) {
+                            context.step = "completed";
+                            sendQuoteEmail();
+                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                        } else {
+                            return `Thanks! Could you provide your email for sending your personalized quote?`;
+                        }
+                    } else {
+                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                    }
+                } else {
+                    return `Great! What style do you prefer for your website? (clean, modern, professional)`;
+                }
+            } else return "Please tell me the type of website project you have in mind (portfolio, e-commerce, blog, business).";
+        } else {
+            context.step = "quoteWebsiteStyle";
+            if (context.websiteStyle) {
+                context.step = "quoteFeatures";
+                if (context.features) {
+                    context.step = "quoteEmail";
+                    if (context.email) {
+                        context.step = "completed";
+                        sendQuoteEmail();
+                        return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                    } else {
+                        return `Thanks! Could you provide your email for sending your personalized quote?`;
+                    }
+                } else {
+                    return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                }
+            } else {
+                return `Great! What style do you prefer for your website? (clean, modern, professional)`;
+            }
+        }
+    }
+
+    if (context.step === "quoteWebsiteStyle" || context.step === "askWebsiteStyle") {
+        if (!context.websiteStyle) {
+            if (/clean|modern|professional/.test(input)) {
+                context.websiteStyle = input.match(/clean|modern|professional/)[0];
+                if (context.step === "quoteWebsiteStyle") {
+                    context.step = "quoteFeatures";
+                    if (context.features) {
+                        context.step = "quoteEmail";
+                        if (context.email) {
+                            context.step = "completed";
+                            sendQuoteEmail();
+                            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                        } else {
+                            return `Thanks! Could you provide your email for sending your personalized quote?`;
+                        }
+                    } else {
+                        return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                    }
+                } else {
+                    context.step = "completed";
+                    return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
+                }
+            } else return "Please choose a style: clean, modern, or professional.";
+        } else {
+            if (context.step === "quoteWebsiteStyle") {
+                context.step = "quoteFeatures";
+                if (context.features) {
+                    context.step = "quoteEmail";
+                    if (context.email) {
+                        context.step = "completed";
+                        sendQuoteEmail();
+                        return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+                    } else {
+                        return `Thanks! Could you provide your email for sending your personalized quote?`;
+                    }
+                } else {
+                    return `Got it! Any special features like contact forms, booking systems, online stores? Or say 'no'.`;
+                }
+            } else {
+                context.step = "completed";
+                return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
+            }
+        }
+    }
+
+    if (context.step === "quoteFeatures") {
+        if (!context.features) {
+            if (/no|none/.test(input)) context.features = "no special features";
+            else context.features = input.trim();
+            context.step = "quoteEmail";
+            if (context.email) {
+                context.step = "completed";
+                sendQuoteEmail();
+                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+            } else {
+                return `Thanks! Could you provide your email for sending your personalized quote?`;
+            }
+        } else {
+            context.step = "quoteEmail";
+            if (context.email) {
+                context.step = "completed";
+                sendQuoteEmail();
+                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+            } else {
+                return `Thanks! Could you provide your email for sending your personalized quote?`;
+            }
+        }
+    }
+
+    if (context.step === "quoteEmail") {
+        if (!context.email) {
+            if (input.includes("@") && input.includes(".")) {
+                context.email = input.trim();
+                context.step = "completed";
+                sendQuoteEmail();
+                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+            } else return "Please provide a valid email address.";
+        } else {
+            context.step = "completed";
+            sendQuoteEmail();
+            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+        }
+    }
+
+    if (context.step === "confirmEmail") {
+        if (input.includes("@") && input.includes(".")) {
+            context.email = input.trim();
+            context.step = "completed";
+            sendContactEmail();
+            return `Thanks! A team member will reach out to you soon at ${context.email}. If you have any questions in the meantime, just ask!`;
+        } else return "Please provide a valid email address.";
+    }
+
+    // Allow starting a quote even after completed
+    if (context.step === "completed") {
+        if (input.includes("quote") || input.includes("free quote")) {
+            context.step = "quoteName";
+            return "Great! Let's get started with your name, please.";
+        }
+    }
+
+    // Check for specific package price requests first
+    if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
+        return "Our Basic Package starts at $XXX, ideal for small startups.";
+    }
+    if ((input.includes("growth package") && !input.includes("growth plus")) || (input.includes("growth") && !input.includes("plus"))) {
+        return "Our Growth Package starts at $YYY, perfect for growing companies.";
+    }
+    if (input.includes("growth plus package") || input.includes("growth plus")) {
+        return "Our Growth Plus Package starts at $ZZZ, with full-featured priority support.";
+    }
+
+    // General package list
+    if (input.includes("package") || input.includes("packages")) {
+        return "We offer the Basic Package for small startups, Growth Package for growing companies, and Growth Plus Package for full-featured priority support.";
+    }
+    if (/services|options|what do you do/.test(input)) {
+        return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
+    }
+    if (/price|cost|how much/.test(input)) {
+        return "Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Would you like a quote?";
+    }
+    if (/portfolio|examples|work/.test(input)) {
+        // Avoid general portfolio response if in quote flow steps
+        if (context.step.startsWith("quote")) {
+            return "Great choice! What style do you prefer for your website? (clean, modern, professional)";
+        }
+        return "You can view our portfolio online to see examples of our projects.";
+    }
+    if (/contact|reach|email/.test(input)) {
+        return "You can reach us at info@webgrant.com or call 123-456-7890.";
+    }
+    if (/bye|goodbye|see you/.test(input)) {
+        return "Goodbye! It was a pleasure assisting you.";
+    }
+
+    // Trigger contact flow if user asks to speak to a representative
+    if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
+        context.step = "confirmEmail";
+        return "Sure! Please provide your email address so a team member can reach out to you.";
+    }
+
+    // Completed or fallback
+    return "I'm here to help! What else would you like to know or discuss?";
+}
+
+function sendQuoteEmail() {
+    // Prepare email parameters for quote
+    const templateParams = {
+        user_name: context.userName,
+        project_type: context.projectType,
+        website_style: context.websiteStyle,
+        features: context.features,
+        user_email: context.email,
+        package: context.package || "Not specified"
+    };
+
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_QUOTE_TEMPLATE_ID', templateParams)
+        .then(() => {
+            console.log("Quote email sent successfully.");
+        }, (error) => {
+            console.error("Failed to send quote email:", error);
+        });
+}
+
+function sendContactEmail() {
+    // Prepare email parameters for contact request
+    const templateParams = {
+        user_email: context.email
+    };
+
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_CONTACT_TEMPLATE_ID', templateParams)
+        .then(() => {
+            console.log("Contact request email sent successfully.");
+        }, (error) => {
+            console.error("Failed to send contact request email:", error);
+        });
+}
+
+function chat() {
+    const userInput = userInputField.value.trim();
+    if (!userInput) return;
+
+    addMessage(userInput, "user");
+    const reply = generateReply(userInput);
+    addMessage(reply, "ai");
+
+    userInputField.value = "";
+    userInputField.focus();
+}
+document.getElementById("openChatBtn").addEventListener("click", () => {
+    const panel = document.getElementById("chatPanel");
+    if (panel.style.right === "0px") {
+        panel.style.right = "-600px";
+    } else {
+        panel.style.right = "0px";
+    }
+});
+
+
   </script>
   <style>
     #backToTop:hover {
