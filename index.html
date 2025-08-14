@@ -806,28 +806,87 @@ nav ul li.active::after {
   pointer-events: none;
 }
 
-        #chatBox { border: 2px solid #4A90E2; border-radius: 10px; padding: 10px; width: 90%; height: 450px; overflow-y: auto; margin-bottom: 10px; background: #fff; }
-        #userInput { width: 50%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; display: none; color: #000; }
-        button { padding: 10px 15px; border-radius: 5px; background: #4A90E2; color: white; border: none; cursor: pointer; margin: 5px 5px 5px 0; }
-        .user { color: #1A1A1A; margin: 5px 0; font-weight: bold; }
-        .ai { color: #4A90E2; margin: 5px 0; }
-        #chatPanel {
-            position: fixed;
-            top: 80px;
-            right: -600px;
-            width: 500px;
-            height: 100%;
-            background: white;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.3);
-            transition: right 0.3s ease;
-            padding: 20px;
-            z-index: 1000;
-        }
+#chatBox {
+    border: 2px solid #1e3a5f;
+    border-radius: 15px;
+    padding: 15px;
+    width: 90%;
+    height: 550px;
+    overflow-y: auto;
+    margin-top: 30px;
+    background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
+    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
+                inset 4px 4px 10px rgba(0, 0, 0, 0.9),
+                0 8px 20px rgba(0, 40, 90, 0.4);
+}
 
-        h10{
-          color: black;
-          font-size: 30px;
-        }
+#userInput {
+  margin-top: 30px;
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #111;
+    display: none;
+    color: #ddd;
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05),
+                inset 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #25395a, #1b2b45);
+    color: #ddd;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin: 5px 5px 5px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.05),
+                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7),
+                inset -2px -2px 4px rgba(255, 255, 255, 0.03),
+                inset 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.user {
+    color: #00c8d6;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.ai {
+    color: #ff3b3b;
+    margin: 5px 0;
+}
+
+#chatPanel {
+    position: fixed;
+    top: 80px;
+    right: -600px;
+    width: 500px;
+    height: 100%;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    box-shadow: -8px 0 15px rgba(0, 40, 90, 0.4),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.02),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.9);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 15px 0 0 15px;
+}
+
+h10 {
+    color: #ccc;
+    font-size: 30px;
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
+                 -1px -1px 4px rgba(0, 0, 0, 0.8);
+}
   </style>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -1268,7 +1327,7 @@ let context = {
 function addMessage(text, sender) {
     const message = document.createElement("div");
     message.className = sender;
-    message.innerText = (sender === "user" ? "You: " : "AI: ") + text;
+    message.innerText = (sender === "user" ? "You: " : "SmartGrant: ") + text;
     chatBox.appendChild(message);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
