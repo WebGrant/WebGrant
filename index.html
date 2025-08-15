@@ -806,6 +806,7 @@ nav ul li.active::after {
   pointer-events: none;
 }
 
+/* Base chat styles (desktop first) */
 #chatBox {
     border: 2px solid #1e3a5f;
     border-radius: 15px;
@@ -821,7 +822,7 @@ nav ul li.active::after {
 }
 
 #userInput {
-  margin-top: 30px;
+    margin-top: 30px;
     width: 50%;
     padding: 10px;
     border-radius: 8px;
@@ -858,11 +859,23 @@ button:active {
     color: #03abb7;
     margin: 5px 0;
     font-weight: bold;
+    text-align: right;
+    background: rgba(0, 170, 187, 0.2);
+    padding: 8px 12px;
+    border-radius: 12px;
+    float: right;
+    clear: both;
 }
 
 .ai {
     color: #aaa4a4;
     margin: 5px 0;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 12px;
+    float: left;
+    clear: both;
 }
 
 #chatPanel {
@@ -881,12 +894,40 @@ button:active {
     border-radius: 15px 0 0 15px;
 }
 
-h10 {
-    color: #ccc;
-    font-size: 30px;
-    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
-                 -1px -1px 4px rgba(0, 0, 0, 0.8);
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    #chatBox {
+        width: 95%;
+        height: 400px;
+        padding: 10px;
+    }
+
+    #userInput {
+        width: 90%;
+        margin-top: 20px;
+        padding: 8px;
+    }
+
+    #chatPanel {
+        width: 100%;
+        right: -100%;
+        top: 60px;
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 12px;
+        margin: 5px 3px 5px 0;
+    }
 }
+
+        h10 {
+            color: #ccc;
+            font-size: 30px;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
+                         -1px -1px 4px rgba(0, 0, 0, 0.8);
+        }
   </style>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -1307,11 +1348,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //CODES FOR AI
 
-        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+        emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
 
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 const sendButton = document.getElementById("sendButton");
+
+// Global variable to store the full conversation transcript
+let conversationTranscript = "";
 
 let context = {
     userName: "",
@@ -1324,16 +1368,49 @@ let context = {
     step: "initial"
 };
 
+function typeMessage(element, text, prefix, speed) {
+    // If text contains HTML tags, display instantly
+    if(/<\/?[a-z][\s\S]*>/i.test(text)) {
+        element.innerHTML = prefix + text;
+        conversationTranscript += prefix + text + "\n";
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return;
+    }
+    let i = 0;
+    let fullText = prefix + text;
+    function typeChar() {
+        if (i < fullText.length) {
+            element.innerHTML += fullText.charAt(i);
+            i++;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            setTimeout(typeChar, speed);
+        } else {
+            conversationTranscript += fullText + "\n";
+        }
+    }
+    typeChar();
+}
+
 function addMessage(text, sender) {
     const message = document.createElement("div");
     message.className = sender;
-    message.innerText = (sender === "user" ? "You: " : "SmartGrant: ") + text;
+    const prefix = sender === "user" ? "You: " : "SmartGrant: ";
+    if (sender === "ai") {
+        typeMessage(message, text, prefix, 18);
+    } else {
+        message.innerText = prefix + text;
+        conversationTranscript += prefix + text + "\n";
+    }
     chatBox.appendChild(message);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 function selectOption(option) {
     if(context.step !== "initial") return;
+
+    // Hide only the initial four option buttons
+    const optionButtons = chatBox.querySelectorAll(".initialOptionBtn");
+    optionButtons.forEach(btn => btn.style.display = "none");
 
     context.selectedOption = option;
     addMessage(option.charAt(0).toUpperCase() + option.slice(1), "user");
@@ -1351,12 +1428,14 @@ function selectOption(option) {
             addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
             break;
         case "i want a quote":
-            context.step = "quoteName";
-            addMessage("Great! Let's get started. Your full name?", "ai");
+            // context.step = "quoteName"; // Removed step change since user is directed to external form
+            addMessage('Sure! Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here</a>', "ai");
+            addMessage("Is there anything else I can help you with today?", "ai");
             break;
         case "contact a team member":
-            context.step = "confirmEmail";
-            addMessage("Sure! Please provide your email address so a team member can reach out to you.", "ai");
+            // context.step = "confirmEmail"; // no longer needed since we're directing to external page
+            addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
+            addMessage("Is there anything else I can help you with today?", "ai");
             break;
         default:
             addMessage("Hello! How can I assist you today?", "ai");
@@ -1720,39 +1799,53 @@ function generateReply(input) {
 }
 
 function sendQuoteEmail() {
-    // Prepare email parameters for quote
+    // Prepare email parameters for quote, ensuring keys match EmailJS template
     const templateParams = {
-        user_name: context.userName,
+        from_name: context.userName,
         project_type: context.projectType,
         website_style: context.websiteStyle,
         features: context.features,
-        user_email: context.email,
-        package: context.package || "Not specified"
+        reply_to: context.email,
+        package: context.package || "Not specified",
+        message: conversationTranscript
     };
 
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_QUOTE_TEMPLATE_ID', templateParams)
+    // Replace 'template_qmeovfp' with your actual quote template ID if different
+    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
         .then(() => {
             console.log("Quote email sent successfully.");
         }, (error) => {
             console.error("Failed to send quote email:", error);
+        })
+        .catch((err) => {
+            console.error("Error in sending quote email (catch):", err);
         });
 }
 
 function sendContactEmail() {
     // Prepare email parameters for contact request
     const templateParams = {
-        user_email: context.email
+        reply_to: context.email,            // User email
+        from_name: context.userName || "Unknown", // Optional: User name
+        message: conversationTranscript     // Full conversation
     };
 
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_CONTACT_TEMPLATE_ID', templateParams)
+    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
         .then(() => {
             console.log("Contact request email sent successfully.");
         }, (error) => {
             console.error("Failed to send contact request email:", error);
+        })
+        .catch((err) => {
+            console.error("Error in sending contact request email (catch):", err);
         });
 }
 
 function chat() {
+    // Hide the initial option buttons if visible
+    const optionButtons = chatBox.querySelectorAll("#chatBox > button");
+    optionButtons.forEach(btn => btn.style.display = "none");
+
     const userInput = userInputField.value.trim();
     if (!userInput) return;
 
@@ -1772,6 +1865,9 @@ document.getElementById("openChatBtn").addEventListener("click", () => {
     }
 });
 
+userInputField.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendButton.click();
+});
 
   </script>
   <style>
