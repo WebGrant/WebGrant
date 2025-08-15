@@ -983,7 +983,6 @@ button:active {
         <p>Please select a question to begin:</p>
         <button onclick="selectOption('what services do you offer?')">What services do you offer?</button>
         <button onclick="selectOption('which package is best for my business?')">Which package is best for my business?</button>
-        <button onclick="selectOption('i want a quote')">I want a quote</button>
         <button onclick="selectOption('contact a team member')">Contact a team member</button>
     </div>
     <input type="text" id="userInput" placeholder="Type your message..." />
@@ -1427,11 +1426,6 @@ function selectOption(option) {
             context.step = "askProjectTypeForPackage";
             addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
             break;
-        case "i want a quote":
-            // context.step = "quoteName"; // Removed step change since user is directed to external form
-            addMessage('Sure! Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here</a>', "ai");
-            addMessage("Is there anything else I can help you with today?", "ai");
-            break;
         case "contact a team member":
             // context.step = "confirmEmail"; // no longer needed since we're directing to external page
             addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
@@ -1496,69 +1490,7 @@ function generateReply(input) {
         return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
     }
 
-    if (context.step === "quoteName") {
-        if (!context.userName) {
-            let name = input.split("my name is")[1]?.trim().split(' ')[0] || input.split("i am")[1]?.trim().split(' ')[0] || input.trim().split(' ')[0];
-            context.userName = name.charAt(0).toUpperCase() + name.slice(1);
-            context.step = "quoteProjectType";
-            return `Thanks, ${context.userName}! Website type? (portfolio, e-commerce, blog, business)`;
-        } else {
-            context.step = "quoteProjectType";
-            // Skip asking name, move to project type
-            if (context.projectType) {
-                context.step = "quoteWebsiteStyle";
-                if (context.websiteStyle) {
-                    context.step = "quoteFeatures";
-                    if (context.features) {
-                        context.step = "quoteBudget";
-                        if (context.budget) {
-                            context.step = "quoteTimeline";
-                            if (context.timeline) {
-                                context.step = "quotePages";
-                                if (context.pages) {
-                                    context.step = "quoteColor";
-                                    if (context.color) {
-                                        context.step = "quoteCompetitor";
-                                        if (context.competitor) {
-                                            context.step = "quoteCMS";
-                                            if (context.cms) {
-                                                context.step = "quoteEmail";
-                                                if (context.email) {
-                                                    context.step = "completed";
-                                                    sendQuoteEmail();
-                                                    return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-                                                } else {
-                                                    return `Your email?`;
-                                                }
-                                            } else {
-                                                return `Preferred platform? (WordPress, Shopify, custom)`;
-                                            }
-                                        } else {
-                                            return `Any sites you like?`;
-                                        }
-                                    } else {
-                                        return `Preferred colors?`;
-                                    }
-                                } else {
-                                    return `Number of pages/products?`;
-                                }
-                            } else {
-                                return `Timeline for launch?`;
-                            }
-                        } else {
-                            return `Budget range?`;
-                        }
-                    } else {
-                        return `Any key features? (contact form, booking, store, etc.) or 'no'`;
-                    }
-                } else {
-                    return `Website style? (clean, modern, professional)`;
-                }
-            } else {
-                return `Website type? (portfolio, e-commerce, blog, business)`;
-            }
-        }
-    }
+    
 
     if (context.step === "quoteProjectType") {
         if (!context.projectType) {
@@ -1768,12 +1700,30 @@ function generateReply(input) {
     if (input.includes("package") || input.includes("packages")) {
         return "We offer the Basic Package for small startups, Growth Package for growing companies, and Growth Plus Package for full-featured priority support.";
     }
-    if (/services|options|what do you do/.test(input)) {
+    if (/services|options|what do you do|offer/.test(input)) {
         return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
     }
-    if (/price|cost|how much/.test(input)) {
-        return "Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Would you like a quote?";
-    }
+// Step 1: User asks about price
+if (/price|cost|how much/.test(input)) {
+    context.step = "askQuote"; // Set step to track next answer
+    addMessage("Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Would you like a quote?", "ai");
+    return;
+}
+
+// Step 2: User responds yes to quote
+if (context.step === "askQuote" && /yes|sure|okay/i.test(input)) {
+    addMessage('Great! Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here</a>', "ai");
+    addMessage("Is there anything else I can help you with today?", "ai");
+    context.step = null; // Reset step
+    return;
+}
+
+// Optional: Handle "no" response
+if (context.step === "askQuote" && /no|not now/i.test(input)) {
+    addMessage("No problem! Let me know if you have any other questions.", "ai");
+    context.step = null; // Reset step
+    return;
+}
     if (/portfolio|examples|work/.test(input)) {
         // Avoid general portfolio response if in quote flow steps
         if (context.step.startsWith("quote")) {
@@ -1782,17 +1732,17 @@ function generateReply(input) {
         return "You can view our portfolio online to see examples of our projects.";
     }
     if (/contact|reach|email/.test(input)) {
-        return "You can reach us at info@webgrant.com or call 123-456-7890.";
+        return "You can reach us via the contact us form or by emailing us at webgrant25@gmail.com or call +61 479 085 297.";
     }
     if (/bye|goodbye|see you/.test(input)) {
         return "Goodbye! It was a pleasure assisting you.";
     }
 
     // Trigger contact flow if user asks to speak to a representative
-    if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
-        context.step = "confirmEmail";
-        return "Sure! Please provide your email address so a team member can reach out to you.";
-    }
+if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
+    context.step = "confirmEmail";
+    addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
+}
 
     // Completed or fallback
     return "I'm here to help! What else would you like to know or discuss?";
