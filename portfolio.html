@@ -6,182 +6,85 @@
   <title>WebGrant Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #0b0f1a, #000);
-  color: #000000;
-  padding-top: 80px; /* This creates space for the fixed navbar */
-  padding-left: 2rem;   /* Keep your existing left padding */
-  padding-right: 2rem;  /* Keep your existing right padding */
-  padding-bottom: 2rem; /* Keep your existing bottom padding */
-  overflow-x: hidden;
-  position: relative;
-  height: 100vh;
-  overflow-y: auto;
-}
- a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0f;
+      color: #ffffff;
+      padding-top: 80px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-bottom: 2rem;
+      overflow-x: hidden;
+      position: relative;
+      height: 100vh;
+      overflow-y: auto;
+    }
 
-.hero .container {
-  padding-top: 60px; /* add this */
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
 
-  /* === Navbar === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 60px;
-    background: rgba(10,10,30, 0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 2px solid #0ff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    z-index: 10000;
-    box-shadow: 0 0 10px #00fff7;
-  }
-  nav .logo {
-    font-weight: 900;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    color: #00fff7;
-    text-shadow: 0 0 6px #00fff7;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
-  nav ul li {
-    position: relative;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #fff;
-    transition: color 0.3s ease;
-  }
-  nav ul li:hover,
-  nav ul li:focus-within {
-    color: #ff00c8;
-    text-shadow: 0 0 10px #ff00c8;
-  }
-  nav ul li::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    transition: width 0.3s ease;
-    border-radius: 1px;
-  }
-  nav ul li:hover::after,
-  nav ul li:focus-within::after {
-    width: 100%;
-  }
-  nav ul li.active {
-    color: #ff00c8;
-    text-shadow: 0 0 10px #ff00c8;
-  }
-  nav ul li.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    border-radius: 1px;
-  }
-
-  /* === Hamburger styles === */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 11000;
-  }
-  .hamburger div {
-    width: 28px;
-    height: 3px;
-    background: #00fff7;
-    border-radius: 2px;
-    box-shadow:
-      0 0 6px #00fff7,
-      inset 0 0 4px #00fff7;
-    transition: all 0.3s ease;
-  }
-  /* Hamburger animation when active */
-  .hamburger.active div:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .hamburger.active div:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active div:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-  }
-
-  /* === Responsive === */
-  @media (max-width: 768px) {
-    nav ul {
+    /* Liquid Glass Header */
+    .header {
       position: fixed;
-      top: 60px;
+      top: 0;
+      left: 0;
       right: 0;
-      height: calc(100vh - 60px);
-      background: rgba(10,10,30, 0.95);
-      backdrop-filter: blur(8px);
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2rem;
-      width: 220px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      box-shadow: -5px 0 15px #00fff7;
-    }
-    nav ul.open {
-      transform: translateX(0);
-    }
-    nav ul li {
-      font-size: 1.3rem;
-    }
-    .hamburger {
-      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(25px) saturate(200%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      padding: 0 2rem;
+      border-radius: 0 0 20px 20px;
     }
 
-    nav .logo {
-        font-size: 1.3rem;
-      }
-      nav .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      color: #00fff7;
-      text-shadow: 0 0 6px #00fff7;
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+      border-radius: 0 0 20px 20px;
+      pointer-events: none;
     }
-  }
 
-  .logo {
+    .nav {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
+      padding: 1rem 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .logo-img {
@@ -189,26 +92,217 @@ body {
       width: 48px;
       border-radius: 50%;
       object-fit: cover;
-      filter: drop-shadow(0 0 6px #00fff7);
+      filter: drop-shadow(0 0 10px #00fff7);
+      transition: transform 0.3s ease;
     }
 
-    
-    header {
-      text-align: center;
-      margin-bottom: 4rem;
-      animation: neon-glow 2s ease-in-out infinite alternate;
+    .logo-img:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    /* Nav menu */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    /* Links */
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Active link styles */
+    .nav-link.active {
+      color: #ff00c8;
+      text-shadow: 0 0 10px #ff00c8;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      border-radius: 1px;
+    }
+
+    /* Shiny hover swipe */
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        #ff00ff,
+        #00fff7,
+        var(--primary)
+      );
+      background-size: 300% 300%;
+      animation: gradient-move 4s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      text-shadow: 0 0 12px rgba(255,255,255,0.6);
+    }
+
+    /* Fancy CTA Button */
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff !important;
+      padding: 0.75rem 1.7rem;
+      border-radius: 50px;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1;
+      animation: pulse-glow 2.5s infinite ease-in-out;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 3px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        #ff00ff,
+        #00fff7,
+        var(--primary)
+      );
+      background-size: 400% 400%;
+      animation: gradient-move 6s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0.6;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .nav-cta:hover::before {
+      opacity: 1;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+    }
+
+    .nav-cta span {
       position: relative;
       z-index: 2;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      color: #88ccff;
-      text-shadow: 0 0 0px #00f7ff, 0 0 20px #074244;
+    /* Mobile menu button */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      z-index: 1001;
     }
 
-    header p {
-      color: #aaa;
+    .mobile-menu-btn span {
+      width: 25px;
+      height: 3px;
+      background: #00fff7;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 6px #00fff7;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Animations */
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
+    }
+
+    /* Portfolio styles */
+    headers {
+      text-align: center;
+      margin: 2rem 0 3rem;
+    }
+
+    headers h1 {
+      font-size: 2.5rem;
+      color: #ffffff;
+      text-shadow: 0 0 30px rgba(0, 255, 247, 0.6), 0 0 60px rgba(0, 255, 247, 0.3);
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff, #00fff7, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    headers p {
+      color: #b0b0b0;
       margin-top: 0.5rem;
       font-size: 1.1rem;
     }
@@ -218,40 +312,70 @@ body {
       flex-direction: row;
       align-items: flex-start;
       gap: 2rem;
-      backdrop-filter: blur(10px);
-      background: rgba(22, 27, 41, 0.3);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(20px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
+      border-radius: 16px;
+      padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.4s ease;
       animation: slide-in 1s ease-out forwards;
       position: relative;
       z-index: 2;
     }
 
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(0, 0, 0, 0.05) 100%);
+      border-radius: 16px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .portfolio-item:hover::before {
+      opacity: 1;
+    }
+
     .portfolio-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(0, 255, 247, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 255, 247, 0.3);
     }
 
     .portfolio-info {
       flex: 1;
       max-width: 300px;
+      position: relative;
+      z-index: 3;
     }
 
     .portfolio-info h3 {
-      color: #00f7ff;
+      color: #00fff7;
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 0px #00f7ff;
+      text-shadow: 0 0 10px #00fff7;
     }
 
     .portfolio-info p {
       font-size: 0.95rem;
-      color: #ccc;
+      color: #e0e0e0;
       margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
     .live-button {
@@ -283,6 +407,8 @@ body {
       flex: 2;
       flex-wrap: wrap;
       animation: fade-in 1s ease-in;
+      position: relative;
+      z-index: 3;
     }
 
     .portfolio-images img {
@@ -290,27 +416,16 @@ body {
       max-width: 310px;
       border-radius: 10px;
       object-fit: cover;
-      border: 1px solid #2a2f45;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       transition: transform 0.3s ease, filter 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .portfolio-images img:hover {
       transform: scale(1.05);
-    }
-
-    @media screen and (max-width: 768px) {
-      .portfolio-item {
-        flex-direction: column;
-        align-items: center;
-      }
-      .portfolio-images {
-        justify-content: center;
-      }
-    }
-
-    @keyframes neon-glow {
-      0% { text-shadow: 0 0 5px #00f7ff; }
-      100% { text-shadow: 0 0 20px #00f7ff; }
+      filter: brightness(1.1);
+      border-color: #00fff7;
+      box-shadow: 0 8px 25px rgba(0, 255, 247, 0.2);
     }
 
     @keyframes fade-in {
@@ -323,30 +438,18 @@ body {
       to { opacity: 1; transform: translateX(0); }
     }
 
-    #background-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-    }
-
     .gradient-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, #001f3f, #003f5c, #1a1a40, #000);
-      background-size: 600% 600%;
-      animation: gradientShift 20s ease infinite;
+      background: radial-gradient(ellipse at center, 
+        rgba(16, 16, 28, 0.9) 0%, 
+        rgba(8, 8, 15, 0.95) 50%,
+        #000000 100%);
       z-index: -1;
-      opacity: 0.4;
       pointer-events: none;
-      background: linear-gradient(135deg, #001520, #002844, #0a0a20, #000000);
-      opacity: 0.25;
-      animation: gradientShift 25s ease infinite;
     }
 
     @keyframes gradientShift {
@@ -365,6 +468,93 @@ body {
       pointer-events: none;
       user-select: none;
     }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 0;
+        height: calc(100vh - 80px);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(25px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: none;
+        border-right: none;
+        border-radius: 0 0 0 25px;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        width: 280px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: 
+          -8px 0 32px rgba(0, 0, 0, 0.4),
+          inset 1px 0 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.1) 0%, 
+          rgba(255, 255, 255, 0.02) 50%,
+          rgba(0, 0, 0, 0.1) 100%);
+        border-radius: 0 0 0 25px;
+        pointer-events: none;
+      }
+
+      .nav-menu.open {
+        transform: translateX(0);
+      }
+
+      .nav-menu li {
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      .nav-link, .nav-cta {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      .portfolio-item {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .portfolio-images {
+        justify-content: center;
+      }
+
+      .header {
+        padding: 0 1rem;
+      }
+
+      body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -372,35 +562,39 @@ body {
   <canvas id="matrix-rain"></canvas>
   <div class="gradient-overlay"></div>
 
-<nav>
-<div class="logo">
-    <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
-    WebGrant
-  </div>
-  <ul id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="service.html">Services</a></li>
-    <li class="active"><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-<li><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#00fff7; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</nav>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo-container">
+        <img src="Logo.png" alt="Logo" class="logo-img">
+        <span class="logo">WebGrant</span>
+      </div>
 
-  <header>
+      <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="service.html" class="nav-link">Services</a></li>
+        <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+        <li><a href="about.html" class="nav-link">About us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="form.html" class="nav-cta"><span>Get Quote</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <headers>
     <h1>WebGrant's Portfolio</h1>
     <p>Browse our futuristic work for real businesses</p>
-  </header>
+  </headers>
 
   <section class="portfolio-item">
     <div class="portfolio-info">
       <h3>Local Cafè</h3>
-  <p><em>“Local Café” is a sample business name used to demonstrate how a clean and basic website can look for a real café.</em></p>
+      <p><em>"Local Café" is a sample business name used to demonstrate how a clean and basic website can look for a real café.</em></p>
       <a href="demo1.html" target="_blank" class="live-button">View Live</a>
     </div>
     <div class="portfolio-images">
@@ -413,7 +607,7 @@ body {
   <section class="portfolio-item">
     <div class="portfolio-info">
       <h3>La Tavola Italiana</h3>
-<p><em>Demonstration of a Standard website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</em></p>
+      <p><em>Demonstration of a Standard website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</em></p>
       <a href="demo2.html" target="_blank" class="live-button">View Live</a>
     </div>
     <div class="portfolio-images">
@@ -423,7 +617,7 @@ body {
     </div>
   </section>
 
-    <section class="portfolio-item">
+  <section class="portfolio-item">
     <div class="portfolio-info">
       <h3>SydneyDine</h3>
       <p><em>Showcase of a Pro Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</em></p>
@@ -449,7 +643,7 @@ body {
     </div>
   </section>
 
-    <section class="portfolio-item">
+  <section class="portfolio-item">
     <div class="portfolio-info">
       <h3>ShinySpark Cleaning Co.</h3>
       <p><em>Demonstration of a Standard Website for a fictional cleaning company, ShinySpark Cleaning Co. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</em></p>
@@ -462,10 +656,10 @@ body {
     </div>
   </section>
 
-      <section class="portfolio-item">
+  <section class="portfolio-item">
     <div class="portfolio-info">
       <h3>FrostAir Experts</h3>
-      <p><em>Demonstration of a Standard Website for a fictional cleaning company, ShinySpark Cleaning Co. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</em></p>
+      <p><em>Demonstration of a Standard Website for a fictional HVAC company, FrostAir Experts. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</em></p>
       <a href="hvac.html" target="_blank" class="live-button">View Live</a>
     </div>
     <div class="portfolio-images">
@@ -476,32 +670,39 @@ body {
   </section>
 
 <script>
-
-      const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-
-  // Optional: close menu when clicking a link (mobile)
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if(window.innerWidth <= 768) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
-      }
-    });
-  });
-
-function toggleMenu() {
-  const navUl = document.querySelector('nav ul');
-  navUl.classList.toggle('show');
-}
+function toggleMobileMenu() {
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navMenu = document.getElementById('navMenu');
   
-// Aurora reactive background
+  mobileMenuBtn.classList.toggle('active');
+  navMenu.classList.toggle('open');
+}
 
+// Close mobile menu when clicking on a nav link
+document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navMenu = document.getElementById('navMenu');
+      mobileMenuBtn.classList.remove('active');
+      navMenu.classList.remove('open');
+    }
+  });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const nav = document.querySelector('.nav');
+  const navMenu = document.getElementById('navMenu');
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  
+  if (!nav.contains(e.target) && navMenu.classList.contains('open')) {
+    mobileMenuBtn.classList.remove('active');
+    navMenu.classList.remove('open');
+  }
+});
+
+// Aurora reactive background
 const canvas = document.getElementById("matrix-rain");
 const ctx = canvas.getContext("2d");
 
@@ -522,8 +723,7 @@ window.addEventListener("mousemove", e => {
   mouse.y = e.clientY;
 });
 
-// Utility: Simplex noise for smooth waves (using noisejs library)
-// Instead of external, here's a minimal simplex noise implementation inline
+// Simplified noise function for aurora effect
 class SimplexNoise {
   constructor() {
     this.grad3 = [
@@ -584,11 +784,6 @@ class SimplexNoise {
 }
 
 const noise = new SimplexNoise();
-
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
 let time = 0;
 
 function drawAurora() {
@@ -600,34 +795,24 @@ function drawAurora() {
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
 
-    // Base Y wave height changes with layer
     let baseY = height * (0.3 + layer * 0.1);
 
-    // Wave points
     const points = 30;
     const waveWidth = width + 100;
     ctx.moveTo(-50, height);
 
     for(let i = 0; i <= points; i++) {
       let x = (i / points) * waveWidth - 50;
-
-      // Calculate noise input, offset by layer and time
       let noiseX = i * 0.2 + time * 0.0006 + layer * 5;
       let noiseY = noise.noise(noiseX, layer * 10);
-
-      // React to mouse X position - offset waves horizontally
       let offsetX = (mouse.x / width - 0.5) * 100 * (layer + 1) / layers;
-
-      // Vertical position with layered noise + mouse Y influence
       let y = baseY + noiseY * 80 + (mouse.y / height - 0.5) * 30;
-
       ctx.lineTo(x + offsetX, y);
     }
 
     ctx.lineTo(width + 50, height);
     ctx.closePath();
 
-    // Gradient color for each layer - pastel blues, greens, purples
     let gradient = ctx.createLinearGradient(0, baseY - 80, 0, height);
     let colorStops = [
       ['#3ae3ff55', '#14ffcc44'],
