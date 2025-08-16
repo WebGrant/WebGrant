@@ -1,539 +1,1311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | WebGrant</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | WebGrant - Professional Web Development</title>
+  <meta name="description" content="WebGrant offers professional web development services from simple landing pages to comprehensive business solutions. Transparent pricing, fast turnaround, and stunning results.">
+  <meta name="keywords" content="web development, website design, professional websites, business websites, responsive design, SEO">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Services | WebGrant - Professional Web Development">
+  <meta property="og:description" content="Transform your online presence with WebGrant's professional web development services. From starter packages to comprehensive solutions.">
+  <meta property="og:type" content="website">
+  
   <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --accent: #06b6d4;
+      --bg-dark: #1a1a1a;
+      --bg-card: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #e0e0e0;
+      --text-muted: #b0b0b0;
+      --border: #404040;
+      --success: #4ade80;
+      --error: #f87171;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: radial-gradient(ellipse at center, #1a1a2e 0%, #000010 80%), #000010;
-      font-family: Arial, sans-serif;
-      color: #e0e0e0;
-      padding-top: 60px;
-      font-size: 1.13rem; /* slightly larger font size */
-      line-height: 1.7;   /* improved readability */
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
     }
 
-       .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    /* Accessibility improvements */
+    *:focus {
+      outline: 2px solid #4a9eff;
+      outline-offset: 2px;
     }
 
-    .logo-img {
-      height: 48px;
-      width: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      filter: drop-shadow(0 0 6px #00fff7);
-    }
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 60px;
-      background: rgba(10,10,30, 0.85);
-      backdrop-filter: blur(8px);
-      border-bottom: 2px solid #0ff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      z-index: 10000;
-      box-shadow: 0 0 10px #00fff7;
-    }
-
-    nav .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      color: #00fff7;
-      text-shadow: 0 0 6px #00fff7;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2.5rem;
-      margin-left: auto;
-    }
-
-    nav ul li {
-      position: relative;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-
-    nav ul li a {
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #4a9eff;
       color: white;
+      padding: 8px;
       text-decoration: none;
+      border-radius: 4px;
+      z-index: 1000;
     }
 
-    nav ul li:hover a,
-    nav ul li:focus-within a {
-      color: #ff00c8;
-      text-shadow: 0 0 10px #ff00c8;
+    .skip-link:focus {
+      top: 6px;
     }
 
-    nav ul li::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
-      transition: width 0.3s ease;
-      border-radius: 1px;
-    }
-
-    nav ul li:hover::after,
-    nav ul li:focus-within::after {
-      width: 100%;
-    }
-
-    nav ul li.active a {
-      color: #ff00c8;
-      text-shadow: 0 0 10px #ff00c8;
-    }
-
-    nav ul li.active::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
-      border-radius: 1px;
-    }
-
-    @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-      /* === Hamburger styles === */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 11000;
-  }
-  .hamburger div {
-    width: 28px;
-    height: 3px;
-    background: #00fff7;
-    border-radius: 2px;
-    box-shadow:
-      0 0 6px #00fff7,
-      inset 0 0 4px #00fff7;
-    transition: all 0.3s ease;
-  }
-  /* Hamburger animation when active */
-  .hamburger.active div:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .hamburger.active div:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active div:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-  }
-
-  /* === Responsive === */
-  @media (max-width: 768px) {
-    nav ul {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      height: calc(100vh - 60px);
-      background: rgba(10,10,30, 0.95);
-      backdrop-filter: blur(8px);
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2rem;
-      width: 220px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      box-shadow: -5px 0 15px #00fff7;
-    }
-    nav ul.open {
-      transform: translateX(0);
-    }
-    nav ul li {
-      font-size: 1.3rem;
-    }
-    .hamburger {
-      display: flex;
-    }
-
-    nav .logo {
-        font-size: 1.3rem;
-      }
-      nav .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      color: #00fff7;
-      text-shadow: 0 0 6px #00fff7;
-    }
-  }
-
-    header {
-      background: linear-gradient(to right, #000010, #1a1a2e);
-      text-align: center;
-      padding: 100px 20px 40px;
-      color: #fff;
-      border-radius: 0 0 22px 22px;
-      box-shadow: 0 4px 24px 0 #00fff73a, 0 2px 8px #00fff74a;
-      margin-bottom: 18px;
-      transition: box-shadow 0.3s;
-    }
-    header h1 {
-      font-size: 3rem;
-      text-shadow: 0 0 15px #ff00c8;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-    section.packages {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 30px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .package {
-      background: #0a0a0a;
-      border: 1px solid #03e9f4;
-      border-left: 6px solid #00fff7;
-      border-radius: 12px;
-      padding: 25px;
-      width: 350px;
-      box-shadow: 0 0 15px #00fff7;
-      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
-    }
-    .package:hover {
-      transform: scale(1.035) translateY(-8px);
-      box-shadow: 0 0 36px 6px #00fff7, 0 0 6px #ff00c8;
-      z-index: 2;
-    }
-    /* === Scroll Progress Bar === */
-    #scroll-progress-bar {
+    /* Header - Mobile First Approach */
+    .header {
       position: fixed;
       top: 0;
       left: 0;
-      width: 0%;
-      height: 5px;
-      background: linear-gradient(90deg, #00fff7 0%, #00fff7 100%);
-      box-shadow: 0 0 12px #00fff7, 0 0 20px #00fff7;
-      z-index: 20000;
-      border-radius: 0 0 5px 0;
-      transition: width 0.18s cubic-bezier(0.4,0,0.2,1);
+      right: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      padding: 0 1rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1001;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 10px #00fff7);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+
+    /* Mobile menu button */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .mobile-menu-btn span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Navigation Menu */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+      margin: 0;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        #ff00ff,
+        #00fff7,
+        var(--primary)
+      );
+      background-size: 300% 300%;
+      animation: gradient-move 4s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      text-shadow: 0 0 12px rgba(255,255,255,0.6);
+    }
+
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff !important;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1;
+      animation: pulse-glow 2.5s infinite ease-in-out;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 3px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        #ff00ff,
+        #00fff7,
+        var(--primary)
+      );
+      background-size: 400% 400%;
+      animation: gradient-move 6s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0.6;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .nav-cta:hover::before {
+      opacity: 1;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+    }
+
+    .nav-cta span {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
+    }
+
+    /* Header Section */
+    .page-header {
+      background: linear-gradient(135deg, #000010, #1a1a2e, #16213e);
+      text-align: center;
+      padding: 120px 1rem 60px;
+      color: #fff;
+      border-radius: 0 0 22px 22px;
+      box-shadow: 0 4px 24px 0 #00fff73a, 0 2px 8px #00fff74a;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
       pointer-events: none;
     }
-    .package h2 {
-      color: #03e9f4;
-      margin-bottom: 10px;
-      text-shadow: 0 0 6px #ff00c8;
-      font-size: 1.5rem;
+
+    .page-header h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      z-index: 1;
     }
-    .package ul {
-      margin-top: 10px;
-      padding-left: 20px;
+
+    .page-header .subtitle {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-    .package ul li {
-      margin-bottom: 10px;
-      list-style: square;
+
+    /* Main Content */
+    main {
+      padding-top: 0;
     }
-    .package .price {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #00fff7;
+
+    .services-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
     }
-    section.transparency, section.extras {
-      max-width: 1000px;
-      margin: 0 auto 50px;
-      background: #111;
-      border: 1px solid #03e9f4;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00fff7;
-    }
-    section.transparency h2,
-    section.extras h2 {
-      color: #03e9f4;
-      margin-bottom: 15px;
-    }
-    section.transparency p,
-    section.extras p {
-      margin-bottom: 12px;
-      line-height: 1.5;
-      color: #ccc;
-    }
-    footer {
+
+    .section-title {
       text-align: center;
-      padding: 20px;
-      background: #000;
-      color: #fff;
-      border-top: 2px solid #03e9f4;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
     }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(0.9rem, 2.5vw, 1.125rem);
+      line-height: 1.6;
+    }
+
+    /* Services Grid - Mobile First */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      border-color: #4a9eff;
+    }
+
+    .service-card.featured {
+      border: 2px solid #4a9eff;
+      background: linear-gradient(135deg, var(--bg-card) 0%, #2d3748 100%);
+      box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
+    }
+
+    .service-card.featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4a9eff;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .info-button {
+      background: none;
+      border: 1px solid #4a9eff;
+      color: #4a9eff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .info-button:hover,
+    .info-button:focus {
+      background: #4a9eff;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: var(--text-secondary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      white-space: normal;
+      max-width: 280px;
+      width: max-content;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+      border: 1px solid #555;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #333;
+    }
+
+    .info-button:hover .tooltip,
+    .info-button:focus .tooltip,
+    .info-button.active .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .feature-list li span:first-child {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-included {
+      color: var(--success);
+    }
+
+    .feature-excluded {
+      color: var(--error);
+      opacity: 0.7;
+    }
+
+    .feature-excluded .feature-text {
+      text-decoration: line-through;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #4a9eff;
+      margin-top: 1.5rem;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(74, 158, 255, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(74, 158, 255, 0.3);
+    }
+
+    /* Info sections */
+    .info-section {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #4a9eff;
+      text-align: center;
+    }
+
+    .pricing-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #333;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pricing-label {
+      font-weight: 600;
+      color: var(--text-secondary);
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .pricing-value {
+      font-weight: 700;
+      color: #4a9eff;
+      font-size: 1.1rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: #333;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border-color: #4a9eff;
+    }
+
+    .benefit-icon {
+      color: #4a9eff;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .benefit-content h3 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+    }
+
+    .benefit-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .highlight-section {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #333 0%, var(--bg-card) 100%);
+      border-radius: 16px;
+      border: 1px solid #4a9eff;
+      box-shadow: 0 8px 25px rgba(74, 158, 255, 0.1);
+    }
+
+    .highlight-section p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .highlight-section p:last-child {
+      text-align: center;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #4a9eff;
+      margin-top: 2rem;
+    }
+
+    .highlight-section strong {
+      color: var(--text-primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid #333;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
     footer a {
-      color: #03e9f4;
+      color: #4a9eff;
       text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
-.info-icon {
-  position: relative;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-left: 6px;
-  border-radius: 50%;
-  background-color: #03e9f4;
-  cursor: pointer;
-  box-shadow: 0 0 6px #03e9f4;
-}
 
-.info-icon::before {
-  content: 'i';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  user-select: none;
-  line-height: 1;
-}
+    footer a:hover,
+    footer a:focus {
+      text-decoration: underline;
+      color: #66b3ff;
+    }
 
-.info-icon:hover {
-  background-color: #ff00c8;
-  box-shadow: 0 0 8px #ff00c8;
-}
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4a9eff, var(--secondary));
+      z-index: 1001;
+      transition: width 0.3s ease;
+    }
 
-.info-icon::after {
-  font-style: italic;
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(10,10,30,0.95);
-  color: #9c9c9c;
-  padding: 10px 14px;          /* increased padding */
-  border-radius: 8px;
-  font-size: 0.9rem;
-  white-space: normal;         /* changed from nowrap to normal */
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 0 15px #00fff7;
-  transition: opacity 0.25s ease;
-  z-index: 10;
-  width: max-content;
-  max-width: 250px;            /* slightly bigger max width */
-  text-align: center;
-  word-wrap: break-word;       /* allow breaking long words if needed */
-}
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
 
-.info-icon:hover::after {
-  opacity: 1;
-}
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 26, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 2rem 1rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        border-bottom: 1px solid #333;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
 
-.info-icon-starter::after {
-    text-shadow: none !important;
-  color: #9a9a9a; /* light grey or white */
-  box-shadow: 0 0 10px #00fff7; /* keep the cyan glow */
-}
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
 
-.info-icon.show-tooltip::after {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-  </style>
+      .nav-menu li {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+        border-radius: 12px;
+        font-size: 1.1rem;
+      }
+
+      .nav-cta {
+        margin-top: 1rem;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      .page-header {
+        padding: 100px 1rem 40px;
+      }
+
+      .services-section {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .service-card {
+        padding: 1.5rem;
+      }
+
+      .service-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .feature-list li {
+        font-size: 0.9rem;
+      }
+
+      .price {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+      }
+
+      .info-card {
+        padding: 1.5rem;
+      }
+
+      .info-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .pricing-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .pricing-label {
+        min-width: auto;
+      }
+
+      .benefit-item {
+        padding: 1.25rem;
+      }
+
+      .benefit-content h3 {
+        font-size: 1rem;
+      }
+
+      .highlight-section {
+        padding: 1.5rem;
+      }
+
+      .tooltip {
+        max-width: 250px;
+        left: -100px;
+        transform: none;
+      }
+    }
+
+    /* Tablet and larger screens */
+    @media (min-width: 769px) {
+      .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .header {
+        padding: 0 2rem;
+      }
+
+      .nav {
+        padding: 1.25rem 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+      }
+
+      .logo-img {
+        height: 48px;
+        width: 48px;
+      }
+
+      .nav-menu {
+        gap: 2rem;
+      }
+
+      .services-section {
+        padding: 3rem 2rem 5rem;
+      }
+
+      .info-section {
+        padding: 0 2rem;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .header,
+      .progress-bar,
+      .mobile-menu-btn {
+        display: none;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      .service-card,
+      .info-card {
+        border: 1px solid #000;
+        break-inside: avoid;
+      }
+
+      .page-header {
+        background: none;
+        color: black;
+        box-shadow: none;
+      }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      ::before,
+      ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .service-card,
+      .info-card {
+        border: 2px solid currentColor;
+      }
+
+      .nav-link:hover {
+        background: currentColor;
+        color: var(--bg-dark);
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="scroll-progress-bar"></div>
-  <nav>
-    <div class="logo">
-      <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
-      WebGrant
-    </div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li class="active"><a href="#">Services</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#00fff7; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
-    </ul>
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</nav>
+  <div class="progress-bar" id="progressBar"></div>
   
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header class="header">
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="logo-container">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%23000010'/%3E%3Cpath d='M24 8c8.84 0 16 7.16 16 16s-7.16 16-16 16S8 32.84 8 24 15.16 8 24 8zm0 4c-6.63 0-12 5.37-12 12s5.37 12 12 12 12-5.37 12-12-5.37-12-12-12z' fill='%2300fff7'/%3E%3C/svg%3E" alt="WebGrant Logo" class="logo-img">
+        <span class="logo">WebGrant</span>
+      </div>
 
-  <header>
-    <h1>Services | WebGrant</h1>
-    <p>We design and deliver websites that are simple, smart, and made for growth.</p>
+      <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none"><a href="service.html" class="nav-link" role="menuitem" aria-current="page">Services</a></li>
+        <li role="none"><a href="portfolio.html" class="nav-link" role="menuitem">Portfolio</a></li>
+        <li role="none"><a href="about.html" class="nav-link" role="menuitem">About us</a></li>
+        <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+        <li role="none"><a href="form.html" class="nav-cta" role="menuitem"><span>Get Quote</span></a></li>
+      </ul>
+    </nav>
   </header>
 
-<section class="packages">
-  <div class="package">
-    <h2><b>Starter</b> <span class="info-icon info-icon-starter" data-tooltip="Perfect for small businesses or individuals who just need a clean, professional single page site."></span></h2>
-    <ul>
-      <li>✅ Single-page design</li>
-      <li>✅ About, Services/Menu, Contact</li>
-      <li>✅ Mobile-friendly</li>
-      <li>✅ Basic branding applied</li>
-      <li>✅ Uses client-provided images</li>
-      <li>❌ Social media buttons</li>
-      <li>❌ Interactive Email/Phone links</li>
-      <li>❌ Professional custom design</li>
-      <li>❌ Contact form</li>
-      <li>❌ Google maps integration</li>
-      <li>❌ SEO setup</li>
-      <li>❌ Animations</li>
-      <li>❌ Monthly updates</li>
-    </ul>
-    <p class="price"><em>Starting from: $300</em></p>
+  <div class="page-header">
+    <h1>Services | WebGrant</h1>
+    <p class="subtitle">We design and deliver websites that are simple, smart, and made for growth.</p>
   </div>
 
-  <div class="package">
-    <h2><b>Growth</b> <span class="info-icon info-icon-starter" data-tooltip="For business wanting more pages and better customer interaction."></span></h2>
-    <ul>
-      <li>✅ 2–3 pages (Home, About, Services/Menu)</li>
-      <li>✅ Mobile-friendly</li>
-      <li>✅ Basic branding applied</li>
-      <li>✅ Uses client-provided images</li>
-      <li>✅ Social media buttons</li>
-      <li>✅ Interactive Email/Phone links</li>
-      <li>✅ Basic Animations</li>
-      <li>❌ Professional custom design</li>
-      <li>❌ Contact form</li>
-      <li>❌ Google maps integration</li>
-      <li>❌ SEO setup</li>
-      <li>❌ Monthly updates</li>
-    </ul>
-    <p class="price"><em>Starting from: $700</em></p>
-  </div>
+  <main id="main-content" tabindex="-1">
+    <section class="services-section" aria-labelledby="services-title">
+      <h2 id="services-title" class="section-title">Choose Your Perfect Plan</h2>
+      <p class="section-subtitle">From simple landing pages to comprehensive business solutions - we've got you covered.</p>
+      
+      <div class="services-grid">
+        <article class="service-card" role="article">
+          <h3 class="service-title">
+            Starter
+            <button class="info-button" aria-label="More information about Starter package" tabindex="0">
+              i
+              <span class="tooltip" role="tooltip">Perfect for small businesses or individuals who just need a clean, professional single page site.</span>
+            </button>
+          </h3>
+          
+          <ul class="feature-list">
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Mobile-friendly</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Basic branding applied</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Uses client-provided images</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Social media buttons</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Interactive Email/Phone links</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Professional custom design</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Contact form</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Google maps integration</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">SEO setup</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Animations</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Monthly updates</span></li>
+          </ul>
+          
+          <p class="price">Starting from: $300</p>
+        </article>
 
-  <div class="package">
-    <h2><b>Growth Plus</b> <span class="info-icon info-icon-starter" data-tooltip="For businesses serious about SEO, performance, and lead capture."></span></h2>
-    <ul>
-      <li>✅ Up to 6 pages</li>
-      <li>✅ Mobile-friendly</li>
-      <li>✅ Basic branding applied</li>
-      <li>✅ Uses client-provided images</li>
-      <li>✅ Social media buttons</li>
-      <li>✅ Interactive Email/Phone links</li>
-      <li>✅ Advanced Animations</li>
-      <li>✅ Professional custom design</li>
-      <li>✅ Contact form</li>
-      <li>✅ Google maps integration</li>
-      <li>✅ SEO (titles & meta descriptions)</li>
-      <li>✅ 2 updates/month FREE</li>
-      <li>✅ Addiional Update pricing: $30+ depending on complexity</li>
-    </ul>
-    <p class="price"><em>Starting from: $1100</em></p>
-  </div>
-</section>
+        <article class="service-card" role="article">
+          <h3 class="service-title">
+            Growth
+            <button class="info-button" aria-label="More information about Growth package" tabindex="0">
+              i
+              <span class="tooltip" role="tooltip">For businesses wanting more pages and better customer interaction.</span>
+            </button>
+          </h3>
+          
+          <ul class="feature-list">
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">2–3 pages (Home, About, Services/Menu)</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Mobile-friendly</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Basic branding applied</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Uses client-provided images</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Social media buttons</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Interactive Email/Phone links</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Basic Animations</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Professional custom design</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Contact form</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Google maps integration</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">SEO setup</span></li>
+            <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Monthly updates</span></li>
+          </ul>
+          
+          <p class="price">Starting from: $700</p>
+        </article>
 
-  <section class="transparency">
-    <h2>What Counts as an Update?</h2>
-    <p>Simple text/image edits: $30–$75 AUD<br>Layout/content tweaks: $75–$150 AUD<br>New features/sections: $150+ AUD</p>
-    <p>Requests must be emailed to <a href="mailto:webgrant25@gmail.com"><strong>webgrant25@gmail.com</strong></a>. Turnaround: 3–5 business days.</p>
-  </section>
+        <article class="service-card featured" role="article">
+          <h3 class="service-title">
+            Growth Plus
+            <button class="info-button" aria-label="More information about Growth Plus package" tabindex="0">
+              i
+              <span class="tooltip" role="tooltip">For businesses serious about SEO, performance, and lead capture.</span>
+            </button>
+          </h3>
+          
+          <ul class="feature-list">
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Up to 6 pages</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Mobile-friendly</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Basic branding applied</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Uses client-provided images</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Social media buttons</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Interactive Email/Phone links</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Advanced Animations</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Professional custom design</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Contact form</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Google maps integration</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">SEO (titles & meta descriptions)</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">2 updates/month FREE</span></li>
+            <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Additional Update pricing: $30+ depending on complexity</span></li>
+          </ul>
+          
+          <p class="price">Starting from: $1100</p>
+        </article>
+      </div>
+    </section>
 
-<section class="extras">
-  <h2>Why Choose WebGrant?</h2>
-  <p>
-    ✔️ Transparent pricing — no surprises, just clear value.<br>
-    ✔️ Preview before payment — see your vision come to life before you commit.<br>
-    ✔️ Fast turnaround (avg. 1–2 weeks) — get online and start growing ASAP.<br>
-    ✔️ Friendly help for non-tech-savvy clients — we make it simple and stress-free.<br>
-    ✔️ Honest communication + future support — your success is our long-term goal.<br><br>
+    <section class="info-section" aria-labelledby="updates-title">
+      <div class="info-card">
+        <h2 id="updates-title" class="info-title">What Counts as an Update?</h2>
+        
+        <div class="pricing-grid">
+          <div class="pricing-item">
+            <span class="pricing-label">Simple text/image edits</span>
+            <span class="pricing-value">$30–$75 AUD</span>
+          </div>
+          <div class="pricing-item">
+            <span class="pricing-label">Layout/content tweaks</span>
+            <span class="pricing-value">$75–$150 AUD</span>
+          </div>
+          <div class="pricing-item">
+            <span class="pricing-label">New features/sections</span>
+            <span class="pricing-value">$150+ AUD</span>
+          </div>
+        </div>
+        
+        <div style="color: #b0b0b0; padding: 20px; background: #333; border-radius: 12px; border: 1px solid #404040; text-align: center; line-height: 1.6;">
+          <p style="margin: 0;">
+            Requests must be emailed to <a href="mailto:webgrant25@gmail.com" style="color: #4a9eff; font-weight: 600; text-decoration: none;">webgrant25@gmail.com</a>
+          </p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Turnaround: 3–5 business days</p>
+        </div>
+      </div>
+    </section>
 
-    At WebGrant, we don’t just build websites — we build powerful business tools.<br>
-    Imagine a website that not only looks stunning but actively drives traffic, converts visitors into loyal customers, and elevates your brand above the competition.<br>
-    Your new online presence will open doors to new markets, boost your credibility, and increase your sales without you lifting a finger.<br><br>
-
-    We know that in today’s digital world, speed and agility are everything. That’s why we combine rapid development with strategic design tailored specifically to your audience and goals.<br>
-    Our process is streamlined but thorough — from discovery to launch, we keep you in the loop and deliver results that speak louder than words.<br><br>
-
-    Choosing WebGrant means choosing growth, clarity, and a partner who treats your business like their own.<br>
-    Ready to dominate your market online? Let’s make it happen.
-  </p>
-</section>
+    <section class="info-section" aria-labelledby="why-choose-title">
+      <div class="info-card">
+        <h2 id="why-choose-title" class="info-title">Why Choose WebGrant?</h2>
+        
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">🛡️</span>
+            <div class="benefit-content">
+              <h3>Transparent pricing</h3>
+              <p>No surprises, just clear value for your investment.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">👁️</span>
+            <div class="benefit-content">
+              <h3>Preview before payment</h3>
+              <p>See your vision come to life before you commit.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">⚡</span>
+            <div class="benefit-content">
+              <h3>Fast turnaround</h3>
+              <p>Average 1–2 weeks to get online and start growing ASAP.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">💝</span>
+            <div class="benefit-content">
+              <h3>Friendly help for non-tech-savvy clients</h3>
+              <p>We make it simple and stress-free for everyone.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">📈</span>
+            <div class="benefit-content">
+              <h3>Honest communication + future support</h3>
+              <p>Your success is our long-term goal and commitment.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="highlight-section">
+          <p>
+            At WebGrant, we don't just build websites — we build <strong>powerful business tools</strong>.
+          </p>
+          
+          <p>
+            Imagine a website that not only looks stunning but actively drives traffic, converts visitors into loyal customers, and elevates your brand above the competition. Your new online presence will open doors to new markets, boost your credibility, and increase your sales without you lifting a finger.
+          </p>
+          
+          <p>
+            We know that in today's digital world, speed and agility are everything. That's why we combine rapid development with strategic design tailored specifically to your audience and goals. Our process is streamlined but thorough — from discovery to launch, we keep you in the loop and deliver results that speak louder than words.
+          </p>
+          
+          <p>
+            Choosing WebGrant means choosing growth, clarity, and a partner who treats your business like their own.<br>
+            <strong>Ready to dominate your market online? Let's make it happen.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>Need help choosing the right plan? <a href="contact.html">Get in touch</a> — we're happy to help.</p>
-    <p>&copy; 2025 WebGrant. All rights reserved.</p>
+    <p>Need help choosing the right plan? <a href="mailto:webgrant25@gmail.com">Get in touch</a> — we're happy to help.</p>
+    <p style="font-size: 0.875rem; margin-top: 16px;">&copy; 2025 WebGrant. All rights reserved.</p>
   </footer>
 
-</script>
-<script>
-  // Hamburger Menu
-  const hamburger = document.getElementById('hamburger');
-  const navMenu = document.querySelector('nav ul');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('open');
-  });
-
-  // Scroll Progress Bar
-  const progressBar = document.getElementById('scroll-progress-bar');
-  function updateProgressBar() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let percent = 0;
-    if (docHeight > 0) {
-      percent = (scrollTop / docHeight) * 100;
+  <script>
+    // Mobile menu functionality
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const isOpen = navMenu.classList.contains('active');
+      
+      navMenu.classList.toggle('active');
+      mobileBtn.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', !isOpen);
+      
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = isOpen ? 'auto' : 'hidden';
     }
-    progressBar.style.width = percent + "%";
-  }
-  window.addEventListener('scroll', updateProgressBar);
-  // On load, set progress bar
-  updateProgressBar();
 
-  // Mobile friendly tooltip toggle for info icons
-document.querySelectorAll('.info-icon').forEach(icon => {
-  icon.addEventListener('click', (e) => {
-    e.preventDefault();
-    // Toggle the tooltip
-    icon.classList.toggle('show-tooltip');
-  });
-});
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      
+      if (!navMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
+        navMenu.classList.remove('active');
+        mobileBtn.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = 'auto';
+      }
+    });
 
-// Optional: close tooltip if clicking outside
-document.addEventListener('click', (e) => {
-  document.querySelectorAll('.info-icon.show-tooltip').forEach(icon => {
-    if (!icon.contains(e.target)) {
-      icon.classList.remove('show-tooltip');
+    // Close mobile menu when pressing Escape
+    document.addEventListener('keydown', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      
+      if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        mobileBtn.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        mobileBtn.focus();
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      const navMenu = document.getElementById('navMenu');
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      
+      if (window.innerWidth > 768) {
+        navMenu.classList.remove('active');
+        mobileBtn.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Scroll progress bar
+    function updateProgressBar() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
     }
-  });
-});
-</script>
+
+    window.addEventListener('scroll', updateProgressBar);
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial call
+    updateProgressBar();
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Close mobile menu if open
+          const navMenu = document.getElementById('navMenu');
+          const mobileBtn = document.getElementById('mobileMenuBtn');
+          navMenu.classList.remove('active');
+          mobileBtn.classList.remove('active');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Tooltip functionality for mobile devices
+    document.querySelectorAll('.info-button').forEach(button => {
+      let clickTimeout;
+      
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Clear any existing timeout
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+        }
+        
+        // Close other tooltips
+        document.querySelectorAll('.info-button').forEach(otherButton => {
+          if (otherButton !== button) {
+            otherButton.classList.remove('active');
+          }
+        });
+        
+        // Toggle current tooltip
+        button.classList.toggle('active');
+        
+        // Auto-close after 5 seconds on mobile
+        if (button.classList.contains('active') && window.innerWidth <= 768) {
+          clickTimeout = setTimeout(() => {
+            button.classList.remove('active');
+          }, 5000);
+        }
+      });
+      
+      // Handle keyboard interaction
+      button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // Close tooltips when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.info-button')) {
+        document.querySelectorAll('.info-button').forEach(button => {
+          button.classList.remove('active');
+        });
+      }
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.service-card, .info-card, .benefit-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Enhanced accessibility features
+    document.addEventListener('keydown', function(event) {
+      // Skip to main content shortcut (Alt + M)
+      if (event.altKey && event.key === 'm') {
+        event.preventDefault();
+        const mainContent = document.getElementById('main-content');
+        mainContent.focus();
+        mainContent.scrollIntoView();
+      }
+    });
+
+    // Add focus indicators for better accessibility
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ensure focus is visible on all interactive elements
+      const interactiveElements = document.querySelectorAll('a, button, input, textarea, select');
+      interactiveElements.forEach(el => {
+        el.addEventListener('focus', function() {
+          this.style.outline = '2px solid #4a9eff';
+          this.style.outlineOffset = '2px';
+        });
+        
+        el.addEventListener('blur', function() {
+          this.style.outline = '';
+          this.style.outlineOffset = '';
+        });
+      });
+    });
+
+    // Performance optimization: Lazy load non-critical elements
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function() {
+        // Initialize any non-critical features here
+        console.log('WebGrant Services page loaded successfully');
+      });
+    }
+  </script>
 </body>
 </html>
