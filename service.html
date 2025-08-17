@@ -91,6 +91,21 @@
       position: relative;
     }
 
+  nav ul li a.active {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8;
+  }
+  nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00fff7, #ff00c8);
+    border-radius: 1px;
+  }
+
     .logo-container {
       display: flex;
       align-items: center;
@@ -890,7 +905,7 @@
 
       <ul class="nav-menu" id="navMenu" role="menubar">
         <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
-        <li role="none"><a href="service.html" class="nav-link" role="menuitem" aria-current="page">Services</a></li>
+        <li role="none"><a href="service.html" class="nav-link active" role="menuitem" aria-current="page">Services</a></li>
         <li role="none"><a href="portfolio.html" class="nav-link" role="menuitem">Portfolio</a></li>
         <li role="none"><a href="about.html" class="nav-link" role="menuitem">About us</a></li>
         <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
@@ -1291,6 +1306,45 @@
         console.log('WebGrant Services page loaded successfully');
       });
     }
+
+
+        // Add some extra interactive magic
+        document.addEventListener('click', (e) => {
+            // Create ripple effect on click
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = e.clientX - 25 + 'px';
+            ripple.style.top = e.clientY - 25 + 'px';
+            ripple.style.width = '50px';
+            ripple.style.height = '50px';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(99, 102, 241, 0.3)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.zIndex = '9999';
+            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
+            
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Add ripple effect CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
   </script>
 </body>
 </html>
