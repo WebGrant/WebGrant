@@ -881,31 +881,42 @@
         display: flex;
       }
 
-      .nav-menu {
+ .nav-menu {
         position: fixed;
         top: 80px;
         left: 50%;
         transform: translateX(-50%) translateY(-100%);
         width: 90%;
         max-width: 320px;
-        background: rgba(10, 10, 11, 0.95);
+                background: rgba(26, 26, 26, 0.95);
         backdrop-filter: blur(25px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-top: none;
         border-radius: 0 0 25px 25px;
-        display: flex;
         flex-direction: column;
         gap: 1.5rem;
         padding: 2rem 1.5rem;
         box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.8),
-          inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s ease, 
-                    visibility 0.3s ease;
+          0 8px 32px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0;
         visibility: hidden;
-        z-index: 1000;
+      }
+
+      .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.1) 0%, 
+          rgba(255, 255, 255, 0.02) 50%,
+          rgba(0, 0, 0, 0.1) 100%);
+        border-radius: 0 0 25px 25px;
+        pointer-events: none;
       }
 
       .nav-menu.open {
@@ -936,6 +947,22 @@
       .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
       .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
       .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
+
+      .nav-link, .nav-cta {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 0.8rem 1rem;
+        position: relative;
+        z-index: 10;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover, .nav-cta:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px) scale(1.02);
+      }
 
       /* Mobile optimizations for background effects */
       body {
