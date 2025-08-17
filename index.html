@@ -996,11 +996,33 @@
         transform: translateY(-2px) scale(1.02);
       }
 
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
+            .header {
+        padding: 0 1rem;
+      }
+
+            body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      /* Overlay for mobile menu */
+      .nav-menu.open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        z-index: -1;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
 
             .services-grid {
                 grid-template-columns: 1fr;
