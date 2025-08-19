@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Request a Website</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
     :root {
@@ -14,6 +15,24 @@
       --neon3: #00bfff;
       --neon4: #ff3399;
       --white: #ffffff;
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --accent1: #00fff7;
+      --accent2: #ff3399;
+      
+      /* New professional dark theme colors */
+      --dark-bg: #0a0a0a;
+      --dark-surface: #151515;
+      --dark-surface-elevated: #1a1a1a;
+      --dark-border: #2a2a2a;
+      --dark-text-primary: #ffffff;
+      --dark-text-secondary: #b3b3b3;
+      --dark-text-muted: #808080;
+      --dark-accent: #6366f1;
+      --dark-accent-hover: #5b5ff9;
+      --dark-success: #10b981;
+      --dark-warning: #f59e0b;
+      --dark-error: #ef4444;
     }
 
     * {
@@ -21,556 +40,896 @@
     }
 
     body {
-      padding-top: 70px; /* Slightly more than the navbar height */
+      padding-top: 70px;
       margin: 0;
-  font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top left, #141414, #0e0e0e 70%);
-      color: var(--white);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
+      min-height: 100vh;
+      color: var(--dark-text-primary);
       overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-      /* === Navbar === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 60px;
-    background: rgba(10,10,30, 0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 2px solid #0ff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    z-index: 10000;
-    box-shadow: 0 0 10px #00fff7;
-  }
-  nav .logo {
-    font-weight: 900;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    color: #00fff7;
-    text-shadow: 0 0 6px #00fff7;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
-  nav ul li {
-    position: relative;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #fff;
-    transition: color 0.3s ease;
-  }
-  nav ul li:hover,
-  nav ul li:focus-within {
-    color: #ff00c8;
-    text-shadow: 0 0 10px #ff00c8;
-  }
-  nav ul li::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    transition: width 0.3s ease;
-    border-radius: 1px;
-  }
-  nav ul li:hover::after,
-  nav ul li:focus-within::after {
-    width: 100%;
-  }
-  nav ul li.active {
-    color: #ff00c8;
-    text-shadow: 0 0 10px #ff00c8;
-  }
-  nav ul li.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    border-radius: 1px;
-  }
-
-  /* === Hamburger styles === */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 11000;
-  }
-  .hamburger div {
-    width: 28px;
-    height: 3px;
-    background: #00fff7;
-    border-radius: 2px;
-    box-shadow:
-      0 0 6px #00fff7,
-      inset 0 0 4px #00fff7;
-    transition: all 0.3s ease;
-  }
-  /* Hamburger animation when active */
-  .hamburger.active div:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .hamburger.active div:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active div:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-  }
-
-  /* === Responsive === */
-  @media (max-width: 768px) {
-    nav ul {
+    /* === Navbar (keeping original styles) === */
+    .header {
       position: fixed;
-      top: 60px;
+      top: 0;
+      left: 0;
       right: 0;
-      height: calc(100vh - 60px);
-      background: rgba(10,10,30, 0.95);
-      backdrop-filter: blur(8px);
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2rem;
-      width: 220px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      box-shadow: -5px 0 15px #00fff7;
-    }
-    nav ul.open {
-      transform: translateX(0);
-    }
-    nav ul li {
-      font-size: 1.3rem;
-    }
-    .hamburger {
-      display: flex;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
 
-    nav .logo {
-        font-size: 1.3rem;
-      }
-      nav .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      color: #00fff7;
-      text-shadow: 0 0 6px #00fff7;
-    }
-  }
-
-  .logo {
+    .nav {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1001;
     }
 
     .logo-img {
-      height: 48px;
-      width: 48px;
+      height: 40px;
+      width: 40px;
       border-radius: 50%;
       object-fit: cover;
-      filter: drop-shadow(0 0 6px #00fff7);
+      filter: drop-shadow(0 0 10px var(--accent1));
+      transition: all 0.3s ease;
     }
 
-     a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
+    .logo-img:hover {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 0 20px var(--accent1)) brightness(1.2);
+    }
 
-    h1 {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 2.8rem;
-      background: linear-gradient(90deg, var(--neon1), var(--neon2), var(--neon3));
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: glowText 3s infinite alternate;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+      transition: transform 0.3s ease;
     }
 
-    form {
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    /* Mobile menu button */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1001;
+      width: 30px;
+      height: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mobile-menu-btn span {
+      width: 25px;
+      height: 3px;
+      background: var(--accent1);
+      border-radius: 2px;
+      box-shadow: 0 0 6px var(--accent1);
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Desktop navigation */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link.active {
+      color: var(--accent2);
+      text-shadow: 0 0 10px var(--accent2);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border-radius: 1px;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent2),
+        var(--accent1),
+        var(--primary)
+      );
+      background-size: 300% 300%;
+      animation: gradient-move 4s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      text-shadow: 0 0 12px rgba(255,255,255,0.6);
+    }
+
+    /* CTA Button */
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff !important;
+      padding: 0.75rem 1.7rem;
+      border-radius: 50px;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 3px;
+      background: linear-gradient(
+        45deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent2),
+        var(--accent1),
+        var(--primary)
+      );
+      background-size: 400% 400%;
+      animation: gradient-move 6s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude; 
+      opacity: 0.6;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .nav-cta:hover::before {
+      opacity: 1;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+    }
+
+    .nav-cta span {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+        width: 90%;
+        max-width: 320px;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(25px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: none;
+        border-radius: 0 0 25px 25px;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.1) 0%, 
+          rgba(255, 255, 255, 0.02) 50%,
+          rgba(0, 0, 0, 0.1) 100%);
+        border-radius: 0 0 25px 25px;
+        pointer-events: none;
+      }
+
+      .nav-menu.open {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-menu li {
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.open li {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
+      .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
+      .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
+      .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
+      .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
+      .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
+
+      .nav-link, .nav-cta {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 0.8rem 1rem;
+        position: relative;
+        z-index: 10;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover, .nav-cta:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+
+    /* New modern professional styles */
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* Main heading */
+    h1 {
+      text-align: center;
+      margin: 60px auto 40px;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--dark-text-primary);
+      letter-spacing: -0.02em;
       max-width: 800px;
-      margin: 40px auto;
-      background: rgba(20, 20, 20, 0.95);
-      padding: 30px;
-      border-radius: 25px;
-      box-shadow: 0 0 25px var(--neon3), 0 0 50px var(--neon2) inset;
-      animation: pulseForm 6s ease-in-out infinite;
+      padding: 0 20px;
     }
 
+    /* Professional form container */
+    form {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      background: var(--dark-surface);
+      padding: clamp(30px, 5vw, 50px);
+      border-radius: 24px;
+      border: 1px solid var(--dark-border);
+      box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.4),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    form::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dark-accent), transparent);
+      opacity: 0.6;
+    }
+
+    /* Form sections */
+    .form-section {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .form-section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--dark-text-primary);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--dark-accent);
+      display: inline-block;
+    }
+
+    /* Labels */
     label {
       display: block;
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: var(--neon1);
-      text-shadow: 0 0 6px var(--neon2);
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--dark-text-secondary);
+      transition: color 0.2s ease;
     }
 
-input, textarea, select {
-  width: 100%;
-  padding: 14px;
-  margin-top: 8px;
-  background-color: #121212;
-  color: var(--white);
-  border: 2px solid #333;
-  border-radius: 12px;
-  font-size: 1rem;
-  transition: all 0.4s ease;
-}
+    /* Input fields */
+    input, textarea, select {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--dark-surface-elevated);
+      color: var(--dark-text-primary);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      outline: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--dark-text-muted);
+    }
 
     input:focus, textarea:focus, select:focus {
-      border: 2px solid;
-      border-image: linear-gradient(to right, var(--neon1), var(--neon4));
-      border-image-slice: 1;
-      box-shadow: 0 0 12px var(--neon4), 0 0 25px var(--neon1);
-      outline: none;
+      border-color: var(--dark-accent);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      background: var(--dark-bg);
     }
 
-    button {
-      margin-top: 30px;
-      width: 100%;
-      padding: 16px;
-      font-size: 1.2rem;
-      background: linear-gradient(90deg, var(--neon1), var(--neon2), var(--neon3));
-      border: none;
-      color: #000;
-      font-weight: bold;
-      border-radius: 15px;
+    input:hover, textarea:hover, select:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    /* Textarea specific */
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    /* Select styling */
+    select {
       cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 10px var(--neon1);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 16px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 48px;
+      appearance: none;
+    }
+
+    /* Submit button */
+    button {
+      margin-top: 40px;
+      width: 100%;
+      padding: 18px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--dark-accent), var(--dark-accent-hover));
+      border: none;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    button:hover::before {
+      left: 100%;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--neon2), 0 0 30px var(--neon1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, var(--dark-accent-hover), #5b5ff9);
     }
 
-    @keyframes glowText {
-      from {
-        text-shadow: 0 0 5px var(--neon1), 0 0 10px var(--neon2);
-      }
-      to {
-        text-shadow: 0 0 15px var(--neon2), 0 0 25px var(--neon4);
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* Checkbox styling */
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 20px;
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      border-radius: 12px;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      width: 20px !important;
+      height: 20px;
+      min-width: 20px;
+      margin: 0;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--dark-accent);
+    }
+
+    .checkbox-label {
+      font-size: 0.95rem !important;
+      font-weight: normal !important;
+      color: var(--dark-text-secondary) !important;
+      margin: 0 !important;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .checkbox-label a {
+      color: var(--dark-accent);
+      text-decoration: underline;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      form {
+        margin: 0 20px 60px;
       }
     }
 
-    @keyframes pulseForm {
-      0%, 100% {
-        box-shadow: 0 0 20px var(--neon3), 0 0 40px var(--neon2) inset;
+    @media (max-width: 768px) {
+      body {
+        padding-top: 80px;
       }
-      50% {
-        box-shadow: 0 0 35px var(--neon2), 0 0 60px var(--neon1) inset;
+
+      h1 {
+        margin-top: 40px;
+        font-size: 2.5rem;
+      }
+
+      form {
+        margin: 0 16px 40px;
+        padding: 24px;
+        border-radius: 20px;
+      }
+
+      .form-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+      }
+
+      .form-section-title {
+        font-size: 1.1rem;
+      }
+
+      input, textarea, select {
+        padding: 14px 16px;
+        font-size: 16px; /* Prevents zoom on iOS */
+      }
+
+      button {
+        padding: 16px 24px;
+        font-size: 1rem;
+        margin-top: 32px;
+      }
+
+      .checkbox-container {
+        padding: 16px;
+        margin-top: 24px;
       }
     }
 
-    .bg-glow {
+    @media (max-width: 480px) {
+      .nav {
+        padding: 0.8rem 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .logo-img {
+        height: 32px;
+        width: 32px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-top: 30px;
+      }
+
+      form {
+        margin: 0 12px 30px;
+        padding: 20px;
+      }
+    }
+
+    /* Subtle background pattern */
+    body::before {
+      content: '';
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: repeating-radial-gradient(circle, #00fff011 1px, transparent 2px);
-      background-size: 70px 70px;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+      pointer-events: none;
       z-index: -1;
-      animation: bgMove 40s linear infinite;
     }
 
-    @keyframes bgMove {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
+    /* Focus management for accessibility */
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--dark-accent);
+      outline-offset: 2px;
     }
-    
-#backgroundCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(ellipse at center, #0c0c0c, #000000);
-}
 
+    /* Loading state for button */
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      :root {
+        --dark-border: #404040;
+        --dark-text-secondary: #e0e0e0;
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-<canvas id="backgroundCanvas"></canvas>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo-container">
+        <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
+        <span class="logo">WebGrant</span>
+      </div>
 
-<nav>
-<div class="logo">
-    <img src="Logo.png" alt="WebGrant Logo" class="logo-img">
-    WebGrant
-  </div>
-  <ul id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="service.html">Services</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-<li class="active"><a href="form.html" tabindex="6" style="display:inline-block; padding:0px 12px; background:#ff00c8; color:#111; font-weight:700; border-radius:16px; box-shadow: 0 0 10px #00fff7; text-decoration:none; transition: background-color 0.3s ease;" onmouseover="this.style.background='#ff00c8'; this.style.boxShadow='0 0 15px #ff00c8';" onmouseout="this.style.background='#00fff7'; this.style.boxShadow='0 0 10px #00fff7';">Get a Free Quote</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</nav>
+      <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="service.html" class="nav-link">Services</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="about.html" class="nav-link">About us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="form.html" class="nav-cta active"><span>Get Quote</span></a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div class="bg-glow"></div>
   <h1>Request a Free Quote</h1>
 
   <form action="https://formspree.io/f/xovwbgqz" method="POST">
+    <div class="form-section">
+      <div class="form-section-title">Client Information</div>
+      
+      <label for="name">Your Full Name</label>
+      <input type="text" id="name" name="Name" required>
 
-    <!-- Client Info -->
-    <label>Your Full Name</label>
-    <input type="text" name="Name" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="Email" required>
 
-    <label>Email Address</label>
-    <input type="email" name="Email" required>
+      <label for="phone">Phone Number</label>
+      <input
+        type="tel"
+        id="phone"
+        name="Phone"
+        required
+        inputmode="numeric"
+        pattern="[0-9]+"
+        title="Please enter numbers only"
+      />
 
-<label for="phone">Phone Number</label>
-<input
-  type="tel"
-  id="phone"
-  name="Phone"
-  required
-  inputmode="numeric"
-  pattern="[0-9]+"
-  title="Please enter numbers only"
-/>
+      <label for="business">Business Name</label>
+      <input type="text" id="business" name="Business Name" required>
+    </div>
 
-    <label>Business Name</label>
-    <input type="text" name="Business Name" required>
+    <div class="form-section">
+      <div class="form-section-title">Website Goals & Type</div>
+      
+      <label for="goal">Main Goal of the Website</label>
+      <textarea id="goal" name="Website Goal" placeholder="Describe what you want to achieve with your website..." required></textarea>
 
-    <!-- Website Goals -->
-    <label>Main Goal of the Website</label>
-    <textarea name="Website Goal" required></textarea>
+      <label for="websiteType">Type of Website</label>
+      <select id="websiteType" name="websiteType" required>
+        <option value="" disabled selected>Select website type</option>
+        <option value="Basic">Basic</option>
+        <option value="Basic Pro">Standard</option>
+        <option value="Standard">Pro</option>
+      </select>
 
-<label for="websiteType">Type of Website</label>
-<select id="websiteType" name="websiteType" required>
-  <option value="" disabled selected>Select type</option>
-  <option value="Basic">Basic</option>
-  <option value="Basic Pro">Standard</option>
-  <option value="Standard">Pro</option>
-</select>
+      <label for="audience">Target Audience</label>
+      <textarea id="audience" name="Target Audience" placeholder="Describe your target customers/visitors..." required></textarea>
+    </div>
 
-    <label>Target Audience</label>
-    <textarea name="Target Audience" required></textarea>
+    <div class="form-section">
+      <div class="form-section-title">Design & Branding</div>
+      
+      <label for="logo">Do you have a logo and brand guidelines?</label>
+      <select id="logo" name="Has Logo">
+        <option value="" disabled selected>Select option</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
 
-    <!-- Design -->
-    <label>Do you have a logo and brand guidelines?</label>
-    <select name="Has Logo">
-      <option>Yes</option>
-      <option>No</option>
-    </select>
+      <label for="design">Preferred Colors or Design Style</label>
+      <textarea id="design" name="Design Preferences" placeholder="Describe your preferred colors, style, or aesthetic..." required></textarea>
 
-    <label>Preferred Colors or Design Style</label>
-    <textarea name="Design Preferences" required></textarea>
+      <label for="inspirations">Websites You Like (Optional)</label>
+      <textarea id="inspirations" name="Design Inspirations" placeholder="Share URLs or describe websites you find inspiring..."></textarea>
+    </div>
 
-    <label>Websites You Like (Optional)</label>
-    <textarea name="Design Inspirations"></textarea>
+    <div class="form-section">
+      <div class="form-section-title">Features & Content</div>
+      
+      <label for="features">What Features Do You Need?</label>
+      <textarea id="features" name="Features" placeholder="e.g., Contact forms, online store, blog, booking system..." required></textarea>
 
-    <!-- Features -->
-    <label>What Features Do You Need?</label>
-    <textarea name="Features" required></textarea>
+      <label for="content">Will you provide the content?</label>
+      <select id="content" name="Content Provided">
+        <option value="" disabled selected>Select option</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
 
-    <label>Will you provide the content?</label>
-    <select name="Content Provided">
-      <option>Yes</option>
-      <option>No</option>
-    </select>
+      <label for="domainHelp">Do you need help with domain or hosting?</label>
+      <select id="domainHelp" name="Domain Hosting Help" required>
+        <option value="" disabled selected>Select option</option>
+        <option value="Yes">Yes (chargeable)</option>
+        <option value="No">No</option>
+      </select>
+    </div>
 
-<label for="domainHelp">Do you need help with domain or hosting?</label>
-<select id="domainHelp" name="Domain Hosting Help" required>
-  <option value="" disabled selected>Choose</option>
-  <option value="Yes">Yes (chargable)</option>
-  <option value="No">No</option>
-</select>
+    <div class="form-section">
+      <div class="form-section-title">Timeline & Budget</div>
+      
+      <label for="launch">Ideal Launch Date</label>
+      <input type="date" id="launch" name="Launch Date" required>
 
-    <!-- Timeline & Budget -->
-    <label>Ideal Launch Date</label>
-    <input type="date" name="Launch Date" required>
+      <label for="budget">Estimated Budget Range</label>
+      <input
+        type="text"
+        id="budget"
+        name="Budget"
+        placeholder="Enter amount in your currency"
+        required
+        title="Please enter numbers only"
+      />
 
-<label for="budget">Estimated Budget Range</label>
-<input
-  type="text"
-  id="budget"
-  name="Budget"
-  required
-  inputmode="numeric"
-  pattern="[0-9]+"
-  title="Please enter numbers only"
-/>
+      <label for="existingWebsite">Do you have an existing website? (link)</label>
+      <input type="text" id="existingWebsite" name="existingWebsite" placeholder="Enter website URL or type 'No'" required />
 
-<label for="existingWebsite">Do you have an existing website? (link)</label>
-<input type="text" id="existingWebsite" name="existingWebsite" required />
-
-    <label>Anything else we should know?</label>
-    <textarea name="Additional Info" required></textarea>
+      <label for="additional">Anything else we should know?</label>
+      <textarea id="additional" name="Additional Info" placeholder="Share any additional requirements, concerns, or questions..." required></textarea>
+    </div>
 
     <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
+    <input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
 
-    <input type="checkbox" name="agree" required style="margin-top: 4px; flex-shrink: 0;">
-    <span>I agree to the <a href="terms.html" target="_blank" style="color: var(--neon2); text-decoration: underline;">Terms and Conditions</a></span>
+    <div class="checkbox-container">
+      <input type="checkbox" id="agree" name="agree" required>
+      <label for="agree" class="checkbox-label">I agree to the <a href="#" target="_blank">Terms and Conditions</a> and consent to processing my personal data for the purpose of this quote request.</label>
+    </div>
 
-    <button type="submit">🚀 Submit Request</button>
+    <button type="submit">
+      🚀 Submit Request
+    </button>
   </form>
-</body>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-
-  const budgetInput = document.getElementById('budget');
-  budgetInput.addEventListener('keydown', function (e) {
-    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
-    
-    if (
-      allowedKeys.includes(e.key) ||
-      (e.ctrlKey || e.metaKey) // Allow copy/paste
-    ) {
-      return;
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navMenu = document.getElementById('navMenu');
+      
+      mobileMenuBtn.classList.toggle('active');
+      navMenu.classList.toggle('open');
     }
 
-    // Prevent non-digit characters
-    if (!/^[0-9]$/.test(e.key)) {
-      e.preventDefault();
-    }
-  });
-
-      const phoneInput = document.getElementById('phone');
-
-  phoneInput.addEventListener('keydown', function (e) {
-    // Allow: Backspace, Delete, Arrow keys, Tab, etc.
-    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
-    
-    if (
-      allowedKeys.includes(e.key) ||
-      (e.ctrlKey || e.metaKey) // Allow copy, paste, etc.
-    ) {
-      return;
-    }
-
-    // Prevent any non-digit character
-    if (!/^[0-9]$/.test(e.key)) {
-      e.preventDefault();
-    }
-  });
-
-  const canvas = document.getElementById("backgroundCanvas");
-  const ctx = canvas.getContext("2d");
-
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
-
-  const particles = [];
-  const particleCount = 70;
-  const maxDistance = 120;
-  const mouse = { x: null, y: null };
-
-  window.addEventListener("resize", () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  window.addEventListener("mousemove", e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-  });
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.radius = Math.random() * 2 + 1;
-      this.vx = (Math.random() - 0.5) * 1.5;
-      this.vy = (Math.random() - 0.5) * 1.5;
-      this.color = "aqua";
-    }
-
-    move() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function connectParticles() {
-    for (let a = 0; a < particleCount; a++) {
-      for (let b = a + 1; b < particleCount; b++) {
-        const dx = particles[a].x - particles[b].x;
-        const dy = particles[a].y - particles[b].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < maxDistance) {
-          const opacity = 1 - distance / maxDistance;
-          ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
-          ctx.lineWidth = 0.8;
-          ctx.beginPath();
-          ctx.moveTo(particles[a].x, particles[a].y);
-          ctx.lineTo(particles[b].x, particles[b].y);
-          ctx.stroke();
+    // Close mobile menu when clicking on a nav link
+    document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+          const navMenu = document.getElementById('navMenu');
+          mobileMenuBtn.classList.remove('active');
+          navMenu.classList.remove('open');
         }
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const nav = document.querySelector('.nav');
+      const navMenu = document.getElementById('navMenu');
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (!nav.contains(e.target) && navMenu.classList.contains('open')) {
+        mobileMenuBtn.classList.remove('active');
+        navMenu.classList.remove('open');
       }
-    }
+    });
 
-    // Mouse connection
-    if (mouse.x && mouse.y) {
-      for (let p of particles) {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < maxDistance) {
-          const opacity = 1 - distance / maxDistance;
-          ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.stroke();
-        }
+    // Close mobile menu on window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.classList.remove('active');
+        navMenu.classList.remove('open');
       }
-    }
-  }
+    });
 
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    for (let p of particles) {
-      p.move();
-      p.draw();
-    }
-    connectParticles();
-    requestAnimationFrame(animate);
-  }
+     // Add some extra interactive magic
+        document.addEventListener('click', (e) => {
+            // Create ripple effect on click
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = e.clientX - 25 + 'px';
+            ripple.style.top = e.clientY - 25 + 'px';
+            ripple.style.width = '50px';
+            ripple.style.height = '50px';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(99, 102, 241, 0.3)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.zIndex = '9999';
+            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
+            
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
 
-  animate();
-</script>
-
+        // Add ripple effect CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+  </script>
+</body>
 </html>
