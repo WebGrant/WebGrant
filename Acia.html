@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies</title>
+  <meta name="description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order online." />
+  <meta name="theme-color" content="#ec4899" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies" />
+  <meta property="og:description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order online." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yalla-Açaí.example/" />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23ec4899'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='72' fill='white' font-family='Inter,system-ui,sans-serif'%3EYalla Açaí!%3C/text%3E%3C/svg%3E" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8D%A6%3C/text%3E%3C/svg%3E">
+  
+  <style>
+    :root {
+      /* Professional Pink & Green Theme */
+      --bg: #fefcff; 
+      --fg: #1a1a1a; 
+      --muted: #64748b; 
+      --primary: #e91e63; /* Professional pink */
+      --primary-light: #f06292;
+      --primary-dark: #c2185b;
+      --secondary: #4caf50; /* Professional green */
+      --secondary-light: #81c784;
+      --secondary-dark: #388e3c;
+      --accent: #00bcd4; /* Complementary cyan */
+      --card: #ffffff; 
+      --card-border: #f1f5f9;
+      --shadow: 0 10px 30px rgba(233,30,99,.08);
+      --shadow-lg: 0 20px 60px rgba(233,30,99,.12);
+      --shadow-green: 0 10px 30px rgba(76,175,80,.08);
+      --radius: 24px;
+      --max: 1200px;
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+    }
+
+    body {
+      background: linear-gradient(135deg, #fef7ff 0%, #f0fdf4 30%, #fff1f2 70%, #f0fdf4 100%);
+      color: var(--fg); 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container { 
+      max-width: var(--max); 
+      margin: 0 auto; 
+      padding: 0 20px; 
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+      40%, 43% { transform: translateY(-8px); }
+      70% { transform: translateY(-4px); }
+    }
+
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+    .animate-scale-in { animation: scaleIn 0.6s ease-out; }
+    .animate-slide-left { animation: slideInLeft 0.8s ease-out; }
+    .animate-slide-right { animation: slideInRight 0.8s ease-out; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-bounce { animation: bounce 2s infinite; }
+
+    /* Parallax Elements */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      z-index: -1;
+      background: linear-gradient(135deg, #fef7ff 0%, #f0fdf4 30%, #fff1f2 70%, #f0fdf4 100%);
+    }
+
+    .parallax-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+
+    .shape-1 {
+      width: 200px;
+      height: 200px;
+      background: var(--primary);
+      top: 10%;
+      left: 10%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      width: 150px;
+      height: 150px;
+      background: var(--secondary);
+      top: 60%;
+      right: 10%;
+      animation: float 3s ease-in-out infinite reverse;
+    }
+
+    .shape-3 {
+      width: 100px;
+      height: 100px;
+      background: var(--accent);
+      top: 30%;
+      right: 30%;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; 
+      align-items: center; 
+      gap: 12px; 
+      padding: 16px 24px; 
+      border-radius: 999px; 
+      font-weight: 700; 
+      letter-spacing: 0.5px; 
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /*SUBSCRIBE BUTTON RIGHT HERE*/
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    /*TILL HERE*/
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--fg);
+      border: 2px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(254, 247, 255, 0.8);
+      border-bottom: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: var(--fg);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+      background: rgba(236, 72, 153, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--fg), var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      padding: 8px 16px;
+      background: rgba(123, 10, 48, 0.1);
+      border: 1px solid rgba(233, 30, 99, 0.2);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .pill-green {
+      padding: 8px 16px;
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.2);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--accent);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--fg), var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-title p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Menu Images */
+    .menu-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Contact Form */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      font-size: 16px;
+      background: var(--card);
+      color: var(--fg);
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--card-border);
+      padding: 60px 0 40px;
+      margin-top: 80px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+        text-align: center;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .pills {
+        justify-content: center;
+      }
+    }
+
+    /* Intersection Observer Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Reviews Slider Styles */
+.reviews-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.review-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
+}
+
+.reviews-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  color: var(--primary);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.reviews-slider-arrow.left { left: 8px; }
+.reviews-slider-arrow.right { right: 8px; }
+
+.reviews-slider-arrow:hover {
+  background: var(--primary);
+  color: #fff;
+}
+  </style>
+
+  <!-- Schema.org: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Yalla Açai!",
+    "servesCuisine": ["Açaí Bowls", "Smoothies", "Pancake Bites", "Cafe"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "215–221 Victoria Road",
+      "addressLocality": "Rydalmere",
+      "addressRegion": "NSW",
+      "postalCode": "2116",
+      "addressCountry": "AU"
+    },
+    "areaServed": "Rydalmere & Western Sydney",
+    "url": "https://yalla-acai.example/",
+    "telephone": "+61 400 000 000",
+    "priceRange": "$$",
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"22:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"10:00","closes":"23:30"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"23:00"}
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax-bg" id="parallax-bg">
+    <div class="parallax-shape shape-1"></div>
+    <div class="parallax-shape shape-2"></div>
+    <div class="parallax-shape shape-3"></div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">
+        <div class="logo-icon">🥣</div>
+        <span>Yalla Açaí!</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#order">Order</a>
+        <a class="nav-link" href="#visit">Visit</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="animate-slide-left">
+          <div class="pill animate-bounce">Rydalmere • Western Sydney</div>
+          <h1 class="animate-fade-in-up">Premium Açaí Bowls & Pancake Bites — made fresh daily.</h1>
+          <p class="animate-fade-in-up">
+            Welcome to <strong>Yalla Açai!</strong> — where bold flavours, fresh ingredients and good vibes meet. 
+            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. Order online or visit our Rydalmere store.
+          </p>
+          <div class="pills animate-fade-in">
+            <span class="pill">100% Premium Açaí</span>
+            <span class="pill">Custom Toppings</span>
+            <span class="pill">Vegan Options</span>
+            <span class="pill">Gluten-Free Friendly</span>
+          </div>
+          <div class="hero-ctas animate-scale-in">
+            <a class="btn btn-primary" href="#order">Order Online ▸</a>
+            <a class="btn btn-secondary" href="#menu">View Menu</a>
+          </div>
+          <div class="trust animate-fade-in">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <small>Locals love us for flavor, portion size and friendly service.</small>
+          </div>
+        </div>
+        
+        <div class="hero-card animate-slide-right animate-float">
+          <div class="hero-image">🥣</div>
+          <div>
+            <strong>Signature Bowl:</strong> Açaí base • Fresh Fruits • Granola • Honey drizzle • Coconut flakes
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Props -->
+    <section>
+      <div class="grid reveal">
+        <article class="card">
+          <div class="pill">Quality First</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Premium Ingredients</h3>
+          <p style="color: var(--muted);">We use high-grade dairy and fresh daily ingredients so every scoop hits that perfect creamy, rich balance.</p>
+        </article>
+        <article class="card">
+          <div class="pill-green">Built Your Way</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Customize Everything</h3>
+          <p style="color: var(--muted);">Pick your flavors, load up the toppings and finish with your favorite sauce. Go classic—or go wild.</p>
+        </article>
+        <article class="card">
+          <div class="pill">Fast & Friendly</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Ready When You Are</h3>
+          <p style="color: var(--muted);">Order ahead for pickup, or swing by and we'll scoop it up fresh. Good vibes guaranteed.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section id="menu">
+      <div class="section-title reveal">
+        <h2>Our Menu Highlights</h2>
+        <p>Delicious açaí bowls, smoothies, and pancake bites made fresh with premium ingredients.</p>
+      </div>
+      
+      <div class="two-col">
+        <div class="card reveal-left">
+          <div class="pill">Best Seller</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">Customizable Açaí Bowls</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Choose your açaí base and load up on fresh fruits, granola, honey, and other toppings. Add-ons available.</p>
+          <div class="menu-image">🥣</div>
+        </div>
+        
+        <div class="card reveal-right">
+          <div class="pill">Crowd Favourite</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">Signature Pancake Bites</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Fluffy pancake bites topped with fruits, chocolate, nuts, or Nutella. Perfect for sharing.</p>
+          <div class="menu-image">🥞</div>
+        </div>
+      </div>
+      
+<div class="grid reveal" style="margin-top: 48px;">
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥣</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Custom Açaí Bowls</h4>
+    <p style="font-size: 14px; color: var(--muted);">Choose your açaí base and load up on fresh fruits, granola, honey, and other toppings. Add-ons available.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥤</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Smoothies</h4>
+    <p style="font-size: 14px; color: var(--muted);">Blended açaí & fruit drinks, fresh and refreshing.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥞</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Signature Pancake Bites</h4>
+    <p style="font-size: 14px; color: var(--muted);">Fluffy pancake bites topped with fruits, chocolate, nuts, or Nutella.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🌱</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Vegan Options</h4>
+    <p style="font-size: 14px; color: var(--muted);">Coconut, Oat & Almond based açaí bowls and smoothies for vegan-friendly choices.</p>
+  </div>
+</div>
+    </section>
+
+    <!-- Order CTA -->
+    <section id="order">
+      <div class="two-col">
+        <div class="card reveal-left">
+          <h2 style="font-size: 32px; margin-bottom: 16px;">Order Online or Pickup</h2>
+          <p style="color: var(--muted); margin-bottom: 24px;">Order now for pickup or plan ahead. Get your favorite açaí bowls, smoothies, and pancake bites quickly and easily.</p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="#">Start Order ▸</a>
+            <a class="btn btn-secondary" href="#contact">Call Store</a>
+          </div>
+        </div>
+        
+<div class="reviews-slider" id="reviews-slider">
+  <button class="slider-arrow left" id="prev-slide">‹</button>
+  <div class="reviews-slider" id="reviews-slider">
+  <button class="reviews-slider-arrow left" type="button" aria-label="Previous review">&#10094;</button>
+
+  <div class="reviews-slider-track">
+    <!-- Review 1 -->
+    <div class="review-slide">
+      <h3>"Yalla Açai is all round perfect!"</h3>
+      <p>Great açaí, great people, great service, and convenient location. Must try!</p>
+      <div><span>★★★★★</span> Christian Zeater</div>
+    </div>
+    <!-- Review 2 -->
+    <div class="review-slide">
+      <h3>"The best açaí bowl I've had in Sydney!"</h3>
+      <p>Super fresh, generous toppings, and friendly staff. Highly recommend!</p>
+      <div><span>★★★★★</span> Alicia Tran</div>
+    </div>
+    <!-- Review 3 -->
+    <div class="review-slide">
+      <h3>"Absolutely delicious and great value."</h3>
+      <p>My go-to spot for a healthy treat. The pancake bites are a must-try!</p>
+      <div><span>★★★★★</span> Jorge Mendez</div>
+    </div>
+  </div>
+
+  <button class="reviews-slider-arrow right" type="button" aria-label="Next review">&#10095;</button>
+</div>
+  </div>
+
+    </section>
+
+    <!-- Location -->
+    <section id="visit">
+      <div class="two-col">
+        <div class="card reveal-left">
+          <div class="pill">Find Us</div>
+          <h2 style="font-size: 28px; margin: 16px 0;">Rydalmere Store</h2>
+          <p style="color: var(--muted); margin-bottom: 24px;">215–221 Victoria Road, Rydalmere NSW 2116</p>
+          
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span>Mon–Thu:</span>
+              <span>10:00–22:00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span>Fri–Sat:</span>
+              <span>10:00–23:30</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Sun:</span>
+              <span>12:00–23:00</span>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-secondary" href="https://maps.apple.com/?q=215-221%20Victoria%20Road%20Rydalmere%20NSW%202116" target="_blank">Open in Maps</a>
+            <a class="btn btn-secondary" href="#">Get Directions</a>
+          </div>
+        </div>
+        
+        <div class="card reveal-right" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);">
+          <div style="text-align: center;">
+            <div style="font-size: 64px; margin-bottom: 16px;">📍</div>
+            <div style="font-weight: 700; font-size: 20px; margin-bottom: 8px;">Interactive Map</div>
+            <small style="color: var(--muted);">Embed your Google Map here</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="grid reveal">
+        <div class="card">
+          <div class="pill">Say Hello</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Contact Us</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Questions, catering or collaborations? We'd love to hear from you.</p>
+          
+          <div style="margin-bottom: 24px;">
+            <p style="margin-bottom: 8px;"><strong>Phone:</strong> <a href="tel:+61400000000" style="color: var(--primary);">+61 400 000 000</a></p>
+            <p><strong>Email:</strong> <a href="mailto:yallaacaisydney@gmail.com" style="color: var(--primary);">yallaacaisydney@gmail.com</a></p>
+          </div>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-secondary" href="#">Instagram</a>
+            <a class="btn btn-secondary" href="#">TikTok</a>
+          </div>
+        </div>
+        
+        <form class="card" onsubmit="handleSubmit(event)">
+          <div class="pill">Stay in the Loop</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Join the Açaí List</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Get promos, new flavors and giveaways, straight to your inbox.</p>
+          
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input id="email" type="email" required placeholder="you@example.com" />
+          </div>
+          
+          <button class="btn btn-primary" type="submit" style="width: 100%;">Subscribe ▸</button>
+          
+          <p style="font-size: 12px; color: var(--muted); margin-top: 12px;">We respect your privacy. Unsubscribe anytime.</p>
+        </form>
+        
+        <div class="card">
+          <div class="pill">Work With Us</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Careers</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Join a growing team that's passionate about flavor and community.</p>
+          <a class="btn btn-secondary" href="#">View Open Roles</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-icon">🥣</div>
+            <span>Yalla Açaí!</span>
+          </div>
+          <small style="color: var(--muted);">© <span id="year"></span> Yalla Açaí! All rights reserved.</small>
+        </div>
+        <div style="text-align: right;">
+          <div style="margin-bottom: 12px;">
+            <a href="#" style="color: var(--muted); text-decoration: none; font-size: 14px;">Privacy</a>
+            <span style="color: var(--muted); margin: 0 8px;">•</span>
+            <a href="#" style="color: var(--muted); text-decoration: none; font-size: 14px;">Terms</a>
+            <span style="color: var(--muted); margin: 0 8px;">•</span>
+            <span style="color: var(--muted); font-size: 14px;">ABN 00 000 000 000</span>
+          </div>
+          <small style="color: var(--muted);">Site by WebGrant</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Parallax effect
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+      const parallaxBg = document.getElementById('parallax-bg');
+      const shapes = document.querySelectorAll('.parallax-shape');
+      
+      // Move background slower than scroll
+      parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+      
+      // Move shapes at different speeds
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.3;
+        shape.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    }
+
+    // Header background on scroll
+    function updateHeader() {
+      const header = document.querySelector('header');
+      const scrolled = window.pageYOffset;
+      
+      if (scrolled > 100) {
+        header.style.background = 'rgba(254, 247, 255, 0.95)';
+        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+      } else {
+        header.style.background = 'rgba(254, 247, 255, 0.8)';
+        header.style.boxShadow = 'none';
+      }
+    }
+
+    // Intersection Observer for reveal animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      if (email) {
+        alert('Thanks for subscribing! We\'ll keep you updated with our latest flavors and offers.');
+        document.getElementById('email').value = '';
+      }
+    }
+
+    // Throttled scroll listener
+    let ticking = false;
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateParallax();
+          updateHeader();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('load', () => {
+      updateParallax();
+      updateHeader();
+    });
+
+    // Add staggered animations to grid items
+    function addStaggeredAnimations() {
+      const gridItems = document.querySelectorAll('.grid .card');
+      gridItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+      });
+    }
+
+    // Initialize
+    addStaggeredAnimations();
+
+        // Reviews Slider
+    (function(){
+  const slider = document.getElementById('reviews-slider');
+  if(!slider) return;
+
+  const track = slider.querySelector('.reviews-slider-track');
+  const slides = Array.from(track.children);
+  const slideCount = slides.length;
+  let current = 0;
+  let timer = null;
+
+  const leftBtn = slider.querySelector('.reviews-slider-arrow.left');
+  const rightBtn = slider.querySelector('.reviews-slider-arrow.right');
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slideCount;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slideCount) % slideCount;
+    updateSlider();
+  }
+
+  function startAutoSlide() {
+    timer = setInterval(nextSlide, 7000); // auto-slide every 2s
+  }
+
+  function stopAutoSlide() {
+    if(timer) clearInterval(timer);
+  }
+
+  leftBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
+
+  rightBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
+
+  // Optional: pause auto-slide on hover
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
+
+  window.addEventListener('resize', updateSlider);
+
+  // Initialize
+  updateSlider();
+  startAutoSlide();
+})();
+  </script>
+</body>
+</html>
