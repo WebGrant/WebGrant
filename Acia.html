@@ -666,12 +666,12 @@
 .reviews-slider {
   position: relative;
   overflow: hidden;
+  padding: 0 40px; /* Add padding to prevent arrows from overlapping slides */
 }
 
 .reviews-slider-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  width: 100%;
 }
 
 .review-slide {
@@ -684,11 +684,10 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
   z-index: 10;
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--card-border);
   background: var(--card);
   color: var(--primary);
   font-size: 24px;
@@ -696,11 +695,10 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0.9;
 }
 
-.reviews-slider-arrow.left { left: 8px; }
-.reviews-slider-arrow.right { right: 8px; }
+.reviews-slider-arrow.left { left: 0; }
+.reviews-slider-arrow.right { right: 0; }
 
 .reviews-slider-arrow:hover {
   background: var(--primary);
@@ -906,11 +904,10 @@
       <p>My go-to spot for a healthy treat. The pancake bites are a must-try!</p>
       <div><span>★★★★★</span> Jorge Mendez</div>
     </div>
-  </div>
+    </div>
 
   <button class="reviews-slider-arrow right" type="button" aria-label="Next review">&#10095;</button>
 </div>
-  </div>
 
     </section>
 
