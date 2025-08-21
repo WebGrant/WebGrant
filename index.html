@@ -1,2172 +1,1269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebGrant - Revolutionary Web Development Experience</title>
-    <meta name="description" content="WebGrant: Mind-blowing web experiences that push boundaries and captivate audiences">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
-            --pink: #ec4899;
-            --orange: #f97316;
-            --green: #10b981;
-            --text: #0f172a;
-            --text-light: #64748b;
-            --bg: #0a0a0a;
-            --surface: #1a1a1a;
-            --surface-light: #2a2a2a;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #ffffff;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 50%);
-            animation: morphBackground 20s ease-in-out infinite;
-        }
-
-        @keyframes morphBackground {
-            0%, 100% { filter: blur(40px) brightness(0.3); }
-            25% { filter: blur(60px) brightness(0.5) hue-rotate(90deg); }
-            50% { filter: blur(80px) brightness(0.4) hue-rotate(180deg); }
-            75% { filter: blur(60px) brightness(0.6) hue-rotate(270deg); }
-        }
-
-        /* Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Glassmorphism Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 26, 26, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-.nav {
-  display: flex;
-  align-items: center;          /* keeps logo + links aligned vertically */
-  justify-content: space-between; /* logo on left, links on right */
-  padding: 1rem 2rem;
-  width: 100%;                  /* full width */
-  margin: 0;                    /* no auto centering */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 0;             /* so it touches edges */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;       /* ensures padding doesn’t break layout */
-}
-
-    /* Active link styles */
-    .nav-link.active {
-      color: #ff00c8;
-      text-shadow: 0 0 10px #ff00c8;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies</title>
+  <meta name="description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order from Uber Eats." />
+  <meta name="theme-color" content="#ec4899" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies" />
+  <meta property="og:description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order from Uber Eats." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yalla-Açaí.example/" />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23ec4899'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='72' fill='white' font-family='Inter,system-ui,sans-serif'%3EYalla Açaí!%3C/text%3E%3C/svg%3E" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8D%A6%3C/text%3E%3C/svg%3E">
+  
+  <style>
+    :root {
+      /* Dark Pink, Purple & Green Theme */
+      --bg: #181024;
+      --fg: #fce7f3;
+      --muted: #b48fc2;
+      --primary: #ec4899; /* Vibrant pink */
+      --primary-light: #f472b6;
+      --primary-dark: #a21caf;
+      --secondary: #22c55e; /* Vibrant green */
+      --secondary-light: #86efac;
+      --secondary-dark: #166534;
+      --accent: #a78bfa; /* Soft purple */
+      --card: #231638;
+      --card-border: #3b2250;
+      --shadow: 0 10px 30px rgba(236,72,153,.09);
+      --shadow-lg: 0 20px 60px rgba(168,139,250,0.14);
+      --shadow-green: 0 10px 30px rgba(34,197,94,.10);
+      --radius: 24px;
+      --max: 1200px;
     }
 
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0px;
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+    }
+
+    body {
+      background: linear-gradient(135deg, #181024 0%, #25173a 50%, #2e1847 100%);
+      color: var(--fg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container { 
+      max-width: var(--max); 
+      margin: 0 auto; 
+      padding: 0 20px; 
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+      40%, 43% { transform: translateY(-8px); }
+      70% { transform: translateY(-4px); }
+    }
+
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+    .animate-scale-in { animation: scaleIn 0.6s ease-out; }
+    .animate-slide-left { animation: slideInLeft 0.8s ease-out; }
+    .animate-slide-right { animation: slideInRight 0.8s ease-out; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-bounce { animation: bounce 2s infinite; }
+
+    /* Parallax Elements */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #00fff7, #ff00c8);
-      border-radius: 1px;
+      height: 120%;
+      z-index: -1;
+      background: linear-gradient(135deg, #181024 0%, #25173a 50%, #2e1847 100%);
     }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05) rotate(-2deg);
-}
-
-         .logo-img {
-    height: 48px;
-    width: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    filter: drop-shadow(0 0 10px #00fff7);
-    transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-
-   .logo-img:hover {
-      transform: scale(1.2) rotate(360deg);
-      filter: drop-shadow(0 0 40px var(--accent2)) brightness(1.8);
+    .parallax-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
     }
 
-.logo-container {
-    display: flex;
-    align-items: center;   /* vertically align image + text */
-    gap: 10px;             /* space between logo image and text */
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-}
-
-/* Nav menu */
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    align-items: center;
-}
-
-/* Links */
-.nav-link {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Shiny hover swipe */
-.nav-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50px;
-    padding: 2px; /* thickness of border */
-    background: linear-gradient(
-        45deg,
-        var(--primary),
-        var(--secondary),
-        #ff00ff,
-        #00fff7,
-        var(--primary)
-    );
-    background-size: 300% 300%;
-    animation: gradient-move 4s linear infinite;
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude; 
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.nav-link:hover::before {
-    opacity: 1;
-}
-
-.nav-link {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #fff;
-    transform: translateY(-2px) scale(1.05);
-    text-shadow: 0 0 12px rgba(255,255,255,0.6);
-}
-
-/* Animate gradient */
-@keyframes gradient-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Fancy CTA button */
-/* Fancy CTA Button */
-.nav-cta {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #ffffff !important;
-    padding: 0.75rem 1.7rem;
-    border-radius: 50px;
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1;
-    animation: pulse-glow 2.5s infinite ease-in-out;
-}
-
-/* Animated glowing gradient border */
-.nav-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50px;
-    padding: 3px;
-    background: linear-gradient(
-        45deg,
-        var(--primary),
-        var(--secondary),
-        #ff00ff,
-        #00fff7,
-        var(--primary)
-    );
-    background-size: 400% 400%;
-    animation: gradient-move 6s linear infinite;
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude; 
-    opacity: 0.6; /* visible glow even when idle */
-    transition: opacity 0.4s ease;
-    z-index: 0;
-}
-
-/* Hover effect intensifies glow */
-.nav-cta:hover::before {
-    opacity: 1;
-}
-
-.nav-cta:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
-}
-
-/* Keep text above the gradient */
-.nav-cta span {
-    position: relative;
-    z-index: 2;
-}
-
-/* Gradient movement */
-@keyframes gradient-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Pulse breathing glow */
-@keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
-    50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
-}
-
-        /* Hero Section with 3D Effects */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 10;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-            line-height: 1.1;
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
-            100% { text-shadow: 0 0 40px rgba(139, 92, 246, 0.8), 0 0 60px rgba(6, 182, 212, 0.4); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.4rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 3rem;
-            animation: slideUp 1s ease-out 0.5s both;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideUp 1s ease-out 1s both;
-        }
-
-        .hero-cta {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-        }
-
-        .hero-cta.primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #ffffff;
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
-        }
-
-        .hero-cta.secondary {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.4);
-        }
-
-        .hero-cta.secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Floating 3D Elements */
-        .floating-element {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.6;
-            animation: floatMove 15s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), transparent);
-            border-radius: 50%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            top: 60%;
-            right: 15%;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--secondary), transparent);
-            border-radius: 20%;
-            animation-delay: 3s;
-        }
-
-        .floating-element:nth-child(3) {
-            bottom: 20%;
-            left: 20%;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent), transparent);
-            border-radius: 30%;
-            animation-delay: 6s;
-        }
-
-        @keyframes floatMove {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(-10px) rotate(180deg); }
-            75% { transform: translateY(-30px) rotate(270deg); }
-        }
-
-        /* Stats Section with Morphing Cards */
-        .stats-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--surface), rgba(26, 26, 26, 0.95));
-            position: relative;
-        }
-
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            cursor: pointer;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            border-radius: 20px;
-        }
-
-        .stat-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) rotateX(10deg);
-            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.2);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Services with Liquid Morphing */
-        .services-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, var(--bg), var(--surface));
-        }
-
-        .services-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, #ffffff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .service-card {
-            background: rgba(194, 156, 156, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: all 0.6s ease;
-            border-radius: 25px;
-            transform: scale(0.8);
-        }
-
-        .service-card:hover::before {
-            opacity: 0.05;
-            transform: scale(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffffff;
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Interactive Portfolio Gallery */
-        .portfolio-section {
-            padding: 8rem 2rem;
-            background: var(--surface);
-        }
-
-        .portfolio-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .portfolio-item {
-            aspect-ratio: 16/10;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.6s ease;
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.03) rotateY(5deg);
-        }
-
-        .portfolio-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            transition: all 0.6s ease;
-        }
-        
-        .portfolio-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            color: #ffffff;
-            transform: translateY(50%);
-            transition: transform 0.6s ease;
-        }
-
-        .portfolio-item:hover .portfolio-content {
-            transform: translateY(0);
-        }
-
-        .portfolio-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-desc {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Testimonials Carousel */
-        .testimonials-section {
-            padding: 8rem 2rem;
-            background: var(--bg);
-        }
-
-        .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .testimonial-carousel {
-            position: relative;
-            margin-top: 4rem;
-        }
-
-        .testimonial {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 4rem;
-            margin: 0 2rem;
-            position: relative;
-        }
-
-        .testimonial-text {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .testimonial-info h4 {
-            color: #ffffff;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .testimonial-info p {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* CTA Section with Animated Background */
-        .cta-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(20px) translateY(20px); }
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 2rem;
-        }
-
-        .cta-text {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            padding: 1.2rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-btn.primary {
-            background: #ffffff;
-            color: var(--primary);
-            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-btn.secondary {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 8rem 2rem;
-            background: var(--surface);
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin: 0 auto 1.5rem;
-        }
-
-        .contact-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
-        }
-
-        .contact-info a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: var(--secondary);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 3rem 2rem;
-            background: var(--bg);
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-text {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-btn span {
-            width: 24px;
-            height: 2px;
-            background: #ffffff;
-            transition: all 0.3s ease;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100%);
-    width: 90%;
-    max-width: 320px;
-    background: rgba(26, 26, 26, 0.95);
-    backdrop-filter: blur(25px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: none;
-    border-radius: 0 0 25px 25px;
-    display: flex; /* Added - needed for flex styles */
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem 1.5rem;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease, 
-                visibility 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 1000; /* Ensure menu appears above other content */
-  }
-
-  .nav-menu::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      rgba(255, 255, 255, 0.02) 50%,
-      rgba(0, 0, 0, 0.1) 100%);
-    border-radius: 0 0 25px 25px;
-    pointer-events: none;
-  }
-
-  .nav-menu.open {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .nav-menu li {
-    font-size: 1.1rem;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-
-  .nav-menu.open li {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
-  .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
-  .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
-  .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
-  .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
-  .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
-
-  .nav-link, .nav-cta {
-    width: 100%;
-    display: block;
-    text-align: center;
-    padding: 0.8rem 1rem;
-    position: relative;
-    z-index: 10;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .nav-link:hover, .nav-cta:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  .header {
-    padding: 0 1rem;
-  }
-
-  /* Overlay for mobile menu */
-  .nav-menu.open::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(2px);
-    z-index: -1; /* keeps it behind menu but above page */
-    animation: fadeIn 0.3s ease;
-  }
-
-  .hero-title {
-    margin-top: 100px; /* adjust until it clears the navbar */
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-cta-group {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-cta {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cta-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-        /* Scroll Animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-/* Base chat styles (desktop first) */
-#chatBox {
-    border: 2px solid #1e3a5f;
-    border-radius: 15px;
-    padding: 15px;
-    width: 90%;
-    height: 550px;
-    overflow-y: auto;
-    margin-top: 30px;
-    background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
-    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
-                inset 4px 4px 10px rgba(0, 0, 0, 0.9),
-                0 8px 20px rgba(0, 40, 90, 0.4);
-}
-
-#userInput {
-    margin-top: 30px;
-    width: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #111;
-    display: none;
-    color: #ddd;
-    background: linear-gradient(145deg, #1a1a1a, #111);
-    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05),
-                inset 2px 2px 6px rgba(0, 0, 0, 0.8);
-}
-
-button {
-    padding: 10px 15px;
-    border-radius: 8px;
-    background: linear-gradient(145deg, #25395a, #1b2b45);
-    color: #ddd;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    margin: 5px 5px 5px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6),
-                inset -2px -2px 5px rgba(255, 255, 255, 0.05),
-                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7),
-                inset -2px -2px 4px rgba(255, 255, 255, 0.03),
-                inset 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
-
-.user {
-    color: #03abb7;
-    margin: 5px 0;
-    font-weight: bold;
-    text-align: right;
-    background: rgba(0, 170, 187, 0.2);
-    padding: 8px 12px;
-    border-radius: 12px;
-    float: right;
-    clear: both;
-}
-
-.ai {
-    color: #aaa4a4;
-    margin: 5px 0;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 12px;
-    border-radius: 12px;
-    float: left;
-    clear: both;
-}
-
-#chatPanel {
-    position: fixed;
-    top: 80px;
-    right: -600px;
-    width: 500px;
-    height: 100%;
-    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    box-shadow: -8px 0 15px rgba(0, 40, 90, 0.4),
-                inset -5px -5px 15px rgba(255, 255, 255, 0.02),
-                inset 5px 5px 15px rgba(0, 0, 0, 0.9);
-    transition: right 0.3s ease;
-    padding: 20px;
-    z-index: 1000;
-    border-radius: 15px 0 0 15px;
-}
-
-/* Mobile responsiveness */
-@media screen and (max-width: 768px) {
-    #chatBox {
-        width: 95%;
-        height: 400px;
-        padding: 10px;
+    .shape-1 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at 40% 60%, #ec4899 70%, transparent 100%);
+      top: 10%;
+      left: 10%;
+      animation: float 4s ease-in-out infinite;
+      filter: blur(2px);
     }
 
-    #userInput {
-        width: 90%;
-        margin-top: 20px;
-        padding: 8px;
+    .shape-2 {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle at 60% 40%, #22c55e 70%, transparent 100%);
+      top: 60%;
+      right: 10%;
+      animation: float 3s ease-in-out infinite reverse;
+      filter: blur(2px);
     }
 
-    #chatPanel {
-        width: 100%;
-        right: -100%;
-        top: 60px;
+    .shape-3 {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at 60% 40%, #a78bfa 70%, transparent 100%);
+      top: 30%;
+      right: 30%;
+      animation: float 5s ease-in-out infinite;
+      filter: blur(1px);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; 
+      align-items: center; 
+      gap: 12px; 
+      padding: 16px 24px; 
+      border-radius: 999px; 
+      font-weight: 700; 
+      letter-spacing: 0.5px; 
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /*SUBSCRIBE BUTTON RIGHT HERE*/
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #221b32, #2d2143 80%);
+      color: var(--accent);
+      border: 2px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      color: var(--primary);
+      background: linear-gradient(135deg, #291b32, #431d4c 100%);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(30, 17, 47, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: var(--primary-light);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Hamburger menu base styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 1100;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .hamburger:focus {
+      outline: 2px solid var(--primary);
+    }
+    .hamburger-bar {
+      width: 28px;
+      height: 4px;
+      background: var(--primary);
+      margin: 2px 0;       /*Change this */
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      display: block;
+    }
+    /* Hamburger open/close animation */
+    .hamburger.active .bar1 {
+      transform: rotate(45deg) translate(5px, 6px);
+    }
+    .hamburger.active .bar2 {
+      opacity: 0;
+    }
+    .hamburger.active .bar3 {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .nav-link {
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+      background: rgba(236, 72, 153, 0.12);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--primary), var(--accent), var(--fg));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      padding: 8px 16px;
+      background: rgba(236, 72, 153, 0.18);
+      border: 1px solid rgba(236, 72, 153, 0.32);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 3px 0 rgba(236,72,153,0.07);
+    }
+
+    .pill-green {
+      padding: 8px 16px;
+      background: rgba(34, 197, 94, 0.13);
+      border: 1px solid rgba(34, 197, 94, 0.24);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 3px 0 rgba(34,197,94,0.07);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--accent);
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #231638 80%, #2e1847 100%);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      color: var(--fg);
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #3b2250 0%, #a21caf 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 2px 18px 0 rgba(236,72,153,0.20);
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    /* Cards */
+    .card {
+      background: linear-gradient(135deg, #231638 80%, #2e1847 100%);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      color: var(--fg);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--accent), var(--fg));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-title p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Menu Images */
+    .menu-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #a21caf 0%, #3b2250 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 2px 10px 0 rgba(236,72,153,0.12);
+    }
+
+    /* Contact Form */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      font-size: 16px;
+      background: #2e1847;
+      color: var(--fg);
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.16);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #1b122a 80%, #2e1847 100%);
+      border-top: 1px solid var(--card-border);
+      padding: 60px 0 40px;
+      margin-top: 80px;
+      color: var(--muted);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+        text-align: center;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .logo {
+        padding-left: 12px;
+        margin-left: 4px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: rgba(27, 18, 42, 0.98);
+        border-bottom-left-radius: 0 0 18px 18px;
+        border-bottom-right-radius: 0 0 18px 18px;
+        box-shadow: 0 8px 24px rgba(236,72,153,0.07);
+        gap: 0;
+        padding: 0 0 12px 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+      }
+      .nav-links.open {
+        max-height: 500px;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-link {
+        padding: 14px 24px;
         border-radius: 0;
-        padding: 15px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--card-border);
+      }
+      .nav-link:last-child {
+        border-bottom: none;
+      }
+      .hero-ctas {
+        justify-content: center;
+      }
+      .pills {
+        justify-content: center;
+      }
     }
 
-    button {
-        padding: 8px 12px;
-        margin: 5px 3px 5px 0;
+    /* Intersection Observer Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
-}
 
-        h10 {
-            color: #ccc;
-            font-size: 30px;
-            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
-                         -1px -1px 4px rgba(0, 0, 0, 0.8);
-        }
-
-
-        .portfolio-1 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('demo2.jpg') center/cover no-repeat;
-}
-
-.portfolio-2 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('SydneyDine.jpg') center/cover no-repeat;
-}
-
-.portfolio-3 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('demo3.jpg') center/cover no-repeat;
-}
-
-.portfolio-4 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('photo1.jpg') center/cover no-repeat;
-}
-
-.portfolio-5 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('cleaninghome.jpg') center/cover no-repeat;
-}
-
-.portfolio-6 .portfolio-bg {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('FrostAir1.jpg') center/cover no-repeat;
-}
-
-    </style>
-</head>
-<body>
-<!-- Animated Background -->
-    <div class="animated-bg"></div>
-
-    <!-- Floating Particles -->
-    <div class="particles"></div>
-
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-<div class="logo-container">
-  <img src="Logo.png" alt="Logo" class="logo-img">
-  <span class="logo">WebGrant</span>
-</div>
-
-            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="service.html" class="nav-link">Services</a></li>
-                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-                <li><a href="about.html" class="nav-link">About us</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="form.html" class="nav-cta"><span>Get Quote</span></a></li>
-            </ul>
-        </nav>
-    </header>
-
- <div id="chatPanel">
-    <h10>Chat with our AI Assistant</h10>
-    <div id="chatBox">
-        <p>Please select a question to begin:</p>
-        <button onclick="selectOption('what services do you offer?')">What services do you offer?</button>
-        <button onclick="selectOption('which package is best for my business?')">Which package is best for my business?</button>
-        <button onclick="selectOption('contact a team member')">Contact a team member</button>
-    </div>
-    <input type="text" id="userInput" placeholder="Type your message..." />
-    <button onclick="chat()" id="sendButton" style="display:none;">Send</button>
-</div>
-
-<button id="openChatBtn" style="position: fixed; right: 20px; bottom: 20px; border-radius: 50%; width: 60px; height: 60px; background: #4A90E2; color: white; font-size: 24px; border: none; cursor: pointer; z-index: 1001;">💬</button>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-
-        <div class="hero-content">
-            <h1 class="hero-title">WebGrant</h1>
-            <p class="hero-subtitle">Revolutionary web experiences that push boundaries, captivate audiences, and transform businesses into digital powerhouses.</p>
-            <div class="hero-cta-group">
-                <a href="#contact" class="hero-cta primary">Start Your Journey</a>
-                <a href="#services" class="hero-cta secondary">Explore Magic</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-
-
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="services-container">
-            <h2 class="section-title scroll-reveal">Revolutionary Services</h2>
-            
-            <div class="services-grid">
-                <div class="service-card scroll-reveal">
-                    <div class="service-icon">🚀</div>
-                    <h3 class="service-title">Mind-Bending Designs</h3>
-                    <p class="service-description">Prepare for visual experiences that defy expectations. We craft stunning, interactive designs that make competitors weep and customers convert instantly.</p>
-                </div>
-                
-                <div class="service-card scroll-reveal">
-                    <div class="service-icon">⚡</div>
-                    <h3 class="service-title">Lightning Performance</h3>
-                    <p class="service-description">Websites so fast they break the speed of light. Our optimization wizardry ensures your site loads before users even think about clicking.</p>
-                </div>
-                
-                <div class="service-card scroll-reveal">
-                    <div class="service-icon">🎯</div>
-                    <h3 class="service-title">Conversion Alchemy</h3>
-                    <p class="service-description">We transform browsers into buyers with psychological design triggers and persuasion techniques that feel like pure magic.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio-section">
-        <div class="portfolio-container">
-            <h2 class="section-title scroll-reveal">Portfolio of Wonders</h2>
-            
-            <div class="portfolio-grid">
-   <div class="portfolio-item portfolio-1 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">La Tavola Italiana</h3>
-        <p class="portfolio-desc">Demonstration of a Standard website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</p>
-    </div>
-</div>
-
-<div class="portfolio-item portfolio-2 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">SydneyDine</h3>
-        <p class="portfolio-desc">Showcase of a Pro Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</p>
-    </div>
-</div>
-
-<div class="portfolio-item portfolio-3 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">NextGen</h3>
-        <p class="portfolio-desc">Demonstration of a Pro Website for a fictional tech company, NextGen. Designed to showcase advanced features, sleek design, and powerful functionality tailored for growing modern businesses.</p>
-    </div>
-</div>
-
-<div class="portfolio-item portfolio-4 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">Local Cafè</h3>
-        <p class="portfolio-desc">"Local Café" is a sample business name used to demonstrate how a clean and basic website can look for a real café.</p>
-    </div>
-</div>
-
-<div class="portfolio-item portfolio-5 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">ShinySpark Cleaning Co.</h3>
-        <p class="portfolio-desc">Demonstration of a Standard Website for a fictional cleaning company, ShinySpark Cleaning Co. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</p>
-    </div>
-</div>
-
-<div class="portfolio-item portfolio-6 scroll-reveal">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-content">
-        <h3 class="portfolio-title">FrostAir Experts</h3>
-        <p class="portfolio-desc">Demonstration of a Standard Website for a fictional HVAC company, FrostAir Experts. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</p>
-    </div>
-</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container scroll-reveal">
-            <h2 class="cta-title">Ready to Break Reality?</h2>
-            <p class="cta-text">Join the revolution of businesses that dared to be extraordinary. Your transformation into a digital legend starts with one click.</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="cta-btn primary">Transform Now</a>
-                <a href="#portfolio" class="cta-btn secondary">See the Magic</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="contact-container">
-            <h2 class="section-title scroll-reveal">Connect With Us</h2>
-            
-            <div class="contact-grid">
-                <div class="contact-item scroll-reveal">
-                    <div class="contact-icon">📧</div>
-                    <h3 class="contact-title">Digital Transmission</h3>
-                    <div class="contact-info">
-                        <a href="mailto:webgrant25@gmail.com">webgrant25@gmail.com</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item scroll-reveal">
-                    <div class="contact-icon">🌐</div>
-                    <h3 class="contact-title">Social Dimension</h3>
-                    <div class="contact-info">
-                        <a href="https://www.instagram.com/webgrantofficial/" target="_blank">@webgrantofficial</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-text">
-            &copy; 2025 WebGrant. Redefining Reality, One Website at a Time.
-        </div>
-    </footer>
-
-    <script>
-        // Create floating particles
-        function createParticles() {
-            const particleContainer = document.querySelector('.particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                particleContainer.appendChild(particle);
-            }
-        }
-
-        // Mobile menu toggle
-function toggleMobileMenu() {
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const navMenu = document.getElementById('navMenu');
-  
-  mobileMenuBtn.classList.toggle('active');
-  navMenu.classList.toggle('open');
-}
-
-// Close mobile menu when clicking on a nav link
-document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth <= 768) {
-      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-      const navMenu = document.getElementById('navMenu');
-      mobileMenuBtn.classList.remove('active');
-      navMenu.classList.remove('open');
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
-  });
-});
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-  const nav = document.querySelector('.nav');
-  const navMenu = document.getElementById('navMenu');
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  
-  if (!nav.contains(e.target) && navMenu.classList.contains('open')) {
-    mobileMenuBtn.classList.remove('active');
-    navMenu.classList.remove('open');
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Reviews Slider Styles */
+    .reviews-slider {
+      position: relative;
+      overflow: hidden;
+      padding: 0 40px; /* Add padding to prevent arrows from overlapping slides */
+      background: linear-gradient(135deg, #221b32 90%, #2e1847 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(168,139,250,0.11);
+      display: flex;
+      align-items: center;
+      min-height: 220px;
+    }
+
+    .reviews-slider-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+      align-items: center;
+    }
+
+    .review-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 32px;
+      color: var(--fg);
+      text-shadow: 0 1px 4px rgba(30,17,47,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      min-height: 180px;
+    }
+
+    .review-slide h3 {
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .review-slide span {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.1em;
+      margin-right: 8px;
+    }
+    .reviews-slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      z-index: 10;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2e1847 60%, #a21caf 100%);
+      color: var(--primary);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 rgba(236,72,153,0.08);
+      border: 1.5px solid var(--primary);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .reviews-slider-arrow.left { left: 0; }
+    .reviews-slider-arrow.right { right: 0; }
+
+    .reviews-slider-arrow:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+  </style>
+
+  <!-- Schema.org: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Yalla Açai!",
+    "servesCuisine": ["Açaí Bowls", "Smoothies", "Pancake Bites", "Cafe"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "215–221 Victoria Road",
+      "addressLocality": "Rydalmere",
+      "addressRegion": "NSW",
+      "postalCode": "2116",
+      "addressCountry": "AU"
+    },
+    "areaServed": "Rydalmere & Western Sydney",
+    "url": "https://yalla-acai.example/",
+    "telephone": "+61 400 000 000",
+    "priceRange": "$$",
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"17:00","closes":"23:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"10:00","closes":"23:30"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"23:00"}
+    ]
   }
-});
+  </script>
+</head>
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax-bg" id="parallax-bg">
+    <div class="parallax-shape shape-1"></div>
+    <div class="parallax-shape shape-2"></div>
+    <div class="parallax-shape shape-3"></div>
+  </div>
 
-        // Scroll reveal animation
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            
-            reveals.forEach(reveal => {
-                const elementTop = reveal.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    reveal.classList.add('active');
-                }
-            });
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">
+        <div class="logo-icon">🥣</div>
+        <span>Yalla Açaí!</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+        <span class="hamburger-bar bar1"></span>
+        <span class="hamburger-bar bar2"></span>
+        <span class="hamburger-bar bar3"></span>
+      </button>
+      <nav class="nav-links" id="main-nav">
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#order">Order</a>
+        <a class="nav-link" href="#visit">Visit</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="animate-slide-left">
+          <div class="pill animate-bounce">Rydalmere • Western Sydney</div>
+          <h1 class="animate-fade-in-up">Premium Açaí Bowls & Pancake Bites — made fresh daily.</h1>
+          <p class="animate-fade-in-up">
+            Welcome to <strong>Yalla Açai!</strong> — where bold flavours, fresh ingredients and good vibes meet. 
+            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. Order from Uber Eats or visit our Rydalmere store.
+          </p>
+          <div class="pills animate-fade-in">
+            <span class="pill">100% Premium Açaí</span>
+            <span class="pill">Custom Toppings</span>
+            <span class="pill">Vegan Options</span>
+            <span class="pill">Gluten-Free Friendly</span>
+          </div>
+          <div class="hero-ctas animate-scale-in">
+            <a class="btn btn-primary" href="#order">Order from Uber Eats ▸</a>
+            <a class="btn btn-secondary" href="#menu">View Menu</a>
+          </div>
+          <div class="trust animate-fade-in">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <small>Locals love us for flavor, portion size and friendly service.</small>
+          </div>
+        </div>
+        
+        <div class="hero-card animate-slide-right animate-float">
+          <div class="hero-image">🥣</div>
+          <div>
+            <strong>Signature Bowl:</strong> Açaí base • Fresh Fruits • Granola • Honey drizzle • Coconut flakes
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Props -->
+    <section>
+      <div class="grid reveal">
+        <article class="card">
+          <div class="pill">Quality First</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Premium Ingredients</h3>
+          <p style="color: var(--muted);">We use high-grade dairy and fresh daily ingredients so every scoop hits that perfect creamy, rich balance.</p>
+        </article>
+        <article class="card">
+          <div class="pill-green">Built Your Way</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Customize Everything</h3>
+          <p style="color: var(--muted);">Pick your flavors, load up the toppings and finish with your favorite sauce. Go classic—or go wild.</p>
+        </article>
+        <article class="card">
+          <div class="pill">Fast & Friendly</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Ready When You Are</h3>
+          <p style="color: var(--muted);">Order ahead for pickup, or swing by and we'll scoop it up fresh. Good vibes guaranteed.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section id="menu">
+      <div class="section-title reveal">
+        <h2>Our Menu Highlights</h2>
+        <p>Delicious açaí bowls, smoothies, and pancake bites made fresh with premium ingredients.</p>
+      </div>
+      
+      <div class="two-col">
+        <div class="card reveal-left">
+          <div class="pill">Best Seller</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">Customizable Açaí Bowls</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Choose your açaí base and load up on fresh fruits, granola, honey, and other toppings. Add-ons available.</p>
+          <div class="menu-image">🥣</div>
+        </div>
+        
+        <div class="card reveal-right">
+          <div class="pill">Crowd Favourite</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">Signature Pancake Bites</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Fluffy pancake bites topped with fruits, chocolate, nuts, or Nutella. Perfect for sharing.</p>
+          <div class="menu-image">🥞</div>
+        </div>
+      </div>
+      
+<div class="grid reveal" style="margin-top: 48px;">
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥣</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Custom Açaí Bowls</h4>
+    <p style="font-size: 14px; color: var(--muted);">Choose your açaí base and load up on fresh fruits, granola, honey, and other toppings. Add-ons available.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥤</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Smoothies</h4>
+    <p style="font-size: 14px; color: var(--muted);">Blended açaí & fruit drinks, fresh and refreshing.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🥞</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Signature Pancake Bites</h4>
+    <p style="font-size: 14px; color: var(--muted);">Fluffy pancake bites topped with fruits, chocolate, nuts, or Nutella.</p>
+  </div>
+  <div class="card" style="text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🌱</div>
+    <h4 style="font-weight: 700; margin-bottom: 8px;">Vegan Options</h4>
+    <p style="font-size: 14px; color: var(--muted);">Coconut, Oat & Almond based açaí bowls and smoothies for vegan-friendly choices.</p>
+  </div>
+</div>
+    </section>
+
+    <!-- Order CTA -->
+    <section id="order">
+      <div class="two-col">
+        <div class="card reveal-left">
+          <h2 style="font-size: 32px; margin-bottom: 16px;">Order from Uber Eats or Pickup</h2>
+          <p style="color: var(--muted); margin-bottom: 24px;">Order now for pickup or plan ahead. Get your favorite açaí bowls, smoothies, and pancake bites quickly and easily.</p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="#">Start Order ▸</a>
+            <a class="btn btn-secondary" href="#contact">Call Store</a>
+          </div>
+        </div>
+        
+<div class="reviews-slider" id="reviews-slider">
+  <button class="reviews-slider-arrow left" type="button" aria-label="Previous review">&#10094;</button>
+
+  <div class="reviews-slider-track">
+    <!-- Review 1 -->
+    <div class="review-slide">
+      <h3>"Yalla Açai is all round perfect!"</h3>
+      <p>Great acai, great people, great service, and convenient location. Must try!</p>
+      <div><span>★★★★★</span> Christian Zeater</div>
+    </div>
+    <!-- Review 2 -->
+    <div class="review-slide">
+      <h3>"Good service straight to the point."</h3>
+      <p>Easy to read menu. And quick serve. easy 5 star</p>
+      <div><span>★★★★★</span> Big Base</div>
+    </div>
+    <!-- Review 3 -->
+    <div class="review-slide">
+      <h3>"Great outdoor seating and area."</h3>
+      <p>Beautiful vibe and atmosphere. The açai and pancake bites are so yum! Can’t get enough of this place.</p>
+      <div><span>★★★★★</span> Micheal Saba</div>
+    </div>
+    </div>
+
+  <button class="reviews-slider-arrow right" type="button" aria-label="Next review">&#10095;</button>
+</div>
+
+    </section>
+
+    <!-- Location -->
+    <section id="visit">
+      <div class="two-col">
+        <div class="card reveal-left">
+          <div class="pill">Find Us</div>
+          <h2 style="font-size: 28px; margin: 16px 0;">Rydalmere Store</h2>
+          <p style="color: var(--muted); margin-bottom: 24px;">215–221 Victoria Road, Rydalmere NSW 2116</p>
+          
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span>Mon–Thu:</span>
+              <span>17:00–23:00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span>Fri–Sat:</span>
+              <span>10:00–23:30</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Sun:</span>
+              <span>12:00–23:00</span>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-secondary" href="https://maps.apple.com/?q=215-221%20Victoria%20Road%20Rydalmere%20NSW%202116" target="_blank">Open in Maps</a>
+            <a class="btn btn-secondary" href="#">Get Directions</a>
+          </div>
+        </div>
+        
+        <div class="card reveal-right" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);">
+          <div style="text-align: center;">
+            <div style="font-size: 64px; margin-bottom: 16px;">📍</div>
+            <div style="font-weight: 700; font-size: 20px; margin-bottom: 8px;">Interactive Map</div>
+            <small style="color: var(--muted);">Embed your Google Map here</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="grid reveal">
+        <div class="card">
+          <div class="pill">Say Hello</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Contact Us</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Questions, catering or collaborations? We'd love to hear from you.</p>
+          
+          <div style="margin-bottom: 24px;">
+            <p style="margin-bottom: 8px;"><strong>Phone:</strong> <a href="tel:+61400000000" style="color: var(--primary);">+61 400 000 000</a></p>
+            <p><strong>Email:</strong> <a href="mailto:yallaacaisydney@gmail.com" style="color: var(--primary);">yallaacaisydney@gmail.com</a></p>
+          </div>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-secondary" href="#">Instagram</a>
+            <a class="btn btn-secondary" href="#">TikTok</a>
+          </div>
+        </div>
+        
+        <form class="card" onsubmit="handleSubmit(event)">
+          <div class="pill">Stay in the Loop</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Join the Açaí List</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Get promos, new flavors and giveaways, straight to your inbox.</p>
+          
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input id="email" type="email" required placeholder="you@example.com" />
+          </div>
+          
+          <button class="btn btn-primary" type="submit" style="width: 100%;">Subscribe ▸</button>
+          
+          <p style="font-size: 12px; color: var(--muted); margin-top: 12px;">We respect your privacy. Unsubscribe anytime.</p>
+        </form>
+        
+        <div class="card">
+          <div class="pill">Work With Us</div>
+          <h3 style="font-size: 24px; margin: 16px 0;">Careers</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">Join a growing team that's passionate about flavor and community.</p>
+          <a class="btn btn-secondary" href="#">View Open Roles</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-icon">🥣</div>
+            <span>Yalla Açaí!</span>
+          </div>
+          <small style="color: var(--muted);">© <span id="year"></span> Yalla Açaí! All rights reserved.</small>
+        </div>
+        <div style="text-align: right;">
+          <div style="margin-bottom: 12px;">
+            <a href="#" style="color: var(--muted); text-decoration: none; font-size: 14px;">Privacy</a>
+            <span style="color: var(--muted); margin: 0 8px;">•</span>
+            <a href="#" style="color: var(--muted); text-decoration: none; font-size: 14px;">Terms</a>
+            <span style="color: var(--muted); margin: 0 8px;">•</span>
+            <span style="color: var(--muted); font-size: 14px;">ABN 00 000 000 000</span>
+          </div>
+          <small style="color: var(--muted);">Site by WebGrant</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
+      });
+    });
 
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            
-            counters.forEach(counter => {
-                if (counter.classList.contains('animated')) return;
-                
-                const rect = counter.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    counter.classList.add('animated');
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    const duration = 2000;
-                    const start = performance.now();
-                    
-                    function updateCounter(timestamp) {
-                        const elapsed = timestamp - start;
-                        const progress = Math.min(elapsed / duration, 1);
-                        
-                        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                        const current = Math.floor(target * easeOutQuart);
-                        
-                        counter.textContent = current;
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.textContent = target;
-                        }
-                    }
-                    
-                    requestAnimationFrame(updateCounter);
-                }
-            });
-        }
-
-        // Header background on scroll
-        function updateHeader() {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(26, 26, 26, 0.95)';
-                header.style.borderBottomColor = 'rgba(99, 102, 241, 0.3)';
-            } else {
-                header.style.background = 'rgba(26, 26, 26, 0.1)';
-                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.1)';
-            }
-        }
-
-        // Portfolio item hover effects
-        function initPortfolioEffects() {
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-            
-            portfolioItems.forEach(item => {
-                const bg = item.querySelector('.portfolio-bg');
-                
-                item.addEventListener('mousemove', (e) => {
-                    const rect = item.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    
-                    bg.style.transform = `translate(${(x - 50) * 0.1}px, ${(y - 50) * 0.1}px) scale(1.1)`;
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    bg.style.transform = 'translate(0, 0) scale(1)';
-                });
-            });
-        }
-
-        // Service card tilt effect
-        function initServiceCardEffects() {
-            const serviceCards = document.querySelectorAll('.service-card');
-            
-            serviceCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
-                });
-            });
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            initPortfolioEffects();
-            initServiceCardEffects();
-            revealOnScroll();
-            animateCounters();
-        });
-
-        // Scroll event listeners
-        window.addEventListener('scroll', () => {
-            revealOnScroll();
-            animateCounters();
-            updateHeader();
-        });
-
-        // Add some extra interactive magic
-        document.addEventListener('click', (e) => {
-            // Create ripple effect on click
-            const ripple = document.createElement('div');
-            ripple.style.position = 'fixed';
-            ripple.style.left = e.clientX - 25 + 'px';
-            ripple.style.top = e.clientY - 25 + 'px';
-            ripple.style.width = '50px';
-            ripple.style.height = '50px';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(99, 102, 241, 0.3)';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.zIndex = '9999';
-            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
-            
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-
-        // Add ripple effect CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rippleEffect {
-                0% {
-                    transform: scale(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add some Easter eggs
-        let clickCount = 0;
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && e.shiftKey) {
-                clickCount++;
-                if (clickCount === 3) {
-                    document.body.style.animation = 'rainbow 2s ease-in-out';
-                    setTimeout(() => {
-                        document.body.style.animation = '';
-                        clickCount = 0;
-                    }, 2000);
-                }
-            }
-        });
-
-        // Add rainbow animation
-        const rainbowStyle = document.createElement('style');
-        rainbowStyle.textContent = `
-            @keyframes rainbow {
-                0%, 100% { filter: hue-rotate(0deg); }
-                25% { filter: hue-rotate(90deg); }
-                50% { filter: hue-rotate(180deg); }
-                75% { filter: hue-rotate(270deg); }
-            }
-        `;
-        document.head.appendChild(rainbowStyle);
-
-        //CODES FOR AI
-
-        emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
-
-const chatBox = document.getElementById("chatBox");
-const userInputField = document.getElementById("userInput");
-const sendButton = document.getElementById("sendButton");
-
-// Global variable to store the full conversation transcript
-let conversationTranscript = "";
-
-let context = {
-    userName: "",
-    projectType: "",
-    package: "",
-    websiteStyle: "",
-    features: "",
-    email: "",
-    selectedOption: "",
-    step: "initial"
-};
-
-function typeMessage(element, text, prefix, speed) {
-    // If text contains HTML tags, display instantly
-    if(/<\/?[a-z][\s\S]*>/i.test(text)) {
-        element.innerHTML = prefix + text;
-        conversationTranscript += prefix + text + "\n";
-        chatBox.scrollTop = chatBox.scrollHeight;
-        return;
-    }
-    let i = 0;
-    let fullText = prefix + text;
-    function typeChar() {
-        if (i < fullText.length) {
-            element.innerHTML += fullText.charAt(i);
-            i++;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(typeChar, speed);
-        } else {
-            conversationTranscript += fullText + "\n";
-        }
-    }
-    typeChar();
-}
-
-function addMessage(text, sender) {
-    const message = document.createElement("div");
-    message.className = sender;
-    const prefix = sender === "user" ? "You: " : "SmartGrant: ";
-    if (sender === "ai") {
-        typeMessage(message, text, prefix, 18);
-    } else {
-        message.innerText = prefix + text;
-        conversationTranscript += prefix + text + "\n";
-    }
-    chatBox.appendChild(message);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function selectOption(option) {
-    if(context.step !== "initial") return;
-
-    // Hide only the initial four option buttons
-    const optionButtons = chatBox.querySelectorAll(".initialOptionBtn");
-    optionButtons.forEach(btn => btn.style.display = "none");
-
-    context.selectedOption = option;
-    addMessage(option.charAt(0).toUpperCase() + option.slice(1), "user");
-    userInputField.style.display = "inline-block";
-    sendButton.style.display = "inline-block";
-    userInputField.focus();
-
-    switch(option) {
-        case "what services do you offer?":
-            context.step = "postFAQ";
-            addMessage("We offer website design, development, SEO, mobile optimization, maintenance, and support services to help your business grow online. Would you like to see our packages or get a quote?", "ai");
-            break;
-        case "which package is best for my business?":
-            context.step = "askProjectTypeForPackage";
-            addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
-            break;
-        case "contact a team member":
-            // context.step = "confirmEmail"; // no longer needed since we're directing to external page
-            addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
-            addMessage("Is there anything else I can help you with today?", "ai");
-            break;
-        default:
-            addMessage("Hello! How can I assist you today?", "ai");
-    }
-}
-
-function generateReply(input) {
-    input = input.toLowerCase();
-
-    // Handle flow-based responses first
-    if (context.step === "postFAQ") {
-        if (input.includes("package")) {
-            context.step = "askProjectTypeForPackage";
-            return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
-        } else if (input.includes("quote") || input.includes("website design")) {
-            context.step = "quoteName";
-            return "Great! Let's get started. Your full name?";
-        } else {
-            return "Please clarify if you want to see our packages or get a quote.";
-        }
+    // Parallax effect
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+      const parallaxBg = document.getElementById('parallax-bg');
+      const shapes = document.querySelectorAll('.parallax-shape');
+      
+      // Move background slower than scroll
+      parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+      
+      // Move shapes at different speeds
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.3;
+        shape.style.transform = `translateY(${scrolled * speed}px)`;
+      });
     }
 
-    if (context.step === "askProjectTypeForPackage") {
-        if (/portfolio|e-commerce|blog|business|website/.test(input)) {
-            if (input.includes("portfolio")) context.projectType = "portfolio";
-            else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
-            else if (input.includes("blog")) context.projectType = "blog";
-            else context.projectType = input.trim();
-
-            context.step = "choosePackage";
-            return "Would you like me to help you select a package based on your business size or needs? (yes/no)";
-        } else return "Website type? (portfolio, e-commerce, blog, business)";
+    // Header background on scroll
+    function updateHeader() {
+      const header = document.querySelector('header');
+      const scrolled = window.pageYOffset;
+      
+      if (scrolled > 100) {
+        header.style.background = 'rgba(30, 17, 47, 0.97)';
+        header.style.boxShadow = '0 4px 20px rgba(236,72,153,0.13)';
+      } else {
+        header.style.background = 'rgba(30, 17, 47, 0.85)';
+        header.style.boxShadow = 'none';
+      }
     }
 
-    if (context.step === "choosePackage") {
-        if (input.includes("yes") || input.includes("sure") || input.includes("ok")) {
-            context.step = "choosePackageDetails";
-            return "Great! Can you tell me about your business size or needs? For example, small startup, growing company, or full-featured priority support.";
-        } else if (input.includes("no")) {
-            context.step = "completed";
-            return "No problem! If you have other questions or need assistance, just let me know.";
-        } else {
-            return "Please reply with 'yes' if you'd like help selecting a package, or 'no' if not.";
-        }
-    }
-
-    if (context.step === "choosePackageDetails") {
-        if (input.includes("small startup") || input.includes("startup") || input.includes("small")) {
-            context.package = "Basic Package";
-        } else if (input.includes("growing company") || input.includes("growing")) {
-            context.package = "Growth Package";
-        } else if (input.includes("full-featured") || input.includes("priority") || input.includes("support")) {
-            context.package = "Growth Plus Package";
-        } else {
-            context.package = "Custom Package";
-        }
-        context.step = "askWebsiteStyle";
-        return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
-    }
-
-    
-
-    if (context.step === "quoteProjectType") {
-        if (!context.projectType) {
-            if (/portfolio|e-commerce|blog|business|website/.test(input)) {
-                if (input.includes("portfolio")) context.projectType = "portfolio";
-                else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
-                else if (input.includes("blog")) context.projectType = "blog";
-                else context.projectType = input.trim();
-
-                context.step = "quoteWebsiteStyle";
-                return `Website style? (clean, modern, professional)`;
-            } else return "Website type? (portfolio, e-commerce, blog, business)";
-        } else {
-            context.step = "quoteWebsiteStyle";
-            return `Website style? (clean, modern, professional)`;
-        }
-    }
-
-    if (context.step === "quoteWebsiteStyle" || context.step === "askWebsiteStyle") {
-        if (!context.websiteStyle) {
-            if (/clean|modern|professional/.test(input)) {
-                context.websiteStyle = input.match(/clean|modern|professional/)[0];
-                if (context.step === "quoteWebsiteStyle") {
-                    context.step = "quoteFeatures";
-                    return `Any key features? (contact form, booking, store, etc.) or 'no'`;
-                } else {
-                    context.step = "completed";
-                    return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-                }
-            } else return "Website style? (clean, modern, professional)";
-        } else {
-            if (context.step === "quoteWebsiteStyle") {
-                context.step = "quoteFeatures";
-                return `Any key features? (contact form, booking, store, etc.) or 'no'`;
-            } else {
-                context.step = "completed";
-                return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-            }
-        }
-    }
-
-    if (context.step === "quoteFeatures") {
-        if (!context.features) {
-            if (/no|none/.test(input)) context.features = "no special features";
-            else context.features = input.trim();
-            context.step = "quoteBudget";
-            return `Budget range?`;
-        } else {
-            context.step = "quoteBudget";
-            return `Budget range?`;
-        }
-    }
-
-    if (context.step === "quoteBudget") {
-        if (!context.budget) {
-            context.budget = input.trim();
-            context.step = "quoteTimeline";
-            return `Timeline for launch?`;
-        } else {
-            context.step = "quoteTimeline";
-            return `Timeline for launch?`;
-        }
-    }
-
-    if (context.step === "quoteTimeline") {
-        if (!context.timeline) {
-            context.timeline = input.trim();
-            context.step = "quotePages";
-            return `Number of pages/products?`;
-        } else {
-            context.step = "quotePages";
-            return `Number of pages/products?`;
-        }
-    }
-
-    if (context.step === "quotePages") {
-        if (!context.pages) {
-            context.pages = input.trim();
-            context.step = "quoteColor";
-            return `Preferred colors?`;
-        } else {
-            context.step = "quoteColor";
-            return `Preferred colors?`;
-        }
-    }
-
-    if (context.step === "quoteColor") {
-        if (!context.color) {
-            context.color = input.trim();
-            context.step = "quoteCompetitor";
-            return `Any sites you like?`;
-        } else {
-            context.step = "quoteCompetitor";
-            return `Any sites you like?`;
-        }
-    }
-
-    // Handle "Any sites you like?" flow
-    if (context.step === "quoteCompetitor") {
-        // If the user hasn't answered yet
-        if (!context.competitor) {
-            // If the answer is yes, prompt for link(s)
-            if (/^yes\b|sure|yeah|yep|of course|i do|i have/i.test(input)) {
-                context.competitor = ""; // Mark as expecting links
-                context.step = "quoteCompetitorLinks";
-                return "Please paste the link(s) to the site(s) you like or consider as competitors:";
-            }
-            // If the answer is no, go to preferred platform as usual
-            if (/^no\b|none|nope|don't|do not/i.test(input)) {
-                context.competitor = "no";
-                context.step = "quoteCMS";
-                return `Preferred platform? (WordPress, Shopify, custom)`;
-            }
-            // If user pastes a link directly, accept it and move to email
-            if (/https?:\/\/|www\./i.test(input)) {
-                context.competitor = input.trim();
-                context.step = "quoteEmail";
-                return `Your email?`;
-            }
-            // Otherwise, treat any other input as links and move to email
-            if (input.length > 3) {
-                context.competitor = input.trim();
-                context.step = "quoteEmail";
-                return `Your email?`;
-            }
-            // Otherwise, re-prompt
-            return `Any sites you like? (Reply "yes" to share, "no" to skip)`;
-        } else {
-            // Already have competitor info, go to next step
-            if (context.competitor !== "no") {
-                context.step = "quoteEmail";
-                return `Your email?`;
-            } else {
-                context.step = "quoteCMS";
-                return `Preferred platform? (WordPress, Shopify, custom)`;
-            }
-        }
-    }
-
-    // If expecting competitor links after "yes"
-    if (context.step === "quoteCompetitorLinks") {
-        if (input && input.length > 0) {
-            context.competitor = input.trim();
-            context.step = "quoteEmail";
-            return `Your email?`;
-        } else {
-            return "Please paste the link(s) to the site(s) you like or consider as competitors:";
-        }
-    }
-
-    // Only ask for preferred platform if we don't have competitor websites
-    if (context.step === "quoteCMS") {
-        if (!context.cms) {
-            context.cms = input.trim();
-            context.step = "quoteEmail";
-            return `Your email?`;
-        } else {
-            context.step = "quoteEmail";
-            return `Your email?`;
-        }
-    }
-
-    if (context.step === "quoteEmail") {
-        if (!context.email) {
-            if (input.includes("@") && input.includes(".")) {
-                context.email = input.trim();
-                context.step = "completed";
-                sendQuoteEmail();
-                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-            } else return "Please provide a valid email address.";
-        } else {
-            context.step = "completed";
-            sendQuoteEmail();
-            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-        }
-    }
-
-    if (context.step === "confirmEmail") {
-        if (input.includes("@") && input.includes(".")) {
-            context.email = input.trim();
-            context.step = "completed";
-            sendContactEmail();
-            return `Thanks! A team member will reach out to you soon at ${context.email}. If you have any questions in the meantime, just ask!`;
-        } else return "Please provide a valid email address.";
-    }
-
-    // Allow starting a quote even after completed
-    if (context.step === "completed") {
-        if (input.includes("quote") || input.includes("free quote")) {
-            context.step = "quoteName";
-            return "Great! Let's get started. Your full name?";
-        }
-    }
-
-    // Check for specific package price requests first
-    if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
-        return "Our Basic Package starts at $300, ideal for small startups.";
-    }
-    if ((input.includes("growth package") && !input.includes("growth plus")) || (input.includes("growth") && !input.includes("plus"))) {
-        return "Our Growth Package starts at $700, perfect for growing companies.";
-    }
-    if (input.includes("growth plus package") || input.includes("growth plus")) {
-        return "Our Growth Plus Package starts at $1100, with full-featured priority support.";
-    }
-
-    // General package list
-    if (input.includes("package") || input.includes("packages")) {
-        return "We offer the Basic Package for small startups, Growth Package for growing companies, and Growth Plus Package for full-featured priority support.";
-    }
-    if (/services|options|what do you do|offer/.test(input)) {
-        return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
-    }
-// Step 1: User asks about price
-if (/price|cost|how much/.test(input)) {
-    context.step = "askQuote"; // Set step to track next answer
-    addMessage("Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Would you like a quote?", "ai");
-    return;
-}
-
-// Step 2: User responds yes to quote
-if (context.step === "askQuote" && /yes|sure|okay/i.test(input)) {
-    addMessage('Great! Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here</a>', "ai");
-    addMessage("Is there anything else I can help you with today?", "ai");
-    context.step = null; // Reset step
-    return;
-}
-
-// Optional: Handle "no" response
-if (context.step === "askQuote" && /no|not now/i.test(input)) {
-    addMessage("No problem! Let me know if you have any other questions.", "ai");
-    context.step = null; // Reset step
-    return;
-}
-    if (/portfolio|examples|work/.test(input)) {
-        // Avoid general portfolio response if in quote flow steps
-        if (context.step.startsWith("quote")) {
-            return "Great choice! What style do you prefer for your website? (clean, modern, professional)";
-        }
-        return "You can view our portfolio online to see examples of our projects.";
-    }
-    if (/contact|reach|email/.test(input)) {
-        return "You can reach us via the contact us form or by emailing us at webgrant25@gmail.com or call +61 479 085 297.";
-    }
-    if (/bye|goodbye|see you/.test(input)) {
-        return "Goodbye! It was a pleasure assisting you.";
-    }
-
-    // Trigger contact flow if user asks to speak to a representative
-if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
-    context.step = "confirmEmail";
-    addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
-}
-
-    // Completed or fallback
-    return "I'm here to help! What else would you like to know or discuss?";
-}
-
-function sendQuoteEmail() {
-    // Prepare email parameters for quote, ensuring keys match EmailJS template
-    const templateParams = {
-        from_name: context.userName,
-        project_type: context.projectType,
-        website_style: context.websiteStyle,
-        features: context.features,
-        reply_to: context.email,
-        package: context.package || "Not specified",
-        message: conversationTranscript
+    // Intersection Observer for reveal animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     };
 
-    // Replace 'template_qmeovfp' with your actual quote template ID if different
-    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
-        .then(() => {
-            console.log("Quote email sent successfully.");
-        }, (error) => {
-            console.error("Failed to send quote email:", error);
-        })
-        .catch((err) => {
-            console.error("Error in sending quote email (catch):", err);
-        });
-}
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
 
-function sendContactEmail() {
-    // Prepare email parameters for contact request
-    const templateParams = {
-        reply_to: context.email,            // User email
-        from_name: context.userName || "Unknown", // Optional: User name
-        message: conversationTranscript     // Full conversation
-    };
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      observer.observe(el);
+    });
 
-    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
-        .then(() => {
-            console.log("Contact request email sent successfully.");
-        }, (error) => {
-            console.error("Failed to send contact request email:", error);
-        })
-        .catch((err) => {
-            console.error("Error in sending contact request email (catch):", err);
-        });
-}
-
-function chat() {
-    // Hide the initial option buttons if visible
-    const optionButtons = chatBox.querySelectorAll("#chatBox > button");
-    optionButtons.forEach(btn => btn.style.display = "none");
-
-    const userInput = userInputField.value.trim();
-    if (!userInput) return;
-
-    addMessage(userInput, "user");
-    const reply = generateReply(userInput);
-    addMessage(reply, "ai");
-
-    userInputField.value = "";
-    userInputField.focus();
-}
-document.getElementById("openChatBtn").addEventListener("click", () => {
-    const panel = document.getElementById("chatPanel");
-    if (panel.style.right === "0px") {
-        panel.style.right = "-600px";
-    } else {
-        panel.style.right = "0px";
+    // Form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      if (email) {
+        alert('Thanks for subscribing! We\'ll keep you updated with our latest flavors and offers.');
+        document.getElementById('email').value = '';
+      }
     }
-});
 
-userInputField.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendButton.click();
-});
+    // Throttled scroll listener
+    let ticking = false;
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateParallax();
+          updateHeader();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
 
-    </script>
+    // Event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('load', () => {
+      updateParallax();
+      updateHeader();
+    });
+
+    // Add staggered animations to grid items
+    function addStaggeredAnimations() {
+      const gridItems = document.querySelectorAll('.grid .card');
+      gridItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+      });
+    }
+
+    // Initialize
+    addStaggeredAnimations();
+
+        // Reviews Slider
+    (function(){
+  const slider = document.getElementById('reviews-slider');
+  if(!slider) return;
+
+  const track = slider.querySelector('.reviews-slider-track');
+  const slides = Array.from(track.children);
+  const slideCount = slides.length;
+  let current = 0;
+  let timer = null;
+
+  const leftBtn = slider.querySelector('.reviews-slider-arrow.left');
+  const rightBtn = slider.querySelector('.reviews-slider-arrow.right');
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slideCount;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slideCount) % slideCount;
+    updateSlider();
+  }
+
+  function startAutoSlide() {
+    timer = setInterval(nextSlide, 7000); // auto-slide every 2s
+  }
+
+  function stopAutoSlide() {
+    if(timer) clearInterval(timer);
+  }
+
+  leftBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
+
+  rightBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
+
+  // Optional: pause auto-slide on hover
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
+
+  window.addEventListener('resize', updateSlider);
+
+  // Initialize
+  updateSlider();
+  startAutoSlide();
+})();
+
+// Hamburger menu for mobile navigation
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('main-nav');
+      if (!hamburger || !navLinks) return;
+
+      function closeMenuOnResize() {
+        if (window.innerWidth > 768) {
+          navLinks.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      hamburger.addEventListener('click', function() {
+        const isOpen = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close menu when a link is clicked (mobile)
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      window.addEventListener('resize', closeMenuOnResize);
+    })();
+  </script>
 </body>
 </html>
+  
