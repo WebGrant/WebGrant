@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies</title>
-  <meta name="description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order online." />
+  <meta name="description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order from Uber Eats." />
   <meta name="theme-color" content="#ec4899" />
   
   <!-- Open Graph -->
   <meta property="og:title" content="Yalla Açai! — Rydalmere | Açaí Bowls, Pancake Bites & Smoothies" />
-  <meta property="og:description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order online." />
+  <meta property="og:description" content="Yalla Açai! in Rydalmere serves premium Açaí Bowls, Smoothies, and Pancake Bites with fresh toppings. Visit us or order from Uber Eats." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yalla-Açaí.example/" />
   <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23ec4899'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='72' fill='white' font-family='Inter,system-ui,sans-serif'%3EYalla Açaí!%3C/text%3E%3C/svg%3E" />
@@ -19,22 +19,22 @@
   
   <style>
     :root {
-      /* Professional Pink & Green Theme */
-      --bg: #fefcff; 
-      --fg: #1a1a1a; 
-      --muted: #64748b; 
-      --primary: #e91e63; /* Professional pink */
-      --primary-light: #f06292;
-      --primary-dark: #c2185b;
-      --secondary: #4caf50; /* Professional green */
-      --secondary-light: #81c784;
-      --secondary-dark: #388e3c;
-      --accent: #00bcd4; /* Complementary cyan */
-      --card: #ffffff; 
-      --card-border: #f1f5f9;
-      --shadow: 0 10px 30px rgba(233,30,99,.08);
-      --shadow-lg: 0 20px 60px rgba(233,30,99,.12);
-      --shadow-green: 0 10px 30px rgba(76,175,80,.08);
+      /* Dark Pink, Purple & Green Theme */
+      --bg: #181024;
+      --fg: #fce7f3;
+      --muted: #b48fc2;
+      --primary: #ec4899; /* Vibrant pink */
+      --primary-light: #f472b6;
+      --primary-dark: #a21caf;
+      --secondary: #22c55e; /* Vibrant green */
+      --secondary-light: #86efac;
+      --secondary-dark: #166534;
+      --accent: #a78bfa; /* Soft purple */
+      --card: #231638;
+      --card-border: #3b2250;
+      --shadow: 0 10px 30px rgba(236,72,153,.09);
+      --shadow-lg: 0 20px 60px rgba(168,139,250,0.14);
+      --shadow-green: 0 10px 30px rgba(34,197,94,.10);
       --radius: 24px;
       --max: 1200px;
     }
@@ -50,8 +50,8 @@
     }
 
     body {
-      background: linear-gradient(135deg, #fef7ff 0%, #f0fdf4 30%, #fff1f2 70%, #f0fdf4 100%);
-      color: var(--fg); 
+      background: linear-gradient(135deg, #181024 0%, #25173a 50%, #2e1847 100%);
+      color: var(--fg);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
@@ -117,40 +117,43 @@
       width: 100%;
       height: 120%;
       z-index: -1;
-      background: linear-gradient(135deg, #fef7ff 0%, #f0fdf4 30%, #fff1f2 70%, #f0fdf4 100%);
+      background: linear-gradient(135deg, #181024 0%, #25173a 50%, #2e1847 100%);
     }
 
     .parallax-shape {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.1;
+      opacity: 0.15;
     }
 
     .shape-1 {
       width: 200px;
       height: 200px;
-      background: var(--primary);
+      background: radial-gradient(circle at 40% 60%, #ec4899 70%, transparent 100%);
       top: 10%;
       left: 10%;
       animation: float 4s ease-in-out infinite;
+      filter: blur(2px);
     }
 
     .shape-2 {
       width: 150px;
       height: 150px;
-      background: var(--secondary);
+      background: radial-gradient(circle at 60% 40%, #22c55e 70%, transparent 100%);
       top: 60%;
       right: 10%;
       animation: float 3s ease-in-out infinite reverse;
+      filter: blur(2px);
     }
 
     .shape-3 {
       width: 100px;
       height: 100px;
-      background: var(--accent);
+      background: radial-gradient(circle at 60% 40%, #a78bfa 70%, transparent 100%);
       top: 30%;
       right: 30%;
       animation: float 5s ease-in-out infinite;
+      filter: blur(1px);
     }
 
     /* Buttons */
@@ -187,21 +190,20 @@
 
     /*SUBSCRIBE BUTTON RIGHT HERE*/
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+      color: #fff;
       box-shadow: var(--shadow);
     }
-
-    /*TILL HERE*/
 
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.02);
       box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
     }
 
     .btn-secondary {
-      background: var(--card);
-      color: var(--fg);
+      background: linear-gradient(135deg, #221b32, #2d2143 80%);
+      color: var(--accent);
       border: 2px solid var(--card-border);
     }
 
@@ -209,6 +211,7 @@
       transform: translateY(-2px);
       border-color: var(--primary);
       color: var(--primary);
+      background: linear-gradient(135deg, #291b32, #431d4c 100%);
     }
 
     /* Header */
@@ -219,7 +222,7 @@
       right: 0;
       z-index: 1000;
       backdrop-filter: blur(20px);
-      background: rgba(254, 247, 255, 0.8);
+      background: rgba(30, 17, 47, 0.85);
       border-bottom: 1px solid var(--card-border);
       transition: all 0.3s ease;
     }
@@ -239,24 +242,26 @@
       font-weight: 800;
       font-size: 20px;
       text-decoration: none;
-      color: var(--fg);
+      color: var(--primary-light);
       transition: transform 0.3s ease;
     }
 
     .logo:hover {
       transform: scale(1.05);
+      color: var(--primary);
     }
 
     .logo-icon {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       box-shadow: var(--shadow);
+      color: #fff;
     }
 
     .nav-links {
@@ -313,7 +318,7 @@
 
     .nav-link:hover {
       color: var(--primary);
-      background: rgba(236, 72, 153, 0.1);
+      background: rgba(236, 72, 153, 0.12);
     }
 
     /* Hero Section */
@@ -335,7 +340,7 @@
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 24px;
-      background: linear-gradient(135deg, var(--fg), var(--primary));
+      background: linear-gradient(135deg, var(--primary), var(--accent), var(--fg));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -357,22 +362,26 @@
 
     .pill {
       padding: 8px 16px;
-      background: rgba(123, 10, 48, 0.1);
-      border: 1px solid rgba(233, 30, 99, 0.2);
+      background: rgba(236, 72, 153, 0.18);
+      border: 1px solid rgba(236, 72, 153, 0.32);
       border-radius: 999px;
       font-size: 14px;
       font-weight: 600;
       color: var(--primary);
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 3px 0 rgba(236,72,153,0.07);
     }
 
     .pill-green {
       padding: 8px 16px;
-      background: rgba(76, 175, 80, 0.1);
-      border: 1px solid rgba(76, 175, 80, 0.2);
+      background: rgba(34, 197, 94, 0.13);
+      border: 1px solid rgba(34, 197, 94, 0.24);
       border-radius: 999px;
       font-size: 14px;
       font-weight: 600;
       color: var(--secondary);
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 3px 0 rgba(34,197,94,0.07);
     }
 
     .hero-ctas {
@@ -389,13 +398,14 @@
     }
 
     .hero-card {
-      background: var(--card);
+      background: linear-gradient(135deg, #231638 80%, #2e1847 100%);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: var(--shadow-lg);
       position: relative;
       overflow: hidden;
+      color: var(--fg);
     }
 
     .hero-card::before {
@@ -412,7 +422,7 @@
       width: 100%;
       aspect-ratio: 4/5;
       border-radius: 16px;
-      background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+      background: linear-gradient(135deg, #3b2250 0%, #a21caf 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -420,6 +430,8 @@
       margin-bottom: 16px;
       position: relative;
       overflow: hidden;
+      color: #fff;
+      box-shadow: 0 2px 18px 0 rgba(236,72,153,0.20);
     }
 
     .hero-image::before {
@@ -429,7 +441,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
       animation: shimmer 3s infinite;
     }
 
@@ -440,7 +452,7 @@
 
     /* Cards */
     .card {
-      background: var(--card);
+      background: linear-gradient(135deg, #231638 80%, #2e1847 100%);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 32px;
@@ -448,6 +460,7 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      color: var(--fg);
     }
 
     .card:hover {
@@ -498,7 +511,7 @@
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 800;
       margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--fg), var(--primary));
+      background: linear-gradient(135deg, var(--primary), var(--accent), var(--fg));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -516,7 +529,7 @@
       width: 100%;
       aspect-ratio: 16/10;
       border-radius: 16px;
-      background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+      background: linear-gradient(135deg, #a21caf 0%, #3b2250 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -524,6 +537,8 @@
       margin-top: 16px;
       position: relative;
       overflow: hidden;
+      color: #fff;
+      box-shadow: 0 2px 10px 0 rgba(236,72,153,0.12);
     }
 
     /* Contact Form */
@@ -535,7 +550,7 @@
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
-      color: var(--fg);
+      color: var(--accent);
     }
 
     .form-group input,
@@ -545,7 +560,7 @@
       border: 2px solid var(--card-border);
       border-radius: 12px;
       font-size: 16px;
-      background: var(--card);
+      background: #2e1847;
       color: var(--fg);
       transition: all 0.3s ease;
     }
@@ -554,15 +569,16 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.16);
     }
 
     /* Footer */
     footer {
-      background: var(--card);
+      background: linear-gradient(135deg, #1b122a 80%, #2e1847 100%);
       border-top: 1px solid var(--card-border);
       padding: 60px 0 40px;
       margin-top: 80px;
+      color: var(--muted);
     }
 
     /* Mobile Styles */
@@ -594,10 +610,10 @@
         top: 100%;
         right: 0;
         left: 0;
-        background: rgba(254, 247, 255, 0.98);
+        background: rgba(27, 18, 42, 0.98);
         border-bottom-left-radius: 0 0 18px 18px;
         border-bottom-right-radius: 0 0 18px 18px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+        box-shadow: 0 8px 24px rgba(236,72,153,0.07);
         gap: 0;
         padding: 0 0 12px 0;
         max-height: 0;
@@ -663,47 +679,78 @@
     }
 
     /* Reviews Slider Styles */
-.reviews-slider {
-  position: relative;
-  overflow: hidden;
-  padding: 0 40px; /* Add padding to prevent arrows from overlapping slides */
-}
+    .reviews-slider {
+      position: relative;
+      overflow: hidden;
+      padding: 0 40px; /* Add padding to prevent arrows from overlapping slides */
+      background: linear-gradient(135deg, #221b32 90%, #2e1847 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(168,139,250,0.11);
+      display: flex;
+      align-items: center;
+      min-height: 220px;
+    }
 
-.reviews-slider-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
+    .reviews-slider-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+      align-items: center;
+    }
 
-.review-slide {
-  min-width: 100%;
-  box-sizing: border-box;
-  padding: 0 8px;
-}
+    .review-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 32px;
+      color: var(--fg);
+      text-shadow: 0 1px 4px rgba(30,17,47,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      min-height: 180px;
+    }
 
-.reviews-slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  z-index: 10;
-  border-radius: 50%;
-  background: var(--card);
-  color: var(--primary);
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
+    .review-slide h3 {
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .review-slide span {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.1em;
+      margin-right: 8px;
+    }
+    .reviews-slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      z-index: 10;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2e1847 60%, #a21caf 100%);
+      color: var(--primary);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 rgba(236,72,153,0.08);
+      border: 1.5px solid var(--primary);
+      transition: background 0.2s, color 0.2s;
+    }
 
-.reviews-slider-arrow.left { left: 0; }
-.reviews-slider-arrow.right { right: 0; }
+    .reviews-slider-arrow.left { left: 0; }
+    .reviews-slider-arrow.right { right: 0; }
 
-.reviews-slider-arrow:hover {
-  background: var(--primary);
-  color: #fff;
-}
+    .reviews-slider-arrow:hover {
+      background: var(--primary);
+      color: #fff;
+    }
   </style>
 
   <!-- Schema.org: LocalBusiness -->
@@ -726,7 +773,7 @@
     "telephone": "+61 400 000 000",
     "priceRange": "$$",
     "openingHoursSpecification": [
-      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"22:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"17:00","closes":"23:00"},
       {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"10:00","closes":"23:30"},
       {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"23:00"}
     ]
@@ -771,7 +818,7 @@
           <h1 class="animate-fade-in-up">Premium Açaí Bowls & Pancake Bites — made fresh daily.</h1>
           <p class="animate-fade-in-up">
             Welcome to <strong>Yalla Açai!</strong> — where bold flavours, fresh ingredients and good vibes meet. 
-            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. Order online or visit our Rydalmere store.
+            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. Order from Uber Eats or visit our Rydalmere store.
           </p>
           <div class="pills animate-fade-in">
             <span class="pill">100% Premium Açaí</span>
@@ -780,7 +827,7 @@
             <span class="pill">Gluten-Free Friendly</span>
           </div>
           <div class="hero-ctas animate-scale-in">
-            <a class="btn btn-primary" href="#order">Order Online ▸</a>
+            <a class="btn btn-primary" href="#order">Order from Uber Eats ▸</a>
             <a class="btn btn-secondary" href="#menu">View Menu</a>
           </div>
           <div class="trust animate-fade-in">
@@ -872,7 +919,7 @@
     <section id="order">
       <div class="two-col">
         <div class="card reveal-left">
-          <h2 style="font-size: 32px; margin-bottom: 16px;">Order Online or Pickup</h2>
+          <h2 style="font-size: 32px; margin-bottom: 16px;">Order from Uber Eats or Pickup</h2>
           <p style="color: var(--muted); margin-bottom: 24px;">Order now for pickup or plan ahead. Get your favorite açaí bowls, smoothies, and pancake bites quickly and easily.</p>
           <div style="display: flex; gap: 16px; flex-wrap: wrap;">
             <a class="btn btn-primary" href="#">Start Order ▸</a>
@@ -881,28 +928,26 @@
         </div>
         
 <div class="reviews-slider" id="reviews-slider">
-  <button class="slider-arrow left" id="prev-slide">‹</button>
-  <div class="reviews-slider" id="reviews-slider">
   <button class="reviews-slider-arrow left" type="button" aria-label="Previous review">&#10094;</button>
 
   <div class="reviews-slider-track">
     <!-- Review 1 -->
     <div class="review-slide">
       <h3>"Yalla Açai is all round perfect!"</h3>
-      <p>Great açaí, great people, great service, and convenient location. Must try!</p>
+      <p>Great acai, great people, great service, and convenient location. Must try!</p>
       <div><span>★★★★★</span> Christian Zeater</div>
     </div>
     <!-- Review 2 -->
     <div class="review-slide">
-      <h3>"The best açaí bowl I've had in Sydney!"</h3>
-      <p>Super fresh, generous toppings, and friendly staff. Highly recommend!</p>
-      <div><span>★★★★★</span> Alicia Tran</div>
+      <h3>"Good service straight to the point."</h3>
+      <p>Easy to read menu. And quick serve. easy 5 star</p>
+      <div><span>★★★★★</span> Big Base</div>
     </div>
     <!-- Review 3 -->
     <div class="review-slide">
-      <h3>"Absolutely delicious and great value."</h3>
-      <p>My go-to spot for a healthy treat. The pancake bites are a must-try!</p>
-      <div><span>★★★★★</span> Jorge Mendez</div>
+      <h3>"Great outdoor seating and area."</h3>
+      <p>Beautiful vibe and atmosphere. The açai and pancake bites are so yum! Can’t get enough of this place.</p>
+      <div><span>★★★★★</span> Micheal Saba</div>
     </div>
     </div>
 
@@ -922,7 +967,7 @@
           <div style="margin-bottom: 24px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
               <span>Mon–Thu:</span>
-              <span>10:00–22:00</span>
+              <span>17:00–23:00</span>
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
               <span>Fri–Sat:</span>
@@ -1058,10 +1103,10 @@
       const scrolled = window.pageYOffset;
       
       if (scrolled > 100) {
-        header.style.background = 'rgba(254, 247, 255, 0.95)';
-        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+        header.style.background = 'rgba(30, 17, 47, 0.97)';
+        header.style.boxShadow = '0 4px 20px rgba(236,72,153,0.13)';
       } else {
-        header.style.background = 'rgba(254, 247, 255, 0.8)';
+        header.style.background = 'rgba(30, 17, 47, 0.85)';
         header.style.boxShadow = 'none';
       }
     }
