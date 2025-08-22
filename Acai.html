@@ -840,19 +840,19 @@
   }
 
   /* Chat panel */
-  .chat-panel {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #1a0b2e, #16213e);
-    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    border-left: 2px solid rgba(233, 30, 99, 0.3);
-  }
+.chat-panel {
+  position: fixed;
+  top: 70px; /* offset to leave space below navbar */
+  right: -100%;
+  width: 100%;
+  height: calc(100vh - 90px); /* leave a gap at bottom */
+  background: linear-gradient(135deg, #1a0b2e, #16213e);
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid rgba(233, 30, 99, 0.3);
+}
 
   .chat-panel.open {
     right: 0;
@@ -2078,7 +2078,7 @@ They're called a "superfood" because they're packed with antioxidants and fiber.
 Try our new Summer Sunshine Bowl with mango & coconut! Limited time only. 😍<br><br>Want to join our açai adventure?`, ["Açai Fun Fact", "Follow Us!", "Back"]);
         } else if (option === "Follow Us!") {
           botSay(`📱 <strong>Let's be friends!</strong><br>
-Follow us on Instagram <a href="https://instagram.com/yallaacai" target="_blank" style="color:#4caf50;">@yallaacai</a> for giveaways, açai art, and more!<br>
+Follow us on Instagram <a href="https://www.instagram.com/yalla.acai/" target="_blank" style="color:#4caf50;">@yallaacai</a> for giveaways, açai art, and more!<br>
 Tag us in your açai bowl photos for a chance to win a free topping!<br><br>Want more fun?`, ["Açai Fun Fact", "Seasonal Specials", "Back"]);
         }
         break;
