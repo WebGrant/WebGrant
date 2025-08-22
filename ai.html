@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yalla Açai Chatbot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: white;
+  }
+
+  /* Floating chat button */
+  .chat-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #e91e63, #9c27b0);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.6);
+  }
+
+  .chat-button.active {
+    background: linear-gradient(45deg, #4caf50, #2e7d32);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+  }
+
+  /* Chat panel */
+  .chat-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a0b2e, #16213e);
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid rgba(233, 30, 99, 0.3);
+  }
+
+  .chat-panel.open {
+    right: 0;
+  }
+
+  /* Desktop specific styles */
+  @media (min-width: 768px) {
+    .chat-panel {
+      width: 450px;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Chat header */
+  .chat-header {
+    background: linear-gradient(45deg, #9c27b0, #e91e63);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+  }
+
+  .close-chat {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+
+  .close-chat:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Chat container */
+  #chat-container {
+    flex: 1;
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message {
+    max-width: 85%;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 1.5rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .bot-message {
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
+    align-self: flex-start;
+    border-bottom-left-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(156, 39, 176, 0.3);
+  }
+
+  .user-message {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    align-self: flex-end;
+    border-bottom-right-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+  }
+
+  /* Scrollbar styling */
+  #chat-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #chat-container::-webkit-scrollbar-track {
+    background: rgba(22, 33, 62, 0.5);
+  }
+
+  #chat-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #e91e63, #9c27b0);
+    border-radius: 10px;
+  }
+
+  /* Option buttons */
+  .options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  }
+
+  .option-btn {
+    background: linear-gradient(45deg, #e91e63, #ad1457);
+    border: none;
+    border-radius: 1.2rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    flex: 1 1 calc(50% - 0.6rem);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+    transform: scale(1);
+  }
+
+  .option-btn:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+  }
+
+  .option-btn.selected {
+    background: linear-gradient(45deg, #4caf50, #2e7d32);
+    font-weight: 700;
+    animation: selectPulse 0.6s ease-out;
+  }
+
+  .option-btn:disabled {
+    background: linear-gradient(45deg, #424242, #212121);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .option-btn.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+    pointer-events: none;
+  }
+
+  /* Order summary */
+  #order-summary {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(156, 39, 176, 0.2));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeInScale 0.6s ease-out forwards;
+  }
+
+  #order-summary strong {
+    color: #4caf50;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 767px) {
+    .chat-button {
+      width: 55px;
+      height: 55px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .chat-header {
+      font-size: 1.3rem;
+      padding: 1.2rem;
+    }
+
+    .message {
+      max-width: 90%;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .option-btn {
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+    }
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0.3;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes selectPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .chat-button.pulse {
+    animation: pulse 2s infinite;
+  }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
+    border-radius: 1.5rem;
+    border-bottom-left-radius: 0.5rem;
+    align-self: flex-start;
+    opacity: 0;
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    animation: typingDot 1.5s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typingDot {
+    0%, 60%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    30% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Chat Button -->
+<button class="chat-button pulse" id="chatBtn" aria-label="Open chat">
+  💬
+</button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <button class="close-chat" id="closeChat" aria-label="Close chat">×</button>
+    Yalla Açai Assistant
+  </div>
+  
+  <div id="chat-container" aria-live="polite" aria-atomic="false"></div>
+</div>
+
+<script>
+(() => {
+  // Chat panel controls
+  const chatBtn = document.getElementById('chatBtn');
+  const chatPanel = document.getElementById('chatPanel');
+  const closeChat = document.getElementById('closeChat');
+  const chatContainer = document.getElementById('chat-container');
+
+  let chatInitialized = false;
+
+  // Toggle chat panel
+  function toggleChat() {
+    const isOpen = chatPanel.classList.contains('open');
+    if (isOpen) {
+      chatPanel.classList.remove('open');
+      chatBtn.classList.remove('active');
+      chatBtn.innerHTML = '💬';
+      chatBtn.classList.add('pulse');
+    } else {
+      chatPanel.classList.add('open');
+      chatBtn.classList.add('active');
+      chatBtn.innerHTML = '💬';
+      chatBtn.classList.remove('pulse');
+      
+      if (!chatInitialized) {
+        initializeChat();
+        chatInitialized = true;
+      }
+    }
+  }
+
+  chatBtn.addEventListener('click', toggleChat);
+  closeChat.addEventListener('click', toggleChat);
+
+  // Close chat when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 767 && 
+        chatPanel.classList.contains('open') && 
+        !chatPanel.contains(e.target) && 
+        e.target !== chatBtn) {
+      toggleChat();
+    }
+  });
+
+  // Chatbot menu/FAQ/fun/feedback states
+  const states = {
+    WELCOME: 'welcome',
+    MENU_GUIDE: 'menu_guide',
+    FAQ: 'faq',
+    FUN_FACTS: 'fun_facts',
+    PROMOTIONS: 'promotions',
+    FEEDBACK: 'feedback',
+    FEEDBACK_WAIT: 'feedback_wait',
+    FEEDBACK_THANKS: 'feedback_thanks',
+  };
+  let state = states.WELCOME;
+  let currentOptions = [];
+
+  // Utility: scroll chat to bottom
+  function scrollToBottom() {
+    setTimeout(() => {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 100);
+  }
+
+  // Utility: disable previous option buttons
+  function disablePreviousOptions() {
+    const previousOptions = document.querySelectorAll('.options-container:not(:last-child) .option-btn');
+    previousOptions.forEach(btn => {
+      btn.disabled = true;
+      btn.classList.add('fade-out');
+    });
+  }
+
+  // Utility: show typing indicator
+  function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.classList.add('typing-indicator');
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = `
+      <div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    `;
+    chatContainer.appendChild(typingDiv);
+    scrollToBottom();
+    return typingDiv;
+  }
+
+  // Utility: remove typing indicator
+  function removeTypingIndicator() {
+    const typing = document.getElementById('typing-indicator');
+    if (typing) {
+      typing.remove();
+    }
+  }
+
+  // Utility: create message element with delay
+  function createMessage(text, isBot = true, options = null, delay = 1000) {
+    if (isBot) {
+      const typingIndicator = showTypingIndicator();
+      
+      setTimeout(() => {
+        removeTypingIndicator();
+        
+        const msg = document.createElement('div');
+        msg.classList.add('message');
+        msg.classList.add(isBot ? 'bot-message' : 'user-message');
+        msg.setAttribute('role', isBot ? 'alert' : 'presentation');
+        msg.innerHTML = text;
+        chatContainer.appendChild(msg);
+
+        if (options && options.length) {
+          setTimeout(() => {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.classList.add('options-container');
+            currentOptions = options; // Store current options
+            
+            options.forEach(opt => {
+              const btn = document.createElement('button');
+              btn.classList.add('option-btn');
+              btn.textContent = opt;
+              btn.setAttribute('type', 'button');
+              btn.addEventListener('click', () => handleOptionClick(opt, btn));
+              optionsContainer.appendChild(btn);
+            });
+            chatContainer.appendChild(optionsContainer);
+            scrollToBottom();
+          }, 200);
+        }
+        scrollToBottom();
+      }, delay);
+    } else {
+      const msg = document.createElement('div');
+      msg.classList.add('message', 'user-message');
+      msg.textContent = text;
+      chatContainer.appendChild(msg);
+      scrollToBottom();
+    }
+  }
+
+  // Utility: add user message
+  function addUserMessage(text) {
+    const msg = document.createElement('div');
+    msg.classList.add('message', 'user-message');
+    msg.textContent = text;
+    chatContainer.appendChild(msg);
+    scrollToBottom();
+  }
+
+  // Track menu/submenu stack for navigation
+  let menuStack = [];
+
+  // Helper to get current submenu path as array
+  function getMenuPath() {
+    return [...menuStack];
+  }
+
+  // Helper to set correct state and options on "Back" or "Menu Guide"
+  function handleBackOrMenuGuide(fromFAQ) {
+    // If we just came from FAQ and there's a submenu stack, restore previous menu
+    if (fromFAQ && menuStack.length > 0) {
+      // Get previous menu/submenu
+      const prevMenu = menuStack[menuStack.length - 1];
+      // Pop FAQ from stack if present
+      if (prevMenu === "FAQ") menuStack.pop();
+      // Now show the correct submenu:
+      const currentMenu = menuStack[menuStack.length - 1];
+      if (!currentMenu) {
+        state = states.WELCOME;
+        botWelcomeOptions();
+      } else if (currentMenu === "Popular Combos") {
+        state = states.MENU_GUIDE;
+        botSay(`<strong>Customer Favourites & Prices:</strong><br>
+• Small Açai Cup — $18.50<br>
+• Large Açai Bowl — $24.50<br>
+• OG Pancake Bites + Strawberries — $21.50<br>
+• Pancake Bites for 2 (w/ Fruit) — $40.00<br>
+• Sauced Up Strawberry Cup — $14.50<br>
+• Sauced Up Banana Cup — $14.50<br>
+• Dubai Chocolate Bar (Large Only) — $34.00<br><br>
+Want to check opening hours or where to find us?`, ["Opening Hours", "Location & Directions", "Back"]);
+      } else if (currentMenu === "Bases") {
+        state = states.MENU_GUIDE;
+        botSay(`<strong>Açai Bases:</strong><br>
+• Classic Açai (our signature!)<br>
+• Pitaya (Dragon Fruit) 🌺<br>
+• Green Açai (with spinach & kale, super healthy!)<br>
+All bases are dairy-free and loaded with antioxidants! 🥄<br><br>Want to know about toppings, drizzles, vegan/healthy options, or popular combos?`, ["Toppings", "Drizzles", "Vegan/Healthy Options", "Popular Combos", "Back"]);
+      } else if (currentMenu === "Toppings") {
+        state = states.MENU_GUIDE;
+        botSay(`<strong>Yummy Toppings:</strong><br>
+Granola, banana, strawberries, blueberries, chia seeds, coconut flakes, almonds, and more! 🍌🍓<br>
+Mix and match for your perfect bowl.<br><br>Want to hear about drizzles, vegan/healthy options, or popular combos?`, ["Drizzles", "Vegan/Healthy Options", "Popular Combos", "Back"]);
+      } else if (currentMenu === "Drizzles") {
+        state = states.MENU_GUIDE;
+        botSay(`<strong>Sweet Drizzles:</strong><br>
+Honey, agave syrup, peanut butter, chocolate sauce, caramel... drizzle away! 🍯<br>
+Ask for extra if you love it sticky!<br><br>Want to explore vegan/healthy options or popular combos?`, ["Vegan/Healthy Options", "Popular Combos", "Back"]);
+      } else if (currentMenu === "Vegan/Healthy Options") {
+        state = states.MENU_GUIDE;
+        botSay(`<strong>Vegan & Healthy Add-ons:</strong><br>
+Vegan granola, almond milk, coconut yogurt, fresh fruit. All bases are vegan! 🥥🌱<br>
+We make it easy to eat clean and green.<br><br>Want to see popular combos?`, ["Popular Combos", "Back"]);
+      } else if (currentMenu === "Menu Guide") {
+        state = states.MENU_GUIDE;
+        botMenuGuide();
+      } else {
+        // Default to main menu
+        state = states.WELCOME;
+        botWelcomeOptions();
+      }
+    } else {
+      // If no submenu stack, just go to main menu or menu guide
+      if (fromFAQ) {
+        state = states.WELCOME;
+        botWelcomeOptions();
+      } else {
+        state = states.MENU_GUIDE;
+        botMenuGuide();
+      }
+    }
+  }
+
+  // Handle option button clicks
+  function handleOptionClick(option, buttonElement) {
+    // Add selected animation
+    buttonElement.classList.add('selected');
+    setTimeout(() => {
+      disablePreviousOptions();
+    }, 300);
+    addUserMessage(option);
+
+    // Handle FAQ shortcuts from any submenu
+    if (
+      option === "Opening Hours" ||
+      option === "Location & Directions" ||
+      option === "Parking" ||
+      option === "Delivery" ||
+      option === "Dietary Info"
+    ) {
+      // Push FAQ to menuStack if not already there
+      if (menuStack[menuStack.length - 1] !== "FAQ") menuStack.push("FAQ");
+      state = states.FAQ;
+      // Determine where we came from for navigation
+      let backOptions = [];
+      let prevMenu = menuStack.length > 1 ? menuStack[menuStack.length - 2] : null;
+      // Always allow Main Menu and Menu Guide
+      backOptions = ["Back", "Menu Guide", "Main Menu"];
+      if (option === "Opening Hours") {
+        botSay(`⏰ <strong>Our Hours (Rydalmere):</strong><br>
+Monday–Thursday: 5 AM – 11 PM<br>
+Friday: 2 PM – 1 AM<br>
+Saturday: 12 PM – 1 AM<br>
+Sunday: 12 PM – 11 PM<br><br>Need directions or menu details?`, backOptions);
+      } else if (option === "Location & Directions") {
+        botSay(`📍 <strong>Where to find us:</strong><br>
+215–221 Victoria Road, Rydalmere NSW 2116 (under the bridge, near Yallamundi Station)<br>
+We're close to Anna Maria King Park and Western Sydney Uni.<br><br>Want opening hours or our menu?`, backOptions);
+      } else if (option === "Parking") {
+        botSay(`🚗 <strong>Parking Info:</strong><br>
+Free parking is available in the mall parking garage.<br>
+Street parking is also nearby.<br><br>Want anything else?`, backOptions);
+      } else if (option === "Delivery") {
+        botSay(`🛵 <strong>Order Online:</strong><br>
+You can order Yalla Açai directly on <a href="https://www.ubereats.com/au/store/yalla-acai!-rydalmere/N-cnQUY-VoOcm_nRGY2VlQ?srsltid=AfmBOoq7QRb5ghIXFXyhHAxQHMu4rqb1zdA0pxZ0TMv8YK3KbLytuSpP" target="_blank" style="color:#4caf50;text-decoration:underline;">Uber Eats</a>!<br>
+Freshness delivered to your door.<br><br>Need more info?`, backOptions);
+      } else if (option === "Dietary Info") {
+        botSay(`🥗 <strong>Dietary Info:</strong><br>
+All our bases are vegan and gluten-free!<br>
+We offer nut-free and sugar-free options.<br>
+Ask our team if you have allergies.<br><br>Want more FAQs?`, backOptions);
+      }
+      return;
+    }
+
+    // Handle navigation for Back, Menu Guide, and Main Menu after FAQ or submenu
+    if (option === "Back") {
+      // Remove last menu from stack
+      if (menuStack.length > 0) menuStack.pop();
+      // If we just came from FAQ, restore previous menu/submenu
+      handleBackOrMenuGuide(true);
+      return;
+    }
+    if (option === "Menu Guide") {
+      // Jump to menu guide, clear stack to just Menu Guide
+      menuStack = ["Menu Guide"];
+      state = states.MENU_GUIDE;
+      botMenuGuide();
+      return;
+    }
+    if (option === "Main Menu") {
+      // Clear stack, go to main menu
+      menuStack = [];
+      state = states.WELCOME;
+      botWelcomeOptions();
+      return;
+    }
+
+    // Handle "Back" universally for all submenus
+    switch (state) {
+      case states.WELCOME:
+        if (option === "Menu Guide") {
+          state = states.MENU_GUIDE;
+          botMenuGuide();
+        } else if (option === "FAQs") {
+          state = states.FAQ;
+          botFAQ();
+        } else if (option === "Fun Facts") {
+          state = states.FUN_FACTS;
+          botFunFacts();
+        } else if (option === "Promotions") {
+          state = states.PROMOTIONS;
+          botPromotions();
+        }
+        break;
+      case states.MENU_GUIDE:
+        // Push menu path for submenu navigation
+        if (
+          option === "Bases" ||
+          option === "Toppings" ||
+          option === "Drizzles" ||
+          option === "Vegan/Healthy Options" ||
+          option === "Popular Combos"
+        ) {
+          menuStack.push(option);
+        }
+        if (option === "Bases") {
+          state = states.MENU_GUIDE;
+          botSay(`<strong>Açai Bases:</strong><br>
+• Classic Açai (our signature!)<br>
+• Pitaya (Dragon Fruit) 🌺<br>
+• Green Açai (with spinach & kale, super healthy!)<br>
+All bases are dairy-free and loaded with antioxidants! 🥄<br><br>Want to know about toppings, drizzles, vegan/healthy options, or popular combos?`, ["Toppings", "Drizzles", "Vegan/Healthy Options", "Popular Combos", "Back"]);
+        } else if (option === "Toppings") {
+          state = states.MENU_GUIDE;
+          botSay(`<strong>Yummy Toppings:</strong><br>
+Granola, banana, strawberries, blueberries, chia seeds, coconut flakes, almonds, and more! 🍌🍓<br>
+Mix and match for your perfect bowl.<br><br>Want to hear about drizzles, vegan/healthy options, or popular combos?`, ["Drizzles", "Vegan/Healthy Options", "Popular Combos", "Back"]);
+        } else if (option === "Drizzles") {
+          state = states.MENU_GUIDE;
+          botSay(`<strong>Sweet Drizzles:</strong><br>
+Honey, agave syrup, peanut butter, chocolate sauce, caramel... drizzle away! 🍯<br>
+Ask for extra if you love it sticky!<br><br>Want to explore vegan/healthy options or popular combos?`, ["Vegan/Healthy Options", "Popular Combos", "Back"]);
+        } else if (option === "Vegan/Healthy Options") {
+          state = states.MENU_GUIDE;
+          botSay(`<strong>Vegan & Healthy Add-ons:</strong><br>
+Vegan granola, almond milk, coconut yogurt, fresh fruit. All bases are vegan! 🥥🌱<br>
+We make it easy to eat clean and green.<br><br>Want to see popular combos?`, ["Popular Combos", "Back"]);
+        } else if (option === "Popular Combos") {
+          state = states.MENU_GUIDE;
+          botSay(`<strong>Customer Favourites & Prices:</strong><br>
+• Small Açai Cup — $18.50<br>
+• Large Açai Bowl — $24.50<br>
+• OG Pancake Bites + Strawberries — $21.50<br>
+• Pancake Bites for 2 (w/ Fruit) — $40.00<br>
+• Sauced Up Strawberry Cup — $14.50<br>
+• Sauced Up Banana Cup — $14.50<br>
+• Dubai Chocolate Bar (Large Only) — $34.00<br><br>
+Want to check opening hours or where to find us?`, ["Opening Hours", "Location & Directions", "Back"]);
+        }
+        break;
+      case states.FAQ:
+        // FAQ handled above, nothing else needed
+        break;
+      case states.FUN_FACTS:
+        if (option === "Back") {
+          state = states.WELCOME;
+          botWelcomeOptions();
+        } else if (option === "Açai Fun Fact") {
+          botSay(`🎉 <strong>Did you know?</strong><br>
+Açai berries grow on palm trees in the Amazon rainforest! 🌴<br>
+They're called a "superfood" because they're packed with antioxidants and fiber.<br><br>Want another fun thing?`, ["Seasonal Specials", "Follow Us!", "Back"]);
+        } else if (option === "Seasonal Specials") {
+          botSay(`🍓 <strong>Seasonal Promotion:</strong><br>
+Try our new Summer Sunshine Bowl with mango & coconut! Limited time only. 😍<br><br>Want to join our açai adventure?`, ["Açai Fun Fact", "Follow Us!", "Back"]);
+        } else if (option === "Follow Us!") {
+          botSay(`📱 <strong>Let's be friends!</strong><br>
+Follow us on Instagram <a href="https://instagram.com/yallaacai" target="_blank" style="color:#4caf50;">@yallaacai</a> for giveaways, açai art, and more!<br>
+Tag us in your açai bowl photos for a chance to win a free topping!<br><br>Want more fun?`, ["Açai Fun Fact", "Seasonal Specials", "Back"]);
+        }
+        break;
+      case states.PROMOTIONS:
+        if (option === "Back") {
+          state = states.WELCOME;
+          botWelcomeOptions();
+        } else if (option === "Loyalty Program") {
+          botSay(`🌟 <strong>Loyalty Card:</strong><br>
+Buy 9 bowls, get the 10th FREE!<br>
+Pick up your card in-store and start collecting stamps today.<br><br>Want to know about events or discounts?`, ["Current Discounts", "Special Events", "Back"]);
+        } else if (option === "Current Discounts") {
+          botSay(`🎁 <strong>Current Discount:</strong><br>
+Student Discount: 10% off with student ID.<br>
+Follow us on social media for flash deals!<br><br>Anything else?`, ["Loyalty Program", "Special Events", "Back"]);
+        } else if (option === "Special Events") {
+          botSay(`🎉 <strong>Special Events:</strong><br>
+Join us for Açai Happy Hour every Friday 4–6pm!<br>
+Free toppings and games for all ages.<br><br>Want to learn more?`, ["Loyalty Program", "Current Discounts", "Back"]);
+        }
+        break;
+      case states.FEEDBACK:
+        // Start feedback collector
+        state = states.FEEDBACK_WAIT;
+        // Remove any previous feedback container if exists
+        const oldContainer = document.getElementById('feedbackContainer');
+        if (oldContainer) oldContainer.remove();
+        // Show bot prompt, then add feedback input immediately after
+        botSay("We'd love your feedback! 💜<br>How would you rate your Yalla Açai experience today? (1 = not great, 5 = amazing!)<br>Or type a short message below:", null, 600);
+        // Add feedback input and button directly after botSay, so it's always visible
+        // Wait for the bot message to be appended before adding the input (sync, not delayed)
+        // Use a MutationObserver to ensure input is appended after bot message if needed, or append immediately
+        // We'll append synchronously after botSay
+        // Create feedback container
+        const inputDiv = document.createElement('div');
+        inputDiv.id = "feedbackContainer";
+        inputDiv.style.marginTop = "0.7rem";
+        inputDiv.innerHTML = `
+          <input id="feedbackInput" type="text" placeholder="Type your feedback..." style="width:100%; padding:0.7rem; border-radius:1.2rem; border:none; font-size:1rem; margin:0.5rem 0; background:#fff; color:#222;" autocomplete="off" />
+          <button id="submitFeedback" class="option-btn" style="width:100%;">Send Feedback</button>
+        `;
+        chatContainer.appendChild(inputDiv);
+        scrollToBottom();
+        // Focus input field
+        setTimeout(() => {
+          const feedbackInput = document.getElementById('feedbackInput');
+          if (feedbackInput) feedbackInput.focus();
+        }, 100);
+        document.getElementById('submitFeedback').onclick = () => {
+          const val = document.getElementById('feedbackInput').value.trim();
+          if (val) {
+            addUserMessage(val);
+            inputDiv.remove();
+            state = states.FEEDBACK_THANKS;
+            // Thank you message with reviews link
+            botSay(
+              `Thank you so much for your feedback! 💜 We appreciate you helping us get better every day. Have a berry wonderful day! 🍇<br><br>
+<a href="reviews.html" target="_blank" style="color:#4caf50;text-decoration:underline;">See all reviews here</a>`,
+              null,
+              800
+            );
+            // Open reviews.html in a new tab and pass the feedback via localStorage
+            try {
+              // Get existing reviews
+              let reviews = [];
+              try {
+                reviews = JSON.parse(localStorage.getItem('yallaacai_reviews') || '[]');
+              } catch(e) {}
+              reviews.push({
+                feedback: val,
+                date: new Date().toISOString()
+              });
+              localStorage.setItem('yallaacai_reviews', JSON.stringify(reviews));
+            } catch(e) {/* ignore */}
+            // Open reviews.html in a new tab
+            window.open('reviews.html', '_blank');
+            setTimeout(() => {
+              state = states.WELCOME;
+              botWelcomeOptions();
+            }, 2700);
+          }
+        };
+        break;
+      default:
+        // After sub-menus or feedback, always return to main menu
+        state = states.WELCOME;
+        setTimeout(() => botWelcomeOptions(), 1000);
+        break;
+    }
+  }
+
+  // Bot messages
+  function botSay(text, options = null, delay = 1000) {
+    createMessage(text, true, options, delay);
+  }
+
+  // Main menu options after welcome or after each flow
+  function botWelcomeOptions() {
+    botSay(
+      "What would you like to know today? 😊",
+      ["Menu Guide", "FAQs", "Fun Facts", "Promotions"],
+      900
+    );
+    // Reset navigation stack
+    menuStack = [];
+  }
+
+  // Menu Guide main menu
+  function botMenuGuide() {
+    botSay(
+      "Here's our açai bowl Menu Guide! 🍧<br>What would you like to explore?",
+      ["Bases", "Toppings", "Drizzles", "Vegan/Healthy Options", "Popular Combos", "Back"],
+      800
+    );
+    // Set stack to Menu Guide
+    menuStack = ["Menu Guide"];
+  }
+
+  // FAQ main menu
+  function botFAQ() {
+    botSay(
+      "What would you like to know about Yalla Açai? 🤔",
+      ["Opening Hours", "Location & Directions", "Parking", "Delivery", "Dietary Info", "Back"],
+      800
+    );
+    // Push FAQ to stack for navigation
+    if (menuStack[menuStack.length - 1] !== "FAQ") menuStack.push("FAQ");
+  }
+
+  // Fun facts/social/seasonal
+  function botFunFacts() {
+    botSay(
+      "Let's have some açai fun! What would you like? 😄",
+      ["Açai Fun Fact", "Seasonal Specials", "Follow Us!", "Back"],
+      800
+    );
+  }
+
+  // Promotions/events/loyalty
+  function botPromotions() {
+    botSay(
+      "Check out our special offers and events! 🎉",
+      ["Loyalty Program", "Current Discounts", "Special Events", "Back"],
+      800
+    );
+  }
+
+  // Feedback collector
+  function botFeedback() {
+    // Only show the prompt, input is handled in handleOptionClick for feedback state
+    botSay("We'd love your feedback! 💜<br>How would you rate your Yalla Açai experience today? (1 = not great, 5 = amazing!)<br>Or type a short message below:", null, 600);
+  }
+
+  // Start conversation with welcome and main menu
+  function startConversation() {
+    botSay(
+      "Hey there! 🌟 Welcome to Yalla Açai! I'm your friendly assistant here to guide you through our açai world. ",
+      null,
+      1200
+    );
+    setTimeout(() => {
+      state = states.WELCOME;
+      botWelcomeOptions();
+    }, 1800);
+  }
+
+  // Initialize chat function
+  function initializeChat() {
+    startConversation();
+  }
+})();
+</script>
+</body>
+</html>
