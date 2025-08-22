@@ -23,9 +23,9 @@
       --bg: #181024;
       --fg: #fce7f3;
       --muted: #b48fc2;
-      --primary: #ec4899; /* Vibrant pink */
-      --primary-light: #f472b6;
-      --primary-dark: #a21caf;
+      --primary: #22c55e; /* Vibrant pink */
+      --primary-light: #86efac;
+      --primary-dark: #166534;
       --secondary: #22c55e; /* Vibrant green */
       --secondary-light: #86efac;
       --secondary-dark: #166534;
@@ -362,14 +362,14 @@
 
     .pill {
       padding: 8px 16px;
-      background: rgba(236, 72, 153, 0.18);
-      border: 1px solid rgba(236, 72, 153, 0.32);
+      background: rgba(34, 197, 94, 0.13);
+      border: 1px solid rgba(34, 197, 94, 0.24);
       border-radius: 999px;
       font-size: 14px;
       font-weight: 600;
       color: var(--primary);
       letter-spacing: 0.5px;
-      box-shadow: 0 1px 3px 0 rgba(236,72,153,0.07);
+      box-shadow: 0 1px 3px 0 rgba(34,197,94,0.07);
     }
 
     .pill-green {
@@ -422,7 +422,8 @@
       width: 100%;
       aspect-ratio: 4/5;
       border-radius: 16px;
-      background: linear-gradient(135deg, #3b2250 0%, #a21caf 100%);
+      background: url('ACAI.png');
+      background-position: center;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -751,6 +752,291 @@
       background: var(--primary);
       color: #fff;
     }
+
+        /* Interactive Map Card Styles */
+    .interactive-map-card {
+      background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+      padding: 0 !important;
+      min-height: 0;
+      height: 300px;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      /* Responsive: fallback for mobile */
+      width: 100%;
+      max-width: 100%;
+    }
+    .interactive-map-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      border-radius: 0;
+      min-height: 0;
+      max-height: none;
+      aspect-ratio: unset;
+    }
+    @media (max-width: 768px) {
+      .interactive-map-card {
+        height: 220px;
+        min-height: 180px;
+      }
+    }
+
+      /* Floating chat button */
+  .chat-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #e91e63, #9c27b0);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.6);
+  }
+
+  .chat-button.active {
+    background: linear-gradient(45deg, #4caf50, #2e7d32);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+  }
+
+  /* Chat panel */
+  .chat-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a0b2e, #16213e);
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid rgba(233, 30, 99, 0.3);
+  }
+
+  .chat-panel.open {
+    right: 0;
+  }
+
+  /* Desktop specific styles */
+  @media (min-width: 768px) {
+    .chat-panel {
+      width: 450px;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Chat header */
+  .chat-header {
+    background: linear-gradient(45deg, #9c27b0, #e91e63);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+  }
+
+  .close-chat {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+
+  .close-chat:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Chat container */
+  #chat-container {
+    flex: 1;
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message {
+    max-width: 85%;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 1.5rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+  }
+
+  .bot-message {
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
+    align-self: flex-start;
+    border-bottom-left-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(156, 39, 176, 0.3);
+  }
+
+  .user-message {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    align-self: flex-end;
+    border-bottom-right-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+  }
+
+  /* Input area */
+
+  /* Scrollbar styling */
+  #chat-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #chat-container::-webkit-scrollbar-track {
+    background: rgba(22, 33, 62, 0.5);
+  }
+
+  #chat-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #e91e63, #9c27b0);
+    border-radius: 10px;
+  }
+
+  /* Option buttons */
+  .options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  .option-btn {
+    background: linear-gradient(45deg, #e91e63, #ad1457);
+    border: none;
+    border-radius: 1.2rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    flex: 1 1 calc(50% - 0.6rem);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+  }
+
+  .option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+  }
+
+  .option-btn.selected {
+    background: linear-gradient(45deg, #4caf50, #2e7d32);
+    font-weight: 700;
+  }
+
+  .option-btn:disabled {
+    background: linear-gradient(45deg, #424242, #212121);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Order summary */
+  #order-summary {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(156, 39, 176, 0.2));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #order-summary strong {
+    color: #4caf50;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 767px) {
+
+    .chat-button {
+      width: 55px;
+      height: 55px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .chat-header {
+      font-size: 1.3rem;
+      padding: 1.2rem;
+    }
+
+    .message {
+      max-width: 90%;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+    }
+
+    #input-area {
+      padding: 0.8rem;
+      gap: 0.6rem;
+    }
+
+    #user-input {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    #send-btn {
+      font-size: 1rem;
+      padding: 0 1.2rem;
+    }
+
+    .option-btn {
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+    }
+  }
+
+  /* Pulse animation for chat button */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .chat-button.pulse {
+    animation: pulse 2s infinite;
+  }
   </style>
 
   <!-- Schema.org: LocalBusiness -->
@@ -772,10 +1058,31 @@
     "url": "https://yalla-acai.example/",
     "telephone": "+61 400 000 000",
     "priceRange": "$$",
-    "openingHoursSpecification": [
-      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"17:00","closes":"23:00"},
-      {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"10:00","closes":"23:30"},
-      {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"23:00"}
+    "openingSpecification": [
+{
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+  "opens": "5:00 PM",
+  "closes": "11:00 PM"
+},
+{
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": ["Friday"],
+  "opens": "5:00 PM",
+  "closes": "11:00 PM"
+},
+{
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": ["Saturday"],
+  "opens": "12:00 PM",
+  "closes": "01:00 AM"
+},
+{
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": ["Sunday"],
+  "opens": "12:00 PM",
+  "closes": "1:00 AM"
+}
     ]
   }
   </script>
@@ -809,6 +1116,23 @@
     </div>
   </header>
 
+  <!-- Floating Chat Button -->
+<button class="chat-button pulse" id="chatBtn" aria-label="Open chat">
+  💬
+</button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <button class="close-chat" id="closeChat" aria-label="Close chat">×</button>
+    Yalla Açai Assistant
+  </div>
+  
+  <div id="chat-container" aria-live="polite" aria-atomic="false"></div>
+  
+
+</div>
+
   <main id="top" class="container">
     <!-- Hero Section -->
     <section class="hero">
@@ -818,7 +1142,7 @@
           <h1 class="animate-fade-in-up">Premium Açaí Bowls & Pancake Bites — made fresh daily.</h1>
           <p class="animate-fade-in-up">
             Welcome to <strong>Yalla Açai!</strong> — where bold flavours, fresh ingredients and good vibes meet. 
-            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. Order from Uber Eats or visit our Rydalmere store.
+            Build your dream açaí bowl, try our signature pancake bites, or grab a smoothie on the go. It's more than Açaí. It's a vibe. Order from Uber Eats or visit our Rydalmere store.
           </p>
           <div class="pills animate-fade-in">
             <span class="pill">100% Premium Açaí</span>
@@ -827,7 +1151,7 @@
             <span class="pill">Gluten-Free Friendly</span>
           </div>
           <div class="hero-ctas animate-scale-in">
-            <a class="btn btn-primary" href="#order">Order from Uber Eats ▸</a>
+            <a class="btn btn-primary" href="#order">Order Online ▸</a>
             <a class="btn btn-secondary" href="#menu">View Menu</a>
           </div>
           <div class="trust animate-fade-in">
@@ -839,9 +1163,9 @@
         </div>
         
         <div class="hero-card animate-slide-right animate-float">
-          <div class="hero-image">🥣</div>
+          <div class="hero-image"></div>
           <div>
-            <strong>Signature Bowl:</strong> Açaí base • Fresh Fruits • Granola • Honey drizzle • Coconut flakes
+            <strong>Large Açaí Bowl:</strong> Organic Açaí • Bananas • Granola • Strawberries
           </div>
         </div>
       </div>
@@ -877,17 +1201,17 @@
       
       <div class="two-col">
         <div class="card reveal-left">
-          <div class="pill">Best Seller</div>
-          <h3 style="font-size: 28px; margin: 16px 0;">Customizable Açaí Bowls</h3>
-          <p style="color: var(--muted); margin-bottom: 16px;">Choose your açaí base and load up on fresh fruits, granola, honey, and other toppings. Add-ons available.</p>
-          <div class="menu-image">🥣</div>
+          <div class="pill">Crowd Favourite</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">The OG Pancake Bites + Strawberries</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Twelve pieces of fluffy pancake bites with maple syrup, vanilla ice cream & fresh strawberries.</p>
+          <div class="menu-image">🥞</div>
         </div>
         
         <div class="card reveal-right">
-          <div class="pill">Crowd Favourite</div>
-          <h3 style="font-size: 28px; margin: 16px 0;">Signature Pancake Bites</h3>
-          <p style="color: var(--muted); margin-bottom: 16px;">Fluffy pancake bites topped with fruits, chocolate, nuts, or Nutella. Perfect for sharing.</p>
-          <div class="menu-image">🥞</div>
+          <div class="pill">Best Selling Juice</div>
+          <h3 style="font-size: 28px; margin: 16px 0;">Freshly Squeezed Juice</h3>
+          <p style="color: var(--muted); margin-bottom: 16px;">Refreshing large cup of freshly squeezed juice, bursting with natural flavors.</p>
+          <div class="menu-image">🥣</div>
         </div>
       </div>
       
@@ -965,18 +1289,34 @@
           <p style="color: var(--muted); margin-bottom: 24px;">215–221 Victoria Road, Rydalmere NSW 2116</p>
           
           <div style="margin-bottom: 24px;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span>Mon–Thu:</span>
-              <span>17:00–23:00</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span>Fri–Sat:</span>
-              <span>10:00–23:30</span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span>Sun:</span>
-              <span>12:00–23:00</span>
-            </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Monday:</span>
+    <span>5:00 PM – 11:00 PM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Tuesday:</span>
+    <span>5:00 PM – 11:00 PM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Wednesday:</span>
+    <span>5:00 PM – 11:00 PM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Thursday:</span>
+    <span>5:00 PM – 11:00 PM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Friday:</span>
+    <span>5:00 PM – 11:00 PM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span>Saturday:</span>
+    <span>12:00 PM – 1:00 AM</span>
+  </div>
+  <div style="display: flex; justify-content: space-between;">
+    <span>Sunday:</span>
+    <span>12:00 PM – 1:00 AM</span>
+  </div>
           </div>
           
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -985,14 +1325,16 @@
           </div>
         </div>
         
-        <div class="card reveal-right" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);">
-          <div style="text-align: center;">
-            <div style="font-size: 64px; margin-bottom: 16px;">📍</div>
-            <div style="font-weight: 700; font-size: 20px; margin-bottom: 8px;">Interactive Map</div>
-            <small style="color: var(--muted);">Embed your Google Map here</small>
-          </div>
-        </div>
-      </div>
+<div class="card reveal-right interactive-map-card">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.088890839637!2d151.02744737570617!3d-33.81001907324916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a3014c4f7f89%3A0xe345b3b6e36058ed!2sYalla%20A%C3%A7ai!5e0!3m2!1sen!2sus!4v1755817526912!5m2!1sen!2sus"
+    style="border:0; width:100%; height:100%; display:block;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    aria-label="Google Map showing Yalla Açai location">
+  </iframe>
+</div>
     </section>
 
     <!-- Contact -->
@@ -1263,7 +1605,310 @@
 
       window.addEventListener('resize', closeMenuOnResize);
     })();
+
+    (() => {
+  // Chat panel controls
+  const chatBtn = document.getElementById('chatBtn');
+  const chatPanel = document.getElementById('chatPanel');
+  const closeChat = document.getElementById('closeChat');
+  const chatContainer = document.getElementById('chat-container');
+
+  let chatInitialized = false;
+
+  // Toggle chat panel
+  function toggleChat() {
+    const isOpen = chatPanel.classList.contains('open');
+    if (isOpen) {
+      chatPanel.classList.remove('open');
+      chatBtn.classList.remove('active');
+      chatBtn.innerHTML = '💬';
+      chatBtn.classList.add('pulse');
+    } else {
+      chatPanel.classList.add('open');
+      chatBtn.classList.add('active');
+      chatBtn.innerHTML = '✕';
+      chatBtn.classList.remove('pulse');
+      
+      if (!chatInitialized) {
+        initializeChat();
+        chatInitialized = true;
+      }
+    }
+  }
+
+  chatBtn.addEventListener('click', toggleChat);
+  closeChat.addEventListener('click', toggleChat);
+
+  // Close chat when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 767 && 
+        chatPanel.classList.contains('open') && 
+        !chatPanel.contains(e.target) && 
+        e.target !== chatBtn) {
+      toggleChat();
+    }
+  });
+
+  // Pricing data
+  const pricing = {
+    base: {
+      'Classic Açai': 8.00,
+      'Pitaya (Dragon Fruit)': 9.00,
+      'Green Açai (Spinach & Kale)': 9.50,
+    },
+    size: {
+      Small: 0,
+      Medium: 2.00,
+      Large: 4.00,
+    },
+    toppings: {
+      'Granola': 1.00,
+      'Banana': 1.00,
+      'Strawberries': 1.50,
+      'Blueberries': 1.50,
+      'Chia Seeds': 1.00,
+      'Coconut Flakes': 1.00,
+      'Almonds': 1.50,
+    },
+    drizzles: {
+      'Honey': 0.75,
+      'Agave Syrup': 0.75,
+      'Peanut Butter': 1.25,
+      'Chocolate Sauce': 1.50,
+      'Caramel': 1.50,
+    },
+    veganOptions: {
+      'Vegan Granola': 1.25,
+      'Almond Milk': 0,
+      'Coconut Yogurt': 1.50,
+    }
+  };
+
+  // Conversation states
+  const states = {
+    WELCOME: 'welcome',
+    BASE: 'base',
+    SIZE: 'size',
+    TOPPINGS: 'toppings',
+    DRIZZLES: 'drizzles',
+    VEGAN: 'vegan',
+    REVIEW: 'review',
+    CONFIRM: 'confirm',
+    COMPLETE: 'complete',
+  };
+
+  // Order object to hold selections
+  const order = {
+    base: null,
+    size: null,
+    toppings: [],
+    drizzles: [],
+    veganOptions: [],
+  };
+
+  let state = states.WELCOME;
+
+  // Utility: scroll chat to bottom
+  function scrollToBottom() {
+    setTimeout(() => {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 100);
+  }
+
+  // Utility: create message element
+  function createMessage(text, isBot = true, options = null) {
+    const msg = document.createElement('div');
+    msg.classList.add('message');
+    msg.classList.add(isBot ? 'bot-message' : 'user-message');
+    msg.setAttribute('role', isBot ? 'alert' : 'presentation');
+    msg.innerHTML = text;
+    chatContainer.appendChild(msg);
+
+    if (options && options.length) {
+      const optionsContainer = document.createElement('div');
+      optionsContainer.classList.add('options-container');
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.classList.add('option-btn');
+        btn.textContent = opt;
+        btn.setAttribute('type', 'button');
+        btn.addEventListener('click', () => handleOptionClick(opt));
+        optionsContainer.appendChild(btn);
+      });
+      chatContainer.appendChild(optionsContainer);
+    }
+    scrollToBottom();
+  }
+
+  // Utility: add user message
+  function addUserMessage(text) {
+    const msg = document.createElement('div');
+    msg.classList.add('message', 'user-message');
+    msg.textContent = text;
+    chatContainer.appendChild(msg);
+    scrollToBottom();
+  }
+
+  // Calculate total price
+  function calculateTotal() {
+    let total = 0;
+    if (order.base) total += pricing.base[order.base];
+    if (order.size) total += pricing.size[order.size];
+    order.toppings.forEach(t => total += pricing.toppings[t]);
+    order.drizzles.forEach(d => total += pricing.drizzles[d]);
+    order.veganOptions.forEach(v => total += pricing.veganOptions[v]);
+    return total;
+  }
+
+  // Render order summary for review
+  function renderOrderSummary() {
+    let html = `<div id="order-summary"><strong>Your order so far:</strong><br>`;
+    html += `<strong>Base:</strong> ${order.base || 'None'}<br>`;
+    html += `<strong>Size:</strong> ${order.size || 'None'}<br>`;
+
+    html += `<strong>Toppings:</strong> ${
+      order.toppings.length ? order.toppings.join(', ') : 'None'
+    }<br>`;
+    html += `<strong>Drizzles/Add-ons:</strong> ${
+      order.drizzles.length ? order.drizzles.join(', ') : 'None'
+    }<br>`;
+    html += `<strong>Vegan Options:</strong> ${
+      order.veganOptions.length ? order.veganOptions.join(', ') : 'None'
+    }<br>`;
+    html += `<strong>Total Price:</strong> $${calculateTotal().toFixed(2)}</div>`;
+    return html;
+  }
+
+  // Handle option button clicks
+  function handleOptionClick(option) {
+    switch(state) {
+      case states.BASE:
+        order.base = option;
+        addUserMessage(option);
+        state = states.SIZE;
+        botAskSize();
+        break;
+      case states.SIZE:
+        order.size = option;
+        addUserMessage(option);
+        state = states.TOPPINGS;
+        botAskToppings();
+        break;
+      case states.TOPPINGS:
+        if (option === 'No more toppings') {
+          addUserMessage(option);
+          state = states.DRIZZLES;
+          botAskDrizzles();
+        } else {
+          if (!order.toppings.includes(option)) {
+            order.toppings.push(option);
+            addUserMessage(option);
+            botFriendlyConfirm(`Added ${option} to your toppings. Would you like to add more toppings or proceed?`);
+          }
+        }
+        break;
+      case states.DRIZZLES:
+        if (option === 'No more drizzles') {
+          addUserMessage(option);
+          state = states.VEGAN;
+          botAskVegan();
+        } else {
+          if (!order.drizzles.includes(option)) {
+            order.drizzles.push(option);
+            addUserMessage(option);
+            botFriendlyConfirm(`Yum! Added ${option}. Want to add more drizzles or move on?`);
+          }
+        }
+        break;
+      case states.VEGAN:
+        if (option === 'No vegan options') {
+          addUserMessage(option);
+          state = states.REVIEW;
+          botReviewOrder();
+        } else {
+          if (!order.veganOptions.includes(option)) {
+            order.veganOptions.push(option);
+            addUserMessage(option);
+            botFriendlyConfirm(`Great choice! Added ${option}. Any other vegan options or ready to review?`);
+          }
+        }
+        break;
+      case states.REVIEW:
+        if (option.toLowerCase() === 'confirm order') {
+          addUserMessage(option);
+          state = states.COMPLETE;
+          botCompleteOrder();
+        } else if (option.toLowerCase() === 'edit order') {
+          addUserMessage(option);
+          state = states.BASE;
+          resetOrder();
+          botAskBase();
+        }
+        break;
+    }
+  }
+
+  // Bot messages
+  function botSay(text, options = null) {
+    createMessage(text, true, options);
+  }
+
+  function botFriendlyConfirm(text) {
+    botSay(text);
+  }
+
+  // Start conversation
+  function startConversation() {
+    botSay("Hey there! 🌟 Welcome to Yalla Açai! I'm here to help you build your perfect açai bowl. Let's start with the base. Which base would you like?", Object.keys(pricing.base));
+    state = states.BASE;
+  }
+
+  // Ask for size
+  function botAskSize() {
+    botSay(`Awesome choice! Now, what size would you like?`, Object.keys(pricing.size));
+  }
+
+  // Ask for toppings
+  function botAskToppings() {
+    botSay(`Perfect! Now, choose your toppings. You can select as many as you like. When you're done, just click "No more toppings".`, [...Object.keys(pricing.toppings), 'No more toppings']);
+  }
+
+  // Ask for drizzles/add-ons
+  function botAskDrizzles() {
+    botSay(`Great choices! How about some drizzles or add-ons? Pick your favorites or select "No more drizzles" to continue.`, [...Object.keys(pricing.drizzles), 'No more drizzles']);
+  }
+
+  // Ask for vegan options
+  function botAskVegan() {
+    botSay(`Almost done! Would you like to add any vegan options? Choose any or select "No vegan options" if none.`, [...Object.keys(pricing.veganOptions), 'No vegan options']);
+  }
+
+  // Review order
+  function botReviewOrder() {
+    const summary = renderOrderSummary();
+    botSay(`Here's what you picked so far:<br>${summary}<br><br>Would you like to <strong>Confirm Order</strong> or <strong>Edit Order</strong>?`, ['Confirm Order', 'Edit Order']);
+  }
+
+  // Complete order
+  function botCompleteOrder() {
+    const total = calculateTotal().toFixed(2);
+    botSay(`🎉 Amazing! Thank you so much for your order! Your delicious açai bowl will be ready soon. Your total comes to <strong>${total}</strong>. Have a wonderful day! 🌟✨`);
+  }
+
+  // Reset order for editing
+  function resetOrder() {
+    order.base = null;
+    order.size = null;
+    order.toppings = [];
+    order.drizzles = [];
+    order.veganOptions = [];
+  }
+
+  // Initialize chat function
+  function initializeChat() {
+    startConversation();
+  }
+})();
   </script>
 </body>
 </html>
-  
