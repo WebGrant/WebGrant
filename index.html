@@ -1695,7 +1695,7 @@ document.addEventListener('click', (e) => {
 
         //CODES FOR AI
 
-        emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
+emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
 
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
@@ -1775,7 +1775,6 @@ function selectOption(option) {
             addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
             break;
         case "contact a team member":
-            // context.step = "confirmEmail"; // no longer needed since we're directing to external page
             addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
             addMessage("Is there anything else I can help you with today?", "ai");
             break;
@@ -1787,14 +1786,18 @@ function selectOption(option) {
 function generateReply(input) {
     input = input.toLowerCase();
 
-    // Handle flow-based responses first
+    // Check for quote requests first - this takes priority
+    if (input.includes("quote") || input.includes("free quote") || input.includes("get a quote")) {
+        addMessage('Great! Please fill out our quote form here: <a href="form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>', "ai");
+        addMessage("Is there anything else I can help you with today?", "ai");
+        return;
+    }
+
+    // Handle flow-based responses
     if (context.step === "postFAQ") {
         if (input.includes("package")) {
             context.step = "askProjectTypeForPackage";
             return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
-        } else if (input.includes("quote") || input.includes("website design")) {
-            context.step = "quoteName";
-            return "Great! Let's get started. Your full name?";
         } else {
             return "Please clarify if you want to see our packages or get a quote.";
         }
@@ -1838,181 +1841,16 @@ function generateReply(input) {
         return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
     }
 
-    
-
-    if (context.step === "quoteProjectType") {
-        if (!context.projectType) {
-            if (/portfolio|e-commerce|blog|business|website/.test(input)) {
-                if (input.includes("portfolio")) context.projectType = "portfolio";
-                else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
-                else if (input.includes("blog")) context.projectType = "blog";
-                else context.projectType = input.trim();
-
-                context.step = "quoteWebsiteStyle";
-                return `Website style? (clean, modern, professional)`;
-            } else return "Website type? (portfolio, e-commerce, blog, business)";
-        } else {
-            context.step = "quoteWebsiteStyle";
-            return `Website style? (clean, modern, professional)`;
-        }
-    }
-
-    if (context.step === "quoteWebsiteStyle" || context.step === "askWebsiteStyle") {
+    if (context.step === "askWebsiteStyle") {
         if (!context.websiteStyle) {
             if (/clean|modern|professional/.test(input)) {
                 context.websiteStyle = input.match(/clean|modern|professional/)[0];
-                if (context.step === "quoteWebsiteStyle") {
-                    context.step = "quoteFeatures";
-                    return `Any key features? (contact form, booking, store, etc.) or 'no'`;
-                } else {
-                    context.step = "completed";
-                    return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-                }
-            } else return "Website style? (clean, modern, professional)";
-        } else {
-            if (context.step === "quoteWebsiteStyle") {
-                context.step = "quoteFeatures";
-                return `Any key features? (contact form, booking, store, etc.) or 'no'`;
-            } else {
                 context.step = "completed";
                 return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-            }
-        }
-    }
-
-    if (context.step === "quoteFeatures") {
-        if (!context.features) {
-            if (/no|none/.test(input)) context.features = "no special features";
-            else context.features = input.trim();
-            context.step = "quoteBudget";
-            return `Budget range?`;
-        } else {
-            context.step = "quoteBudget";
-            return `Budget range?`;
-        }
-    }
-
-    if (context.step === "quoteBudget") {
-        if (!context.budget) {
-            context.budget = input.trim();
-            context.step = "quoteTimeline";
-            return `Timeline for launch?`;
-        } else {
-            context.step = "quoteTimeline";
-            return `Timeline for launch?`;
-        }
-    }
-
-    if (context.step === "quoteTimeline") {
-        if (!context.timeline) {
-            context.timeline = input.trim();
-            context.step = "quotePages";
-            return `Number of pages/products?`;
-        } else {
-            context.step = "quotePages";
-            return `Number of pages/products?`;
-        }
-    }
-
-    if (context.step === "quotePages") {
-        if (!context.pages) {
-            context.pages = input.trim();
-            context.step = "quoteColor";
-            return `Preferred colors?`;
-        } else {
-            context.step = "quoteColor";
-            return `Preferred colors?`;
-        }
-    }
-
-    if (context.step === "quoteColor") {
-        if (!context.color) {
-            context.color = input.trim();
-            context.step = "quoteCompetitor";
-            return `Any sites you like?`;
-        } else {
-            context.step = "quoteCompetitor";
-            return `Any sites you like?`;
-        }
-    }
-
-    // Handle "Any sites you like?" flow
-    if (context.step === "quoteCompetitor") {
-        // If the user hasn't answered yet
-        if (!context.competitor) {
-            // If the answer is yes, prompt for link(s)
-            if (/^yes\b|sure|yeah|yep|of course|i do|i have/i.test(input)) {
-                context.competitor = ""; // Mark as expecting links
-                context.step = "quoteCompetitorLinks";
-                return "Please paste the link(s) to the site(s) you like or consider as competitors:";
-            }
-            // If the answer is no, go to preferred platform as usual
-            if (/^no\b|none|nope|don't|do not/i.test(input)) {
-                context.competitor = "no";
-                context.step = "quoteCMS";
-                return `Preferred platform? (WordPress, Shopify, custom)`;
-            }
-            // If user pastes a link directly, accept it and move to email
-            if (/https?:\/\/|www\./i.test(input)) {
-                context.competitor = input.trim();
-                context.step = "quoteEmail";
-                return `Your email?`;
-            }
-            // Otherwise, treat any other input as links and move to email
-            if (input.length > 3) {
-                context.competitor = input.trim();
-                context.step = "quoteEmail";
-                return `Your email?`;
-            }
-            // Otherwise, re-prompt
-            return `Any sites you like? (Reply "yes" to share, "no" to skip)`;
-        } else {
-            // Already have competitor info, go to next step
-            if (context.competitor !== "no") {
-                context.step = "quoteEmail";
-                return `Your email?`;
-            } else {
-                context.step = "quoteCMS";
-                return `Preferred platform? (WordPress, Shopify, custom)`;
-            }
-        }
-    }
-
-    // If expecting competitor links after "yes"
-    if (context.step === "quoteCompetitorLinks") {
-        if (input && input.length > 0) {
-            context.competitor = input.trim();
-            context.step = "quoteEmail";
-            return `Your email?`;
-        } else {
-            return "Please paste the link(s) to the site(s) you like or consider as competitors:";
-        }
-    }
-
-    // Only ask for preferred platform if we don't have competitor websites
-    if (context.step === "quoteCMS") {
-        if (!context.cms) {
-            context.cms = input.trim();
-            context.step = "quoteEmail";
-            return `Your email?`;
-        } else {
-            context.step = "quoteEmail";
-            return `Your email?`;
-        }
-    }
-
-    if (context.step === "quoteEmail") {
-        if (!context.email) {
-            if (input.includes("@") && input.includes(".")) {
-                context.email = input.trim();
-                context.step = "completed";
-                sendQuoteEmail();
-                return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
-            } else return "Please provide a valid email address.";
+            } else return "Website style? (clean, modern, professional)";
         } else {
             context.step = "completed";
-            sendQuoteEmail();
-            return `Thank you, ${context.userName}! We've received your details and will email your personalized quote to ${context.email} shortly.`;
+            return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
         }
     }
 
@@ -2025,15 +1863,7 @@ function generateReply(input) {
         } else return "Please provide a valid email address.";
     }
 
-    // Allow starting a quote even after completed
-    if (context.step === "completed") {
-        if (input.includes("quote") || input.includes("free quote")) {
-            context.step = "quoteName";
-            return "Great! Let's get started. Your full name?";
-        }
-    }
-
-    // Check for specific package price requests first
+    // Check for specific package price requests
     if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
         return "Our Basic Package starts at $300, ideal for small startups.";
     }
@@ -2051,32 +1881,13 @@ function generateReply(input) {
     if (/services|options|what do you do|offer/.test(input)) {
         return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
     }
-// Step 1: User asks about price
-if (/price|cost|how much/.test(input)) {
-    context.step = "askQuote"; // Set step to track next answer
-    addMessage("Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Would you like a quote?", "ai");
-    return;
-}
 
-// Step 2: User responds yes to quote
-if (context.step === "askQuote" && /yes|sure|okay/i.test(input)) {
-    addMessage('Great! Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here</a>', "ai");
-    addMessage("Is there anything else I can help you with today?", "ai");
-    context.step = null; // Reset step
-    return;
-}
+    // Handle pricing questions
+    if (/price|cost|how much/.test(input)) {
+        return 'Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/forms.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>';
+    }
 
-// Optional: Handle "no" response
-if (context.step === "askQuote" && /no|not now/i.test(input)) {
-    addMessage("No problem! Let me know if you have any other questions.", "ai");
-    context.step = null; // Reset step
-    return;
-}
     if (/portfolio|examples|work/.test(input)) {
-        // Avoid general portfolio response if in quote flow steps
-        if (context.step.startsWith("quote")) {
-            return "Great choice! What style do you prefer for your website? (clean, modern, professional)";
-        }
         return "You can view our portfolio online to see examples of our projects.";
     }
     if (/contact|reach|email/.test(input)) {
@@ -2087,37 +1898,12 @@ if (context.step === "askQuote" && /no|not now/i.test(input)) {
     }
 
     // Trigger contact flow if user asks to speak to a representative
-if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
-    context.step = "confirmEmail";
-    addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
-}
+    if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
+        return 'Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>';
+    }
 
-    // Completed or fallback
+    // Default response
     return "I'm here to help! What else would you like to know or discuss?";
-}
-
-function sendQuoteEmail() {
-    // Prepare email parameters for quote, ensuring keys match EmailJS template
-    const templateParams = {
-        from_name: context.userName,
-        project_type: context.projectType,
-        website_style: context.websiteStyle,
-        features: context.features,
-        reply_to: context.email,
-        package: context.package || "Not specified",
-        message: conversationTranscript
-    };
-
-    // Replace 'template_qmeovfp' with your actual quote template ID if different
-    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
-        .then(() => {
-            console.log("Quote email sent successfully.");
-        }, (error) => {
-            console.error("Failed to send quote email:", error);
-        })
-        .catch((err) => {
-            console.error("Error in sending quote email (catch):", err);
-        });
 }
 
 function sendContactEmail() {
@@ -2149,11 +1935,14 @@ function chat() {
 
     addMessage(userInput, "user");
     const reply = generateReply(userInput);
-    addMessage(reply, "ai");
+    if (reply) { // Only add message if there's a reply
+        addMessage(reply, "ai");
+    }
 
     userInputField.value = "";
     userInputField.focus();
 }
+
 document.getElementById("openChatBtn").addEventListener("click", () => {
     const panel = document.getElementById("chatPanel");
     if (panel.style.right === "0px") {
