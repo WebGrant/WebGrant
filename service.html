@@ -25,6 +25,9 @@
       --border: #404040;
       --success: #4ade80;
       --error: #f87171;
+      --neon-blue: #00fff7;
+      --neon-pink: #ff00c8;
+      --electric-purple: #9d4edd;
     }
 
     * {
@@ -68,18 +71,19 @@
       top: 6px;
     }
 
-    /* Header - Mobile First Approach */
-    .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 26, 26, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-    }
+/* Make the header/navbar sticky */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26, 26, 26, 0.154); /* Slightly more opaque for better visibility */
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  /* Remove any transform properties that might be interfering */
+}
 
     .nav {
       display: flex;
@@ -91,20 +95,20 @@
       position: relative;
     }
 
-  nav ul li a.active {
-    color: #ff00c8;
-    text-shadow: 0 0 10px #ff00c8;
-  }
-  nav ul li a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #00fff7, #ff00c8);
-    border-radius: 1px;
-  }
+    nav ul li a.active {
+      color: #ff00c8;
+      text-shadow: 0 0 10px #ff00c8;
+    }
+    nav ul li a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00fff7, #ff00c8);
+      border-radius: 1px;
+    }
 
     .logo-container {
       display: flex;
@@ -373,15 +377,15 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
-      transition: all 0.3s ease;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       background: linear-gradient(135deg, var(--bg-card) 0%, #2d3748 100%);
       box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
     }
 
     .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       border-color: #4a9eff;
     }
 
@@ -389,7 +393,6 @@
       background: linear-gradient(135deg, var(--bg-card) 0%, #2d3748 100%);
       box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
     }
-
 
     .service-title {
       font-size: 1.5rem;
@@ -509,157 +512,760 @@
       border: 1px solid rgba(74, 158, 255, 0.3);
     }
 
-    /* Info sections */
-    .info-section {
-      max-width: 900px;
-      margin: 0 auto 3rem;
-      padding: 0 1rem;
+    /* REDESIGNED SECTIONS - EXCITING AND MODERN */
+
+    /* Cosmic Background with Floating Elements */
+    .cosmic-section {
+      position: relative;
+      background: linear-gradient(135deg, #0a0a23 0%, #1a1a2e 50%, #16213e 100%);
+      border-radius: 25px;
+      margin: 4rem auto 2rem;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 100px rgba(0, 255, 247, 0.1);
     }
 
-    .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    .cosmic-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      animation: cosmic-pulse 8s ease-in-out infinite alternate;
     }
 
-    .info-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: #4a9eff;
+    @keyframes cosmic-pulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .floating-orbs {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: float-around 20s infinite linear;
+    }
+
+    .orb:nth-child(1) {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(0, 255, 247, 0.4) 0%, transparent 70%);
+      top: 10%;
+      left: 10%;
+      animation-duration: 25s;
+    }
+
+    .orb:nth-child(2) {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, rgba(255, 0, 200, 0.3) 0%, transparent 70%);
+      top: 60%;
+      right: 15%;
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+
+    .orb:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(157, 78, 221, 0.2) 0%, transparent 70%);
+      bottom: 20%;
+      left: 20%;
+      animation-duration: 30s;
+    }
+
+    @keyframes float-around {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(30px, -20px) rotate(90deg); }
+      50% { transform: translate(-20px, -40px) rotate(180deg); }
+      75% { transform: translate(-40px, 20px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    /* Holographic Pricing Cards */
+    .holographic-title {
       text-align: center;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(
+        45deg,
+        #00fff7 0%,
+        #ff00c8 25%,
+        #9d4edd 50%,
+        #4a9eff 75%,
+        #00fff7 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: holographic-shift 4s ease-in-out infinite;
+      text-shadow: 
+        0 0 30px rgba(0, 255, 247, 0.5),
+        0 0 60px rgba(255, 0, 200, 0.3);
     }
 
-    .pricing-grid {
+    @keyframes holographic-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .pricing-showcase {
       display: grid;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      position: relative;
+      z-index: 2;
     }
 
-    .pricing-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #333;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      gap: 1rem;
-      flex-wrap: wrap;
+    .pricing-card-3d {
+      background: linear-gradient(145deg, rgba(42, 42, 42, 0.9) 0%, rgba(35, 35, 35, 0.9) 100%);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .pricing-label {
-      font-weight: 600;
-      color: var(--text-secondary);
-      flex: 1;
-      min-width: 120px;
+    .pricing-card-3d::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(0, 255, 247, 0.5) 25%,
+        rgba(255, 0, 200, 0.5) 50%,
+        rgba(157, 78, 221, 0.5) 75%,
+        transparent 100%
+      );
+      background-size: 300% 300%;
+      border-radius: 20px;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: border-dance 3s ease-in-out infinite;
     }
 
-    .pricing-value {
-      font-weight: 700;
-      color: #4a9eff;
+    .pricing-card-3d:hover {
+      transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(0, 255, 247, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes border-dance {
+      0%, 100% { background-position: 0% 50%; opacity: 0.6; }
+      50% { background-position: 100% 50%; opacity: 1; }
+    }
+
+    .pricing-tier {
+      text-align: center;
+      color: var(--neon-blue);
       font-size: 1.1rem;
-    }
-
-    .benefits-grid {
-      display: grid;
-      gap: 1.25rem;
-      margin: 2rem 0;
-    }
-
-    .benefit-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem;
-      background: #333;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .benefit-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border-color: #4a9eff;
-    }
-
-    .benefit-icon {
-      color: #4a9eff;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .benefit-content h3 {
       font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .pricing-amount {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #fff;
       margin-bottom: 0.5rem;
-      color: var(--text-primary);
-      font-size: 1.1rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.2rem;
     }
 
-    .benefit-content p {
+    .pricing-currency {
+      font-size: 1.5rem;
+      color: var(--neon-pink);
+    }
+
+    .pricing-description {
       color: var(--text-muted);
       font-size: 0.95rem;
+      margin-bottom: 2rem;
       line-height: 1.5;
     }
 
-    .highlight-section {
-      margin-top: 2.5rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, #333 0%, var(--bg-card) 100%);
-      border-radius: 16px;
-      border: 1px solid #4a9eff;
-      box-shadow: 0 8px 25px rgba(74, 158, 255, 0.1);
+    .pricing-feature-list {
+      list-style: none;
+      margin: 2rem 0;
     }
 
-    .highlight-section p {
-      margin-bottom: 1.5rem;
+    .pricing-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      line-height: 1.7;
-      font-size: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
     }
 
-    .highlight-section p:last-child {
+    .pricing-feature-item:hover {
+      color: #fff;
+      transform: translateX(5px);
+      background: rgba(255, 255, 255, 0.05);
+      padding-left: 10px;
+      border-radius: 8px;
+    }
+
+    .pricing-feature-item:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-feature-icon {
+      color: var(--success);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .turnaround-badge {
+      background: linear-gradient(45deg, rgba(0, 255, 247, 0.2), rgba(255, 0, 200, 0.2));
+      border: 1px solid rgba(0, 255, 247, 0.4);
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
       text-align: center;
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #4a9eff;
       margin-top: 2rem;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .highlight-section strong {
-      color: var(--text-primary);
+    .turnaround-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shine 2s infinite;
     }
 
-    /* Footer */
-    footer {
-      background: var(--bg-dark);
-      border-top: 1px solid #333;
-      padding: 2.5rem 1rem;
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Interactive Industry Grid */
+    .industry-cosmos {
+      background: linear-gradient(135deg, #1a0033 0%, #000066 50%, #003366 100%);
+      border-radius: 25px;
+      margin: 4rem auto 2rem;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .industry-cosmos::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        conic-gradient(
+          transparent 0deg,
+          rgba(0, 255, 247, 0.1) 60deg,
+          transparent 120deg,
+          rgba(255, 0, 200, 0.1) 180deg,
+          transparent 240deg,
+          rgba(157, 78, 221, 0.1) 300deg,
+          transparent 360deg
+        );
+      animation: rotate-cosmos 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate-cosmos {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .industry-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 255, 247, 0.1) 50%, 
+        transparent 100%
+      );
+      transition: all 0.6s ease;
+    }
+
+    .industry-card:hover::before {
+      left: 100%;
+    }
+
+    .industry-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 255, 247, 0.4);
+      border-color: rgba(0, 255, 247, 0.6);
+    }
+
+    .industry-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.5s ease;
+      filter: drop-shadow(0 0 10px rgba(0, 255, 247, 0.3));
+    }
+
+    .industry-card:hover .industry-icon {
+      transform: scale(1.2) rotate(10deg);
+      filter: drop-shadow(0 0 20px rgba(0, 255, 247, 0.6));
+    }
+
+    .industry-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .industry-card:hover .industry-title {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+    }
+
+    .industry-description {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .industry-card:hover .industry-description {
+      color: var(--text-secondary);
+    }
+
+    /* Magnetic Benefits Section */
+    .magnetic-benefits {
+      background: linear-gradient(135deg, #2d1b69 0%, #11001e 50%, #1a0033 100%);
+      border-radius: 25px;
+      margin: 4rem auto 2rem;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.8),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .magnetic-benefits::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(157, 78, 221, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
+        linear-gradient(45deg, rgba(0, 255, 247, 0.05) 0%, transparent 100%);
+      animation: magnetic-pulse 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes magnetic-pulse {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .benefits-constellation {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .benefit-orb {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .benefit-orb::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(0, 255, 247, 0.3) 25%,
+        rgba(255, 0, 200, 0.3) 50%,
+        rgba(157, 78, 221, 0.3) 75%,
+        transparent 100%
+      );
+      border-radius: 25px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .benefit-orb:hover::before {
+      opacity: 1;
+    }
+
+    .benefit-orb:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.7),
+        0 0 50px rgba(0, 255, 247, 0.3);
+      border-color: rgba(0, 255, 247, 0.5);
+    }
+
+    .benefit-emoji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transition: all 0.5s ease;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    }
+
+    .benefit-orb:hover .benefit-emoji {
+      transform: scale(1.3) rotate(-10deg);
+      filter: drop-shadow(0 10px 25px rgba(0, 255, 247, 0.4));
+    }
+
+    .benefit-heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-orb:hover .benefit-heading {
+      color: var(--neon-blue);
+      text-shadow: 0 0 15px rgba(0, 255, 247, 0.5);
+    }
+
+    .benefit-text {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-orb:hover .benefit-text {
+      color: var(--text-secondary);
+    }
+
+    /* Epic Call-to-Action Section */
+    .epic-finale {
+      background: linear-gradient(135deg, #000000 0%, #1a0026 25%, #003d5c 50%, #1a0026 75%, #000000 100%);
+      border-radius: 30px;
+      margin: 4rem auto 2rem;
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.9),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1),
+        0 0 100px rgba(0, 255, 247, 0.2);
+    }
+
+    .epic-finale::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: 
+        conic-gradient(
+          transparent 0deg,
+          rgba(0, 255, 247, 0.1) 30deg,
+          transparent 60deg,
+          rgba(255, 0, 200, 0.1) 120deg,
+          transparent 150deg,
+          rgba(157, 78, 221, 0.1) 210deg,
+          transparent 240deg,
+          rgba(74, 158, 255, 0.1) 300deg,
+          transparent 330deg,
+          transparent 360deg
+        );
+      animation: epic-rotation 25s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes epic-rotation {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .finale-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .finale-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      margin-bottom: 2rem;
+      background: linear-gradient(
+        45deg,
+        #ffffff 0%,
+        #00fff7 25%,
+        #ff00c8 50%,
+        #9d4edd 75%,
+        #ffffff 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: finale-glow 4s ease-in-out infinite;
+      text-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+      line-height: 1.2;
+    }
+
+    @keyframes finale-glow {
+      0%, 100% { 
+        background-position: 0% 50%;
+        filter: drop-shadow(0 0 20px rgba(0, 255, 247, 0.5));
+      }
+      50% { 
+        background-position: 100% 50%;
+        filter: drop-shadow(0 0 30px rgba(255, 0, 200, 0.7));
+      }
+    }
+
+    .finale-description {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .finale-highlight {
+      color: var(--neon-blue);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+    }
+
+    .finale-cta-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .finale-cta-button {
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+      color: #000;
+      font-size: 1.3rem;
+      font-weight: 800;
+      padding: 1.5rem 4rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 
+        0 15px 35px rgba(0, 255, 247, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .finale-cta-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .finale-cta-button:hover::before {
+      transform: translateX(100%);
+    }
+
+    .finale-cta-button:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 
+        0 25px 50px rgba(0, 255, 247, 0.6),
+        inset 0 3px 0 rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 0, 200, 0.5);
+    }
+
+    .finale-contact-info {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .finale-email {
+      color: var(--neon-pink);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .finale-email:hover {
+      color: var(--neon-blue);
+      text-shadow: 0 0 15px rgba(0, 255, 247, 0.7);
+    }
+
+    /* Enhanced Footer */
+    .cosmic-footer {
+      background: linear-gradient(135deg, #000000 0%, #0a0a23 100%);
+      border-top: 2px solid rgba(0, 255, 247, 0.3);
+      padding: 3rem 1rem;
       text-align: center;
       margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    footer p {
+    .cosmic-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--neon-blue) 25%, 
+        var(--neon-pink) 50%, 
+        var(--electric-purple) 75%, 
+        transparent 100%
+      );
+      animation: footer-glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes footer-glow {
+      0% { opacity: 0.5; transform: scaleX(0.5); }
+      100% { opacity: 1; transform: scaleX(1); }
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-text {
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
     }
 
-    footer a {
-      color: #4a9eff;
+    .footer-link {
+      color: var(--neon-blue);
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    footer a:hover,
-    footer a:focus {
-      text-decoration: underline;
-      color: #66b3ff;
+    .footer-link:hover {
+      color: var(--neon-pink);
+      text-shadow: 0 0 15px rgba(255, 0, 200, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .footer-copyright {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Progress bar */
@@ -672,6 +1278,71 @@
       z-index: 1001;
       transition: width 0.3s ease;
     }
+
+    /* Parallax Animation Classes */
+    .parallax-element {
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-100px) rotateY(45deg);
+    }
+
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(100px) rotateY(-45deg);
+    }
+
+    .slide-in-up {
+      opacity: 0;
+      transform: translateY(80px) scale(0.9);
+    }
+
+    .slide-in-down {
+      opacity: 0;
+      transform: translateY(-50px) scale(0.95) rotateX(15deg);
+    }
+
+    .fade-in-scale {
+      opacity: 0;
+      transform: scale(0.8) rotateZ(5deg);
+    }
+
+    .bounce-in {
+      opacity: 0;
+      transform: scale(0.3) translateY(100px);
+      animation-fill-mode: both;
+    }
+
+    .parallax-visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1) rotateX(0) rotateY(0) rotateZ(0) !important;
+    }
+
+    /* Enhanced hover effects with parallax */
+    .service-card.parallax-visible:hover {
+      transform: translateY(-12px) scale(1.03) rotateX(2deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(74, 158, 255, 0.3);
+    }
+
+    .benefit-item.parallax-visible:hover {
+      transform: translateY(-6px) scale(1.02) rotateY(2deg);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(74, 158, 255, 0.2);
+    }
+
+    /* Staggered animations */
+    .service-card:nth-child(1) { transition-delay: 0s; }
+    .service-card:nth-child(2) { transition-delay: 0.2s; }
+    .service-card:nth-child(3) { transition-delay: 0.4s; }
+
+    .benefit-item:nth-child(1) { transition-delay: 0s; }
+    .benefit-item:nth-child(2) { transition-delay: 0.1s; }
+    .benefit-item:nth-child(3) { transition-delay: 0.2s; }
+    .benefit-item:nth-child(4) { transition-delay: 0.3s; }
+    .benefit-item:nth-child(5) { transition-delay: 0.4s; }
+    .benefit-item:nth-child(6) { transition-delay: 0.5s; }
+    .benefit-item:nth-child(7) { transition-delay: 0.6s; }
 
     /* Mobile Responsive Design */
     @media (max-width: 768px) {
@@ -749,41 +1420,64 @@
         padding: 0.75rem;
       }
 
-      .info-card {
-        padding: 1.5rem;
+      .cosmic-section,
+      .industry-cosmos,
+      .magnetic-benefits,
+      .epic-finale {
+        margin: 2rem 1rem;
+        padding: 2rem 1rem;
       }
 
-      .info-title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+      .holographic-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
       }
 
-      .pricing-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
+      .finale-title {
+        font-size: clamp(1.8rem, 8vw, 3rem);
       }
 
-      .pricing-label {
-        min-width: auto;
+      .pricing-showcase,
+      .industry-grid,
+      .benefits-constellation {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
-      .benefit-item {
-        padding: 1.25rem;
+      .finale-cta-button {
+        font-size: 1.1rem;
+        padding: 1.2rem 3rem;
       }
 
-      .benefit-content h3 {
-        font-size: 1rem;
-      }
-
-      .highlight-section {
-        padding: 1.5rem;
+      .finale-cta-container {
+        gap: 1.5rem;
       }
 
       .tooltip {
         max-width: 250px;
         left: -100px;
         transform: none;
+      }
+
+      /* Mobile-optimized parallax */
+      .slide-in-left,
+      .slide-in-right {
+        transform: translateY(50px) scale(0.95);
+      }
+
+      .service-card.parallax-visible:hover {
+        transform: translateY(-8px) scale(1.02);
+      }
+
+      .benefit-item.parallax-visible:hover {
+        transform: translateY(-4px) scale(1.01);
+      }
+
+      /* Reduce motion on mobile for better performance */
+      .orb,
+      .cosmic-section::before,
+      .industry-cosmos::before,
+      .epic-finale::before {
+        animation-duration: 30s;
       }
     }
 
@@ -824,17 +1518,15 @@
       .services-section {
         padding: 3rem 2rem 5rem;
       }
-
-      .info-section {
-        padding: 0 2rem;
-      }
     }
 
     /* Print styles */
     @media print {
       .header,
       .progress-bar,
-      .mobile-menu-btn {
+      .mobile-menu-btn,
+      .floating-orbs,
+      .orb {
         display: none;
       }
 
@@ -844,7 +1536,10 @@
       }
 
       .service-card,
-      .info-card {
+      .cosmic-section,
+      .industry-cosmos,
+      .magnetic-benefits,
+      .epic-finale {
         border: 1px solid #000;
         break-inside: avoid;
       }
@@ -858,6 +1553,7 @@
 
     /* Reduce motion for accessibility */
     @media (prefers-reduced-motion: reduce) {
+      .parallax-element,
       *,
       ::before,
       ::after {
@@ -869,12 +1565,25 @@
       html {
         scroll-behavior: auto;
       }
+
+      .slide-in-left,
+      .slide-in-right,
+      .slide-in-up,
+      .slide-in-down,
+      .fade-in-scale,
+      .bounce-in {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     /* High contrast mode support */
     @media (prefers-contrast: high) {
       .service-card,
-      .info-card {
+      .cosmic-section,
+      .industry-cosmos,
+      .magnetic-benefits,
+      .epic-finale {
         border: 2px solid currentColor;
       }
 
@@ -883,9 +1592,48 @@
         color: var(--bg-dark);
       }
     }
+
+    /* Floating particles background effect */
+    .floating-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: linear-gradient(45deg, #4a9eff, var(--secondary));
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="floating-particles" id="particles"></div>
   <div class="progress-bar" id="progressBar"></div>
   
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -921,11 +1669,11 @@
 
   <main id="main-content" tabindex="-1">
     <section class="services-section" aria-labelledby="services-title">
-      <h2 id="services-title" class="section-title">Choose Your Perfect Plan</h2>
-      <p class="section-subtitle">From simple landing pages to comprehensive business solutions - we've got you covered.</p>
+      <h2 id="services-title" class="section-title parallax-element slide-in-down">Choose Your Perfect Plan</h2>
+      <p class="section-subtitle parallax-element fade-in-scale">From simple landing pages to comprehensive business solutions - we've got you covered.</p>
       
       <div class="services-grid">
-        <article class="service-card" role="article">
+        <article class="service-card parallax-element slide-in-left" role="article">
           <h3 class="service-title">
             Starter
             <button class="info-button" aria-label="More information about Starter package" tabindex="0">
@@ -948,11 +1696,9 @@
             <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Google maps integration</span></li>
             <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Includes up to 2 complimentary updates per month</span></li>
           </ul>
-          
-
         </article>
 
-        <article class="service-card" role="article">
+        <article class="service-card parallax-element slide-in-up" role="article">
           <h3 class="service-title">
             Growth
             <button class="info-button" aria-label="More information about Growth package" tabindex="0">
@@ -976,11 +1722,9 @@
             <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Google maps integration</span></li>
             <li class="feature-excluded"><span aria-hidden="true">❌</span> <span class="feature-text">Includes up to 2 complimentary updates per month</span></li>
           </ul>
-          
-
         </article>
 
-        <article class="service-card featured" role="article">
+        <article class="service-card featured parallax-element slide-in-right" role="article">
           <h3 class="service-title">
             Growth +
             <button class="info-button" aria-label="More information about Growth Plus package" tabindex="0">
@@ -1004,114 +1748,297 @@
             <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Includes up to 2 complimentary updates per month</span></li>
             <li class="feature-included"><span aria-hidden="true">✅</span> <span class="feature-text">Additional Updates (chargable)</span></li>
           </ul>
-          
-
         </article>
       </div>
     </section>
 
-    <section class="info-section" aria-labelledby="updates-title">
-      <div class="info-card">
-        <h2 id="updates-title" class="info-title">What Counts as an Update?</h2>
-        
-        <div class="pricing-grid">
-          <div class="pricing-item">
-            <span class="pricing-label">Simple text/image edits</span>
-            <span class="pricing-value">$30–$75 AUD</span>
+    <!-- REDESIGNED EXCITING SECTIONS START HERE -->
+
+    <section class="cosmic-section parallax-element fade-in-scale" aria-labelledby="updates-title">
+      <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+      </div>
+
+      <h2 id="updates-title" class="holographic-title">What Counts as an Update?</h2>
+      
+      <div class="pricing-showcase">
+        <div class="pricing-card-3d">
+          <div class="pricing-tier">Simple Changes</div>
+          <div class="pricing-amount">
+            <span class="pricing-currency">$</span>30-75
+            <span style="font-size: 1rem; color: var(--text-muted); margin-left: 8px;">AUD</span>
           </div>
-          <div class="pricing-item">
-            <span class="pricing-label">Layout/content tweaks</span>
-            <span class="pricing-value">$75–$150 AUD</span>
+          <div class="pricing-description">Quick text updates, image swaps, and minor tweaks</div>
+          <ul class="pricing-feature-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">⚡</span>
+              <span>Text content updates</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🖼️</span>
+              <span>Image replacements</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🎨</span>
+              <span>Color scheme adjustments</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">📱</span>
+              <span>Contact info changes</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-card-3d">
+          <div class="pricing-tier">Layout Tweaks</div>
+          <div class="pricing-amount">
+            <span class="pricing-currency">$</span>75-150
+            <span style="font-size: 1rem; color: var(--text-muted); margin-left: 8px;">AUD</span>
           </div>
-          <div class="pricing-item">
-            <span class="pricing-label">New features/sections</span>
-            <span class="pricing-value">$150+ AUD</span>
+          <div class="pricing-description">Structural changes and content reorganization</div>
+          <ul class="pricing-feature-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">📐</span>
+              <span>Layout restructuring</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🔄</span>
+              <span>Content reorganization</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">📝</span>
+              <span>Menu modifications</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🎯</span>
+              <span>Section reordering</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-card-3d">
+          <div class="pricing-tier">New Features</div>
+          <div class="pricing-amount">
+            <span class="pricing-currency">$</span>150+
+            <span style="font-size: 1rem; color: var(--text-muted); margin-left: 8px;">AUD</span>
           </div>
+          <div class="pricing-description">Advanced functionality and major additions</div>
+          <ul class="pricing-feature-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🚀</span>
+              <span>New page creation</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">⚙️</span>
+              <span>Custom functionality</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">🔗</span>
+              <span>Third-party integrations</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-icon">💎</span>
+              <span>Advanced animations</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="turnaround-badge">
+        <strong>⏱️ Turnaround Time: 3-5 Business Days</strong><br>
+        Email requests to <strong style="color: var(--neon-blue);">webgrant25@gmail.com</strong>
+      </div>
+    </section>
+
+    <section class="industry-cosmos parallax-element slide-in-up" aria-labelledby="who-we-help-title">
+      <h2 id="who-we-help-title" class="holographic-title">Who We Help Dominate Online</h2>
+      
+      <div class="industry-grid">
+        <div class="industry-card parallax-element slide-in-left">
+          <div class="industry-icon">🍽️</div>
+          <h3 class="industry-title">Restaurants</h3>
+          <p class="industry-description">Mouth-watering websites with online menus, reservations, and food galleries that make customers hungry for more.</p>
         </div>
         
-        <div style="color: #b0b0b0; padding: 20px; background: #333; border-radius: 12px; border: 1px solid #404040; text-align: center; line-height: 1.6;">
-          <p style="margin: 0;">
-            Requests must be emailed to <a href="mailto:webgrant25@gmail.com" style="color: #4a9eff; font-weight: 600; text-decoration: none;">webgrant25@gmail.com</a>
-          </p>
-          <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Turnaround: 3–5 business days</p>
+        <div class="industry-card parallax-element slide-in-right">
+          <div class="industry-icon">☕</div>
+          <h3 class="industry-title">Cafes</h3>
+          <p class="industry-description">Cozy digital spaces showcasing your atmosphere, daily specials, and community vibe that draws locals in.</p>
+        </div>
+        
+        <div class="industry-card parallax-element slide-in-left">
+          <div class="industry-icon">🛠️</div>
+          <h3 class="industry-title">HVAC & Trades</h3>
+          <p class="industry-description">Professional sites that build trust, showcase certifications, and make it easy for customers to book services.</p>
+        </div>
+        
+        <div class="industry-card parallax-element slide-in-right">
+          <div class="industry-icon">💡</div>
+          <h3 class="industry-title">Electricians & Plumbers</h3>
+          <p class="industry-description">Emergency-ready websites with clear contact info, service areas, and instant quote requests.</p>
+        </div>
+        
+        <div class="industry-card parallax-element slide-in-left">
+          <div class="industry-icon">🛍️</div>
+          <h3 class="industry-title">Retail & E-commerce</h3>
+          <p class="industry-description">Sales-driving online stores with seamless checkout, product showcases, and inventory management.</p>
+        </div>
+        
+        <div class="industry-card parallax-element slide-in-right">
+          <div class="industry-icon">🏋️</div>
+          <h3 class="industry-title">Gyms & Fitness</h3>
+          <p class="industry-description">Motivating websites with class schedules, trainer profiles, and membership sign-ups that get people moving.</p>
+        </div>
+
+        <div class="industry-card parallax-element bounce-in">
+          <div class="industry-icon">🎨</div>
+          <h3 class="industry-title">Creative Professionals</h3>
+          <p class="industry-description">Stunning portfolio sites that showcase your artistry and attract high-paying clients who value quality.</p>
         </div>
       </div>
     </section>
 
-    <section class="info-section" aria-labelledby="why-choose-title">
-      <div class="info-card">
-        <h2 id="why-choose-title" class="info-title">Why Choose WebGrant?</h2>
-        
-        <div class="benefits-grid">
-          <div class="benefit-item">
-            <span class="benefit-icon" aria-hidden="true">🛡️</span>
-            <div class="benefit-content">
-              <h3>Transparent pricing</h3>
-              <p>No surprises, just clear value for your investment.</p>
-            </div>
-          </div>
-          
-          <div class="benefit-item">
-            <span class="benefit-icon" aria-hidden="true">👁️</span>
-            <div class="benefit-content">
-              <h3>Preview before payment</h3>
-              <p>See your vision come to life before you commit.</p>
-            </div>
-          </div>
-          
-          <div class="benefit-item">
-            <span class="benefit-icon" aria-hidden="true">⚡</span>
-            <div class="benefit-content">
-              <h3>Fast turnaround</h3>
-              <p>Average 1–2 weeks to get online and start growing ASAP.</p>
-            </div>
-          </div>
-          
-          <div class="benefit-item">
-            <span class="benefit-icon" aria-hidden="true">💝</span>
-            <div class="benefit-content">
-              <h3>Friendly help for non-tech-savvy clients</h3>
-              <p>We make it simple and stress-free for everyone.</p>
-            </div>
-          </div>
-          
-          <div class="benefit-item">
-            <span class="benefit-icon" aria-hidden="true">📈</span>
-            <div class="benefit-content">
-              <h3>Honest communication + future support</h3>
-              <p>Your success is our long-term goal and commitment.</p>
-            </div>
-          </div>
+    <section class="magnetic-benefits parallax-element slide-in-down" aria-labelledby="why-choose-title">
+      <h2 id="why-choose-title" class="holographic-title">Why WebGrant is Your Secret Weapon</h2>
+      
+      <div class="benefits-constellation">
+        <div class="benefit-orb parallax-element slide-in-up">
+          <div class="benefit-emoji">🛡️</div>
+          <h3 class="benefit-heading">Transparent Pricing</h3>
+          <p class="benefit-text">No hidden fees, no surprises. What you see is what you pay - clear value that respects your budget.</p>
         </div>
         
-        <div class="highlight-section">
-          <p>
-            At WebGrant, we don't just build websites — we build <strong>powerful business tools</strong>.
-          </p>
+        <div class="benefit-orb parallax-element slide-in-up">
+          <div class="benefit-emoji">👁️</div>
+          <h3 class="benefit-heading">Preview Before Payment</h3>
+          <p class="benefit-text">See your website come to life before you commit a single dollar. Love it first, pay second.</p>
+        </div>
+        
+        <div class="benefit-orb parallax-element slide-in-up">
+          <div class="benefit-emoji">⚡</div>
+          <h3 class="benefit-heading">Lightning Fast</h3>
+          <p class="benefit-text">Average 1-2 weeks from concept to launch. While competitors take months, you'll be online making money.</p>
+        </div>
+        
+        <div class="benefit-orb parallax-element slide-in-up">
+          <div class="benefit-emoji">💝</div>
+          <h3 class="benefit-heading">Non-Tech Friendly</h3>
+          <p class="benefit-text">We speak human, not code. Simple explanations, patient guidance, and zero tech jargon confusion.</p>
+        </div>
+        
+        <div class="benefit-orb parallax-element slide-in-up">
+          <div class="benefit-emoji">📈</div>
+          <h3 class="benefit-heading">Long-Term Partnership</h3>
+          <p class="benefit-text">We're not just building a website - we're building your future success with ongoing support and growth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="epic-finale parallax-element fade-in-scale">
+      <div class="finale-content">
+        <h2 class="finale-title">Ready to Dominate Your Market?</h2>
+        
+        <p class="finale-description">
+          Stop losing customers to competitors with better websites. Your business deserves a <span class="finale-highlight">digital presence that works as hard as you do</span> - converting visitors into loyal customers 24/7.
+        </p>
+        
+        <p class="finale-description">
+          In today's world, your website isn't just a nice-to-have. It's your <span class="finale-highlight">most powerful sales tool</span>, your always-open storefront, and your competitive edge rolled into one.
+        </p>
+        
+        <div class="finale-cta-container">
+          <a href="form.html" class="finale-cta-button">
+            🚀 Start Your Digital Transformation
+          </a>
           
-          <p>
-            Imagine a website that not only looks stunning but actively drives traffic, converts visitors into loyal customers, and elevates your brand above the competition. Your new online presence will open doors to new markets, boost your credibility, and increase your sales without you lifting a finger.
-          </p>
-          
-          <p>
-            We know that in today's digital world, speed and agility are everything. That's why we combine rapid development with strategic design tailored specifically to your audience and goals. Our process is streamlined but thorough — from discovery to launch, we keep you in the loop and deliver results that speak louder than words.
-          </p>
-          
-          <p>
-            Choosing WebGrant means choosing growth, clarity, and a partner who treats your business like their own.<br>
-            <strong>Ready to dominate your market online? Let's make it happen.</strong>
-          </p>
+          <div class="finale-contact-info">
+            Questions? Email us at <a href="mailto:webgrant25@gmail.com" class="finale-email">webgrant25@gmail.com</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p>Need help choosing the right plan? <a href="mailto:webgrant25@gmail.com">Get in touch</a> — we're happy to help.</p>
-    <p style="font-size: 0.875rem; margin-top: 16px;">&copy; 2025 WebGrant. All rights reserved.</p>
+  <footer class="cosmic-footer">
+    <div class="footer-content">
+      <p class="footer-text">
+        Ready to transform your business? 
+        <a href="mailto:webgrant25@gmail.com" class="footer-link">
+          💫 Let's create something amazing together
+        </a>
+      </p>
+      <p class="footer-copyright">&copy; 2025 WebGrant. All rights reserved. Made with ❤️ for businesses that dream big.</p>
+    </div>
   </footer>
 
   <script>
+    // Enhanced Parallax Scroll Observer
+    const parallaxObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.style.transitionDelay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('parallax-visible');
+          }, delay * 1000);
+          
+          // Unobserve after animation to improve performance
+          setTimeout(() => {
+            parallaxObserver.unobserve(entry.target);
+          }, (delay * 1000) + 800);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all parallax elements
+    document.querySelectorAll('.parallax-element').forEach(el => {
+      parallaxObserver.observe(el);
+    });
+
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = window.innerWidth > 768 ? 50 : 20; // Fewer particles on mobile
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Initialize particles if reduced motion is not preferred
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      createParticles();
+    }
+
+    // Enhanced scroll effects
+      // ✅ REPLACE WITH THIS - Only apply parallax to the page-header section, NOT the navbar:
+      const scrolled = window.pageYOffset;
+      const pageHeader = document.querySelector('.page-header'); // Only the hero section
+      if (pageHeader) {
+        pageHeader.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+      
+      // Make sure navbar stays fixed
+      const navbar = document.querySelector('.header');
+      if (navbar) {
+        navbar.style.transform = 'none'; // Override any transforms
+      }
+      
+      ticking = false;
+    ;
+    ticking = true;
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     // Mobile menu functionality
     function toggleMobileMenu() {
       const navMenu = document.getElementById('navMenu');
@@ -1173,12 +2100,6 @@
       const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       document.getElementById('progressBar').style.width = scrollPercent + '%';
     }
-
-    window.addEventListener('scroll', updateProgressBar);
-    window.addEventListener('resize', updateProgressBar);
-    
-    // Initial call
-    updateProgressBar();
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1250,29 +2171,6 @@
       }
     });
 
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements for animation
-    document.querySelectorAll('.service-card, .info-card, .benefit-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-
     // Enhanced accessibility features
     document.addEventListener('keydown', function(event) {
       // Skip to main content shortcut (Alt + M)
@@ -1301,52 +2199,76 @@
       });
     });
 
-    // Performance optimization: Lazy load non-critical elements
+    // Enhanced click ripple effect
+    document.addEventListener('click', (e) => {
+      // Skip ripple for navigation and form elements
+      if (e.target.closest('.nav-menu, .info-button, input, button, a')) return;
+      
+      const ripple = document.createElement('div');
+      const size = Math.max(50, Math.min(150, window.innerWidth / 10));
+      
+      ripple.style.cssText = `
+        position: fixed;
+        left: ${e.clientX - size/2}px;
+        top: ${e.clientY - size/2}px;
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 9999;
+        animation: rippleEffect 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      `;
+      
+      document.body.appendChild(ripple);
+      
+      setTimeout(() => {
+        if (ripple.parentNode) {
+          ripple.parentNode.removeChild(ripple);
+        }
+      }, 800);
+    });
+
+    // Add ripple effect CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes rippleEffect {
+        0% {
+          transform: scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(4) rotate(180deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Performance optimization
     if ('requestIdleCallback' in window) {
       requestIdleCallback(function() {
-        // Initialize any non-critical features here
-        console.log('WebGrant Services page loaded successfully');
+        console.log('WebGrant Services page with enhanced cosmic design loaded successfully');
       });
     }
 
-
-        // Add some extra interactive magic
-        document.addEventListener('click', (e) => {
-            // Create ripple effect on click
-            const ripple = document.createElement('div');
-            ripple.style.position = 'fixed';
-            ripple.style.left = e.clientX - 25 + 'px';
-            ripple.style.top = e.clientY - 25 + 'px';
-            ripple.style.width = '50px';
-            ripple.style.height = '50px';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(99, 102, 241, 0.3)';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.zIndex = '9999';
-            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
-            
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-
-        // Add ripple effect CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rippleEffect {
-                0% {
-                    transform: scale(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    // Initialize on load
+    window.addEventListener('load', () => {
+      updateProgressBar();
+      
+      // Add a subtle entrance animation to the whole page
+      document.body.style.opacity = '0';
+      document.body.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        document.body.style.opacity = '1';
+        document.body.style.transform = 'translateY(0)';
+      }, 100);
+    });
   </script>
 </body>
 </html>
