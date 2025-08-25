@@ -390,6 +390,110 @@
       padding: 0 20px;
     }
 
+    /* Option selection cards */
+    .option-cards {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .option-card {
+      background: var(--dark-surface);
+      border: 2px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--dark-accent), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .option-card:hover {
+      border-color: var(--dark-accent);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+    }
+
+    .option-card:hover::before {
+      opacity: 1;
+    }
+
+    .option-card.selected {
+      border-color: var(--dark-accent);
+      background: rgba(99, 102, 241, 0.1);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+
+    .option-card.selected::before {
+      opacity: 1;
+    }
+
+    .option-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .option-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-text-primary);
+      margin-bottom: 15px;
+    }
+
+    .option-description {
+      color: var(--dark-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .option-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .option-features li {
+      padding: 8px 0;
+      color: var(--dark-text-secondary);
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .option-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--dark-success);
+      font-weight: bold;
+    }
+
+    .option-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark-accent);
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      background: rgba(99, 102, 241, 0.1);
+      border-radius: 12px;
+    }
+
     /* Professional form container */
     form {
       max-width: 900px;
@@ -403,6 +507,23 @@
         0 10px 10px -5px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
+      display: none;
+    }
+
+    form.show {
+      display: block;
+      animation: slideInUp 0.5s ease-out;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     form::before {
@@ -541,6 +662,33 @@
       transform: translateY(0);
     }
 
+    /* Back button */
+    .back-button {
+      margin: 20px auto 40px;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+
+    .back-btn {
+      background: var(--dark-surface);
+      color: var(--dark-text-secondary);
+      border: 2px solid var(--dark-border);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      border-color: var(--dark-accent);
+      color: var(--dark-text-primary);
+      transform: translateX(-2px);
+    }
+
     /* Checkbox styling */
     .checkbox-container {
       display: flex;
@@ -577,10 +725,19 @@
       text-decoration: underline;
     }
 
+    /* Hidden sections */
+    .hidden {
+      display: none;
+    }
+
     /* Responsive design */
     @media (max-width: 1024px) {
       form {
         margin: 0 20px 60px;
+      }
+      
+      .option-cards {
+        padding: 0 20px;
       }
     }
 
@@ -592,6 +749,16 @@
       h1 {
         margin-top: 40px;
         font-size: 2.5rem;
+      }
+
+      .option-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .option-card {
+        padding: 25px;
       }
 
       form {
@@ -648,6 +815,10 @@
       form {
         margin: 0 12px 30px;
         padding: 20px;
+      }
+
+      .option-cards {
+        padding: 0 12px;
       }
     }
 
@@ -730,22 +901,136 @@
     </nav>
   </header>
 
-  <h1>Request a Free Quote</h1>
+  <h1>Choose Your Service</h1>
 
-  <form action="https://formspree.io/f/xovwbgqz" method="POST">
+  <div class="option-cards" id="optionCards">
+    <div class="option-card" onclick="selectOption('preview')">
+      <div class="option-icon">🎨</div>
+      <div class="option-title">Free Homepage Preview</div>
+      <div class="option-description">
+        See your website come to life! Get a custom homepage design mockup based on your business and preferences.
+      </div>
+      <ul class="option-features">
+        <li>Custom homepage design</li>
+        <li>Mobile-responsive layout</li>
+        <li>Brand-aligned styling</li>
+        <li>No commitment required</li>
+        <li>Delivered in 2-3 business days</li>
+      </ul>
+      <div class="option-price">100% FREE</div>
+    </div>
+
+    <div class="option-card" onclick="selectOption('quote')">
+      <div class="option-icon">💼</div>
+      <div class="option-title">Full Website Quote</div>
+      <div class="option-description">
+        Get a detailed proposal for your complete website project with timeline, features, and pricing breakdown.
+      </div>
+      <ul class="option-features">
+        <li>Detailed project proposal</li>
+        <li>Custom feature planning</li>
+        <li>Timeline & milestone breakdown</li>
+        <li>Transparent pricing</li>
+        <li>Free consultation included</li>
+      </ul>
+      <div class="option-price">FREE CONSULTATION</div>
+    </div>
+  </div>
+
+  <div class="back-button hidden" id="backButton">
+    <button class="back-btn" onclick="goBack()">
+      ← Back to Options
+    </button>
+  </div>
+
+  <!-- Homepage Preview Form -->
+  <form action="https://formspree.io/f/xovwbgqz" method="POST" id="previewForm">
+    <input type="hidden" name="Service_Type" value="Homepage Preview">
+    
+    <div class="form-section">
+      <div class="form-section-title">Your Business Information</div>
+      
+      <label for="preview_name">Your Full Name</label>
+      <input type="text" id="preview_name" name="Name" required>
+
+      <label for="preview_email">Email Address</label>
+      <input type="email" id="preview_email" name="Email" required>
+
+      <label for="preview_business">Business Name</label>
+      <input type="text" id="preview_business" name="Business_Name" required>
+
+      <label for="preview_industry">Industry/Business Type</label>
+      <input type="text" id="preview_industry" name="Industry" placeholder="e.g., Restaurant, Law Firm, E-commerce..." required>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Design Preferences</div>
+      
+      <label for="preview_style">Preferred Design Style</label>
+      <select id="preview_style" name="Design_Style" required>
+        <option value="" disabled selected>Select your preferred style</option>
+        <option value="Modern & Minimalist">Modern & Minimalist</option>
+        <option value="Bold & Creative">Bold & Creative</option>
+        <option value="Professional & Corporate">Professional & Corporate</option>
+        <option value="Elegant & Luxury">Elegant & Luxury</option>
+        <option value="Fun & Playful">Fun & Playful</option>
+        <option value="Classic & Traditional">Classic & Traditional</option>
+      </select>
+
+      <label for="preview_colors">Preferred Colors (Optional)</label>
+      <input type="text" id="preview_colors" name="Preferred_Colors" placeholder="e.g., Blue and white, Green and gold, etc.">
+
+      <label for="preview_logo">Do you have a logo?</label>
+      <select id="preview_logo" name="Has_Logo" required>
+        <option value="" disabled selected>Select option</option>
+        <option value="Yes">Yes, I have a logo</option>
+        <option value="No">No, I need one created</option>
+      </select>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Content & Goals</div>
+      
+      <label for="preview_tagline">Business Tagline/Slogan (Optional)</label>
+      <input type="text" id="preview_tagline" name="Business_Tagline" placeholder="Your main business message or slogan">
+
+      <label for="preview_services">Main Services/Products (List 3-5)</label>
+      <textarea id="preview_services" name="Main_Services" placeholder="e.g., Web Design, SEO Services, Digital Marketing..." required></textarea>
+
+      <label for="preview_inspiration">Website Inspiration (Optional)</label>
+      <textarea id="preview_inspiration" name="Website_Inspiration" placeholder="Share any websites you like or describe the look you want..."></textarea>
+    </div>
+
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="preview_agree" name="agree" required>
+      <label for="preview_agree" class="checkbox-label">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> and consent to processing my personal data for this free homepage preview request.</label>
+    </div>
+
+    <button type="submit">
+      🎨 Request Free Homepage Preview
+    </button>
+  </form>
+
+  <!-- Full Quote Form -->
+  <form action="https://formspree.io/f/xovwbgqz" method="POST" id="quoteForm">
+    <input type="hidden" name="Service_Type" value="Full Website Quote">
+    
     <div class="form-section">
       <div class="form-section-title">Client Information</div>
       
-      <label for="name">Your Full Name</label>
-      <input type="text" id="name" name="Name" required>
+      <label for="quote_name">Your Full Name</label>
+      <input type="text" id="quote_name" name="Name" required>
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="Email" required>
+      <label for="quote_email">Email Address</label>
+      <input type="email" id="quote_email" name="Email" required>
 
-      <label for="phone">Phone Number</label>
+      <label for="quote_phone">Phone Number</label>
       <input
         type="tel"
-        id="phone"
+        id="quote_phone"
         name="Phone"
         required
         inputmode="numeric"
@@ -753,103 +1038,181 @@
         title="Please enter numbers only"
       />
 
-      <label for="business">Business Name</label>
-      <input type="text" id="business" name="Business Name" required>
+      <label for="quote_business">Business Name</label>
+      <input type="text" id="quote_business" name="Business_Name" required>
     </div>
 
     <div class="form-section">
       <div class="form-section-title">Website Goals & Type</div>
       
-      <label for="goal">Main Goal of the Website</label>
-      <textarea id="goal" name="Website Goal" placeholder="Describe what you want to achieve with your website..." required></textarea>
+      <label for="quote_goal">Main Goal of the Website</label>
+      <textarea id="quote_goal" name="Website_Goal" placeholder="Describe what you want to achieve with your website..." required></textarea>
 
-      <label for="websiteType">Type of Website</label>
-      <select id="websiteType" name="websiteType" required>
+      <label for="quote_websiteType">Type of Website Package</label>
+      <select id="quote_websiteType" name="Website_Type" required>
         <option value="" disabled selected>Select website type</option>
-        <option value="Basic">Starter</option>
-        <option value="Basic Pro">Growth</option>
-        <option value="Standard">Growth +</option>
+        <option value="Starter Package">Starter Package</option>
+        <option value="Growth Package">Growth Package</option>
+        <option value="Growth+ Package">Growth+ Package</option>
+        <option value="Custom Solution">Custom Solution</option>
       </select>
 
-      <label for="audience">Target Audience</label>
-      <textarea id="audience" name="Target Audience" placeholder="Describe your target customers/visitors..." required></textarea>
+      <label for="quote_audience">Target Audience</label>
+      <textarea id="quote_audience" name="Target_Audience" placeholder="Describe your target customers/visitors..." required></textarea>
     </div>
 
     <div class="form-section">
       <div class="form-section-title">Design & Branding</div>
       
-      <label for="logo">Do you have a logo and brand guidelines?</label>
-      <select id="logo" name="Has Logo">
+      <label for="quote_logo">Do you have a logo and brand guidelines?</label>
+      <select id="quote_logo" name="Has_Logo_Brand" required>
         <option value="" disabled selected>Select option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
+        <option value="Yes, complete brand guidelines">Yes, complete brand guidelines</option>
+        <option value="Yes, logo only">Yes, logo only</option>
+        <option value="No, need everything created">No, need everything created</option>
       </select>
 
-      <label for="design">Preferred Colors or Design Style</label>
-      <textarea id="design" name="Design Preferences" placeholder="Describe your preferred colors, style, or aesthetic..." required></textarea>
+      <label for="quote_design">Preferred Colors or Design Style</label>
+      <textarea id="quote_design" name="Design_Preferences" placeholder="Describe your preferred colors, style, or aesthetic..." required></textarea>
 
-      <label for="inspirations">Websites You Like (Optional)</label>
-      <textarea id="inspirations" name="Design Inspirations" placeholder="Share URLs or describe websites you find inspiring..."></textarea>
+      <label for="quote_inspirations">Websites You Like (Optional)</label>
+      <textarea id="quote_inspirations" name="Design_Inspirations" placeholder="Share URLs or describe websites you find inspiring..."></textarea>
     </div>
 
     <div class="form-section">
-      <div class="form-section-title">Features & Content</div>
+      <div class="form-section-title">Features & Functionality</div>
       
-      <label for="features">What Features Do You Need?</label>
-      <textarea id="features" name="Features" placeholder="e.g., Contact forms, online store, blog, booking system..." required></textarea>
+      <label for="quote_features">What Features Do You Need?</label>
+      <textarea id="quote_features" name="Required_Features" placeholder="e.g., Contact forms, online store, blog, booking system, user accounts..." required></textarea>
 
-      <label for="content">Will you provide the content?</label>
-      <select id="content" name="Content Provided">
+      <label for="quote_integrations">Third-party Integrations Needed</label>
+      <textarea id="quote_integrations" name="Integrations" placeholder="e.g., Payment gateways, CRM systems, social media, analytics..."></textarea>
+
+      <label for="quote_content">Will you provide the content?</label>
+      <select id="quote_content" name="Content_Provided" required>
         <option value="" disabled selected>Select option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
+        <option value="Yes, I will provide all content">Yes, I will provide all content</option>
+        <option value="Partial, need help with some content">Partial, need help with some content</option>
+        <option value="No, need full content creation">No, need full content creation</option>
+      </select>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Technical Requirements</div>
+      
+      <label for="quote_domainHelp">Do you need help with domain or hosting?</label>
+      <select id="quote_domainHelp" name="Domain_Hosting_Help" required>
+        <option value="" disabled selected>Select option</option>
+        <option value="Yes, need both domain and hosting">Yes, need both domain and hosting</option>
+        <option value="Yes, need hosting only">Yes, need hosting only</option>
+        <option value="No, I have both">No, I have both</option>
       </select>
 
-      <label for="domainHelp">Do you need help with domain or hosting?</label>
-      <select id="domainHelp" name="Domain Hosting Help" required>
+      <label for="quote_maintenance">Ongoing Maintenance & Support</label>
+      <select id="quote_maintenance" name="Maintenance_Support" required>
         <option value="" disabled selected>Select option</option>
-        <option value="Yes">Yes (chargeable)</option>
-        <option value="No">No</option>
+        <option value="Yes, monthly maintenance plan">Yes, monthly maintenance plan</option>
+        <option value="As needed basis only">As needed basis only</option>
+        <option value="No, I'll handle it myself">No, I'll handle it myself</option>
       </select>
+
+      <label for="quote_existingWebsite">Do you have an existing website?</label>
+      <input type="text" id="quote_existingWebsite" name="Existing_Website" placeholder="Enter website URL or type 'No'" required />
     </div>
 
     <div class="form-section">
       <div class="form-section-title">Timeline & Budget</div>
       
-      <label for="launch">Ideal Launch Date</label>
-      <input type="date" id="launch" name="Launch Date" required>
+      <label for="quote_launch">Ideal Launch Date</label>
+      <input type="date" id="quote_launch" name="Launch_Date" required>
 
-      <label for="budget">Estimated Budget Range</label>
-      <input
-        type="text"
-        id="budget"
-        name="Budget"
-        placeholder="Enter amount in your currency"
-        required
-        title="Please enter numbers only"
-      />
+      <label for="quote_budget">Estimated Budget Range</label>
+      <select id="quote_budget" name="Budget_Range" required>
+        <option value="" disabled selected>Select budget range</option>
+        <option value="$1,000 - $2,500">$300 - $500</option>
+        <option value="$2,500 - $5,000">$500 - $1,000</option>
+        <option value="$5,000 - $10,000">$1,000 - $1,500</option>
+        <option value="$10,000+">$1,500+</option>
+        <option value="Open to suggestions">Open to suggestions</option>
+      </select>
 
-      <label for="existingWebsite">Do you have an existing website? (link)</label>
-      <input type="text" id="existingWebsite" name="existingWebsite" placeholder="Enter website URL or type 'No'" required />
+      <label for="quote_priority">Project Priority Level</label>
+      <select id="quote_priority" name="Project_Priority" required>
+        <option value="" disabled selected>Select priority</option>
+        <option value="ASAP - Rush Project">ASAP - Rush Project</option>
+        <option value="High - Within 2 months">High - Within 2 months</option>
+        <option value="Medium - 2-4 months">Medium - 2-4 months</option>
+        <option value="Low - Flexible timing">Low - Flexible timing</option>
+      </select>
 
-      <label for="additional">Anything else we should know?</label>
-      <textarea id="additional" name="Additional Info" placeholder="Share any additional requirements, concerns, or questions..." required></textarea>
+      <label for="quote_additional">Anything else we should know?</label>
+      <textarea id="quote_additional" name="Additional_Info" placeholder="Share any additional requirements, concerns, or questions..." required></textarea>
     </div>
 
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
 
     <div class="checkbox-container">
-      <input type="checkbox" id="agree" name="agree" required>
-      <label for="agree" class="checkbox-label">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> and consent to processing my personal data for the purpose of this quote request.</label>
+      <input type="checkbox" id="quote_agree" name="agree" required>
+      <label for="quote_agree" class="checkbox-label">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> and consent to processing my personal data for the purpose of this quote request.</label>
     </div>
 
     <button type="submit">
-      🚀 Submit Request
+      💼 Request Full Website Quote
     </button>
   </form>
 
 <script>
+    let selectedOption = null;
+
+    function selectOption(option) {
+      selectedOption = option;
+      
+      // Hide option cards
+      document.getElementById('optionCards').style.display = 'none';
+      
+      // Show back button
+      document.getElementById('backButton').classList.remove('hidden');
+      
+      // Show the appropriate form
+      if (option === 'preview') {
+        document.getElementById('previewForm').classList.add('show');
+        document.querySelector('h1').textContent = 'Request Free Homepage Preview';
+      } else if (option === 'quote') {
+        document.getElementById('quoteForm').classList.add('show');
+        document.querySelector('h1').textContent = 'Request Full Website Quote';
+      }
+      
+      // Smooth scroll to form
+      setTimeout(() => {
+        document.querySelector('form.show').scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 100);
+    }
+
+    function goBack() {
+      // Hide forms
+      document.getElementById('previewForm').classList.remove('show');
+      document.getElementById('quoteForm').classList.remove('show');
+      
+      // Hide back button
+      document.getElementById('backButton').classList.add('hidden');
+      
+      // Show option cards
+      document.getElementById('optionCards').style.display = 'grid';
+      
+      // Reset title
+      document.querySelector('h1').textContent = 'Choose Your Service';
+      
+      // Reset selected option
+      selectedOption = null;
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Mobile menu toggle
     function toggleMobileMenu() {
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -893,43 +1256,66 @@
       }
     });
 
-     // Add some extra interactive magic
-        document.addEventListener('click', (e) => {
-            // Create ripple effect on click
-            const ripple = document.createElement('div');
-            ripple.style.position = 'fixed';
-            ripple.style.left = e.clientX - 25 + 'px';
-            ripple.style.top = e.clientY - 25 + 'px';
-            ripple.style.width = '50px';
-            ripple.style.height = '50px';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(99, 102, 241, 0.3)';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.zIndex = '9999';
-            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
-            
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
+    // Add some extra interactive magic
+    document.addEventListener('click', (e) => {
+      // Create ripple effect on click
+      const ripple = document.createElement('div');
+      ripple.style.position = 'fixed';
+      ripple.style.left = e.clientX - 25 + 'px';
+      ripple.style.top = e.clientY - 25 + 'px';
+      ripple.style.width = '50px';
+      ripple.style.height = '50px';
+      ripple.style.borderRadius = '50%';
+      ripple.style.background = 'rgba(99, 102, 241, 0.3)';
+      ripple.style.pointerEvents = 'none';
+      ripple.style.zIndex = '9999';
+      ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
+      
+      document.body.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
 
-        // Add ripple effect CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rippleEffect {
-                0% {
-                    transform: scale(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    // Add ripple effect CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes rippleEffect {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Add hover effect for option cards
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Form validation enhancement
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        const button = form.querySelector('button[type="submit"]');
+        button.disabled = true;
+        button.style.opacity = '0.7';
+        button.innerHTML = button.innerHTML.includes('Preview') ? 
+          '⏳ Sending Preview Request...' : 
+          '⏳ Sending Quote Request...';
+      });
+    });
   </script>
 </body>
 </html>
