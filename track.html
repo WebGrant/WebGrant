@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - WebGrant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 20px 20px; /* Added top padding for fixed header */
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Liquid Glass Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.37),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 0 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.02) 50%,
+                rgba(0, 0, 0, 0.1) 100%);
+            border-radius: 0 0 20px 20px;
+            pointer-events: none;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #00fff7);
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Nav menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* Links */
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Active link styles */
+        .nav-link.active {
+            color: #ff00c8;
+            text-shadow: 0 0 10px #ff00c8;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00fff7, #ff00c8);
+            border-radius: 1px;
+        }
+
+        /* Shiny hover swipe */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(
+                45deg,
+                var(--primary),
+                var(--secondary),
+                #ff00ff,
+                #00fff7,
+                var(--primary)
+            );
+            background-size: 300% 300%;
+            animation: gradient-move 4s linear infinite;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 0 12px rgba(255,255,255,0.6);
+        }
+
+        /* Fancy CTA Button */
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff !important;
+            padding: 0.75rem 1.7rem;
+            border-radius: 50px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1;
+            animation: pulse-glow 2.5s infinite ease-in-out;
+            text-decoration: none;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            padding: 3px;
+            background: linear-gradient(
+                45deg,
+                var(--primary),
+                var(--secondary),
+                #ff00ff,
+                #00fff7,
+                var(--primary)
+            );
+            background-size: 400% 400%;
+            animation: gradient-move 6s linear infinite;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .nav-cta:hover::before {
+            opacity: 1;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+        }
+
+        .nav-cta span {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+                width: 90%;
+                max-width: 320px;
+                background: rgba(26, 26, 26, 0.95);
+                backdrop-filter: blur(25px) saturate(200%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-top: none;
+                border-radius: 0 0 25px 25px;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem 1.5rem;
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-menu::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.1) 0%, 
+                    rgba(255, 255, 255, 0.02) 50%,
+                    rgba(0, 0, 0, 0.1) 100%);
+                border-radius: 0 0 25px 25px;
+                pointer-events: none;
+            }
+
+            .nav-menu.open {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-menu li {
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                position: relative;
+                z-index: 10;
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu.open li {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
+            .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
+            .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
+            .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
+            .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
+
+            .nav-link, .nav-cta {
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 0.8rem 1rem;
+                position: relative;
+                z-index: 10;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-link:hover, .nav-cta:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px) scale(1.02);
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            body {
+                padding-top: 100px; /* Adjusted for mobile */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header styles - removed duplicate */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00aaff;
+            text-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        /* Main Card */
+        .tracking-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        /* Form Elements */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 400;
+            color: #cccccc;
+            font-size: 0.95rem;
+        }
+
+        .order-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .order-input:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .order-input:hover {
+            border-color: rgba(0, 170, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.1);
+        }
+
+        .order-input::placeholder {
+            color: #888888;
+        }
+
+        .track-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .track-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 170, 255, 0.3);
+            background: linear-gradient(135deg, #0099ee 0%, #0077bb 100%);
+        }
+
+        .track-button:active {
+            transform: translateY(0);
+        }
+
+        /* Results Section */
+        .results-section {
+            margin-top: 30px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            transform: translateY(20px);
+        }
+
+        .results-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .status-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #00aaff;
+            margin-bottom: 10px;
+        }
+
+        .status-description {
+            font-size: 1rem;
+            color: #cccccc;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 12px;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00aaff 0%, #00ddff 100%);
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+            width: 0%;
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.5);
+        }
+
+        .progress-percentage {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            margin-top: 5px;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 82, 82, 0.1);
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            color: #ff5252;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 20%, 40%, 60%, 80% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-5px);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .tracking-card {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+
+            .page-logo {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .order-input,
+            .track-button {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+
+            .status-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tracking-card {
+                padding: 25px 20px;
+            }
+
+            .page-logo {
+                font-size: 1.8rem;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            body {
+                padding-top: 90px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            color: #00aaff;
+            font-weight: 500;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 2px solid rgba(0, 170, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #00aaff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+      <div class="logo-container">
+        <img src="Logo.png" alt="Logo" class="logo-img">
+        <span class="logo">WebGrant</span>
+      </div>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="service.html" class="nav-link">Services</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="about.html" class="nav-link">About us</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="track.html" class="nav-link active">Track Your Order</a></li>
+                <li><a href="form.html" class="nav-cta"><span>Get Quote</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Tracking Card -->
+    <div class="tracking-card">
+        <h2 class="card-title">Track Your Order</h2>
+        
+        <form id="trackingForm">
+            <div class="input-group">
+                <label for="orderCode" class="input-label">Enter your order code:</label>
+                <input 
+                    type="text" 
+                    id="orderCode" 
+                    class="order-input" 
+                    placeholder="e.g., WEB1234"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="track-button" id="trackButton">
+                Track Now
+            </button>
+        </form>
+
+        <!-- Loading State -->
+        <div class="loading" id="loadingState">
+            <div class="spinner"></div>
+            Checking your order...
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // MOBILE MENU FUNCTION
+        // ========================================
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            navMenu.classList.toggle('open');
+            mobileMenuBtn.classList.toggle('open');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navMenu = document.getElementById('navMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!e.target.closest('.nav') && navMenu.classList.contains('open')) {
+                navMenu.classList.remove('open');
+                mobileMenuBtn.classList.remove('open');
+            }
+        });
+
+        // ========================================
+        // ORDER DATABASE
+        // ========================================
+        // Add new orders here as projects progress
+        const orders = {
+            "WEB1234": { 
+                progress: 40, 
+                status: "Layout Complete",
+                description: "Design mockups approved, moving to development phase"
+            },
+            "WEB5678": { 
+                progress: 70, 
+                status: "Development in Progress",
+                description: "Core functionality implemented, testing phase beginning"
+            },
+            "WEB9999": { 
+                progress: 100, 
+                status: "Completed",
+                description: "Project delivered and live. Thank you for choosing WebGrant!"
+            },
+            "WEB0001": { 
+                progress: 15, 
+                status: "Initial Planning",
+                description: "Requirements gathered, project planning underway"
+            },
+            "WEB2468": { 
+                progress: 85, 
+                status: "Final Review",
+                description: "Project in final review stage, launching soon"
+            }
+        };
+
+        // ========================================
+        // DOM ELEMENTS
+        // ========================================
+        const form = document.getElementById('trackingForm');
+        const orderInput = document.getElementById('orderCode');
+        const trackButton = document.getElementById('trackButton');
+        const loadingState = document.getElementById('loadingState');
+        const resultsSection = document.getElementById('resultsSection');
+
+        // ========================================
+        // EVENT LISTENERS
+        // ========================================
+        form.addEventListener('submit', handleFormSubmit);
+        
+        // Allow Enter key to submit
+        orderInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleFormSubmit(e);
+            }
+        });
+
+        // Auto-uppercase input
+        orderInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        // ========================================
+        // MAIN TRACKING FUNCTION
+        // ========================================
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const orderCode = orderInput.value.trim().toUpperCase();
+            
+            if (!orderCode) {
+                showError("Please enter an order code");
+                return;
+            }
+
+            // Show loading state
+            showLoading();
+            
+            // Simulate API delay for better UX
+            await new Promise(resolve => setTimeout(resolve, 1200));
+            
+            // Check if order exists
+            if (orders[orderCode]) {
+                showOrderStatus(orders[orderCode]);
+            } else {
+                showError("Invalid code. Please try again.");
+            }
+        }
+
+        // ========================================
+        // DISPLAY FUNCTIONS
+        // ========================================
+        function showLoading() {
+            hideResults();
+            loadingState.classList.add('show');
+            trackButton.disabled = true;
+            trackButton.style.opacity = '0.7';
+        }
+
+        function hideLoading() {
+            loadingState.classList.remove('show');
+            trackButton.disabled = false;
+            trackButton.style.opacity = '1';
+        }
+
+        function showOrderStatus(order) {
+            hideLoading();
+            
+            const statusColor = getStatusColor(order.progress);
+            
+            resultsSection.innerHTML = `
+                <div class="status-info">
+                    <div class="status-text" style="color: ${statusColor}">
+                        ${order.status}
+                    </div>
+                    <div class="status-description">
+                        ${order.description}
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div class="progress-percentage">
+                    <span id="progressText">0</span>% Complete
+                </div>
+            `;
+            
+            resultsSection.classList.add('show');
+            
+            // Animate progress bar
+            setTimeout(() => {
+                animateProgressBar(order.progress);
+            }, 100);
+        }
+
+        function showError(message) {
+            hideLoading();
+            
+            resultsSection.innerHTML = `
+                <div class="error-message">
+                    ${message}
+                </div>
+            `;
+            
+            resultsSection.classList.add('show');
+        }
+
+        function hideResults() {
+            resultsSection.classList.remove('show');
+            setTimeout(() => {
+                resultsSection.innerHTML = '';
+            }, 300);
+        }
+
+        // ========================================
+        // ANIMATION FUNCTIONS
+        // ========================================
+        function animateProgressBar(targetProgress) {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            if (!progressBar || !progressText) return;
+            
+            let currentProgress = 0;
+            const increment = targetProgress / 60; // 60 frames for smooth animation
+            
+            const animateFrame = () => {
+                currentProgress += increment;
+                
+                if (currentProgress >= targetProgress) {
+                    currentProgress = targetProgress;
+                }
+                
+                progressBar.style.width = currentProgress + '%';
+                progressText.textContent = Math.round(currentProgress);
+                
+                if (currentProgress < targetProgress) {
+                    requestAnimationFrame(animateFrame);
+                }
+            };
+            
+            requestAnimationFrame(animateFrame);
+        }
+
+        function getStatusColor(progress) {
+            if (progress === 100) return '#00ff88'; // Green for completed
+            if (progress >= 70) return '#ffaa00';   // Orange for near completion
+            if (progress >= 40) return '#00aaff';   // Blue for in progress
+            return '#ffffff';                       // White for initial stages
+        }
+
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+        
+        // Clear form when page loads
+        window.addEventListener('load', function() {
+            orderInput.value = '';
+            orderInput.focus();
+        });
+
+        // Handle escape key to
