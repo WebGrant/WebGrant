@@ -517,6 +517,12 @@
             transform: translateY(0);
         }
 
+        .track-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Results Section */
         .results-section {
             margin-top: 30px;
@@ -793,14 +799,18 @@
         // ========================================
         // EVENT LISTENERS
         // ========================================
-        form.addEventListener('submit', handleFormSubmit);
+        // Fixed form submission handling for mobile
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            e.stopPropagation(); // Stop event bubbling
+            handleFormSubmit(e);
+        });
         
-        // Allow Enter key to submit
-        orderInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleFormSubmit(e);
-            }
+        // Improved button click handler for mobile
+        trackButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent any default action
+            e.stopPropagation(); // Stop event bubbling
+            handleFormSubmit(e);
         });
 
         // Auto-uppercase input
@@ -808,17 +818,30 @@
             e.target.value = e.target.value.toUpperCase();
         });
 
+        // Prevent form submission on Enter key and handle manually
+        orderInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                handleFormSubmit(e);
+            }
+        });
+
         // ========================================
         // MAIN TRACKING FUNCTION
         // ========================================
         async function handleFormSubmit(e) {
-            e.preventDefault();
+            // Ensure we prevent any default behavior
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             
             const orderCode = orderInput.value.trim().toUpperCase();
             
             if (!orderCode) {
                 showError("Please enter an order code");
-                return;
+                return false;
             }
 
             // Show loading state
@@ -833,6 +856,8 @@
             } else {
                 showError("Invalid code. Please try again.");
             }
+            
+            return false; // Ensure no form submission
         }
 
         // ========================================
@@ -843,12 +868,14 @@
             loadingState.classList.add('show');
             trackButton.disabled = true;
             trackButton.style.opacity = '0.7';
+            trackButton.style.cursor = 'not-allowed';
         }
 
         function hideLoading() {
             loadingState.classList.remove('show');
             trackButton.disabled = false;
             trackButton.style.opacity = '1';
+            trackButton.style.cursor = 'pointer';
         }
 
         function showOrderStatus(order) {
@@ -943,10 +970,47 @@
         // UTILITY FUNCTIONS
         // ========================================
         
-        // Clear form when page loads
-        window.addEventListener('load', function() {
+        // Clear form when page loads and focus input
+        document.addEventListener('DOMContentLoaded', function() {
             orderInput.value = '';
             orderInput.focus();
+            
+            // Ensure form doesn't submit on page load
+            form.setAttribute('onsubmit', 'return false;');
         });
 
-        // Handle escape key to
+        // Additional mobile-specific fixes
+        document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Prevent iOS Safari from zooming on input focus
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            orderInput.addEventListener('focus', function() {
+                this.style.fontSize = '16px';
+            });
+            orderInput.addEventListener('blur', function() {
+                this.style.fontSize = '1.1rem';
+            });
+        }
+
+        // Handle viewport changes on mobile (keyboard open/close)
+        let initialViewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        
+        function handleViewportChange() {
+            if (window.visualViewport) {
+                const currentHeight = window.visualViewport.height;
+                const heightDifference = initialViewportHeight - currentHeight;
+                
+                if (heightDifference > 150) { // Keyboard is likely open
+                    document.body.style.transform = `translateY(-${Math.min(heightDifference / 2, 100)}px)`;
+                } else {
+                    document.body.style.transform = 'translateY(0)';
+                }
+            }
+        }
+
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', handleViewportChange);
+        }
+    </script>
+</body>
+</html>
