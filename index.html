@@ -3003,10 +3003,23 @@ trackAnotherOrder() {
             ai.sendMessage();
         }
 
-        function toggleChat() {
-            const panel = document.getElementById('chatPanel');
-            panel.classList.toggle('open');
-        }
+// Enhanced toggle function that works properly on mobile
+function toggleChat() {
+    const panel = document.getElementById('chatPanel');
+    const btn = document.getElementById('openChatBtn');
+    
+    if (panel.classList.contains('open')) {
+        // Close the chat
+        panel.classList.remove('open');
+        btn.innerHTML = '💬';
+        btn.style.transform = 'scale(1)';
+    } else {
+        // Open the chat
+        panel.classList.add('open');
+        btn.innerHTML = '✕';
+        btn.style.transform = 'scale(1.1)';
+    }
+}
 
         // Auto-hide initial options after first interaction
         document.addEventListener('DOMContentLoaded', () => {
