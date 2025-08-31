@@ -866,6 +866,18 @@
       }
     }
 
+    /* Force single row layout for cards */
+@media (min-width: 769px) {
+  .option-cards {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+  }
+  
+  .option-card {
+    min-height: 400px;
+  }
+}
+
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -904,7 +916,7 @@
 
   <h1>Choose Your Service</h1>
 
-  <div class="option-cards" id="optionCards">
+ <div class="option-cards" id="optionCards">
     <div class="option-card" onclick="selectOption('preview')">
       <div class="option-icon">🎨</div>
       <div class="option-title">Free Homepage Preview</div>
@@ -933,6 +945,22 @@
         <li>Timeline & milestone breakdown</li>
         <li>Transparent pricing</li>
         <li>Free consultation included</li>
+      </ul>
+      <div class="option-price">FREE CONSULTATION</div>
+    </div>
+
+    <div class="option-card" onclick="selectOption('ai')">
+      <div class="option-icon">🤖</div>
+      <div class="option-title">AI Solutions Quote</div>
+      <div class="option-description">
+        Transform your business with intelligent AI automation solutions that work 24/7 to enhance customer experience.
+      </div>
+      <ul class="option-features">
+        <li>Smart chatbots for customer support</li>
+        <li>Intelligent contact forms</li>
+        <li>AI product recommendations</li>
+        <li>Automated call answering</li>
+        <li>Custom AI integrations</li>
       </ul>
       <div class="option-price">FREE CONSULTATION</div>
     </div>
@@ -1161,7 +1189,138 @@
     <button type="submit">
       💼 Request Full Website Quote
     </button>
+
   </form>
+
+  <!-- AI Solutions Form -->
+<form action="https://formspree.io/f/xovwbgqz" method="POST" id="aiForm">
+  <input type="hidden" name="Service_Type" value="AI Solutions Quote">
+  
+  <div class="form-section">
+    <div class="form-section-title">Contact Information</div>
+    
+    <label for="ai_name">Your Full Name</label>
+    <input type="text" id="ai_name" name="Name" required>
+
+    <label for="ai_email">Email Address</label>
+    <input type="email" id="ai_email" name="Email" required>
+
+    <label for="ai_phone">Phone Number</label>
+    <input type="tel" id="ai_phone" name="Phone" required>
+
+    <label for="ai_business">Business Name</label>
+    <input type="text" id="ai_business" name="Business_Name" required>
+
+    <label for="ai_industry">Industry</label>
+    <input type="text" id="ai_industry" name="Industry" placeholder="e.g., E-commerce, Healthcare, Real Estate..." required>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">AI Solutions Needed</div>
+    
+    <label>Which AI solutions are you interested in? (Select all that apply)</label>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 12px;">
+      <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(99, 102, 241, 0.05); border-radius: 8px; cursor: pointer; margin-top: 0;">
+        <input type="checkbox" name="AI_Solutions" value="Smart Chatbot for Customer Support" style="width: auto !important; margin: 0;">
+        <span style="color: var(--dark-text-primary);">💬 Smart chatbots for customer support</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(99, 102, 241, 0.05); border-radius: 8px; cursor: pointer; margin-top: 0;">
+        <input type="checkbox" name="AI_Solutions" value="Smart Contact Form" style="width: auto !important; margin: 0;">
+        <span style="color: var(--dark-text-primary);">📝 Smart Contact Form – asks questions & sends a clear summary</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(99, 102, 241, 0.05); border-radius: 8px; cursor: pointer; margin-top: 0;">
+        <input type="checkbox" name="AI_Solutions" value="Product Recommender" style="width: auto !important; margin: 0;">
+        <span style="color: var(--dark-text-primary);">🔍 Product Recommender – suggests best product/service</span>
+      </label>
+      <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(99, 102, 241, 0.05); border-radius: 8px; cursor: pointer; margin-top: 0;">
+        <input type="checkbox" name="AI_Solutions" value="AI Call Answering" style="width: auto !important; margin: 0;">
+        <span style="color: var(--dark-text-primary);">📲 AI Call Answering</span>
+      </label>
+    </div>
+
+    <label for="ai_goals">What business goals do you want to achieve with AI?</label>
+    <textarea id="ai_goals" name="AI_Goals" placeholder="e.g., Reduce response time, increase sales, improve customer satisfaction..." required></textarea>
+
+    <label for="ai_current_system">Current Customer Support System</label>
+    <select id="ai_current_system" name="Current_System" required>
+      <option value="" disabled selected>Select your current setup</option>
+      <option value="Email only">Email only</option>
+      <option value="Phone support">Phone support</option>
+      <option value="Live chat">Live chat</option>
+      <option value="Contact forms">Contact forms</option>
+      <option value="Multiple systems">Multiple systems</option>
+      <option value="No formal system">No formal system</option>
+    </select>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">Business Requirements</div>
+    
+    <label for="ai_customers">Average number of customer inquiries per day</label>
+    <select id="ai_customers" name="Daily_Inquiries" required>
+      <option value="" disabled selected>Select range</option>
+      <option value="1-10">1-10 inquiries</option>
+      <option value="11-50">11-50 inquiries</option>
+      <option value="51-100">51-100 inquiries</option>
+      <option value="100+">100+ inquiries</option>
+      <option value="Just starting">Just starting out</option>
+    </select>
+
+    <label for="ai_hours">Business hours for AI support</label>
+    <select id="ai_hours" name="Support_Hours" required>
+      <option value="" disabled selected>Select option</option>
+      <option value="24/7 Support">24/7 Support</option>
+      <option value="Business hours only">Business hours only (9-5)</option>
+      <option value="Extended hours">Extended hours (8am-8pm)</option>
+      <option value="Weekend support">Include weekend support</option>
+    </select>
+
+    <label for="ai_integration">Do you need AI integrated with existing systems?</label>
+    <textarea id="ai_integration" name="Integration_Needs" placeholder="e.g., CRM, inventory system, booking platform, payment processor..."></textarea>
+
+    <label for="ai_languages">Languages needed for AI support</label>
+    <input type="text" id="ai_languages" name="Languages" placeholder="e.g., English, Spanish, French..." required>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title">Timeline & Budget</div>
+    
+    <label for="ai_launch">When do you need the AI solution live?</label>
+    <select id="ai_launch" name="AI_Launch_Timeline" required>
+      <option value="" disabled selected>Select timeline</option>
+      <option value="ASAP - Within 2 weeks">ASAP - Within 2 weeks</option>
+      <option value="Within 1 month">Within 1 month</option>
+      <option value="1-3 months">1-3 months</option>
+      <option value="3+ months">3+ months</option>
+      <option value="Flexible">Flexible timing</option>
+    </select>
+
+    <label for="ai_budget">Monthly budget for AI solutions</label>
+    <select id="ai_budget" name="AI_Budget" required>
+      <option value="" disabled selected>Select budget range</option>
+      <option value="$100-$300/month">$100-$300/month</option>
+      <option value="$300-$500/month">$300-$500/month</option>
+      <option value="$500-$1000/month">$500-$1000/month</option>
+      <option value="$1000+/month">$1000+/month</option>
+      <option value="Open to recommendations">Open to recommendations</option>
+    </select>
+
+    <label for="ai_additional">Additional requirements or questions</label>
+    <textarea id="ai_additional" name="AI_Additional_Info" placeholder="Share any specific requirements, concerns, or questions about AI implementation..." required></textarea>
+  </div>
+
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://webgrant.github.io/WebGrant/thankyou.html">
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="ai_agree" name="agree" required>
+    <label for="ai_agree" class="checkbox-label">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> and consent to processing my personal data for this AI solutions quote request.</label>
+  </div>
+
+  <button type="submit">
+    🤖 Request AI Solutions Quote
+  </button>
+</form>
 
 <script>
     let selectedOption = null;
@@ -1317,6 +1476,118 @@
           '⏳ Sending Quote Request...';
       });
     });
+
+    // Update the selectOption function to handle 'ai' option
+function selectOption(option) {
+  selectedOption = option;
+  
+  // Hide option cards
+  document.getElementById('optionCards').style.display = 'none';
+  
+  // Show back button
+  document.getElementById('backButton').classList.remove('hidden');
+  
+  // Show the appropriate form
+  if (option === 'preview') {
+    document.getElementById('previewForm').classList.add('show');
+    document.querySelector('h1').textContent = 'Request Free Homepage Preview';
+  } else if (option === 'quote') {
+    document.getElementById('quoteForm').classList.add('show');
+    document.querySelector('h1').textContent = 'Request Full Website Quote';
+  } else if (option === 'ai') {
+    document.getElementById('aiForm').classList.add('show');
+    document.querySelector('h1').textContent = 'Request AI Solutions Quote';
+  }
+  
+  // Smooth scroll to form
+  setTimeout(() => {
+    document.querySelector('form.show').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  }, 100);
+}
+
+function goBack() {
+  // Hide forms
+  document.getElementById('previewForm').classList.remove('show');
+  document.getElementById('quoteForm').classList.remove('show');
+  document.getElementById('aiForm').classList.remove('show');
+  
+  // Hide back button
+  document.getElementById('backButton').classList.add('hidden');
+  
+  // Show option cards
+  document.getElementById('optionCards').style.display = 'grid';
+  
+  // Reset title
+  document.querySelector('h1').textContent = 'Choose Your Service';
+  
+  // Reset selected option
+  selectedOption = null;
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Update form validation
+document.querySelectorAll('form').forEach(form => {
+  form.addEventListener('submit', (e) => {
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.style.opacity = '0.7';
+    
+    if (button.innerHTML.includes('Preview')) {
+      button.innerHTML = '⏳ Sending Preview Request...';
+    } else if (button.innerHTML.includes('AI')) {
+      button.innerHTML = '⏳ Sending AI Quote Request...';
+    } else {
+      button.innerHTML = '⏳ Sending Quote Request...';
+    }
+  });
+});
+
+// Update the goBack function to hide AI form too
+// Replace your existing goBack function with this:
+function goBack() {
+  // Hide forms
+  document.getElementById('previewForm').classList.remove('show');
+  document.getElementById('quoteForm').classList.remove('show');
+  document.getElementById('aiForm').classList.remove('show');
+  
+  // Hide back button
+  document.getElementById('backButton').classList.add('hidden');
+  
+  // Show option cards
+  document.getElementById('optionCards').style.display = 'grid';
+  
+  // Reset title
+  document.querySelector('h1').textContent = 'Choose Your Service';
+  
+  // Reset selected option
+  selectedOption = null;
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Update the form validation enhancement
+// Replace the existing form validation section with this:
+document.querySelectorAll('form').forEach(form => {
+  form.addEventListener('submit', (e) => {
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.style.opacity = '0.7';
+    
+    if (button.innerHTML.includes('Preview')) {
+      button.innerHTML = '⏳ Sending Preview Request...';
+    } else if (button.innerHTML.includes('AI')) {
+      button.innerHTML = '⏳ Sending AI Quote Request...';
+    } else {
+      button.innerHTML = '⏳ Sending Quote Request...';
+    }
+  });
+});
   </script>
 </body>
 </html>
