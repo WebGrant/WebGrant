@@ -1119,6 +1119,129 @@
                 url('FrostAir1.jpg') center/cover no-repeat;
 }
 
+        /* Base chat styles (desktop first) */
+#chatBox {
+    border: 2px solid #1e3a5f;
+    border-radius: 15px;
+    padding: 15px;
+    width: 90%;
+    height: 550px;
+    overflow-y: auto;
+    margin-top: 30px;
+    background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
+    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
+                inset 4px 4px 10px rgba(0, 0, 0, 0.9),
+                0 8px 20px rgba(0, 40, 90, 0.4);
+}
+
+#userInput {
+    margin-top: 30px;
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #111;
+    display: none;
+    color: #ddd;
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05),
+                inset 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #25395a, #1b2b45);
+    color: #ddd;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin: 5px 5px 5px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.05),
+                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7),
+                inset -2px -2px 4px rgba(255, 255, 255, 0.03),
+                inset 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.user {
+    color: #03abb7;
+    margin: 5px 0;
+    font-weight: bold;
+    text-align: right;
+    background: rgba(0, 170, 187, 0.2);
+    padding: 8px 12px;
+    border-radius: 12px;
+    float: right;
+    clear: both;
+}
+
+.ai {
+    color: #aaa4a4;
+    margin: 5px 0;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 12px;
+    float: left;
+    clear: both;
+}
+
+#chatPanel {
+    position: fixed;
+    top: 80px;
+    right: -600px;
+    width: 500px;
+    height: 100%;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    box-shadow: -8px 0 15px rgba(0, 40, 90, 0.4),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.02),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.9);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 15px 0 0 15px;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    #chatBox {
+        width: 95%;
+        height: 400px;
+        padding: 10px;
+    }
+
+    #userInput {
+        width: 90%;
+        margin-top: 20px;
+        padding: 8px;
+    }
+
+    #chatPanel {
+        width: 100%;
+        right: -100%;
+        top: 60px;
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 12px;
+        margin: 5px 3px 5px 0;
+    }
+}
+
+        h10 {
+            color: #ccc;
+            font-size: 30px;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
+                         -1px -1px 4px rgba(0, 0, 0, 0.8);
+        }
+
     </style>
 </head>
 <body>
@@ -1169,6 +1292,22 @@
             </div>
         </div>
     </section>
+
+    <div id="chatPanel">
+    <h10>Chat with our AI Assistant</h10>
+    <div id="chatBox">
+        <p>Please select a question to begin:</p>
+        <button onclick="selectOption('what services do you offer?')">What services do you offer?</button>
+        <button onclick="selectOption('which package is best for my business?')">Which package is best for my business?</button>
+        <button onclick="selectOption('contact a team member')">Contact a team member</button>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="chat()" id="sendButton" style="display:none;">Send</button>
+</div>
+
+<button id="openChatBtn" style="position: fixed; right: 20px; bottom: 20px; border-radius: 50%; width: 60px; height: 60px; background: #4A90E2; color: white; font-size: 24px; border: none; cursor: pointer; z-index: 1001;">💬</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
     <!-- Stats Section -->
 
@@ -1304,9 +1443,6 @@
         </div>
     </footer>
 
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="XeSIXZfjDUO-zsisE7opt";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
     
     <script>
         // Create floating particles
@@ -1559,6 +1695,270 @@ document.addEventListener('click', (e) => {
             }
         `;
         document.head.appendChild(rainbowStyle);
+
+        //CODES FOR AI
+
+emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
+
+const chatBox = document.getElementById("chatBox");
+const userInputField = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+
+// Global variable to store the full conversation transcript
+let conversationTranscript = "";
+
+let context = {
+    userName: "",
+    projectType: "",
+    package: "",
+    websiteStyle: "",
+    features: "",
+    email: "",
+    selectedOption: "",
+    step: "initial"
+};
+
+function typeMessage(element, text, prefix, speed) {
+    // If text contains HTML tags, display instantly
+    if(/<\/?[a-z][\s\S]*>/i.test(text)) {
+        element.innerHTML = prefix + text;
+        conversationTranscript += prefix + text + "\n";
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return;
+    }
+    let i = 0;
+    let fullText = prefix + text;
+    function typeChar() {
+        if (i < fullText.length) {
+            element.innerHTML += fullText.charAt(i);
+            i++;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            setTimeout(typeChar, speed);
+        } else {
+            conversationTranscript += fullText + "\n";
+        }
+    }
+    typeChar();
+}
+
+function addMessage(text, sender) {
+    const message = document.createElement("div");
+    message.className = sender;
+    const prefix = sender === "user" ? "You: " : "SmartGrant: ";
+    if (sender === "ai") {
+        typeMessage(message, text, prefix, 18);
+    } else {
+        message.innerText = prefix + text;
+        conversationTranscript += prefix + text + "\n";
+    }
+    chatBox.appendChild(message);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function selectOption(option) {
+    if(context.step !== "initial") return;
+
+    // Hide only the initial four option buttons
+    const optionButtons = chatBox.querySelectorAll(".initialOptionBtn");
+    optionButtons.forEach(btn => btn.style.display = "none");
+
+    context.selectedOption = option;
+    addMessage(option.charAt(0).toUpperCase() + option.slice(1), "user");
+    userInputField.style.display = "inline-block";
+    sendButton.style.display = "inline-block";
+    userInputField.focus();
+
+    switch(option) {
+        case "what services do you offer?":
+            context.step = "postFAQ";
+            addMessage("We offer website design, development, SEO, mobile optimization, maintenance, and support services to help your business grow online. Would you like to see our packages or get a quote?", "ai");
+            break;
+        case "which package is best for my business?":
+            context.step = "askProjectTypeForPackage";
+            addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
+            break;
+        case "contact a team member":
+            addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
+            addMessage("Is there anything else I can help you with today?", "ai");
+            break;
+        default:
+            addMessage("Hello! How can I assist you today?", "ai");
+    }
+}
+
+function generateReply(input) {
+    input = input.toLowerCase();
+
+    // Check for quote requests first - this takes priority
+    if (input.includes("quote") || input.includes("free quote") || input.includes("get a quote")) {
+        addMessage('Great! Please fill out our quote form here: <a href="form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>', "ai");
+        addMessage("Is there anything else I can help you with today?", "ai");
+        return;
+    }
+
+    // Handle flow-based responses
+    if (context.step === "postFAQ") {
+        if (input.includes("package")) {
+            context.step = "askProjectTypeForPackage";
+            return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
+        } else {
+            return "Please clarify if you want to see our packages or get a quote.";
+        }
+    }
+
+    if (context.step === "askProjectTypeForPackage") {
+        if (/portfolio|e-commerce|blog|business|website/.test(input)) {
+            if (input.includes("portfolio")) context.projectType = "portfolio";
+            else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
+            else if (input.includes("blog")) context.projectType = "blog";
+            else context.projectType = input.trim();
+
+            context.step = "choosePackage";
+            return "Would you like me to help you select a package based on your business size or needs? (yes/no)";
+        } else return "Website type? (portfolio, e-commerce, blog, business)";
+    }
+
+    if (context.step === "choosePackage") {
+        if (input.includes("yes") || input.includes("sure") || input.includes("ok")) {
+            context.step = "choosePackageDetails";
+            return "Great! Can you tell me about your business size or needs? For example, small startup, growing company, or full-featured priority support.";
+        } else if (input.includes("no")) {
+            context.step = "completed";
+            return "No problem! If you have other questions or need assistance, just let me know.";
+        } else {
+            return "Please reply with 'yes' if you'd like help selecting a package, or 'no' if not.";
+        }
+    }
+
+    if (context.step === "choosePackageDetails") {
+        if (input.includes("small startup") || input.includes("startup") || input.includes("small")) {
+            context.package = "Basic Package";
+        } else if (input.includes("growing company") || input.includes("growing")) {
+            context.package = "Growth Package";
+        } else if (input.includes("full-featured") || input.includes("priority") || input.includes("support")) {
+            context.package = "Growth Plus Package";
+        } else {
+            context.package = "Custom Package";
+        }
+        context.step = "askWebsiteStyle";
+        return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
+    }
+
+    if (context.step === "askWebsiteStyle") {
+        if (!context.websiteStyle) {
+            if (/clean|modern|professional/.test(input)) {
+                context.websiteStyle = input.match(/clean|modern|professional/)[0];
+                context.step = "completed";
+                return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
+            } else return "Website style? (clean, modern, professional)";
+        } else {
+            context.step = "completed";
+            return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
+        }
+    }
+
+    if (context.step === "confirmEmail") {
+        if (input.includes("@") && input.includes(".")) {
+            context.email = input.trim();
+            context.step = "completed";
+            sendContactEmail();
+            return `Thanks! A team member will reach out to you soon at ${context.email}. If you have any questions in the meantime, just ask!`;
+        } else return "Please provide a valid email address.";
+    }
+
+    // Check for specific package price requests
+    if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
+        return "Our Basic Package starts at $300, ideal for small startups.";
+    }
+    if ((input.includes("growth package") && !input.includes("growth plus")) || (input.includes("growth") && !input.includes("plus"))) {
+        return "Our Growth Package starts at $700, perfect for growing companies.";
+    }
+    if (input.includes("growth plus package") || input.includes("growth plus")) {
+        return "Our Growth Plus Package starts at $1100, with full-featured priority support.";
+    }
+
+    // General package list
+    if (input.includes("package") || input.includes("packages")) {
+        return "We offer the Basic Package for small startups, Growth Package for growing companies, and Growth Plus Package for full-featured priority support.";
+    }
+    if (/services|options|what do you do|offer/.test(input)) {
+        return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
+    }
+
+    // Handle pricing questions
+    if (/price|cost|how much/.test(input)) {
+        return 'Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/forms.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>';
+    }
+
+    if (/portfolio|examples|work/.test(input)) {
+        return "You can view our portfolio online to see examples of our projects.";
+    }
+    if (/contact|reach|email/.test(input)) {
+        return "You can reach us via the contact us form or by emailing us at webgrant25@gmail.com or call +61 479 085 297.";
+    }
+    if (/bye|goodbye|see you/.test(input)) {
+        return "Goodbye! It was a pleasure assisting you.";
+    }
+
+    // Trigger contact flow if user asks to speak to a representative
+    if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
+        return 'Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>';
+    }
+
+    // Default response
+    return "I'm here to help! What else would you like to know or discuss?";
+}
+
+function sendContactEmail() {
+    // Prepare email parameters for contact request
+    const templateParams = {
+        reply_to: context.email,            // User email
+        from_name: context.userName || "Unknown", // Optional: User name
+        message: conversationTranscript     // Full conversation
+    };
+
+    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
+        .then(() => {
+            console.log("Contact request email sent successfully.");
+        }, (error) => {
+            console.error("Failed to send contact request email:", error);
+        })
+        .catch((err) => {
+            console.error("Error in sending contact request email (catch):", err);
+        });
+}
+
+function chat() {
+    // Hide the initial option buttons if visible
+    const optionButtons = chatBox.querySelectorAll("#chatBox > button");
+    optionButtons.forEach(btn => btn.style.display = "none");
+
+    const userInput = userInputField.value.trim();
+    if (!userInput) return;
+
+    addMessage(userInput, "user");
+    const reply = generateReply(userInput);
+    if (reply) { // Only add message if there's a reply
+        addMessage(reply, "ai");
+    }
+
+    userInputField.value = "";
+    userInputField.focus();
+}
+
+document.getElementById("openChatBtn").addEventListener("click", () => {
+    const panel = document.getElementById("chatPanel");
+    if (panel.style.right === "0px") {
+        panel.style.right = "-600px";
+    } else {
+        panel.style.right = "0px";
+    }
+});
+
+userInputField.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendButton.click();
+});
+        
     </script>
 </body>
 </html>
