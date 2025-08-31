@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebGrant - Revolutionary Web Development Experience</title>
     <meta name="description" content="WebGrant: Mind-blowing web experiences that push boundaries and captivate audiences">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -1119,127 +1120,230 @@
                 url('FrostAir1.jpg') center/cover no-repeat;
 }
 
-        /* Base chat styles (desktop first) */
-#chatBox {
-    border: 2px solid #1e3a5f;
-    border-radius: 15px;
-    padding: 15px;
-    width: 90%;
-    height: 550px;
-    overflow-y: auto;
-    margin-top: 30px;
-    background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
-    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
-                inset 4px 4px 10px rgba(0, 0, 0, 0.9),
-                0 8px 20px rgba(0, 40, 90, 0.4);
-}
+      /* Chat styles */
+        #chatPanel {
+            position: fixed;
+            top: 20px;
+            right: -600px;
+            width: 500px;
+            height: calc(100vh - 40px);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            box-shadow: -8px 0 25px rgba(0, 40, 90, 0.4);
+            transition: right 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+            border-radius: 15px 0 0 15px;
+            display: flex;
+            flex-direction: column;
+        }
 
-#userInput {
-    margin-top: 30px;
-    width: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #111;
-    display: none;
-    color: #ddd;
-    background: linear-gradient(145deg, #1a1a1a, #111);
-    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05),
-                inset 2px 2px 6px rgba(0, 0, 0, 0.8);
-}
+        #chatPanel.open {
+            right: 0;
+        }
 
-button {
-    padding: 10px 15px;
-    border-radius: 8px;
-    background: linear-gradient(145deg, #25395a, #1b2b45);
-    color: #ddd;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    margin: 5px 5px 5px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6),
-                inset -2px -2px 5px rgba(255, 255, 255, 0.05),
-                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7),
-                inset -2px -2px 4px rgba(255, 255, 255, 0.03),
-                inset 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
+        .chat-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-.user {
-    color: #03abb7;
-    margin: 5px 0;
-    font-weight: bold;
-    text-align: right;
-    background: rgba(0, 170, 187, 0.2);
-    padding: 8px 12px;
-    border-radius: 12px;
-    float: right;
-    clear: both;
-}
-
-.ai {
-    color: #aaa4a4;
-    margin: 5px 0;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 12px;
-    border-radius: 12px;
-    float: left;
-    clear: both;
-}
-
-#chatPanel {
-    position: fixed;
-    top: 80px;
-    right: -600px;
-    width: 500px;
-    height: 100%;
-    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    box-shadow: -8px 0 15px rgba(0, 40, 90, 0.4),
-                inset -5px -5px 15px rgba(255, 255, 255, 0.02),
-                inset 5px 5px 15px rgba(0, 0, 0, 0.9);
-    transition: right 0.3s ease;
-    padding: 20px;
-    z-index: 1000;
-    border-radius: 15px 0 0 15px;
-}
-
-/* Mobile responsiveness */
-@media screen and (max-width: 768px) {
-    #chatBox {
-        width: 95%;
-        height: 400px;
-        padding: 10px;
-    }
-
-    #userInput {
-        width: 90%;
-        margin-top: 20px;
-        padding: 8px;
-    }
-
-    #chatPanel {
-        width: 100%;
-        right: -100%;
-        top: 60px;
-        border-radius: 0;
-        padding: 15px;
-    }
-
-    button {
-        padding: 8px 12px;
-        margin: 5px 3px 5px 0;
-    }
-}
-
-        h10 {
+        .chat-title {
             color: #ccc;
-            font-size: 30px;
-            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1),
-                         -1px -1px 4px rgba(0, 0, 0, 0.8);
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        #chatBox {
+            border: 2px solid #1e3a5f;
+            border-radius: 15px;
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
+            box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
+                        inset 4px 4px 10px rgba(0, 0, 0, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            color: #ddd;
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .option-button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-button:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .message {
+            margin: 12px 0;
+            padding: 12px;
+            border-radius: 12px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: rgba(99, 102, 241, 0.2);
+            color: #fff;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .ai-message {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+            margin-right: auto;
+        }
+
+        .form-field {
+            margin: 10px 0;
+        }
+
+        .form-field label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-field input, .form-field select, .form-field textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        #openChatBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #openChatBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            #chatPanel {
+                width: 100%;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #999;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin: 8px 5px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
         }
 
     </style>
@@ -1293,21 +1397,34 @@ button:active {
         </div>
     </section>
 
+ <!-- Chat Panel -->
     <div id="chatPanel">
-    <h10>Chat with our AI Assistant</h10>
-    <div id="chatBox">
-        <p>Please select a question to begin:</p>
-        <button onclick="selectOption('what services do you offer?')">What services do you offer?</button>
-        <button onclick="selectOption('which package is best for my business?')">Which package is best for my business?</button>
-        <button onclick="selectOption('contact a team member')">Contact a team member</button>
+        <div class="chat-header">
+            <h2 class="chat-title">WebGrant AI Assistant</h2>
+            <p style="color: #999; font-size: 14px;">Your friendly guide to the perfect website</p>
+        </div>
+        
+        <div id="chatBox">
+            <div class="ai-message message">
+                <p>Hi! I'm here to help you find the perfect website solution for your business. What would you like to know?</p>
+                <div id="initialOptions">
+                    <button class="option-button" onclick="selectOption('packages')">📦 Tell me about your packages</button>
+                    <button class="option-button" onclick="selectOption('which_package')">🎯 Which package is right for me?</button>
+                    <button class="option-button" onclick="selectOption('free_preview')">🆓 Get a free homepage preview</button>
+                    <button class="option-button" onclick="selectOption('full_quote')">💰 Request a full quote</button>
+                    <button class="option-button" onclick="selectOption('track_order')">📋 Track my order</button>
+                    <button class="option-button" onclick="selectOption('talk_human')">👤 Talk to a human</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+        </div>
     </div>
-    <input type="text" id="userInput" placeholder="Type your message..." />
-    <button onclick="chat()" id="sendButton" style="display:none;">Send</button>
-</div>
 
-<button id="openChatBtn" style="position: fixed; right: 20px; bottom: 20px; border-radius: 50%; width: 60px; height: 60px; background: #4A90E2; color: white; font-size: 24px; border: none; cursor: pointer; z-index: 1001;">💬</button>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <!-- Chat Toggle Button -->
+    <button id="openChatBtn" onclick="toggleChat()">💬</button>
 
     <!-- Stats Section -->
 
@@ -1349,7 +1466,7 @@ button:active {
     <div class="portfolio-bg"></div>
     <div class="portfolio-content">
         <h3 class="portfolio-title">La Tavola Italiana</h3>
-        <p class="portfolio-desc">Demonstration of a Standard website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</p>
+        <p class="portfolio-desc">Demonstration of a Growth website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</p>
     </div>
 </div>
 
@@ -1357,7 +1474,7 @@ button:active {
     <div class="portfolio-bg"></div>
     <div class="portfolio-content">
         <h3 class="portfolio-title">SydneyDine</h3>
-        <p class="portfolio-desc">Showcase of a Pro Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</p>
+        <p class="portfolio-desc">Showcase of a Growth + Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</p>
     </div>
 </div>
 
@@ -1365,7 +1482,7 @@ button:active {
     <div class="portfolio-bg"></div>
     <div class="portfolio-content">
         <h3 class="portfolio-title">NextGen</h3>
-        <p class="portfolio-desc">Demonstration of a Pro Website for a fictional tech company, NextGen. Designed to showcase advanced features, sleek design, and powerful functionality tailored for growing modern businesses.</p>
+        <p class="portfolio-desc">Demonstration of a Growth + Website for a fictional tech company, NextGen. Designed to showcase advanced features, sleek design, and powerful functionality tailored for growing modern businesses.</p>
     </div>
 </div>
 
@@ -1445,6 +1562,127 @@ button:active {
 
     
     <script>
+        // ==============================================
+// 1. ORDER DATABASE - Add this right after your existing orders = {} line
+// ==============================================
+
+        // ORDER DATABASE
+// Enhanced order database with sample data
+const orders = {
+    'WG-2025-001': {
+        progress: 75,
+        status: 'In Review', 
+        description: 'Homepage design completed, awaiting client feedback',
+        client: 'Sample Client',
+        email: 'sample@email.com',
+        package: 'Growth',
+        created: '2025-01-15',
+        eta: '2025-02-01'
+    },
+    'WG-2025-002': {
+        progress: 30,
+        status: 'In Design',
+        description: 'Designer assigned and working on initial concepts',
+        client: 'Demo Business',
+        email: 'demo@business.com', 
+        package: 'Growth +',
+        created: '2025-01-20',
+        eta: '2025-02-10'
+    }
+    // Add more orders manually as needed
+};
+
+// ==============================================
+// 2. UNIQUE CODE GENERATOR - Add this function
+// ==============================================
+
+function generateOrderCode() {
+    const year = new Date().getFullYear();
+    const orderNumber = Math.floor(Math.random() * 9000) + 1000; // Random 4-digit number
+    return `WG-${year}-${orderNumber}`;
+}
+
+// ==============================================
+// 3. EMAIL FUNCTIONS - Add these functions
+// ==============================================
+
+// Send confirmation email to client using Formspree
+function sendClientConfirmation(orderCode, clientEmail, clientName, packageType) {
+    const emailData = new FormData();
+    emailData.append('to_email', clientEmail);
+    emailData.append('order_code', orderCode);
+    emailData.append('client_name', clientName);
+    emailData.append('package_type', packageType);
+    emailData.append('email_type', 'client_confirmation');
+    emailData.append('subject', `Your WebGrant Order Code: ${orderCode}`);
+    
+    const emailMessage = `
+Hello ${clientName},
+
+Thank you for choosing WebGrant! Your order has been received.
+
+Order Code: ${orderCode}
+Package: ${packageType}
+
+You can track your order progress anytime at: https://yourwebsite.com/track.html
+
+What happens next:
+• Our team will review your requirements within 24 hours
+• You'll receive updates as work progresses
+• Expected completion: 1-2 weeks
+
+Questions? Reply to this email or contact us at webgrant25@gmail.com
+
+Best regards,
+The WebGrant Team
+    `;
+    
+    emailData.append('message', emailMessage);
+    
+    return fetch('https://formspree.io/f/xovwbgqz', {
+        method: 'POST',
+        body: emailData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+}
+
+// Send notification to your email
+function sendInternalNotification(orderCode, clientData, requestType) {
+    const emailData = new FormData();
+    emailData.append('to_email', 'webgrant25@gmail.com'); // Your email
+    emailData.append('order_code', orderCode);
+    emailData.append('email_type', 'internal_notification');
+    emailData.append('subject', `New ${requestType}: ${orderCode}`);
+    
+    const emailMessage = `
+New order received!
+
+Order Code: ${orderCode}
+Request Type: ${requestType}
+Client: ${clientData.name || 'Not provided'}
+Email: ${clientData.email}
+Business: ${clientData.businessName || clientData.business_name || 'Not provided'}
+Package: ${clientData.package || 'Not specified'}
+
+Additional Details:
+${JSON.stringify(clientData, null, 2)}
+
+Please add this order to your tracking system and update the orders object in your code.
+    `;
+    
+    emailData.append('message', emailMessage);
+    
+    return fetch('https://formspree.io/f/xovwbgqz', {
+        method: 'POST',
+        body: emailData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+}
+
         // Create floating particles
         function createParticles() {
             const particleContainer = document.querySelector('.particles');
@@ -1696,269 +1934,1208 @@ document.addEventListener('click', (e) => {
         `;
         document.head.appendChild(rainbowStyle);
 
-        //CODES FOR AI
 
-emailjs.init("service_xj87x16"); // Replace with your EmailJS user ID
 
-const chatBox = document.getElementById("chatBox");
-const userInputField = document.getElementById("userInput");
-const sendButton = document.getElementById("sendButton");
+        // Enhanced WebGrant AI Assistant
+        class WebGrantAI {
 
-// Global variable to store the full conversation transcript
-let conversationTranscript = "";
+            startFullQuote(suggestedPackage = '') {
+    this.context.step = 'full_quote';
+    const message = `
+        <strong>Full Project Quote Request</strong><br><br>
+        Let's gather your project details for an accurate quote:<br><br>
+        
+        <div class="form-field">
+            <label>Your Name *</label>
+            <input type="text" id="quoteName" placeholder="Full name">
+        </div>
+        
+        <div class="form-field">
+            <label>Email Address *</label>
+            <input type="email" id="quoteEmail" placeholder="your@email.com">
+        </div>
+        
+        <div class="form-field">
+            <label>Phone Number</label>
+            <input type="tel" id="quotePhone" placeholder="Your phone number">
+        </div>
+        
+        <div class="form-field">
+            <label>Business Name *</label>
+            <input type="text" id="quoteBusinessName" placeholder="Your business name">
+        </div>
+        
+        <div class="form-field">
+            <label>Package Interest</label>
+            <select id="quotePackage">
+                <option value="">Select a package</option>
+                <option value="Starter" ${suggestedPackage === 'Starter' ? 'selected' : ''}>Starter ($400-$700)</option>
+                <option value="Growth" ${suggestedPackage === 'Growth' ? 'selected' : ''}>Growth ($800-$1100)</option>
+                <option value="Growth +" ${suggestedPackage === 'Growth +' ? 'selected' : ''}>Growth + ($1200-$2500)</option>
+            </select>
+        </div>
+        
+        <div class="form-field">
+            <label>Project Details *</label>
+            <textarea id="quoteMessage" placeholder="Tell us about your project, timeline, and specific needs"></textarea>
+        </div>
+        
+        <button class="cta-button" onclick="ai.submitFullQuote()">Submit Quote Request</button>
+    `;
+    this.addMessage(message, 'ai', true);
+}
 
-let context = {
-    userName: "",
-    projectType: "",
-    package: "",
-    websiteStyle: "",
-    features: "",
-    email: "",
-    selectedOption: "",
-    step: "initial"
-};
+            constructor() {
+                this.context = {
+                    step: 'initial',
+                    userData: {},
+                    conversationHistory: []
+                };
 
-function typeMessage(element, text, prefix, speed) {
-    // If text contains HTML tags, display instantly
-    if(/<\/?[a-z][\s\S]*>/i.test(text)) {
-        element.innerHTML = prefix + text;
-        conversationTranscript += prefix + text + "\n";
-        chatBox.scrollTop = chatBox.scrollHeight;
+                this.packages = {
+                    Starter: {
+                        name: 'Starter',
+                        price: '$400-$700 AUD',
+                        features: ['Single page website', 'Mobile-friendly design', 'Basic branding', 'Uses client-provided images', 'Basic Animations', 'Interactive Email/Phone links', 'Additional Updates (chargable)', 'Basic SEO']
+                    },
+                    Growth: {
+                        name: 'Growth', 
+                        price: '$800-$1100 AUD',
+                        features: ['Multi-page website', 'Mobile-friendly design', 'Standard branding', 'Uses client-provided images', 'Interactive Email/Phone links', 'Standard interactive forms', 'Social media integration', 'Standard animations', 'Standard SEO', 'Additional Updates (chargable)', 'Intermediate SEO Setup']
+                    },
+                    Growthplus: {
+                        name: 'Growth +',
+                        price: '$1200-$2500 AUD',
+                        features: ['Multi-page website', 'Mobile-friendly design', 'Custom design', 'Advnaced branding', 'Uses client-provided images',  'Interactive Email/Phone links', 'Advanced animations', 'Multiple contact forms', 'Advanced SEO', 'Social media integration', 'Priority updates', 'Enhanced features', 'Google maps integration']
+                    }
+                };
+                this.init();
+            }
+
+            init() {
+                const userInput = document.getElementById('userInput');
+                userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            }
+
+            addMessage(text, sender, showTyping = false) {
+                const chatBox = document.getElementById('chatBox');
+                const message = document.createElement('div');
+                message.className = `message ${sender}-message`;
+                
+                if (showTyping && sender === 'ai') {
+                    this.showTypingIndicator();
+                    setTimeout(() => {
+                        this.hideTypingIndicator();
+                        message.innerHTML = text;
+                        chatBox.appendChild(message);
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }, 1000);
+                } else {
+                    message.innerHTML = text;
+                    chatBox.appendChild(message);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+                
+                this.context.conversationHistory.push({
+                    text: text.replace(/<[^>]*>/g, ''), // Strip HTML for history
+                    sender: sender,
+                    timestamp: new Date()
+                });
+            }
+
+            showTypingIndicator() {
+                const chatBox = document.getElementById('chatBox');
+                const indicator = document.createElement('div');
+                indicator.className = 'typing-indicator';
+                indicator.id = 'typingIndicator';
+                indicator.innerHTML = `
+                    SmartGrant is typing
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                chatBox.appendChild(indicator);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            hideTypingIndicator() {
+                const indicator = document.getElementById('typingIndicator');
+                if (indicator) indicator.remove();
+            }
+
+            selectOption(option) {
+                const initialOptions = document.getElementById('initialOptions');
+                if (initialOptions) initialOptions.style.display = 'none';
+
+                switch(option) {
+                    case 'packages':
+                        this.addMessage('Tell me about your packages', 'user');
+                        this.explainPackages();
+                        break;
+                    case 'which_package':
+                        this.addMessage('Which package is right for me?', 'user');
+                        this.startPackageRecommendation();
+                        break;
+                    case 'free_preview':
+                        this.addMessage('I want a free homepage preview', 'user');
+                        this.startFreePreview();
+                        break;
+                    case 'full_quote':
+                        this.addMessage('I need a full quote', 'user');
+                        this.startFullQuote();
+                        break;
+                    case 'track_order':
+                        this.addMessage('Track my order', 'user');
+                        this.startOrderTracking();
+                        break;
+                    case 'talk_human':
+                        this.addMessage('I want to talk to a human', 'user');
+                        this.escalateToHuman();
+                        break;
+                }
+            }
+
+            explainPackages() {
+                const packageInfo = `
+                    <strong>Our Website Packages:</strong><br><br>
+                    
+                    <strong>🌟 Starter Package (${this.packages.Starter.price})</strong><br>
+                    Perfect for startups and simple business presence<br>
+                    • ${this.packages.Starter.features.join('<br>• ')}<br><br>
+                    
+                    <strong>🚀 Growth Package (${this.packages.Growth.price})</strong><br>
+                    Great for growing businesses needing more features<br>
+                    • ${this.packages.Growth.features.join('<br>• ')}<br><br>
+                    
+                    <strong>💎 Growth + Package (${this.packages.Growthplus.price})</strong><br>
+                    Premium solution for businesses wanting the best<br>
+                    • ${this.packages.Growthplus.features.join('<br>• ')}<br><br>
+                    
+                    <button class="cta-button" onclick="ai.startPackageRecommendation()">Help Me Choose</button>
+                    <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>
+                `;
+                this.addMessage(packageInfo, 'ai', true);
+            }
+
+            startPackageRecommendation() {
+                this.context.step = 'package_recommendation';
+                const message = `
+                    Let's find your perfect package! Tell me about your business:<br><br>
+                    <button class="option-button" onclick="ai.handleBusinessType('single_page')">I need a simple single-page site</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('multi_page')">I need multiple pages</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('custom_features')">I need custom features & animations</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('not_sure')">I'm not sure what I need</button>
+                `;
+                this.addMessage(message, 'ai', true);
+            }
+
+            handleBusinessType(type) {
+                this.context.userData.businessType = type;
+                
+                let recommendation = '';
+                let packageName = '';
+                
+                switch(type) {
+                    case 'single_page':
+                        packageName = 'Starter';
+                        recommendation = `Perfect! For a single-page website, our <strong>Starter Package (${this.packages.Starter.price})</strong> is ideal. You'll get a mobile-friendly design, basic branding, Basic Interactive form, and SEO.`;
+                        break;
+                    case 'multi_page':
+                        packageName = 'Growth';
+                        recommendation = `Great choice! Our <strong>Growth Package (${this.packages.Growth.price})</strong> is perfect for multi-page sites. You'll get professional branding, a mobile-friendly design, social media integration, Interactive forms, basic animations, and SEO.`;
+                        break;
+                    case 'custom_features':
+                        packageName = 'Growth +';
+                        recommendation = `Excellent! You'll love our <strong>Growth + Package (${this.packages.Growthplus.price})</strong>. It includes custom design, advanced animations, multiple interactive forms, google maps integration, advanced SEO, and priority support.`;
+                        break;
+                    case 'not_sure':
+                        recommendation = `No worries! Most of our clients start with the <strong>Growth Package (${this.packages.Growth.price})</strong> - it's our most popular option with great features for growing businesses.`;
+                        packageName = 'Standard';
+                        break;
+                }
+
+                this.addMessage(`I ${type.replace('_', ' ')}`, 'user');
+                
+                const responseWithCTA = `
+                    ${recommendation}<br><br>
+                    <strong>Next steps:</strong><br>
+                    <button class="cta-button" onclick="ai.startFreePreview('${packageName}')">Get Free Preview</button>
+                    <button class="cta-button" onclick="ai.startFullQuote('${packageName}')">Request Full Quote</button>
+                    <button class="cta-button" onclick="ai.explainPackages()">Compare All Packages</button>
+                `;
+                
+                this.addMessage(responseWithCTA, 'ai', true);
+            }
+
+// Add this to your WebGrantAI class
+
+startFreePreview(suggestedPackage = '') {
+    this.context.step = 'free_preview';
+    const message = `
+        <strong>Free Homepage Preview - Let's get started!</strong><br><br>
+        I'll need a few quick details to create your preview:<br><br>
+        
+        <div class="form-field">
+            <label>Business Name *</label>
+            <input type="text" id="previewBusinessName" placeholder="Your business name">
+        </div>
+        
+        <div class="form-field">
+            <label>Email Address *</label>
+            <input type="email" id="previewEmail" placeholder="your@email.com">
+        </div>
+        
+        <div class="form-field">
+            <label>Target Audience</label>
+            <input type="text" id="previewAudience" placeholder="Who are your customers?">
+        </div>
+        
+        <div class="form-field">
+            <label>Inspiration (1-2 websites you like)</label>
+            <textarea id="previewInspiration" placeholder="Share any websites you admire or competitors"></textarea>
+        </div>
+        
+        ${suggestedPackage ? `<input type="hidden" id="suggestedPackage" value="${suggestedPackage}">` : ''}
+        
+        <button class="cta-button" onclick="ai.submitFreePreview()">Submit Preview Request</button>
+    `;
+    this.addMessage(message, 'ai', true);
+}
+
+// NEW FUNCTION - Add this missing submitFreePreview function
+submitFreePreview() {
+    const businessName = document.getElementById('previewBusinessName')?.value;
+    const email = document.getElementById('previewEmail')?.value;
+    const audience = document.getElementById('previewAudience')?.value;
+    const inspiration = document.getElementById('previewInspiration')?.value;
+    const suggestedPackage = document.getElementById('suggestedPackage')?.value;
+
+    if (!businessName || !email) {
+        this.addMessage('Please fill in all required fields (*)', 'ai');
         return;
     }
-    let i = 0;
-    let fullText = prefix + text;
-    function typeChar() {
-        if (i < fullText.length) {
-            element.innerHTML += fullText.charAt(i);
-            i++;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(typeChar, speed);
-        } else {
-            conversationTranscript += fullText + "\n";
-        }
-    }
-    typeChar();
-}
 
-function addMessage(text, sender) {
-    const message = document.createElement("div");
-    message.className = sender;
-    const prefix = sender === "user" ? "You: " : "SmartGrant: ";
-    if (sender === "ai") {
-        typeMessage(message, text, prefix, 18);
-    } else {
-        message.innerText = prefix + text;
-        conversationTranscript += prefix + text + "\n";
-    }
-    chatBox.appendChild(message);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+    // Generate unique order code
+    const orderCode = generateOrderCode();
 
-function selectOption(option) {
-    if(context.step !== "initial") return;
-
-    // Hide only the initial four option buttons
-    const optionButtons = chatBox.querySelectorAll(".initialOptionBtn");
-    optionButtons.forEach(btn => btn.style.display = "none");
-
-    context.selectedOption = option;
-    addMessage(option.charAt(0).toUpperCase() + option.slice(1), "user");
-    userInputField.style.display = "inline-block";
-    sendButton.style.display = "inline-block";
-    userInputField.focus();
-
-    switch(option) {
-        case "what services do you offer?":
-            context.step = "postFAQ";
-            addMessage("We offer website design, development, SEO, mobile optimization, maintenance, and support services to help your business grow online. Would you like to see our packages or get a quote?", "ai");
-            break;
-        case "which package is best for my business?":
-            context.step = "askProjectTypeForPackage";
-            addMessage("To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)", "ai");
-            break;
-        case "contact a team member":
-            addMessage('Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>', "ai");
-            addMessage("Is there anything else I can help you with today?", "ai");
-            break;
-        default:
-            addMessage("Hello! How can I assist you today?", "ai");
-    }
-}
-
-function generateReply(input) {
-    input = input.toLowerCase();
-
-    // Check for quote requests first - this takes priority
-    if (input.includes("quote") || input.includes("free quote") || input.includes("get a quote")) {
-        addMessage('Great! Please fill out our quote form here: <a href="form.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>', "ai");
-        addMessage("Is there anything else I can help you with today?", "ai");
-        return;
-    }
-
-    // Handle flow-based responses
-    if (context.step === "postFAQ") {
-        if (input.includes("package")) {
-            context.step = "askProjectTypeForPackage";
-            return "To recommend the best package, could you please tell me what type of website project you have in mind? (portfolio, e-commerce, blog, business)";
-        } else {
-            return "Please clarify if you want to see our packages or get a quote.";
-        }
-    }
-
-    if (context.step === "askProjectTypeForPackage") {
-        if (/portfolio|e-commerce|blog|business|website/.test(input)) {
-            if (input.includes("portfolio")) context.projectType = "portfolio";
-            else if (input.includes("e-commerce") || input.includes("store")) context.projectType = "e-commerce";
-            else if (input.includes("blog")) context.projectType = "blog";
-            else context.projectType = input.trim();
-
-            context.step = "choosePackage";
-            return "Would you like me to help you select a package based on your business size or needs? (yes/no)";
-        } else return "Website type? (portfolio, e-commerce, blog, business)";
-    }
-
-    if (context.step === "choosePackage") {
-        if (input.includes("yes") || input.includes("sure") || input.includes("ok")) {
-            context.step = "choosePackageDetails";
-            return "Great! Can you tell me about your business size or needs? For example, small startup, growing company, or full-featured priority support.";
-        } else if (input.includes("no")) {
-            context.step = "completed";
-            return "No problem! If you have other questions or need assistance, just let me know.";
-        } else {
-            return "Please reply with 'yes' if you'd like help selecting a package, or 'no' if not.";
-        }
-    }
-
-    if (context.step === "choosePackageDetails") {
-        if (input.includes("small startup") || input.includes("startup") || input.includes("small")) {
-            context.package = "Basic Package";
-        } else if (input.includes("growing company") || input.includes("growing")) {
-            context.package = "Growth Package";
-        } else if (input.includes("full-featured") || input.includes("priority") || input.includes("support")) {
-            context.package = "Growth Plus Package";
-        } else {
-            context.package = "Custom Package";
-        }
-        context.step = "askWebsiteStyle";
-        return `Based on your input, I suggest the ${context.package}. Website style? (clean, modern, professional)`;
-    }
-
-    if (context.step === "askWebsiteStyle") {
-        if (!context.websiteStyle) {
-            if (/clean|modern|professional/.test(input)) {
-                context.websiteStyle = input.match(/clean|modern|professional/)[0];
-                context.step = "completed";
-                return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-            } else return "Website style? (clean, modern, professional)";
-        } else {
-            context.step = "completed";
-            return `Thanks! Your selected package is ${context.package || "not specified"} with a ${context.websiteStyle} style. If you'd like a quote or more information, just ask!`;
-        }
-    }
-
-    if (context.step === "confirmEmail") {
-        if (input.includes("@") && input.includes(".")) {
-            context.email = input.trim();
-            context.step = "completed";
-            sendContactEmail();
-            return `Thanks! A team member will reach out to you soon at ${context.email}. If you have any questions in the meantime, just ask!`;
-        } else return "Please provide a valid email address.";
-    }
-
-    // Check for specific package price requests
-    if (input.includes("basic package") || (input.includes("basic") && !input.includes("growth"))) {
-        return "Our Basic Package starts at $300, ideal for small startups.";
-    }
-    if ((input.includes("growth package") && !input.includes("growth plus")) || (input.includes("growth") && !input.includes("plus"))) {
-        return "Our Growth Package starts at $700, perfect for growing companies.";
-    }
-    if (input.includes("growth plus package") || input.includes("growth plus")) {
-        return "Our Growth Plus Package starts at $1100, with full-featured priority support.";
-    }
-
-    // General package list
-    if (input.includes("package") || input.includes("packages")) {
-        return "We offer the Basic Package for small startups, Growth Package for growing companies, and Growth Plus Package for full-featured priority support.";
-    }
-    if (/services|options|what do you do|offer/.test(input)) {
-        return "We offer website design, development, SEO, mobile optimization, and maintenance services.";
-    }
-
-    // Handle pricing questions
-    if (/price|cost|how much/.test(input)) {
-        return 'Pricing varies depending on features and packages. We provide detailed quotes tailored to your needs. Please fill out our quote form here: <a href="https://webgrant.github.io/WebGrant/forms.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to get your quote</a>';
-    }
-
-    if (/portfolio|examples|work/.test(input)) {
-        return "You can view our portfolio online to see examples of our projects.";
-    }
-    if (/contact|reach|email/.test(input)) {
-        return "You can reach us via the contact us form or by emailing us at webgrant25@gmail.com or call +61 479 085 297.";
-    }
-    if (/bye|goodbye|see you/.test(input)) {
-        return "Goodbye! It was a pleasure assisting you.";
-    }
-
-    // Trigger contact flow if user asks to speak to a representative
-    if (input.includes("contact") || input.includes("representative") || input.includes("support")) {
-        return 'Sure! Please contact our team using this link: <a href="https://webgrant.github.io/WebGrant/contact.html" target="_blank" style="color:#4A90E2; text-decoration:underline;">Click here to contact a team member</a>';
-    }
-
-    // Default response
-    return "I'm here to help! What else would you like to know or discuss?";
-}
-
-function sendContactEmail() {
-    // Prepare email parameters for contact request
-    const templateParams = {
-        reply_to: context.email,            // User email
-        from_name: context.userName || "Unknown", // Optional: User name
-        message: conversationTranscript     // Full conversation
+    // Prepare client data
+    const clientData = {
+        name: 'Not provided', // Free preview doesn't require name
+        email: email,
+        businessName: businessName,
+        target_audience: audience || 'Not specified',
+        inspiration: inspiration || 'Not specified',
+        package: suggestedPackage || 'Free Preview',
+        request_type: 'Free Homepage Preview'
     };
 
-    emailjs.send('service_xj87x16', 'template_qmeovfp', templateParams)
-        .then(() => {
-            console.log("Contact request email sent successfully.");
-        }, (error) => {
-            console.error("Failed to send contact request email:", error);
-        })
-        .catch((err) => {
-            console.error("Error in sending contact request email (catch):", err);
-        });
+    // Add to orders database
+    orders[orderCode] = {
+        progress: 10,
+        status: 'Preview Preparation',
+        description: 'Free homepage preview request received, designer will start creating mockup',
+        client: businessName,
+        email: email,
+        package: 'Free Preview',
+        created: new Date().toISOString().split('T')[0],
+        eta: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 days from now
+    };
+
+    // Send to Formspree + email notifications
+    const formData = new FormData();
+    formData.append('business_name', businessName);
+    formData.append('email', email);
+    formData.append('target_audience', audience || 'Not specified');
+    formData.append('inspiration', inspiration || 'Not specified');
+    formData.append('suggested_package', suggestedPackage || 'Not specified');
+    formData.append('request_type', 'Free Homepage Preview');
+    formData.append('order_code', orderCode);
+    formData.append('source', 'AI Chat');
+
+    Promise.all([
+        fetch('https://formspree.io/f/xovwbgqz', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }),
+        sendClientConfirmation(orderCode, email, businessName, 'Free Homepage Preview'),
+        sendInternalNotification(orderCode, clientData, 'Free Homepage Preview')
+    ])
+    .then(responses => {
+        if (responses[0].ok) {
+            this.addMessage(`Perfect! Your free preview request has been submitted.
+
+            <strong>Order Code: ${orderCode}</strong><br>
+            (Save this code to track your preview!)<br><br>
+
+            <strong>What happens next:</strong><br>
+            • Confirmation email sent to ${email}<br>
+            • Custom homepage mockup within 2-3 business days<br>
+            • Track your progress with code: ${orderCode}<br>
+            • Preview delivered to ${email}<br><br>
+            
+            <button class="cta-button" onclick="ai.showTrackingInstructions('${orderCode}')">How to Track Preview</button>
+            <button class="cta-button" onclick="ai.startFullQuote()">Upgrade to Full Project</button>`, 'ai', true);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Submission error:', error);
+        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+    });
+    
+    this.context.step = 'completed';
 }
 
-function chat() {
-    // Hide the initial option buttons if visible
-    const optionButtons = chatBox.querySelectorAll("#chatBox > button");
-    optionButtons.forEach(btn => btn.style.display = "none");
+// Update your existing submitFullQuote function
+// Replace the existing submitFullQuote function with this enhanced version:
 
-    const userInput = userInputField.value.trim();
-    if (!userInput) return;
+submitFullQuote() {
+    const name = document.getElementById('quoteName')?.value;
+    const email = document.getElementById('quoteEmail')?.value;
+    const phone = document.getElementById('quotePhone')?.value;
+    const businessName = document.getElementById('quoteBusinessName')?.value;
+    const packageInterest = document.getElementById('quotePackage')?.value;
+    const message = document.getElementById('quoteMessage')?.value;
 
-    addMessage(userInput, "user");
-    const reply = generateReply(userInput);
-    if (reply) { // Only add message if there's a reply
-        addMessage(reply, "ai");
+    if (!name || !email || !businessName || !message) {
+        this.addMessage('Please fill in all required fields (*)', 'ai');
+        return;
     }
 
-    userInputField.value = "";
-    userInputField.focus();
+    // Generate unique order code
+    const orderCode = generateOrderCode();
+
+    // Prepare client data
+    const clientData = {
+        name: name,
+        email: email,
+        phone: phone,
+        businessName: businessName,
+        package: packageInterest,
+        project_details: message,
+        request_type: 'Full Quote'
+    };
+
+    // Add to orders database
+    orders[orderCode] = {
+        progress: 15,
+        status: 'Quote Preparation',
+        description: 'Full quote request received, our team is preparing your detailed proposal',
+        client: businessName,
+        email: email,
+        package: packageInterest || 'To be determined',
+        created: new Date().toISOString().split('T')[0],
+        eta: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 days from now
+    };
+
+    // Send to Formspree (existing functionality) + email notifications
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone || 'Not provided');
+    formData.append('business_name', businessName);
+    formData.append('package_interest', packageInterest || 'Not specified');
+    formData.append('project_details', message);
+    formData.append('request_type', 'Full Quote');
+    formData.append('order_code', orderCode); // Add order code
+    formData.append('source', 'AI Chat');
+
+    Promise.all([
+        fetch('https://formspree.io/f/xovwbgqz', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }),
+        sendClientConfirmation(orderCode, email, name, packageInterest || 'Full Website'),
+        sendInternalNotification(orderCode, clientData, 'Full Quote')
+    ])
+    .then(responses => {
+        if (responses[0].ok) {
+            this.addMessage(`Excellent! Your quote request has been submitted successfully.
+
+            <strong>Order Code: ${orderCode}</strong><br>
+            (Important: Save this code to track your order!)<br><br>
+
+            <strong>What happens next:</strong><br>
+            • Confirmation email sent to ${email}<br>
+            • Detailed proposal within 2-3 business days<br>
+            • Track your progress with code: ${orderCode}<br>
+            • We'll contact you at ${email}${phone ? ` or ${phone}` : ''}<br><br>
+            
+            <button class="cta-button" onclick="ai.showTrackingInstructions('${orderCode}')">How to Track Order</button>
+            <button class="cta-button" onclick="ai.startFreePreview()">Also Get Free Preview</button>`, 'ai', true);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Submission error:', error);
+        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+    });
+    
+    this.context.step = 'completed';
 }
 
-document.getElementById("openChatBtn").addEventListener("click", () => {
-    const panel = document.getElementById("chatPanel");
-    if (panel.style.right === "0px") {
-        panel.style.right = "-600px";
-    } else {
-        panel.style.right = "0px";
-    }
-});
+            submitCallRequest() {
+                const name = document.getElementById('callName')?.value;
+                const email = document.getElementById('callEmail')?.value;
+                const time = document.getElementById('callTime')?.value;
+                const topic = document.getElementById('callTopic')?.value;
 
-userInputField.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendButton.click();
-});
+                if (!email) {
+                    this.addMessage('Please provide your email address', 'ai');
+                    return;
+                }
+
+                // Send email via EmailJS
+                const templateParams = {
+                    to_email: this.emailConfig.toEmail,
+                    from_name: 'WebGrant AI Assistant',
+                    subject: 'Call Request - Chat Assistant',
+                    client_name: name || 'Not provided',
+                    client_email: email,
+                    preferred_time: time || 'Not specified',
+                    call_topic: topic || 'General discussion',
+                    request_type: 'Call Request',
+                    message: `Call request from chat:\n\nName: ${name}\nEmail: ${email}\nPreferred Time: ${time}\nTopic: ${topic}`
+                };
+
+                emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, templateParams)
+                    .then(() => {
+                        console.log('Call request email sent successfully');
+                        this.addMessage(`Your call request has been submitted! Om or Ritvik will reach out to you at ${email} to schedule a convenient time.
+
+                        Expected response: Within 24 hours<br>
+                        Preferred time: ${time || 'Not specified'}<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview While You Wait</button>`, 'ai', true);
+                    })
+                    .catch((error) => {
+                        console.error('Email send failed:', error);
+                        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                    });
+            }
+
+            submitFounderMessage() {
+                const name = document.getElementById('founderName')?.value;
+                const email = document.getElementById('founderEmail')?.value;
+                const message = document.getElementById('founderMessage')?.value;
+
+                if (!email || !message) {
+                    this.addMessage('Please provide your email and message', 'ai');
+                    return;
+                }
+
+                // Send email via EmailJS
+                const templateParams = {
+                    to_email: this.emailConfig.toEmail,
+                    from_name: 'WebGrant AI Assistant',
+                    subject: 'Direct Message for Founders',
+                    client_name: name || 'Not provided',
+                    client_email: email,
+                    founder_message: message,
+                    request_type: 'Founder Message',
+                    message: `Direct message to founders from chat:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
+                };
+
+                emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, templateParams)
+                    .then(() => {
+                        console.log('Founder message email sent successfully');
+                        this.addMessage(`Your message has been sent directly to Om and Ritvik! They'll personally respond to you at ${email}.
+
+                        <strong>Our founders typically respond within:</strong><br>
+                        • Business inquiries: Same day<br>
+                        • Technical questions: 24 hours<br>
+                        • General questions: 48 hours<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>`, 'ai', true);
+                    })
+                    .catch((error) => {
+                        console.error('Email send failed:', error);
+                        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                    });
+            }
+
+startOrderTracking() {
+    this.context.step = 'order_tracking';
+    
+    // Generate unique ID to avoid conflicts
+    const inputId = 'orderCode_' + Date.now();
+    
+    const message = `
+        <strong>Order Tracking</strong><br><br>
+        Please enter your order code to check the status:<br><br>
         
-    </script>
+        <div class="form-field">
+            <input type="text" id="${inputId}" placeholder="Enter your order code (e.g., WG-2025-001)" style="text-transform: uppercase;">
+        </div>
+        
+        <button class="cta-button" onclick="ai.trackOrderWithId('${inputId}')">Track Order</button>
+        
+        
+    `;
+    this.addMessage(message, 'ai', true);
+}
+
+trackOrderWithId(inputId) {
+    const orderCodeInput = document.getElementById(inputId);
+    
+    if (!orderCodeInput) {
+        this.addMessage('Error: Order code input field not found. Please try again.', 'ai');
+        this.startOrderTracking(); // Restart the process
+        return;
+    }
+    
+    const orderCode = orderCodeInput.value.trim().toUpperCase();
+    
+    if (!orderCode) {
+        this.addMessage('Please enter your order code', 'ai');
+        return;
+    }
+
+    this.addMessage(`Looking up order ${orderCode}...`, 'user');
+    
+    // Check if order exists in database
+    const order = orders[orderCode];
+    
+    setTimeout(() => {
+        if (order) {
+            const progressBar = this.generateProgressBar(order.progress);
+            const statusMessage = `
+                <strong>✅ Order Found!</strong><br><br>
+                
+                <strong>Order Code:</strong> ${orderCode}<br>
+                <strong>Client:</strong> ${order.client}<br>
+                <strong>Package:</strong> ${order.package}<br>
+                <strong>Status:</strong> ${order.status}<br>
+                <strong>Created:</strong> ${order.created}<br>
+                <strong>Expected Completion:</strong> ${order.eta}<br><br>
+                
+                <strong>Progress:</strong><br>
+                ${progressBar}<br>
+                <strong>${order.progress}% Complete</strong><br><br>
+                
+                <strong>Latest Update:</strong><br>
+                ${order.description}<br><br>
+                
+                <button class="cta-button" onclick="ai.escalateToHuman()">Need an Update?</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Track Another Order</button>
+            `;
+            this.addMessage(statusMessage, 'ai');
+        } else {
+            const notFoundMessage = `
+                <strong>❌ Order Not Found</strong><br><br>
+                We couldn't find an order with code: <strong>${orderCode}</strong><br><br>
+                
+                <strong>Please check:</strong><br>
+                • Code is entered correctly (case sensitive)<br>
+                • Code format: WG-YYYY-#### (e.g., WG-2025-1234)<br>
+                • You received the code via email<br><br>
+                
+                <strong>Valid test codes to try:</strong><br>
+                • WG-2025-001<br>
+                • WG-2025-002<br><br>
+                
+                <strong>Still having trouble?</strong><br>
+                <button class="cta-button" onclick="ai.escalateToHuman()">Contact Support</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Try Again</button>
+            `;
+            this.addMessage(notFoundMessage, 'ai');
+        }
+    }, 1500);
+}
+
+// Keep the old trackOrder function as a fallback
+trackOrder() {
+    this.trackOrderWithId('orderCode');
+}
+
+// Fixed trackAnotherOrder function
+trackAnotherOrder() {
+    this.startOrderTracking(); // This will create a fresh input field with new ID
+}
+
+          trackOrder() {
+    const orderCodeInput = document.getElementById('orderCode');
+    
+    if (!orderCodeInput) {
+        this.addMessage('Error: Order code input field not found. Please try again.', 'ai');
+        return;
+    }
+    
+    const orderCode = orderCodeInput.value.trim().toUpperCase();
+    
+    if (!orderCode) {
+        this.addMessage('Please enter your order code', 'ai');
+        return;
+    }
+
+    // Clear the input field to prevent caching
+    orderCodeInput.value = '';
+    
+    this.addMessage(`Looking up order ${orderCode}...`, 'user');
+    
+    // Check if order exists in database
+    const order = orders[orderCode];
+    
+    setTimeout(() => {
+        if (order) {
+            const progressBar = this.generateProgressBar(order.progress);
+            const statusMessage = `
+                <strong>✅ Order Found!</strong><br><br>
+                
+                <strong>Order Code:</strong> ${orderCode}<br>
+                <strong>Client:</strong> ${order.client}<br>
+                <strong>Package:</strong> ${order.package}<br>
+                <strong>Status:</strong> ${order.status}<br>
+                <strong>Created:</strong> ${order.created}<br>
+                <strong>Expected Completion:</strong> ${order.eta}<br><br>
+                
+                <strong>Progress:</strong><br>
+                ${progressBar}<br>
+                <strong>${order.progress}% Complete</strong><br><br>
+                
+                <strong>Latest Update:</strong><br>
+                ${order.description}<br><br>
+                
+                <button class="cta-button" onclick="ai.escalateToHuman()">Need an Update?</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Track Another Order</button>
+            `;
+            this.addMessage(statusMessage, 'ai');
+        } else {
+            const notFoundMessage = `
+                <strong>❌ Order Not Found</strong><br><br>
+                We couldn't find an order with code: <strong>${orderCode}</strong><br><br>
+                
+                <strong>Please check:</strong><br>
+                • Code is entered correctly (case sensitive)<br>
+                • Code format: WG-YYYY-#### (e.g., WG-2025-1234)<br>
+                • You received the code via email<br><br>
+                
+                <strong>Valid test codes to try:</strong><br>
+                • WG-2025-001<br>
+                • WG-2025-002<br><br>
+                
+                <strong>Still having trouble?</strong><br>
+                <button class="cta-button" onclick="ai.escalateToHuman()">Contact Support</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Try Again</button>
+            `;
+            this.addMessage(notFoundMessage, 'ai');
+        }
+    }, 1500);
+}
+
+// ==============================================
+// 6. NEW HELPER FUNCTIONS - Add these
+// ==============================================
+
+// Generate visual progress bar
+generateProgressBar(progress) {
+    const segments = 10;
+    const filledSegments = Math.floor((progress / 100) * segments);
+    const emptySegments = segments - filledSegments;
+    
+    const filled = '🟩'.repeat(filledSegments);
+    const empty = '⬜'.repeat(emptySegments);
+    
+    return `<div style="font-size: 1.2em; letter-spacing: 2px;">${filled}${empty}</div>`;
+}
+
+// Show tracking instructions
+// In your WebGrantAI class, add this method:
+showTrackingInstructions(orderCode) {
+    const message = `
+        <strong>📋 How to Track Your Order</strong><br><br>
+        
+        <strong>Your Order Code:</strong> ${orderCode}<br><br>
+        
+        <strong>Tracking Options:</strong><br>
+        1. Visit our <a href="track.html" style="color: var(--primary);">Track Your Order</a> page<br>
+        2. Enter your code: ${orderCode}<br>
+        3. View real-time progress updates<br><br>
+        
+
+    `;
+    this.addMessage(message, 'ai');
+}
+
+// Add this method to WebGrantAI class:
+trackAnotherOrder() {
+    this.startOrderTracking();
+}
+
+// Add this method to WebGrantAI class:
+generateProgressBar(progress) {
+    const segments = 10;
+    const filledSegments = Math.floor((progress / 100) * segments);
+    const emptySegments = segments - filledSegments;
+    
+    const filled = '🟩'.repeat(filledSegments);
+    const empty = '⬜'.repeat(emptySegments);
+    
+    return `<div style="font-size: 1.2em; letter-spacing: 2px;">${filled}${empty}</div>`;
+}
+
+// Track another order
+trackAnotherOrder() {
+    this.startOrderTracking();
+}
+
+        
+
+            escalateToHuman() {
+                const message = `
+                    <strong>Let's connect you with our team!</strong><br><br>
+                    
+                    <strong>Contact Options:</strong><br>
+                    📧 Email: <a href="mailto:webgrant25@gmail.com" style="color: var(--primary);">webgrant25@gmail.com</a><br>
+                    📱 Instagram: <a href="https://www.instagram.com/webgrantofficial/" target="_blank" style="color: var(--primary);">@webgrantofficial</a><br><br>
+                    
+                    <strong>Or schedule a call:</strong><br>
+                    <button class="cta-button" onclick="ai.scheduleCall()">Schedule Call with Founders</button>
+                    <button class="cta-button" onclick="ai.sendToFounders()">Send Message to Team</button>
+                `;
+                this.addMessage(message, 'ai', true);
+            }
+
+            scheduleCall() {
+                const message = `
+                    <strong>Schedule a Call</strong><br><br>
+                    What's the best time to reach you?<br><br>
+                    
+                    <div class="form-field">
+                        <label>Your Name</label>
+                        <input type="text" id="callName" placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" id="callEmail" placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Preferred Time</label>
+                        <input type="text" id="callTime" placeholder="e.g., Monday mornings, weekday evenings">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>What would you like to discuss?</label>
+                        <textarea id="callTopic" placeholder="Project details, questions, etc."></textarea>
+                    </div>
+                    
+                    <button class="cta-button" onclick="ai.submitCallRequest()">Request Call</button>
+                `;
+                this.addMessage(message, 'ai');
+            }
+
+            submitCallRequest() {
+                const name = document.getElementById('callName')?.value;
+                const email = document.getElementById('callEmail')?.value;
+                const time = document.getElementById('callTime')?.value;
+                const topic = document.getElementById('callTopic')?.value;
+
+                if (!email) {
+                    this.addMessage('Please provide your email address', 'ai');
+                    return;
+                }
+
+                // Send to Formspree
+                const formData = new FormData();
+                formData.append('name', name || 'Not provided');
+                formData.append('email', email);
+                formData.append('preferred_time', time || 'Not specified');
+                formData.append('call_topic', topic || 'General discussion');
+                formData.append('request_type', 'Call Request');
+                formData.append('source', 'AI Chat');
+
+                fetch('https://formspree.io/f/xovwbgqz', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        this.addMessage(`Your call request has been submitted! Om or Ritvik will reach out to you at ${email} to schedule a convenient time.
+
+                        Expected response: Within 24 hours<br>
+                        Preferred time: ${time || 'Not specified'}<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview While You Wait</button>`, 'ai', true);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Formspree error:', error);
+                    this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                });
+            }
+
+            submitFounderMessage() {
+                const name = document.getElementById('founderName')?.value;
+                const email = document.getElementById('founderEmail')?.value;
+                const message = document.getElementById('founderMessage')?.value;
+
+                if (!email || !message) {
+                    this.addMessage('Please provide your email and message', 'ai');
+                    return;
+                }
+
+                // Send to Formspree
+                const formData = new FormData();
+                formData.append('name', name || 'Not provided');
+                formData.append('email', email);
+                formData.append('founder_message', message);
+                formData.append('request_type', 'Direct Message to Founders');
+                formData.append('source', 'AI Chat');
+
+                fetch('https://formspree.io/f/xovwbgqz', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        this.addMessage(`Your message has been sent directly to Om and Ritvik! They'll personally respond to you at ${email}.
+
+                        <strong>Our founders typically respond within:</strong><br>
+                        • Business inquiries: Same day<br>
+                        • Technical questions: 24 hours<br>
+                        • General questions: 48 hours<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>`, 'ai', true);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Formspree error:', error);
+                    this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                });
+            }
+
+            sendToFounders() {
+                const message = `
+                    <strong>Send Message to Our Founders</strong><br><br>
+                    
+                    <div class="form-field">
+                        <label>Your Name</label>
+                        <input type="text" id="founderName" placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" id="founderEmail" placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Message for Om & Ritvik</label>
+                        <textarea id="founderMessage" placeholder="What would you like to discuss with our founders?"></textarea>
+                    </div>
+                    
+                    <button class="cta-button" onclick="ai.submitFounderMessage()">Send Message</button>
+                `;
+                this.addMessage(message, 'ai');
+            }
+
+            sendMessage() {
+                const userInput = document.getElementById('userInput');
+                const message = userInput.value.trim();
+                
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                userInput.value = '';
+
+                // Process the message
+                this.processUserMessage(message);
+            }
+
+            processUserMessage(message) {
+                const lowerMessage = message.toLowerCase();
+
+                // Handle different conversation flows
+                if (this.context.step === 'completed' || this.context.step === 'initial') {
+                    // FAQ responses
+                    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+                        this.addMessage(`Our packages range from $400-$2500 AUD:
+
+                        <strong>Starter:</strong> $400-$700 (single page, mobile-friendly)<br>
+                        <strong>Growth:</strong> $800-$1100 (multi-page, animations)<br>
+                        <strong>Growth +:</strong> $1200-$2500 (custom design, advanced features)<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get Exact Quote</button>
+                        <button class="cta-button" onclick="ai.startPackageRecommendation()">Help Me Choose</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('turnaround') || lowerMessage.includes('how long') || lowerMessage.includes('timeline')) {
+                        this.addMessage(`Our average turnaround time is 1-2 weeks for normal projects. This includes:
+
+                        • Design phase: 3-5 days<br>
+                        • Development: 5-7 days<br>
+                        • Revisions: 2-3 days<br><br>
+                        
+                        Rush jobs available for additional fee!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get Timeline for My Project</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('update') || lowerMessage.includes('maintenance') || lowerMessage.includes('changes')) {
+                        this.addMessage(`Website updates and maintenance:
+
+                        • Minor updates: Included for 30 days after launch<br>
+                        • Content updates: $50-$100 per hour<br>
+                        • Feature additions: Custom quote<br>
+                        • Emergency fixes: Same day response<br><br>
+                        
+                        <button class="cta-button" onclick="ai.escalateToHuman()">Discuss Maintenance Plan</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('portfolio') || lowerMessage.includes('examples') || lowerMessage.includes('work')) {
+                        this.addMessage(`Check out our portfolio! We've built sites for:
+
+                        • La Tavola Italiana (restaurant)<br>
+                        • SydneyDine (fine dining)<br>
+                        • NextGen (tech company)<br>
+                        • Local Café (café)<br>
+                        • ShinySpark Cleaning Co.<br>
+                        • FrostAir Experts (HVAC)<br><br>
+                        
+                        View full portfolio on our website!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Your Preview</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('seo') || lowerMessage.includes('search') || lowerMessage.includes('google')) {
+                        this.addMessage(`SEO is included in all our packages:
+
+                        <strong>Starter:</strong> Basic SEO setup<br>
+                        <strong>Growth:</strong> Standard SEO optimization<br>
+                        <strong>Growth +:</strong> Advanced SEO with ongoing optimization<br><br>
+                        
+                        We optimize for Google, mobile search, and local SEO!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get SEO Quote</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('mobile') || lowerMessage.includes('responsive') || lowerMessage.includes('phone')) {
+                        this.addMessage(`All our websites are mobile-friendly and responsive:
+
+                        • Works perfectly on phones, tablets, desktops<br>
+                        • Fast loading on mobile networks<br>
+                        • Touch-friendly navigation<br>
+                        • Mobile-optimized images<br><br>
+                        
+                        Mobile-first design is our standard!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">See Mobile Preview</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('package') || lowerMessage.includes('which') || lowerMessage.includes('recommend')) {
+                        this.startPackageRecommendation();
+                    }
+                    else if (lowerMessage.includes('quote') || lowerMessage.includes('estimate')) {
+                        this.startFullQuote();
+                    }
+                    else if (lowerMessage.includes('preview') || lowerMessage.includes('free')) {
+                        this.startFreePreview();
+                    }
+                    else if (lowerMessage.includes('track') || lowerMessage.includes('order') || lowerMessage.includes('status')) {
+                        this.startOrderTracking();
+                    }
+                    else if (lowerMessage.includes('contact') || lowerMessage.includes('human') || lowerMessage.includes('team')) {
+                        this.escalateToHuman();
+                    }
+                    else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                        this.addMessage(`Hello! I'm here to help you with your website needs. What would you like to know?
+
+                        <button class="cta-button" onclick="ai.explainPackages()">View Packages</button>
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>
+                        <button class="cta-button" onclick="ai.startFullQuote()">Request Quote</button>`, 'ai', true);
+                    }
+                    else {
+                        // Default helpful response
+                        this.addMessage(`I can help you with:
+
+                        • Package recommendations<br>
+                        • Free homepage previews<br>
+                        • Full project quotes<br>
+                        • Order tracking<br>
+                        • Connecting with our team<br><br>
+                        
+                        What interests you most?<br><br>
+                        
+                        <button class="cta-button" onclick="ai.explainPackages()">View Packages</button>
+                        <button class="cta-button" onclick="ai.startFreePreview()">Free Preview</button>`, 'ai', true);
+                    }
+                } else {
+                    // Handle context-specific responses
+                    this.addMessage("I'm processing your request. Please use the buttons above to continue, or let me know if you need something else!", 'ai');
+                }
+            }
+
+            // FAQ responses
+            getFAQResponse(topic) {
+                const faqs = {
+                    turnaround: "Average turnaround is 1-2 weeks for normal projects. Rush jobs available!",
+                    updates: "Minor updates included for 30 days. Additional updates: $50-$100/hour.",
+                    email: "Contact us at webgrant25@gmail.com",
+                    preview: "Free homepage previews delivered in 2-3 business days",
+                    social: "Follow us @webgrantofficial on Instagram"
+                };
+                return faqs[topic] || "I don't have specific information about that. Let me connect you with our team!";
+            }
+        }
+
+        // Initialize the AI assistant
+        const ai = new WebGrantAI();
+
+        // Global functions for button clicks
+        function selectOption(option) {
+            ai.selectOption(option);
+        }
+
+        function sendMessage() {
+            ai.sendMessage();
+        }
+
+        function toggleChat() {
+            const panel = document.getElementById('chatPanel');
+            panel.classList.toggle('open');
+        }
+
+        // Auto-hide initial options after first interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const userInput = document.getElementById('userInput');
+            userInput.addEventListener('focus', () => {
+                const initialOptions = document.getElementById('initialOptions');
+                if (initialOptions && initialOptions.style.display !== 'none') {
+                    // Don't hide immediately, let user choose
+                }
+            });
+        });
+
+        // Enhanced mobile responsiveness
+        window.addEventListener('resize', () => {
+            const chatPanel = document.getElementById('chatPanel');
+            if (window.innerWidth <= 768) {
+                chatPanel.style.width = '100%';
+                chatPanel.style.right = chatPanel.classList.contains('open') ? '0' : '-100%';
+            } else {
+                chatPanel.style.width = '500px';
+                chatPanel.style.right = chatPanel.classList.contains('open') ? '0' : '-600px';
+            }
+        });
+
+        // Simulate webhook responses for demo
+        function simulateWebhookResponse(data, type) {
+            console.log(`${type} webhook called with:`, data);
+            
+            // In a real implementation, you would make actual HTTP requests here:
+            // fetch('https://YOUR_DOMAIN/api/webgrant/lead', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+            
+            return {
+                success: true,
+                message: `${type} request processed successfully`
+            };
+        }
+
+        // Add some easter eggs and fun interactions
+        let konami = [];
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            konami.push(e.code);
+            if (konami.length > konamiCode.length) {
+                konami.shift();
+            }
+            
+            if (konami.join(',') === konamiCode.join(',')) {
+                ai.addMessage('🎉 Konami code activated! You found our secret! Here\'s a special 10% discount code: KONAMI2025', 'ai');
+                konami = [];
+            }
+        });
+
+        // Add some personality to the AI
+        const personalityQuips = [
+            "Building websites is like cooking - we make sure yours is perfectly seasoned!",
+            "We turn boring websites into digital masterpieces!",
+            "Your website should work as hard as you do - let's make it happen!",
+            "From startup to scale-up, we've got the web magic you need!",
+            "Why settle for ordinary when you can have extraordinary?"
+        ];
+
+        // Randomly add personality to responses (10% chance)
+        const originalAddMessage = ai.addMessage.bind(ai);
+        ai.addMessage = function(text, sender, showTyping = false) {
+            if (sender === 'ai' && Math.random() < 0.1 && !text.includes('<button')) {
+                const quip = personalityQuips[Math.floor(Math.random() * personalityQuips.length)];
+                text += `<br><br><em style="color: #999; font-size: 0.9em;">${quip}</em>`;
+            }
+            originalAddMessage(text, sender, showTyping);
+        };
+
+
+// ==============================================
+// 9. EXAMPLE USAGE INSTRUCTIONS
+// ==============================================
+
+/*
+TO MANUALLY UPDATE ORDERS:
+
+1. Open browser console (F12)
+2. Use these commands:
+
+// Add a new order:
+addNewOrder('WG-2025-123', {
+    progress: 25,
+    status: 'In Design',
+    description: 'Homepage wireframes completed, moving to visual design',
+    client: 'ABC Company',
+    email: 'client@abccompany.com',
+    package: 'Growth +',
+    eta: '2025-02-15'
+});
+
+// Update existing order:
+updateOrder('WG-2025-123', {
+    progress: 50,
+    status: 'Development Started',
+    description: 'Design approved, developer has started coding'
+});
+
+// View all orders:
+listAllOrders();
+
+COMMON STATUS VALUES:
+- 'Pending Review'
+- 'In Design' 
+- 'Design Review'
+- 'In Development'
+- 'Testing'
+- 'Client Review'
+- 'Revisions'
+- 'Ready to Launch'
+- 'Completed'
+- 'On Hold'
+
+PROGRESS VALUES:
+- 0-20: Initial review/planning
+- 21-40: Design phase
+- 41-60: Development phase  
+- 61-80: Testing/review
+- 81-100: Final touches/launch
+*/
+
+</script>
 </body>
 </html>
+
