@@ -892,7 +892,7 @@
                     // Switch to Korean
                     const koOption = Array.from(select.options).find(o => o.value === 'ko');
                     if (koOption) select.value = 'ko';
-                    this.innerHTML = 'Translate to English<br><span style="display:block; font-size:0.7rem;">영어로 번역</span>';
+                    this.innerHTML = 'Translate to English<br><span style="display:block; font-size:0.7rem;"></span>';
                     navbar.style.top = '50px';
                 }
                 select.dispatchEvent(new Event('change'));
@@ -983,11 +983,12 @@
 // Function to update navbar and button text based on current language
 function updateNavbarByLanguage(lang) {
     if (lang === 'ko') {
-        navbar.style.top = '50px';
-        translateBtn.innerHTML = 'Translate to English<br><span style="display:block; font-size:0.7rem;">영어로 번역</span>';
+        navbar.style.top = '30px';
+        translateBtn.style.display = 'none'; // hide button
     } else {
         // default English
         navbar.style.top = '0px';
+        translateBtn.style.display = 'inline-block'; // show button
         translateBtn.innerHTML = 'Translate to Korean<br><span style="display:block; font-size:0.7rem;">웹사이트를 한국어로 번역</span>';
     }
 }
