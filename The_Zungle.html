@@ -152,7 +152,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 1rem; /* Reduced from 2rem to 1rem to bring logo cyesloser to left */
         }
 
         .logo {
@@ -697,6 +697,22 @@
                 padding: 3rem 1rem;
             }
         }
+
+        .logo-img {
+            height: 50px; /* Adjust height as needed */
+            width: 50px;  /* Make width equal to height for perfect circle */
+            border-radius: 50%; /* Makes the image round */
+            object-fit: cover; /* Ensures the image fills the circle without distortion */
+            vertical-align: middle;
+            margin-right: 0.5rem; /* optional, if keeping text */
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 40px;
+                width: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -707,7 +723,11 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">The Zungle</a>
+<a href="#" class="logo">
+    <img src="IMG_8441.jpg" alt="The Zungle Logo" class="logo-img">
+    <!-- Optional text -->
+    The Zungle
+</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
