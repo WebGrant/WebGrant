@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Zungle Korean Fire BBQ - Korean Fire BBQ Like No Other</title>
+    <meta name="description" content="Experience cinematic Korean BBQ with our unique blowtorch cooking method at The Zungle, Parramatta. Luxury dining redefined.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-green: #3A3F2D;
+            --gold: #FFD700;
+            --dark-gold: #B8860B;
+            --white: #FFFFFF;
+            --black: #000000;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background-color: var(--dark-green);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Utility Classes */
+        .animate-fadeInUp {
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.8s ease forwards;
+        }
+
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 50%, var(--gold) 100%);
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(58, 63, 45, 0.9);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(58, 63, 45, 0.95);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+            background: rgba(58, 63, 45, 0.98);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--gold);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        radial-gradient(ellipse at center, rgba(255,69,0,0.3) 0%, rgba(255,140,0,0.2) 25%, rgba(58,63,45,0.9) 70%),
+                        var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            font-weight: bold;
+            position: relative;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        /* Food Grid */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .food-card {
+            background: linear-gradient(145deg, rgba(58, 63, 45, 0.9), rgba(74, 82, 56, 0.8));
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255, 215, 0, 0.3);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .food-card h3 {
+            padding: 1.5rem 1.5rem 1rem;
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+        }
+
+        .food-card p {
+            padding: 0 1.5rem 1rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .view-menu-btn {
+            margin: 0 1.5rem 1.5rem;
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .view-menu-btn:hover {
+            background: var(--dark-gold);
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #4a5238 100%);
+            color: var(--white);
+            margin: 3rem 0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .about-text h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .feature-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .image-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            height: 300px;
+        }
+
+        .collage-item {
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--black);
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .collage-item:hover {
+            transform: scale(1.05);
+        }
+
+        .collage-item:nth-child(1) {
+            grid-row: 1 / 3;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+        }
+
+        /* Map Section */
+        .map-container {
+            background: linear-gradient(145deg, var(--dark-green), #4a5238);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .map-placeholder {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .map-placeholder h3 {
+            color: var(--gold);
+            font-size: 2rem;
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark-green), var(--black));
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--black);
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .social-link i {
+            font-size: 18px;
+            line-height: 40px;
+            vertical-align: middle;
+        }
+
+        .social-link[aria-label="Facebook"] {
+            background: #1877F2;
+            color: white;
+        }
+
+        .social-link[aria-label="Instagram"] {
+            background: #E4405F;
+            color: white;
+        }
+
+        .social-link[aria-label="Twitter"] {
+            background: black;
+            color: white;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(58, 63, 45, 0.98);
+                backdrop-filter: blur(20px);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                border-top: 1px solid rgba(255, 215, 0, 0.2);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .feature-badges {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">The Zungle</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="animate-glow">THE ZUNGLE</h1>
+            <p class="tagline">Korean Fire BBQ Like No Other</p>
+            <a href="#location" class="cta-button">
+                🔥 Reserve Now 🔥
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Food Section -->
+    <section id="menu" class="section">
+        <h2 class="section-title fade-in">Signature Fire Creations</h2>
+        <div class="food-grid">
+            <div class="food-card fade-in">
+                <div class="food-image" style="background: linear-gradient(45deg, #FF6B6B, #FF8E53);">🥩</div>
+                <h3>LA Rib Meal</h3>
+                <p>Premium LA-style ribs, torch-seared to perfection. Tender, smoky, and infused with Korean flavors that dance on your palate.</p>
+                <a href="#menu" class="view-menu-btn">Experience This</a>
+            </div>
+            
+            <div class="food-card fade-in">
+                <div class="food-image" style="background: linear-gradient(45deg, #amber-600, #red-500);">🍖</div>
+                <h3>Beef Bulgogi</h3>
+                <p>Silky marinated beef, flame-kissed and served with steamed rice. A symphony of sweet, savory, and smoky notes.</p>
+                <a href="#menu" class="view-menu-btn">Experience This</a>
+            </div>
+            
+            <div class="food-card fade-in">
+                <div class="food-image" style="background: linear-gradient(45deg, #DC2626, #EA580C);">🍜</div>
+                <h3>Buldak Ramen</h3>
+                <p>Fiery spicy chicken ramen that challenges the brave. Rich, complex broth with tender chicken and fresh vegetables.</p>
+                <a href="#menu" class="view-menu-btn">Experience This</a>
+            </div>
+            
+            <div class="food-card fade-in">
+                <div class="food-image" style="background: linear-gradient(45deg, #059669, #FBBF24);">🍙</div>
+                <h3>Jungle Hands Rice Balls</h3>
+                <p>Our signature hand-crafted rice balls, filled with premium ingredients. A perfect fusion of tradition and innovation.</p>
+                <a href="#menu" class="view-menu-btn">Experience This</a>
+            </div>
+            
+            <div class="food-card fade-in">
+                <div class="food-image" style="background: linear-gradient(45deg, #EA580C, #EC4899);">🍚</div>
+                <h3>Kimchi Beef Fried Rice</h3>
+                <p>Aromatic wok-fried rice with aged kimchi and premium beef. Comfort food elevated to an art form.</p>
+                <a href="#menu" class="view-menu-btn">Experience This</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about fade-in">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>The Zungle Experience</h2>
+                    <p>Step into a world where Korean BBQ transcends the ordinary. At The Zungle, we don't just serve food – we create theatrical dining experiences that ignite all your senses.</p>
+                    <p>Our signature <strong>blowtorch technique</strong> transforms premium cuts into culinary masterpieces, while our rooftop setting offers breathtaking views of Parramatta's skyline.</p>
+                    <p>With live music echoing through our cozy atmosphere and the mesmerizing dance of flames at every table, dining at The Zungle is nothing short of cinematic luxury.</p>
+                    
+                    <div class="feature-badges">
+                        <div class="badge">
+                            <span>🔥</span>
+                            <span>Blowtorch BBQ</span>
+                        </div>
+                        <div class="badge">
+                            <span>🌿</span>
+                            <span>Eat Street Alfresco Vibes</span>
+                        </div>
+                        <div class="badge">
+                            <span>🏮</span>
+                            <span>Cozy Casual Ambience</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-collage">
+                        <div class="collage-item animate-float">🏮<br>Ambiance</div>
+                        <div class="collage-item" style="animation-delay: 1s;">🔥</div>
+                        <div class="collage-item" style="animation-delay: 2s;">🍽️</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section">
+        <h2 class="section-title fade-in">Find The Fire</h2>
+        <div class="map-container fade-in">
+            <div class="map-placeholder">
+                <h3>📍 Visit Us Today</h3>
+                <p><strong>329 Church Street</strong></p>
+                <p>Parramatta, NSW 2150</p>
+                <p>📞 (02) 9635-FIRE</p>
+                <p style="margin-top: 1rem; font-style: italic; color: #ccc;">Interactive Google Maps integration available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact The Fire</h3>
+                <p>📍 329 Church Street<br>Parramatta, NSW 2150</p>
+                <p>📞 (02) 9635-FIRE</p>
+                <p>✉️ reservations@thezungle.com.au</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Fire Hours</h3>
+                <p>Monday - Thursday: 5:00 PM - 10:00 PM</p>
+                <p>Friday - Saturday: 5:00 PM - 11:00 PM</p>
+                <p>Sunday: 4:00 PM - 9:00 PM</p>
+                <p style="margin-top: 1rem; color: var(--gold); font-weight: bold;">🔥 Late night sessions Fri & Sat</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow The Fire</h3>
+                <p>Stay connected for the latest updates and special offers!</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 The Zungle Korean Fire BBQ - Crafted with 🔥 in Parramatta</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced button hover effects
+        document.querySelectorAll('.cta-button, .view-menu-btn').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Food card hover effects
+        document.querySelectorAll('.food-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255, 215, 0, 0.3)';
+                this.style.borderColor = 'rgba(255, 215, 0, 0.5)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                this.style.borderColor = 'rgba(255, 215, 0, 0.1)';
+            });
+        });
+
+        // Collage item hover effects
+        document.querySelectorAll('.collage-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Social link hover effects
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.1)';
+                this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.4)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add initial fade-in effect to hero content
+            setTimeout(() => {
+                document.querySelector('.hero-content').style.opacity = '1';
+            }, 100);
+            
+            // Stagger food card animations
+            const foodCards = document.querySelectorAll('.food-card');
+            foodCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Performance optimization: throttle scroll events
+        let ticking = false;
+        function updateScrollEffects() {
+            const scrolled = window.pageYOffset;
+            const navbar = document.getElementById('navbar');
+            
+            if (scrolled > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            ticking = false;
+        }
+
+        function requestScrollUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestScrollUpdate);
+
+        
+    </script>
+</body>
+</html>
