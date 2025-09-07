@@ -214,9 +214,10 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        radial-gradient(ellipse at center, rgba(255,69,0,0.3) 0%, rgba(255,140,0,0.2) 25%, rgba(58,63,45,0.9) 70%),
-                        var(--dark-green);
+            background-image: url(zungle.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -228,18 +229,20 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            opacity: 0.1;
-            animation: float 8s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* thin black overlay */
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 800px;
             padding: 2rem;
             animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -544,19 +547,19 @@
             vertical-align: middle;
         }
 
-        .social-link[aria-label="Facebook"] {
-            background: #1877F2;
-            color: white;
-        }
-
         .social-link[aria-label="Instagram"] {
-            background: #E4405F;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
             color: white;
         }
 
-        .social-link[aria-label="Twitter"] {
-            background: black;
+        .social-link[aria-label="TikTok"] {
+            background: #000000;
             color: white;
+        }
+        .social-link[aria-label="TikTok"] i {
+            background: linear-gradient(45deg, #25F4EE, #FE2C55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .social-link:hover {
@@ -837,18 +840,22 @@
         </div>
     </section>
 
-    <!-- Location Section -->
-    <section id="location" class="section">
-        <h2 class="section-title">Find The Fire</h2>
-        <div class="map-container">
-            <div class="map-placeholder">
-                <h3>📍 Visit Us Today</h3>
-                <p><strong>329 Church Street</strong></p>
-                <p>Parramatta, NSW 2150</p>
-                <p>📞 (02) 9635-FIRE</p>
-            </div>
-        </div>
-    </section>
+<!-- Location Section -->
+<section id="location" class="section">
+  <h2 class="section-title">Find The Fire</h2>
+  <div class="map-container">
+    <iframe
+      width="100%"
+      height="400"
+      frameborder="0"
+      style="border:0; border-radius: 15px;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.0463487768634!2d151.0014968760337!3d-33.8111169732487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a35fc9da27bb%3A0x84e116b83cae7f21!2sThe%20Zungle!5e0!3m2!1sen!2sau!4v1757230133933!5m2!1sen!2sau">
+    </iframe>
+  </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -872,9 +879,8 @@
                 <h3>Follow The Fire</h3>
                 <p>Stay connected for the latest updates and special offers!</p>
                 <div class="social-links">
-                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/the.zungle/" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@thezungle" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
