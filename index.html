@@ -1,138 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WebGrant Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #6366f1;
-      --secondary: #8b5cf6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGrant - Revolutionary Web Development Experience</title>
+    <meta name="description" content="WebGrant: Mind-blowing web experiences that push boundaries and captivate audiences">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #0a0a0f;
-      color: #ffffff;
-      padding-top: 80px;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-bottom: 2rem;
-      overflow-x: hidden;
-      position: relative;
-      height: 100vh;
-      overflow-y: auto;
-    }
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --pink: #ec4899;
+            --orange: #f97316;
+            --green: #10b981;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --bg: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-light: #2a2a2a;
+        }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    /* Liquid Glass Header */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(25px) saturate(200%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.37),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      z-index: 1000;
-      transition: all 0.3s ease;
-      padding: 0 2rem;
-      border-radius: 0 0 20px 20px;
-    }
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 50%);
+            animation: morphBackground 20s ease-in-out infinite;
+        }
 
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        rgba(255, 255, 255, 0.02) 50%,
-        rgba(0, 0, 0, 0.1) 100%);
-      border-radius: 0 0 20px 20px;
-      pointer-events: none;
-    }
+        @keyframes morphBackground {
+            0%, 100% { filter: blur(40px) brightness(0.3); }
+            25% { filter: blur(60px) brightness(0.5) hue-rotate(90deg); }
+            50% { filter: blur(80px) brightness(0.4) hue-rotate(180deg); }
+            75% { filter: blur(60px) brightness(0.6) hue-rotate(270deg); }
+        }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
 
-    .logo-img {
-      height: 48px;
-      width: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      filter: drop-shadow(0 0 10px #00fff7);
-      transition: transform 0.3s ease;
-    }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
 
-    .logo-img:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
+        /* Glassmorphism Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
-      transition: transform 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.05) rotate(-2deg);
-    }
-
-    /* Nav menu */
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    /* Links */
-    .nav-link {
-      color: rgba(255, 255, 255, 0.85);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      transition: all 0.35s ease;
-      position: relative;
-      overflow: hidden;
-    }
+.nav {
+  display: flex;
+  align-items: center;          /* keeps logo + links aligned vertically */
+  justify-content: space-between; /* logo on left, links on right */
+  padding: 1rem 2rem;
+  width: 100%;                  /* full width */
+  margin: 0;                    /* no auto centering */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 0;             /* so it touches edges */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;       /* ensures padding doesn’t break layout */
+}
 
     /* Active link styles */
     .nav-link.active {
@@ -151,571 +129,1578 @@
       border-radius: 1px;
     }
 
-    /* Shiny hover swipe */
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      padding: 2px;
-      background: linear-gradient(
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+         .logo-img {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: drop-shadow(0 0 10px #00fff7);
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+   .logo-img:hover {
+      transform: scale(1.2) rotate(360deg);
+      filter: drop-shadow(0 0 40px var(--accent2)) brightness(1.8);
+    }
+
+.logo-container {
+    display: flex;
+    align-items: center;   /* vertically align image + text */
+    gap: 10px;             /* space between logo image and text */
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Nav menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Links */
+.nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shiny hover swipe */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 2px; /* thickness of border */
+    background: linear-gradient(
         45deg,
         var(--primary),
         var(--secondary),
         #ff00ff,
         #00fff7,
         var(--primary)
-      );
-      background-size: 300% 300%;
-      animation: gradient-move 4s linear infinite;
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude; 
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+    );
+    background-size: 300% 300%;
+    animation: gradient-move 4s linear infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-    .nav-link:hover::before {
-      opacity: 1;
-    }
+.nav-link:hover::before {
+    opacity: 1;
+}
 
-    .nav-link:hover {
-      color: #fff;
-      transform: translateY(-2px) scale(1.05);
-      text-shadow: 0 0 12px rgba(255,255,255,0.6);
-    }
+.nav-link {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 
-    /* Fancy CTA Button */
-    .nav-cta {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #ffffff !important;
-      padding: 0.75rem 1.7rem;
-      border-radius: 50px;
-      font-weight: 600;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 1;
-      animation: pulse-glow 2.5s infinite ease-in-out;
-    }
+.nav-link:hover {
+    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+    text-shadow: 0 0 12px rgba(255,255,255,0.6);
+}
 
-    .nav-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      padding: 3px;
-      background: linear-gradient(
+/* Animate gradient */
+@keyframes gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Fancy CTA button */
+/* Fancy CTA Button */
+.nav-cta {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #ffffff !important;
+    padding: 0.75rem 1.7rem;
+    border-radius: 50px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
+    animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+/* Animated glowing gradient border */
+.nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 3px;
+    background: linear-gradient(
         45deg,
         var(--primary),
         var(--secondary),
         #ff00ff,
         #00fff7,
         var(--primary)
-      );
-      background-size: 400% 400%;
-      animation: gradient-move 6s linear infinite;
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude; 
-      opacity: 0.6;
-      transition: opacity 0.4s ease;
-      z-index: 0;
-    }
+    );
+    background-size: 400% 400%;
+    animation: gradient-move 6s linear infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+    opacity: 0.6; /* visible glow even when idle */
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
 
-    .nav-cta:hover::before {
-      opacity: 1;
-    }
+/* Hover effect intensifies glow */
+.nav-cta:hover::before {
+    opacity: 1;
+}
 
-    .nav-cta:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
-    }
+.nav-cta:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+}
 
-    .nav-cta span {
-      position: relative;
-      z-index: 2;
-    }
+/* Keep text above the gradient */
+.nav-cta span {
+    position: relative;
+    z-index: 2;
+}
 
-    /* Mobile menu button */
-    .mobile-menu-btn {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      z-index: 1001;
-    }
+/* Gradient movement */
+@keyframes gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    .mobile-menu-btn span {
-      width: 25px;
-      height: 3px;
-      background: #00fff7;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 6px #00fff7;
-    }
+/* Pulse breathing glow */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
+}
 
-    .mobile-menu-btn.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
+        /* Hero Section with 3D Effects */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
 
-    .mobile-menu-btn.active span:nth-child(2) {
-      opacity: 0;
-    }
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+        }
 
-    .mobile-menu-btn.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            line-height: 1.1;
+        }
 
-    /* Animations */
-    @keyframes gradient-move {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(139, 92, 246, 0.8), 0 0 60px rgba(6, 182, 212, 0.4); }
+        }
 
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
-      50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8); }
-    }
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            animation: slideUp 1s ease-out 0.5s both;
+        }
 
-    /* Portfolio styles */
-    headers {
-      text-align: center;
-      margin: 2rem 0 3rem;
-    }
+        .hero-cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease-out 1s both;
+        }
 
-    headers h1 {
-      font-size: 2.5rem;
-      color: #ffffff;
-      text-shadow: 0 0 30px rgba(0, 255, 247, 0.6), 0 0 60px rgba(0, 255, 247, 0.3);
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #ffffff, #00fff7, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .hero-cta {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
 
-    headers p {
-      color: #b0b0b0;
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
-    }
+        .hero-cta.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
 
-    .portfolio-item {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 2rem;
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transition: all 0.4s ease;
-      animation: slide-in 1s ease-out forwards;
-      position: relative;
-      z-index: 2;
-    }
+        .hero-cta.secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
 
-    .portfolio-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.08) 0%, 
-        rgba(255, 255, 255, 0.02) 50%,
-        rgba(0, 0, 0, 0.05) 100%);
-      border-radius: 16px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
+        .hero-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.4);
+        }
 
-    .portfolio-item:hover::before {
-      opacity: 1;
-    }
+        .hero-cta.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
 
-    .portfolio-item:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 
-        0 16px 48px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(0, 255, 247, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border-color: rgba(0, 255, 247, 0.3);
-    }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .portfolio-info {
-      flex: 1;
-      max-width: 300px;
-      position: relative;
-      z-index: 3;
-    }
+        /* Floating 3D Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: floatMove 15s ease-in-out infinite;
+        }
 
-    .portfolio-info h3 {
-      color: #00fff7;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 10px #00fff7;
-    }
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), transparent);
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
 
-    .portfolio-info p {
-      font-size: 0.95rem;
-      color: #e0e0e0;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary), transparent);
+            border-radius: 20%;
+            animation-delay: 3s;
+        }
 
-    .live-button {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      background: linear-gradient(45deg, #00cfff, #0040ff);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), transparent);
+            border-radius: 30%;
+            animation-delay: 6s;
+        }
 
-    .live-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-      animation: hologramPulse 1s infinite alternate;
-    }
+        @keyframes floatMove {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+            75% { transform: translateY(-30px) rotate(270deg); }
+        }
 
-    @keyframes hologramPulse {
-      0% { box-shadow: 0 0 5px #00f7ff88, 0 0 15px #00f7ff44; }
-      100% { box-shadow: 0 0 15px #00f7ffcc, 0 0 30px #00f7ffaa; }
-    }
+        /* Stats Section with Morphing Cards */
+        .stats-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--surface), rgba(26, 26, 26, 0.95));
+            position: relative;
+        }
 
-    .portfolio-images {
-      display: flex;
-      gap: 1rem;
-      flex: 2;
-      flex-wrap: wrap;
-      animation: fade-in 1s ease-in;
-      position: relative;
-      z-index: 3;
-    }
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
 
-    .portfolio-images img {
-      width: 100%;
-      max-width: 310px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease, filter 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
 
-    .portfolio-images img:hover {
-      transform: scale(1.05);
-      filter: brightness(1.1);
-      border-color: #00fff7;
-      box-shadow: 0 8px 25px rgba(0, 255, 247, 0.2);
-    }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 20px;
+        }
 
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .stat-card:hover::before {
+            opacity: 0.1;
+        }
 
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateX(-50px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+        .stat-card:hover {
+            transform: translateY(-10px) rotateX(10deg);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.2);
+        }
 
-    .gradient-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(ellipse at center, 
-        rgba(16, 16, 28, 0.9) 0%, 
-        rgba(8, 8, 15, 0.95) 50%,
-        #000000 100%);
-      z-index: -1;
-      pointer-events: none;
-    }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
 
-    canvas#matrix-rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -3;
-      pointer-events: none;
-      user-select: none;
-    }
+        /* Services with Liquid Morphing */
+        .services-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--bg), var(--surface));
+        }
 
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .mobile-menu-btn {
-        display: flex;
-      }
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-      .nav-menu {
-        position: fixed;
-        top: 80px;
-        left: 50%;
-        transform: translateX(-50%) translateY(-100%);
-        width: 90%;
-        max-width: 320px;
-                background: rgba(26, 26, 26, 0.95);
-        backdrop-filter: blur(25px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-top: none;
-        border-radius: 0 0 25px 25px;
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 2rem 1.5rem;
-        box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        visibility: hidden;
-      }
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      .nav-menu::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, 
-          rgba(255, 255, 255, 0.1) 0%, 
-          rgba(255, 255, 255, 0.02) 50%,
-          rgba(0, 0, 0, 0.1) 100%);
-        border-radius: 0 0 25px 25px;
-        pointer-events: none;
-      }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
 
-      .nav-menu.open {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
+        .service-card {
+            background: rgba(194, 156, 156, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
 
-      .nav-menu li {
-        font-size: 1.1rem;
-        width: 100%;
-        text-align: center;
-        position: relative;
-        z-index: 10;
-        transform: translateY(-20px);
-        opacity: 0;
-        transition: all 0.3s ease;
-      }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: all 0.6s ease;
+            border-radius: 25px;
+            transform: scale(0.8);
+        }
 
-      .nav-menu.open li {
-        transform: translateY(0);
-        opacity: 1;
-      }
+        .service-card:hover::before {
+            opacity: 0.05;
+            transform: scale(1);
+        }
 
-      .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
-      .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
-      .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
-      .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
-      .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
-      .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
 
-      .nav-link, .nav-cta {
-        width: 100%;
-        display: block;
-        text-align: center;
-        padding: 0.8rem 1rem;
-        position: relative;
-        z-index: 10;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-      }
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            z-index: 1;
+        }
 
-      .nav-link:hover, .nav-cta:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-2px) scale(1.02);
-      }
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
 
-      .logo {
-        font-size: 1.6rem;
-      }
+        .service-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
 
-      .portfolio-item {
-        flex-direction: column;
-        align-items: center;
-        padding: 1.5rem;
-      }
+        /* Interactive Portfolio Gallery */
+        .portfolio-section {
+            padding: 8rem 2rem;
+            background: var(--surface);
+        }
 
-      .portfolio-images {
-        justify-content: center;
-      }
+        .portfolio-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-      .header {
-        padding: 0 1rem;
-      }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
 
-      body {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
+        .portfolio-item {
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s ease;
+        }
 
-      /* Overlay for mobile menu */
-      .nav-menu.open::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(2px);
-        z-index: -1;
-        animation: fadeIn 0.3s ease;
-      }
+        .portfolio-item:hover {
+            transform: scale(1.03) rotateY(5deg);
+        }
 
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    }
-  </style>
+        .portfolio-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            transition: all 0.6s ease;
+        }
+        
+        .portfolio-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: #ffffff;
+            transform: translateY(50%);
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content {
+            transform: translateY(0);
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonials Carousel */
+        .testimonials-section {
+            padding: 8rem 2rem;
+            background: var(--bg);
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-carousel {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 4rem;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .testimonial-info h4 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* CTA Section with Animated Background */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(20px) translateY(20px); }
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn.primary {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 2rem;
+            background: var(--surface);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 0 auto 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: var(--bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    width: 90%;
+    max-width: 320px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 25px 25px;
+    display: flex; /* Added - needed for flex styles */
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease, 
+                visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000; /* Ensure menu appears above other content */
+  }
+
+  .nav-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 0 0 25px 25px;
+    pointer-events: none;
+  }
+
+  .nav-menu.open {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu li {
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-menu.open li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
+  .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
+  .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
+  .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
+  .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
+  .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
+
+  .nav-link, .nav-cta {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    position: relative;
+    z-index: 10;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover, .nav-cta:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
+
+  /* Overlay for mobile menu */
+  .nav-menu.open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    z-index: -1; /* keeps it behind menu but above page */
+    animation: fadeIn 0.3s ease;
+  }
+
+  .hero-title {
+    margin-top: 100px; /* adjust until it clears the navbar */
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-cta {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+
+        .portfolio-1 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('demo2.jpg') center/cover no-repeat;
+}
+
+.portfolio-2 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('SydneyDine.jpg') center/cover no-repeat;
+}
+
+.portfolio-3 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('demo3.jpg') center/cover no-repeat;
+}
+
+.portfolio-4 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('photo1.jpg') center/cover no-repeat;
+}
+
+.portfolio-5 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('cleaninghome.jpg') center/cover no-repeat;
+}
+
+.portfolio-6 .portfolio-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('FrostAir1.jpg') center/cover no-repeat;
+}
+
+      /* Chat styles */
+        #chatPanel {
+            position: fixed;
+            top: 20px;
+            right: -600px;
+            width: 500px;
+            height: calc(100vh - 40px);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            box-shadow: -8px 0 25px rgba(0, 40, 90, 0.4);
+            transition: right 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+            border-radius: 15px 0 0 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chatPanel.open {
+            right: 0;
+        }
+
+        .chat-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-title {
+            color: #ccc;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        #chatBox {
+            border: 2px solid #1e3a5f;
+            border-radius: 15px;
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
+            box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.03),
+                        inset 4px 4px 10px rgba(0, 0, 0, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            color: #ddd;
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .option-button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-button:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .message {
+            margin: 12px 0;
+            padding: 12px;
+            border-radius: 12px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: rgba(99, 102, 241, 0.2);
+            color: #fff;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .ai-message {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+            margin-right: auto;
+        }
+
+        .form-field {
+            margin: 10px 0;
+        }
+
+        .form-field label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-field input, .form-field select, .form-field textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        #openChatBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #openChatBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            #chatPanel {
+                width: 100%;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #999;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin: 8px 5px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+    </style>
 </head>
 <body>
+<!-- Animated Background -->
+    <div class="animated-bg"></div>
 
-  <canvas id="matrix-rain"></canvas>
-  <div class="gradient-overlay"></div>
+    <!-- Floating Particles -->
+    <div class="particles"></div>
 
-  <header class="header">
-    <nav class="nav">
-      <div class="logo-container">
-        <img src="Logo.png" alt="Logo" class="logo-img">
-        <span class="logo">WebGrant</span>
-      </div>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+<div class="logo-container">
+  <img src="Logo.png" alt="Logo" class="logo-img">
+  <span class="logo">WebGrant</span>
+</div>
 
-      <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="service.html" class="nav-link">Services</a></li>
-        <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
-        <li><a href="about.html" class="nav-link">About us</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="track.html" class="nav-link">Track Your Order</a></li>
-        <li><a href="form.html" class="nav-cta"><span>Get Quote</span></a></li>
-      </ul>
-    </nav>
-  </header>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="service.html" class="nav-link">Services</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="about.html" class="nav-link">About us</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="track.html" class="nav-link">Track Your Order</a></li>
+                <li><a href="form.html" class="nav-cta"><span>Get Quote</span></a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <headers>
-    <h1>WebGrant's Portfolio</h1>
-    <p>Browse our futuristic work for real businesses</p>
-  </headers>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>Local Cafè (Starter)</h3>
-      <p><em>"Local Café" is a sample business name used to demonstrate how a Starter website can look for a real café.</em></p>
-      <a href="demo1.html" target="_blank" class="live-button">View Live</a>
-    </div>
-    <div class="portfolio-images">
-      <img src="photo1.jpg" alt="NovaTech Screenshot 1">
-      <img src="localcafe2.jpg" alt="NovaTech Screenshot 2">
-      <img src="localcafe3.jpg" alt="NovaTech Screenshot 3">
-    </div>
-  </section>
+        <div class="hero-content">
+            <h1 class="hero-title">WebGrant</h1>
+            <p class="hero-subtitle">Revolutionary web experiences that push boundaries, captivate audiences, and transform businesses into digital powerhouses.</p>
+            <div class="hero-cta-group">
+                <a href="#contact" class="hero-cta primary">Start Your Journey</a>
+                <a href="portfolio.html" class="hero-cta secondary">Explore Magic</a>
+            </div>
+        </div>
+    </section>
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>La Tavola Italiana (Growth)</h3>
-      <p><em>Demonstration of a Growth website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</em></p>
-      <a href="demo2.html" target="_blank" class="live-button">View Live</a>
+ <!-- Chat Panel -->
+    <div id="chatPanel">
+        <div class="chat-header">
+            <h2 class="chat-title">WebGrant AI Assistant</h2>
+            <p style="color: #999; font-size: 14px;">Your friendly guide to the perfect website</p>
+        </div>
+        
+        <div id="chatBox">
+            <div class="ai-message message">
+                <p>Hi! I'm here to help you find the perfect website solution for your business. What would you like to know?</p>
+                <div id="initialOptions">
+                    <button class="option-button" onclick="selectOption('packages')">📦 Tell me about your packages</button>
+                    <button class="option-button" onclick="selectOption('which_package')">🎯 Which package is right for me?</button>
+                    <button class="option-button" onclick="selectOption('free_preview')">🆓 Get a free homepage preview</button>
+                    <button class="option-button" onclick="selectOption('full_quote')">💰 Request a full quote</button>
+                    <button class="option-button" onclick="selectOption('track_order')">📋 Track my order</button>
+                    <button class="option-button" onclick="selectOption('talk_human')">👤 Talk to a human</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+        </div>
     </div>
-    <div class="portfolio-images">
-      <img src="demo2.jpg" alt="GlowSkin Screenshot 1">
-      <img src="demo2about.jpg" alt="GlowSkin Screenshot 2">
-      <img src="demo2menu.jpg" alt="GlowSkin Screenshot 3">
-    </div>
-  </section>
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>SydneyDine (Growth +)</h3>
-      <p><em>Showcase of a Growth+ Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</em></p>
-      <a href="restraurant.html" target="_blank" class="live-button">View Live</a>
-    </div>
-    <div class="portfolio-images">
-      <img src="SydneyDine.jpg" alt="GlowSkin Screenshot 1">
-      <img src="Sydmenu.jpg" alt="GlowSkin Screenshot 2">
-      <img src="SydContact.jpg" alt="GlowSkin Screenshot 3">
-    </div>
-  </section>
+    <!-- Chat Toggle Button -->
+    <button id="openChatBtn" onclick="toggleChat()">💬</button>
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>NextGen (Growth +)</h3>
-      <p><em>Demonstration of a Growth+ Website for a fictional tech company, NextGen. Designed to showcase advanced features, sleek design, and powerful functionality tailored for growing modern businesses.</em></p>
-      <a href="TESTIN.HTML" target="_blank" class="live-button">View Live</a>
-    </div>
-    <div class="portfolio-images">
-      <img src="demo3.jpg" alt="QuantumFleet Screenshot 1">
-      <img src="demo32.jpg" alt="QuantumFleet Screenshot 2">
-      <img src="demo33.jpg" alt="QuantumFleet Screenshot 3">
-    </div>
-  </section>
+    <!-- Stats Section -->
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>ShinySpark Cleaning Co. (Growth)</h3>
-      <p><em>Demonstration of a Growth Website for a fictional cleaning company, ShinySpark Cleaning Co. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</em></p>
-      <a href="cleaningdemo.html" target="_blank" class="live-button">View Live</a>
-    </div>
-    <div class="portfolio-images">
-      <img src="cleaninghome.jpg" alt="QuantumFleet Screenshot 1">
-      <img src="cleaningservices.jpg" alt="QuantumFleet Screenshot 2">
-      <img src="cleaningBOOK.jpg" alt="QuantumFleet Screenshot 3">
-    </div>
-  </section>
 
-  <section class="portfolio-item">
-    <div class="portfolio-info">
-      <h3>FrostAir Experts (Growth)</h3>
-      <p><em>Demonstration of a Growth Website for a fictional HVAC company, FrostAir Experts. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</em></p>
-      <a href="hvac.html" target="_blank" class="live-button">View Live</a>
-    </div>
-    <div class="portfolio-images">
-      <img src="FrostAir1.jpg" alt="QuantumFleet Screenshot 1">
-      <img src="FrostAir2.jpg" alt="QuantumFleet Screenshot 2">
-      <img src="ForstAir3.jpg" alt="QuantumFleet Screenshot 3">
-    </div>
-  </section>
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="services-container">
+            <h2 class="section-title scroll-reveal">Revolutionary Services</h2>
+            
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">🚀</div>
+                    <h3 class="service-title">Mind-Bending Designs</h3>
+                    <p class="service-description">Prepare for visual experiences that defy expectations. We craft stunning, interactive designs that make competitors weep and customers convert instantly.</p>
+                </div>
+                
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Lightning Performance</h3>
+                    <p class="service-description">Websites so fast they break the speed of light. Our optimization wizardry ensures your site loads before users even think about clicking.</p>
+                </div>
+                
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Conversion Alchemy</h3>
+                    <p class="service-description">We transform browsers into buyers with psychological design triggers and persuasion techniques that feel like pure magic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="portfolio-container">
+            <h2 class="section-title scroll-reveal">Portfolio of Wonders</h2>
+            
+            <div class="portfolio-grid">
+   <div class="portfolio-item portfolio-1 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">La Tavola Italiana</h3>
+        <p class="portfolio-desc">Demonstration of a Growth website for a fictional Italian restaurant. Designed to highlight clean branding, responsive layout, and essential features for modern small businesses.</p>
+    </div>
+</div>
+
+<div class="portfolio-item portfolio-2 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">SydneyDine</h3>
+        <p class="portfolio-desc">Showcase of a Growth + Website Package for a fictional fine-dining restaurant. Packed with professional animations that elevate user engagement and satisfaction. Fully responsive design that works seamlessly across all devices, including mobile and tablet.</p>
+    </div>
+</div>
+
+<div class="portfolio-item portfolio-3 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">NextGen</h3>
+        <p class="portfolio-desc">Demonstration of a Growth + Website for a fictional tech company, NextGen. Designed to showcase advanced features, sleek design, and powerful functionality tailored for growing modern businesses.</p>
+    </div>
+</div>
+
+<div class="portfolio-item portfolio-4 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">Local Cafè</h3>
+        <p class="portfolio-desc">"Local Café" is a sample business name used to demonstrate how a clean and basic website can look for a real café.</p>
+    </div>
+</div>
+
+<div class="portfolio-item portfolio-5 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">ShinySpark Cleaning Co.</h3>
+        <p class="portfolio-desc">Demonstration of a Standard Website for a fictional cleaning company, ShinySpark Cleaning Co. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</p>
+    </div>
+</div>
+
+<div class="portfolio-item portfolio-6 scroll-reveal">
+    <div class="portfolio-bg"></div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">FrostAir Experts</h3>
+        <p class="portfolio-desc">Demonstration of a Standard Website for a fictional HVAC company, FrostAir Experts. Designed to highlight a clean, professional design with user-friendly navigation and essential features perfect for local service businesses.</p>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container scroll-reveal">
+            <h2 class="cta-title">Ready to Break Reality?</h2>
+            <p class="cta-text">Join the revolution of businesses that dared to be extraordinary. Your transformation into a digital legend starts with one click.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-btn primary">Transform Now</a>
+                <a href="#portfolio" class="cta-btn secondary">See the Magic</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2 class="section-title scroll-reveal">Connect With Us</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-item scroll-reveal">
+                    <div class="contact-icon">📧</div>
+                    <h3 class="contact-title">Digital Transmission</h3>
+                    <div class="contact-info">
+                        <a href="mailto:webgrant25@gmail.com">webgrant25@gmail.com</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item scroll-reveal">
+                    <div class="contact-icon">🌐</div>
+                    <h3 class="contact-title">Social Dimension</h3>
+                    <div class="contact-info">
+                        <a href="https://www.instagram.com/webgrantofficial/" target="_blank">@webgrantofficial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            &copy; 2025 WebGrant. Redefining Reality, One Website at a Time.
+        </div>
+    </footer>
+
+    
+    <script>
+        // ==============================================
+// 1. ORDER DATABASE - Add this right after your existing orders = {} line
+// ==============================================
+
+        // ORDER DATABASE
+// Enhanced order database with sample data
+const orders = {
+    'WG-2025-001': {
+        progress: 75,
+        status: 'In Review', 
+        description: 'Homepage design completed, awaiting client feedback',
+        client: 'Sample Client',
+        email: 'sample@email.com',
+        package: 'Growth',
+        created: '2025-01-15',
+        eta: '2025-02-01'
+    },
+    'WG-2025-002': {
+        progress: 30,
+        status: 'In Design',
+        description: 'Designer assigned and working on initial concepts',
+        client: 'Demo Business',
+        email: 'demo@business.com', 
+        package: 'Growth +',
+        created: '2025-01-20',
+        eta: '2025-02-10'
+    }
+    // Add more orders manually as needed
+};
+
+// ==============================================
+// 2. UNIQUE CODE GENERATOR - Add this function
+// ==============================================
+
+function generateOrderCode() {
+    const year = new Date().getFullYear();
+    const orderNumber = Math.floor(Math.random() * 9000) + 1000; // Random 4-digit number
+    return `WG-${year}-${orderNumber}`;
+}
+
+// ==============================================
+// 3. EMAIL FUNCTIONS - Add these functions
+// ==============================================
+
+// Send confirmation email to client using Formspree
+function sendClientConfirmation(orderCode, clientEmail, clientName, packageType) {
+    const emailData = new FormData();
+    emailData.append('to_email', clientEmail);
+    emailData.append('order_code', orderCode);
+    emailData.append('client_name', clientName);
+    emailData.append('package_type', packageType);
+    emailData.append('email_type', 'client_confirmation');
+    emailData.append('subject', `Your WebGrant Order Code: ${orderCode}`);
+    
+    const emailMessage = `
+Hello ${clientName},
+
+Thank you for choosing WebGrant! Your order has been received.
+
+Order Code: ${orderCode}
+Package: ${packageType}
+
+You can track your order progress anytime at: https://yourwebsite.com/track.html
+
+What happens next:
+• Our team will review your requirements within 24 hours
+• You'll receive updates as work progresses
+• Expected completion: 1-2 weeks
+
+Questions? Reply to this email or contact us at webgrant25@gmail.com
+
+Best regards,
+The WebGrant Team
+    `;
+    
+    emailData.append('message', emailMessage);
+    
+    return fetch('https://formspree.io/f/xovwbgqz', {
+        method: 'POST',
+        body: emailData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+}
+
+// Send notification to your email
+function sendInternalNotification(orderCode, clientData, requestType) {
+    const emailData = new FormData();
+    emailData.append('to_email', 'webgrant25@gmail.com'); // Your email
+    emailData.append('order_code', orderCode);
+    emailData.append('email_type', 'internal_notification');
+    emailData.append('subject', `New ${requestType}: ${orderCode}`);
+    
+    const emailMessage = `
+New order received!
+
+Order Code: ${orderCode}
+Request Type: ${requestType}
+Client: ${clientData.name || 'Not provided'}
+Email: ${clientData.email}
+Business: ${clientData.businessName || clientData.business_name || 'Not provided'}
+Package: ${clientData.package || 'Not specified'}
+
+Additional Details:
+${JSON.stringify(clientData, null, 2)}
+
+Please add this order to your tracking system and update the orders object in your code.
+    `;
+    
+    emailData.append('message', emailMessage);
+    
+    return fetch('https://formspree.io/f/xovwbgqz', {
+        method: 'POST',
+        body: emailData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+}
+
+        // Create floating particles
+        function createParticles() {
+            const particleContainer = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // Mobile menu toggle
 function toggleMobileMenu() {
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const navMenu = document.getElementById('navMenu');
@@ -748,148 +1733,141 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Aurora reactive background
-const canvas = document.getElementById("matrix-rain");
-const ctx = canvas.getContext("2d");
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-let width, height;
-function resize() {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-}
-resize();
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            reveals.forEach(reveal => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
 
-window.addEventListener("resize", resize);
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                if (counter.classList.contains('animated')) return;
+                
+                const rect = counter.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    counter.classList.add('animated');
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const start = performance.now();
+                    
+                    function updateCounter(timestamp) {
+                        const elapsed = timestamp - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                        const current = Math.floor(target * easeOutQuart);
+                        
+                        counter.textContent = current;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    }
+                    
+                    requestAnimationFrame(updateCounter);
+                }
+            });
+        }
 
-let mouse = { x: width/2, y: height/2 };
-window.addEventListener("mousemove", e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
+        // Header background on scroll
+        function updateHeader() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+                header.style.borderBottomColor = 'rgba(99, 102, 241, 0.3)';
+            } else {
+                header.style.background = 'rgba(26, 26, 26, 0.1)';
+                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.1)';
+            }
+        }
 
-// Simplified noise function for aurora effect
-class SimplexNoise {
-  constructor() {
-    this.grad3 = [
-      [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
-      [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
-      [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]
-    ];
-    this.p = [];
-    for (let i=0; i<256; i++) this.p[i] = Math.floor(Math.random()*256);
-    this.perm = [];
-    for(let i=0; i<512; i++) this.perm[i]=this.p[i & 255];
-  }
-  dot(g, x, y) { return g[0]*x + g[1]*y; }
-  noise(xin, yin) {
-    let F2 = 0.5*(Math.sqrt(3.0)-1.0);
-    let s = (xin+yin)*F2;
-    let i = Math.floor(xin+s);
-    let j = Math.floor(yin+s);
-    let G2 = (3.0-Math.sqrt(3.0))/6.0;
-    let t = (i+j)*G2;
-    let X0 = i-t;
-    let Y0 = j-t;
-    let x0 = xin-X0;
-    let y0 = yin-Y0;
-    let i1, j1;
-    if(x0>y0) { i1=1; j1=0; }
-    else { i1=0; j1=1; }
-    let x1 = x0 - i1 + G2;
-    let y1 = y0 - j1 + G2;
-    let x2 = x0 - 1.0 + 2.0*G2;
-    let y2 = y0 - 1.0 + 2.0*G2;
-    let ii = i & 255;
-    let jj = j & 255;
-    let gi0 = this.perm[ii+this.perm[jj]] % 12;
-    let gi1 = this.perm[ii+i1+this.perm[jj+j1]] % 12;
-    let gi2 = this.perm[ii+1+this.perm[jj+1]] % 12;
-    let n0, n1, n2;
-    let t0 = 0.5 - x0*x0 - y0*y0;
-    if(t0<0) n0=0.0;
-    else {
-      t0 *= t0;
-      n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
-    }
-    let t1 = 0.5 - x1*x1 - y1*y1;
-    if(t1<0) n1=0.0;
-    else {
-      t1 *= t1;
-      n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
-    }
-    let t2 = 0.5 - x2*x2 - y2*y2;
-    if(t2<0) n2=0.0;
-    else {
-      t2 *= t2;
-      n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
-    }
-    return 70.0 * (n0 + n1 + n2);
-  }
-}
+        // Portfolio item hover effects
+        function initPortfolioEffects() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            portfolioItems.forEach(item => {
+                const bg = item.querySelector('.portfolio-bg');
+                
+                item.addEventListener('mousemove', (e) => {
+                    const rect = item.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    bg.style.transform = `translate(${(x - 50) * 0.1}px, ${(y - 50) * 0.1}px) scale(1.1)`;
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    bg.style.transform = 'translate(0, 0) scale(1)';
+                });
+            });
+        }
 
-const noise = new SimplexNoise();
-let time = 0;
+        // Service card tilt effect
+        function initServiceCardEffects() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+                });
+            });
+        }
 
-function drawAurora() {
-  ctx.clearRect(0, 0, width, height);
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initPortfolioEffects();
+            initServiceCardEffects();
+            revealOnScroll();
+            animateCounters();
+        });
 
-  const layers = 6;
-  for(let layer = 0; layer < layers; layer++) {
-    ctx.beginPath();
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-
-    let baseY = height * (0.3 + layer * 0.1);
-
-    const points = 30;
-    const waveWidth = width + 100;
-    ctx.moveTo(-50, height);
-
-    for(let i = 0; i <= points; i++) {
-      let x = (i / points) * waveWidth - 50;
-      let noiseX = i * 0.2 + time * 0.0006 + layer * 5;
-      let noiseY = noise.noise(noiseX, layer * 10);
-      let offsetX = (mouse.x / width - 0.5) * 100 * (layer + 1) / layers;
-      let y = baseY + noiseY * 80 + (mouse.y / height - 0.5) * 30;
-      ctx.lineTo(x + offsetX, y);
-    }
-
-    ctx.lineTo(width + 50, height);
-    ctx.closePath();
-
-    let gradient = ctx.createLinearGradient(0, baseY - 80, 0, height);
-    let colorStops = [
-      ['#3ae3ff55', '#14ffcc44'],
-      ['#3affc455', '#ccff0055'],
-      ['#b38aff55', '#e055ff44'],
-      ['#3ae3ff33', '#14ffcc22'],
-      ['#1affcc55', '#0055ff33'],
-      ['#aa33ff44', '#5533ff22']
-    ];
-
-    let c1 = colorStops[layer % colorStops.length][0];
-    let c2 = colorStops[layer % colorStops.length][1];
-
-    gradient.addColorStop(0, c1);
-    gradient.addColorStop(1, c2);
-
-    ctx.fillStyle = gradient;
-    ctx.shadowColor = c1;
-    ctx.shadowBlur = 40 - layer * 5;
-    ctx.fill();
-  }
-}
-
-function animate() {
-  time += 1;
-  drawAurora();
-  requestAnimationFrame(animate);
-}
-
-animate();
-
+        // Scroll event listeners
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            animateCounters();
+            updateHeader();
+        });
 
         // Add some extra interactive magic
         document.addEventListener('click', (e) => {
@@ -928,7 +1906,1249 @@ animate();
             }
         `;
         document.head.appendChild(style);
-</script>
 
+        // Add some Easter eggs
+        let clickCount = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.shiftKey) {
+                clickCount++;
+                if (clickCount === 3) {
+                    document.body.style.animation = 'rainbow 2s ease-in-out';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                        clickCount = 0;
+                    }, 2000);
+                }
+            }
+        });
+
+        // Add rainbow animation
+        const rainbowStyle = document.createElement('style');
+        rainbowStyle.textContent = `
+            @keyframes rainbow {
+                0%, 100% { filter: hue-rotate(0deg); }
+                25% { filter: hue-rotate(90deg); }
+                50% { filter: hue-rotate(180deg); }
+                75% { filter: hue-rotate(270deg); }
+            }
+        `;
+        document.head.appendChild(rainbowStyle);
+
+
+
+        // Enhanced WebGrant AI Assistant
+        class WebGrantAI {
+
+            startFullQuote(suggestedPackage = '') {
+    this.context.step = 'full_quote';
+    const message = `
+        <strong>Full Project Quote Request</strong><br><br>
+        Let's gather your project details for an accurate quote:<br><br>
+        
+        <div class="form-field">
+            <label>Your Name *</label>
+            <input type="text" id="quoteName" placeholder="Full name">
+        </div>
+        
+        <div class="form-field">
+            <label>Email Address *</label>
+            <input type="email" id="quoteEmail" placeholder="your@email.com">
+        </div>
+        
+        <div class="form-field">
+            <label>Phone Number</label>
+            <input type="tel" id="quotePhone" placeholder="Your phone number">
+        </div>
+        
+        <div class="form-field">
+            <label>Business Name *</label>
+            <input type="text" id="quoteBusinessName" placeholder="Your business name">
+        </div>
+        
+        <div class="form-field">
+            <label>Package Interest</label>
+            <select id="quotePackage">
+                <option value="">Select a package</option>
+                <option value="Starter" ${suggestedPackage === 'Starter' ? 'selected' : ''}>Starter ($400-$700)</option>
+                <option value="Growth" ${suggestedPackage === 'Growth' ? 'selected' : ''}>Growth ($800-$1100)</option>
+                <option value="Growth +" ${suggestedPackage === 'Growth +' ? 'selected' : ''}>Growth + ($1200-$2500)</option>
+            </select>
+        </div>
+        
+        <div class="form-field">
+            <label>Project Details *</label>
+            <textarea id="quoteMessage" placeholder="Tell us about your project, timeline, and specific needs"></textarea>
+        </div>
+        
+        <button class="cta-button" onclick="ai.submitFullQuote()">Submit Quote Request</button>
+    `;
+    this.addMessage(message, 'ai', true);
+}
+
+            constructor() {
+                this.context = {
+                    step: 'initial',
+                    userData: {},
+                    conversationHistory: []
+                };
+
+                this.packages = {
+                    Starter: {
+                        name: 'Starter',
+                        price: '$400-$700 AUD',
+                        features: ['Single page website', 'Mobile-friendly design', 'Basic branding', 'Uses client-provided images', 'Basic Animations', 'Interactive Email/Phone links', 'Additional Updates (chargable)', 'Basic SEO']
+                    },
+                    Growth: {
+                        name: 'Growth', 
+                        price: '$800-$1100 AUD',
+                        features: ['Multi-page website', 'Mobile-friendly design', 'Standard branding', 'Uses client-provided images', 'Interactive Email/Phone links', 'Standard interactive forms', 'Social media integration', 'Standard animations', 'Standard SEO', 'Additional Updates (chargable)', 'Intermediate SEO Setup']
+                    },
+                    Growthplus: {
+                        name: 'Growth +',
+                        price: '$1200-$2500 AUD',
+                        features: ['Multi-page website', 'Mobile-friendly design', 'Custom design', 'Advnaced branding', 'Uses client-provided images',  'Interactive Email/Phone links', 'Advanced animations', 'Multiple contact forms', 'Advanced SEO', 'Social media integration', 'Priority updates', 'Enhanced features', 'Google maps integration']
+                    }
+                };
+                this.init();
+            }
+
+            init() {
+                const userInput = document.getElementById('userInput');
+                userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            }
+
+            addMessage(text, sender, showTyping = false) {
+                const chatBox = document.getElementById('chatBox');
+                const message = document.createElement('div');
+                message.className = `message ${sender}-message`;
+                
+                if (showTyping && sender === 'ai') {
+                    this.showTypingIndicator();
+                    setTimeout(() => {
+                        this.hideTypingIndicator();
+                        message.innerHTML = text;
+                        chatBox.appendChild(message);
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }, 1000);
+                } else {
+                    message.innerHTML = text;
+                    chatBox.appendChild(message);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+                
+                this.context.conversationHistory.push({
+                    text: text.replace(/<[^>]*>/g, ''), // Strip HTML for history
+                    sender: sender,
+                    timestamp: new Date()
+                });
+            }
+
+            showTypingIndicator() {
+                const chatBox = document.getElementById('chatBox');
+                const indicator = document.createElement('div');
+                indicator.className = 'typing-indicator';
+                indicator.id = 'typingIndicator';
+                indicator.innerHTML = `
+                    SmartGrant is typing
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                chatBox.appendChild(indicator);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            hideTypingIndicator() {
+                const indicator = document.getElementById('typingIndicator');
+                if (indicator) indicator.remove();
+            }
+
+            selectOption(option) {
+                const initialOptions = document.getElementById('initialOptions');
+                if (initialOptions) initialOptions.style.display = 'none';
+
+                switch(option) {
+                    case 'packages':
+                        this.addMessage('Tell me about your packages', 'user');
+                        this.explainPackages();
+                        break;
+                    case 'which_package':
+                        this.addMessage('Which package is right for me?', 'user');
+                        this.startPackageRecommendation();
+                        break;
+                    case 'free_preview':
+                        this.addMessage('I want a free homepage preview', 'user');
+                        this.startFreePreview();
+                        break;
+                    case 'full_quote':
+                        this.addMessage('I need a full quote', 'user');
+                        this.startFullQuote();
+                        break;
+                    case 'track_order':
+                        this.addMessage('Track my order', 'user');
+                        this.startOrderTracking();
+                        break;
+                    case 'talk_human':
+                        this.addMessage('I want to talk to a human', 'user');
+                        this.escalateToHuman();
+                        break;
+                }
+            }
+
+            explainPackages() {
+                const packageInfo = `
+                    <strong>Our Website Packages:</strong><br><br>
+                    
+                    <strong>🌟 Starter Package (${this.packages.Starter.price})</strong><br>
+                    Perfect for startups and simple business presence<br>
+                    • ${this.packages.Starter.features.join('<br>• ')}<br><br>
+                    
+                    <strong>🚀 Growth Package (${this.packages.Growth.price})</strong><br>
+                    Great for growing businesses needing more features<br>
+                    • ${this.packages.Growth.features.join('<br>• ')}<br><br>
+                    
+                    <strong>💎 Growth + Package (${this.packages.Growthplus.price})</strong><br>
+                    Premium solution for businesses wanting the best<br>
+                    • ${this.packages.Growthplus.features.join('<br>• ')}<br><br>
+                    
+                    <button class="cta-button" onclick="ai.startPackageRecommendation()">Help Me Choose</button>
+                    <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>
+                `;
+                this.addMessage(packageInfo, 'ai', true);
+            }
+
+            startPackageRecommendation() {
+                this.context.step = 'package_recommendation';
+                const message = `
+                    Let's find your perfect package! Tell me about your business:<br><br>
+                    <button class="option-button" onclick="ai.handleBusinessType('single_page')">I need a simple single-page site</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('multi_page')">I need multiple pages</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('custom_features')">I need custom features & animations</button>
+                    <button class="option-button" onclick="ai.handleBusinessType('not_sure')">I'm not sure what I need</button>
+                `;
+                this.addMessage(message, 'ai', true);
+            }
+
+            handleBusinessType(type) {
+                this.context.userData.businessType = type;
+                
+                let recommendation = '';
+                let packageName = '';
+                
+                switch(type) {
+                    case 'single_page':
+                        packageName = 'Starter';
+                        recommendation = `Perfect! For a single-page website, our <strong>Starter Package (${this.packages.Starter.price})</strong> is ideal. You'll get a mobile-friendly design, basic branding, Basic Interactive form, and SEO.`;
+                        break;
+                    case 'multi_page':
+                        packageName = 'Growth';
+                        recommendation = `Great choice! Our <strong>Growth Package (${this.packages.Growth.price})</strong> is perfect for multi-page sites. You'll get professional branding, a mobile-friendly design, social media integration, Interactive forms, basic animations, and SEO.`;
+                        break;
+                    case 'custom_features':
+                        packageName = 'Growth +';
+                        recommendation = `Excellent! You'll love our <strong>Growth + Package (${this.packages.Growthplus.price})</strong>. It includes custom design, advanced animations, multiple interactive forms, google maps integration, advanced SEO, and priority support.`;
+                        break;
+                    case 'not_sure':
+                        recommendation = `No worries! Most of our clients start with the <strong>Growth Package (${this.packages.Growth.price})</strong> - it's our most popular option with great features for growing businesses.`;
+                        packageName = 'Standard';
+                        break;
+                }
+
+                this.addMessage(`I ${type.replace('_', ' ')}`, 'user');
+                
+                const responseWithCTA = `
+                    ${recommendation}<br><br>
+                    <strong>Next steps:</strong><br>
+                    <button class="cta-button" onclick="ai.startFreePreview('${packageName}')">Get Free Preview</button>
+                    <button class="cta-button" onclick="ai.startFullQuote('${packageName}')">Request Full Quote</button>
+                    <button class="cta-button" onclick="ai.explainPackages()">Compare All Packages</button>
+                `;
+                
+                this.addMessage(responseWithCTA, 'ai', true);
+            }
+
+// Add this to your WebGrantAI class
+
+startFreePreview(suggestedPackage = '') {
+    this.context.step = 'free_preview';
+    const message = `
+        <strong>Free Homepage Preview - Let's get started!</strong><br><br>
+        I'll need a few quick details to create your preview:<br><br>
+        
+        <div class="form-field">
+            <label>Business Name *</label>
+            <input type="text" id="previewBusinessName" placeholder="Your business name">
+        </div>
+        
+        <div class="form-field">
+            <label>Email Address *</label>
+            <input type="email" id="previewEmail" placeholder="your@email.com">
+        </div>
+        
+        <div class="form-field">
+            <label>Target Audience</label>
+            <input type="text" id="previewAudience" placeholder="Who are your customers?">
+        </div>
+        
+        <div class="form-field">
+            <label>Inspiration (1-2 websites you like)</label>
+            <textarea id="previewInspiration" placeholder="Share any websites you admire or competitors"></textarea>
+        </div>
+        
+        ${suggestedPackage ? `<input type="hidden" id="suggestedPackage" value="${suggestedPackage}">` : ''}
+        
+        <button class="cta-button" onclick="ai.submitFreePreview()">Submit Preview Request</button>
+    `;
+    this.addMessage(message, 'ai', true);
+}
+
+// NEW FUNCTION - Add this missing submitFreePreview function
+submitFreePreview() {
+    const businessName = document.getElementById('previewBusinessName')?.value;
+    const email = document.getElementById('previewEmail')?.value;
+    const audience = document.getElementById('previewAudience')?.value;
+    const inspiration = document.getElementById('previewInspiration')?.value;
+    const suggestedPackage = document.getElementById('suggestedPackage')?.value;
+
+    if (!businessName || !email) {
+        this.addMessage('Please fill in all required fields (*)', 'ai');
+        return;
+    }
+
+    // Generate unique order code
+    const orderCode = generateOrderCode();
+
+    // Prepare client data
+    const clientData = {
+        name: 'Not provided', // Free preview doesn't require name
+        email: email,
+        businessName: businessName,
+        target_audience: audience || 'Not specified',
+        inspiration: inspiration || 'Not specified',
+        package: suggestedPackage || 'Free Preview',
+        request_type: 'Free Homepage Preview'
+    };
+
+    // Add to orders database
+    orders[orderCode] = {
+        progress: 10,
+        status: 'Preview Preparation',
+        description: 'Free homepage preview request received, designer will start creating mockup',
+        client: businessName,
+        email: email,
+        package: 'Free Preview',
+        created: new Date().toISOString().split('T')[0],
+        eta: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 days from now
+    };
+
+    // Send to Formspree + email notifications
+    const formData = new FormData();
+    formData.append('business_name', businessName);
+    formData.append('email', email);
+    formData.append('target_audience', audience || 'Not specified');
+    formData.append('inspiration', inspiration || 'Not specified');
+    formData.append('suggested_package', suggestedPackage || 'Not specified');
+    formData.append('request_type', 'Free Homepage Preview');
+    formData.append('order_code', orderCode);
+    formData.append('source', 'AI Chat');
+
+    Promise.all([
+        fetch('https://formspree.io/f/xovwbgqz', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }),
+        sendClientConfirmation(orderCode, email, businessName, 'Free Homepage Preview'),
+        sendInternalNotification(orderCode, clientData, 'Free Homepage Preview')
+    ])
+    .then(responses => {
+        if (responses[0].ok) {
+            this.addMessage(`Perfect! Your free preview request has been submitted.
+
+            <strong>Order Code: ${orderCode}</strong><br>
+            (Save this code to track your preview!)<br><br>
+
+            <strong>What happens next:</strong><br>
+            • Confirmation email sent to ${email}<br>
+            • Custom homepage mockup within 2-3 business days<br>
+            • Track your progress with code: ${orderCode}<br>
+            • Preview delivered to ${email}<br><br>
+            
+            <button class="cta-button" onclick="ai.showTrackingInstructions('${orderCode}')">How to Track Preview</button>
+            <button class="cta-button" onclick="ai.startFullQuote()">Upgrade to Full Project</button>`, 'ai', true);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Submission error:', error);
+        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+    });
+    
+    this.context.step = 'completed';
+}
+
+// Update your existing submitFullQuote function
+// Replace the existing submitFullQuote function with this enhanced version:
+
+submitFullQuote() {
+    const name = document.getElementById('quoteName')?.value;
+    const email = document.getElementById('quoteEmail')?.value;
+    const phone = document.getElementById('quotePhone')?.value;
+    const businessName = document.getElementById('quoteBusinessName')?.value;
+    const packageInterest = document.getElementById('quotePackage')?.value;
+    const message = document.getElementById('quoteMessage')?.value;
+
+    if (!name || !email || !businessName || !message) {
+        this.addMessage('Please fill in all required fields (*)', 'ai');
+        return;
+    }
+
+    // Generate unique order code
+    const orderCode = generateOrderCode();
+
+    // Prepare client data
+    const clientData = {
+        name: name,
+        email: email,
+        phone: phone,
+        businessName: businessName,
+        package: packageInterest,
+        project_details: message,
+        request_type: 'Full Quote'
+    };
+
+    // Add to orders database
+    orders[orderCode] = {
+        progress: 15,
+        status: 'Quote Preparation',
+        description: 'Full quote request received, our team is preparing your detailed proposal',
+        client: businessName,
+        email: email,
+        package: packageInterest || 'To be determined',
+        created: new Date().toISOString().split('T')[0],
+        eta: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 days from now
+    };
+
+    // Send to Formspree (existing functionality) + email notifications
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone || 'Not provided');
+    formData.append('business_name', businessName);
+    formData.append('package_interest', packageInterest || 'Not specified');
+    formData.append('project_details', message);
+    formData.append('request_type', 'Full Quote');
+    formData.append('order_code', orderCode); // Add order code
+    formData.append('source', 'AI Chat');
+
+    Promise.all([
+        fetch('https://formspree.io/f/xovwbgqz', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }),
+        sendClientConfirmation(orderCode, email, name, packageInterest || 'Full Website'),
+        sendInternalNotification(orderCode, clientData, 'Full Quote')
+    ])
+    .then(responses => {
+        if (responses[0].ok) {
+            this.addMessage(`Excellent! Your quote request has been submitted successfully.
+
+            <strong>Order Code: ${orderCode}</strong><br>
+            (Important: Save this code to track your order!)<br><br>
+
+            <strong>What happens next:</strong><br>
+            • Confirmation email sent to ${email}<br>
+            • Detailed proposal within 2-3 business days<br>
+            • Track your progress with code: ${orderCode}<br>
+            • We'll contact you at ${email}${phone ? ` or ${phone}` : ''}<br><br>
+            
+            <button class="cta-button" onclick="ai.showTrackingInstructions('${orderCode}')">How to Track Order</button>
+            <button class="cta-button" onclick="ai.startFreePreview()">Also Get Free Preview</button>`, 'ai', true);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Submission error:', error);
+        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+    });
+    
+    this.context.step = 'completed';
+}
+
+            submitCallRequest() {
+                const name = document.getElementById('callName')?.value;
+                const email = document.getElementById('callEmail')?.value;
+                const time = document.getElementById('callTime')?.value;
+                const topic = document.getElementById('callTopic')?.value;
+
+                if (!email) {
+                    this.addMessage('Please provide your email address', 'ai');
+                    return;
+                }
+
+                // Send email via EmailJS
+                const templateParams = {
+                    to_email: this.emailConfig.toEmail,
+                    from_name: 'WebGrant AI Assistant',
+                    subject: 'Call Request - Chat Assistant',
+                    client_name: name || 'Not provided',
+                    client_email: email,
+                    preferred_time: time || 'Not specified',
+                    call_topic: topic || 'General discussion',
+                    request_type: 'Call Request',
+                    message: `Call request from chat:\n\nName: ${name}\nEmail: ${email}\nPreferred Time: ${time}\nTopic: ${topic}`
+                };
+
+                emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, templateParams)
+                    .then(() => {
+                        console.log('Call request email sent successfully');
+                        this.addMessage(`Your call request has been submitted! Om or Ritvik will reach out to you at ${email} to schedule a convenient time.
+
+                        Expected response: Within 24 hours<br>
+                        Preferred time: ${time || 'Not specified'}<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview While You Wait</button>`, 'ai', true);
+                    })
+                    .catch((error) => {
+                        console.error('Email send failed:', error);
+                        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                    });
+            }
+
+            submitFounderMessage() {
+                const name = document.getElementById('founderName')?.value;
+                const email = document.getElementById('founderEmail')?.value;
+                const message = document.getElementById('founderMessage')?.value;
+
+                if (!email || !message) {
+                    this.addMessage('Please provide your email and message', 'ai');
+                    return;
+                }
+
+                // Send email via EmailJS
+                const templateParams = {
+                    to_email: this.emailConfig.toEmail,
+                    from_name: 'WebGrant AI Assistant',
+                    subject: 'Direct Message for Founders',
+                    client_name: name || 'Not provided',
+                    client_email: email,
+                    founder_message: message,
+                    request_type: 'Founder Message',
+                    message: `Direct message to founders from chat:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
+                };
+
+                emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, templateParams)
+                    .then(() => {
+                        console.log('Founder message email sent successfully');
+                        this.addMessage(`Your message has been sent directly to Om and Ritvik! They'll personally respond to you at ${email}.
+
+                        <strong>Our founders typically respond within:</strong><br>
+                        • Business inquiries: Same day<br>
+                        • Technical questions: 24 hours<br>
+                        • General questions: 48 hours<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>`, 'ai', true);
+                    })
+                    .catch((error) => {
+                        console.error('Email send failed:', error);
+                        this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                    });
+            }
+
+startOrderTracking() {
+    this.context.step = 'order_tracking';
+    
+    // Generate unique ID to avoid conflicts
+    const inputId = 'orderCode_' + Date.now();
+    
+    const message = `
+        <strong>Order Tracking</strong><br><br>
+        Please enter your order code to check the status:<br><br>
+        
+        <div class="form-field">
+            <input type="text" id="${inputId}" placeholder="Enter your order code (e.g., WG-2025-001)" style="text-transform: uppercase;">
+        </div>
+        
+        <button class="cta-button" onclick="ai.trackOrderWithId('${inputId}')">Track Order</button>
+        
+        
+    `;
+    this.addMessage(message, 'ai', true);
+}
+
+trackOrderWithId(inputId) {
+    const orderCodeInput = document.getElementById(inputId);
+    
+    if (!orderCodeInput) {
+        this.addMessage('Error: Order code input field not found. Please try again.', 'ai');
+        this.startOrderTracking(); // Restart the process
+        return;
+    }
+    
+    const orderCode = orderCodeInput.value.trim().toUpperCase();
+    
+    if (!orderCode) {
+        this.addMessage('Please enter your order code', 'ai');
+        return;
+    }
+
+    this.addMessage(`Looking up order ${orderCode}...`, 'user');
+    
+    // Check if order exists in database
+    const order = orders[orderCode];
+    
+    setTimeout(() => {
+        if (order) {
+            const progressBar = this.generateProgressBar(order.progress);
+            const statusMessage = `
+                <strong>✅ Order Found!</strong><br><br>
+                
+                <strong>Order Code:</strong> ${orderCode}<br>
+                <strong>Client:</strong> ${order.client}<br>
+                <strong>Package:</strong> ${order.package}<br>
+                <strong>Status:</strong> ${order.status}<br>
+                <strong>Created:</strong> ${order.created}<br>
+                <strong>Expected Completion:</strong> ${order.eta}<br><br>
+                
+                <strong>Progress:</strong><br>
+                ${progressBar}<br>
+                <strong>${order.progress}% Complete</strong><br><br>
+                
+                <strong>Latest Update:</strong><br>
+                ${order.description}<br><br>
+                
+                <button class="cta-button" onclick="ai.escalateToHuman()">Need an Update?</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Track Another Order</button>
+            `;
+            this.addMessage(statusMessage, 'ai');
+        } else {
+            const notFoundMessage = `
+                <strong>❌ Order Not Found</strong><br><br>
+                We couldn't find an order with code: <strong>${orderCode}</strong><br><br>
+                
+                <strong>Please check:</strong><br>
+                • Code is entered correctly (case sensitive)<br>
+                • Code format: WG-YYYY-#### (e.g., WG-2025-1234)<br>
+                • You received the code via email<br><br>
+                
+                <strong>Valid test codes to try:</strong><br>
+                • WG-2025-001<br>
+                • WG-2025-002<br><br>
+                
+                <strong>Still having trouble?</strong><br>
+                <button class="cta-button" onclick="ai.escalateToHuman()">Contact Support</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Try Again</button>
+            `;
+            this.addMessage(notFoundMessage, 'ai');
+        }
+    }, 1500);
+}
+
+// Keep the old trackOrder function as a fallback
+trackOrder() {
+    this.trackOrderWithId('orderCode');
+}
+
+// Fixed trackAnotherOrder function
+trackAnotherOrder() {
+    this.startOrderTracking(); // This will create a fresh input field with new ID
+}
+
+          trackOrder() {
+    const orderCodeInput = document.getElementById('orderCode');
+    
+    if (!orderCodeInput) {
+        this.addMessage('Error: Order code input field not found. Please try again.', 'ai');
+        return;
+    }
+    
+    const orderCode = orderCodeInput.value.trim().toUpperCase();
+    
+    if (!orderCode) {
+        this.addMessage('Please enter your order code', 'ai');
+        return;
+    }
+
+    // Clear the input field to prevent caching
+    orderCodeInput.value = '';
+    
+    this.addMessage(`Looking up order ${orderCode}...`, 'user');
+    
+    // Check if order exists in database
+    const order = orders[orderCode];
+    
+    setTimeout(() => {
+        if (order) {
+            const progressBar = this.generateProgressBar(order.progress);
+            const statusMessage = `
+                <strong>✅ Order Found!</strong><br><br>
+                
+                <strong>Order Code:</strong> ${orderCode}<br>
+                <strong>Client:</strong> ${order.client}<br>
+                <strong>Package:</strong> ${order.package}<br>
+                <strong>Status:</strong> ${order.status}<br>
+                <strong>Created:</strong> ${order.created}<br>
+                <strong>Expected Completion:</strong> ${order.eta}<br><br>
+                
+                <strong>Progress:</strong><br>
+                ${progressBar}<br>
+                <strong>${order.progress}% Complete</strong><br><br>
+                
+                <strong>Latest Update:</strong><br>
+                ${order.description}<br><br>
+                
+                <button class="cta-button" onclick="ai.escalateToHuman()">Need an Update?</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Track Another Order</button>
+            `;
+            this.addMessage(statusMessage, 'ai');
+        } else {
+            const notFoundMessage = `
+                <strong>❌ Order Not Found</strong><br><br>
+                We couldn't find an order with code: <strong>${orderCode}</strong><br><br>
+                
+                <strong>Please check:</strong><br>
+                • Code is entered correctly (case sensitive)<br>
+                • Code format: WG-YYYY-#### (e.g., WG-2025-1234)<br>
+                • You received the code via email<br><br>
+                
+                <strong>Valid test codes to try:</strong><br>
+                • WG-2025-001<br>
+                • WG-2025-002<br><br>
+                
+                <strong>Still having trouble?</strong><br>
+                <button class="cta-button" onclick="ai.escalateToHuman()">Contact Support</button>
+                <button class="cta-button" onclick="ai.trackAnotherOrder()">Try Again</button>
+            `;
+            this.addMessage(notFoundMessage, 'ai');
+        }
+    }, 1500);
+}
+
+// ==============================================
+// 6. NEW HELPER FUNCTIONS - Add these
+// ==============================================
+
+// Generate visual progress bar
+generateProgressBar(progress) {
+    const segments = 10;
+    const filledSegments = Math.floor((progress / 100) * segments);
+    const emptySegments = segments - filledSegments;
+    
+    const filled = '🟩'.repeat(filledSegments);
+    const empty = '⬜'.repeat(emptySegments);
+    
+    return `<div style="font-size: 1.2em; letter-spacing: 2px;">${filled}${empty}</div>`;
+}
+
+// Show tracking instructions
+// In your WebGrantAI class, add this method:
+showTrackingInstructions(orderCode) {
+    const message = `
+        <strong>📋 How to Track Your Order</strong><br><br>
+        
+        <strong>Your Order Code:</strong> ${orderCode}<br><br>
+        
+        <strong>Tracking Options:</strong><br>
+        1. Visit our <a href="track.html" style="color: var(--primary);">Track Your Order</a> page<br>
+        2. Enter your code: ${orderCode}<br>
+        3. View real-time progress updates<br><br>
+        
+
+    `;
+    this.addMessage(message, 'ai');
+}
+
+// Add this method to WebGrantAI class:
+trackAnotherOrder() {
+    this.startOrderTracking();
+}
+
+// Add this method to WebGrantAI class:
+generateProgressBar(progress) {
+    const segments = 10;
+    const filledSegments = Math.floor((progress / 100) * segments);
+    const emptySegments = segments - filledSegments;
+    
+    const filled = '🟩'.repeat(filledSegments);
+    const empty = '⬜'.repeat(emptySegments);
+    
+    return `<div style="font-size: 1.2em; letter-spacing: 2px;">${filled}${empty}</div>`;
+}
+
+// Track another order
+trackAnotherOrder() {
+    this.startOrderTracking();
+}
+
+        
+
+            escalateToHuman() {
+                const message = `
+                    <strong>Let's connect you with our team!</strong><br><br>
+                    
+                    <strong>Contact Options:</strong><br>
+                    📧 Email: <a href="mailto:webgrant25@gmail.com" style="color: var(--primary);">webgrant25@gmail.com</a><br>
+                    📱 Instagram: <a href="https://www.instagram.com/webgrantofficial/" target="_blank" style="color: var(--primary);">@webgrantofficial</a><br><br>
+                    
+                    <strong>Or schedule a call:</strong><br>
+                    <button class="cta-button" onclick="ai.scheduleCall()">Schedule Call with Founders</button>
+                    <button class="cta-button" onclick="ai.sendToFounders()">Send Message to Team</button>
+                `;
+                this.addMessage(message, 'ai', true);
+            }
+
+            scheduleCall() {
+                const message = `
+                    <strong>Schedule a Call</strong><br><br>
+                    What's the best time to reach you?<br><br>
+                    
+                    <div class="form-field">
+                        <label>Your Name</label>
+                        <input type="text" id="callName" placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" id="callEmail" placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Preferred Time</label>
+                        <input type="text" id="callTime" placeholder="e.g., Monday mornings, weekday evenings">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>What would you like to discuss?</label>
+                        <textarea id="callTopic" placeholder="Project details, questions, etc."></textarea>
+                    </div>
+                    
+                    <button class="cta-button" onclick="ai.submitCallRequest()">Request Call</button>
+                `;
+                this.addMessage(message, 'ai');
+            }
+
+            submitCallRequest() {
+                const name = document.getElementById('callName')?.value;
+                const email = document.getElementById('callEmail')?.value;
+                const time = document.getElementById('callTime')?.value;
+                const topic = document.getElementById('callTopic')?.value;
+
+                if (!email) {
+                    this.addMessage('Please provide your email address', 'ai');
+                    return;
+                }
+
+                // Send to Formspree
+                const formData = new FormData();
+                formData.append('name', name || 'Not provided');
+                formData.append('email', email);
+                formData.append('preferred_time', time || 'Not specified');
+                formData.append('call_topic', topic || 'General discussion');
+                formData.append('request_type', 'Call Request');
+                formData.append('source', 'AI Chat');
+
+                fetch('https://formspree.io/f/xovwbgqz', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        this.addMessage(`Your call request has been submitted! Om or Ritvik will reach out to you at ${email} to schedule a convenient time.
+
+                        Expected response: Within 24 hours<br>
+                        Preferred time: ${time || 'Not specified'}<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview While You Wait</button>`, 'ai', true);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Formspree error:', error);
+                    this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                });
+            }
+
+            submitFounderMessage() {
+                const name = document.getElementById('founderName')?.value;
+                const email = document.getElementById('founderEmail')?.value;
+                const message = document.getElementById('founderMessage')?.value;
+
+                if (!email || !message) {
+                    this.addMessage('Please provide your email and message', 'ai');
+                    return;
+                }
+
+                // Send to Formspree
+                const formData = new FormData();
+                formData.append('name', name || 'Not provided');
+                formData.append('email', email);
+                formData.append('founder_message', message);
+                formData.append('request_type', 'Direct Message to Founders');
+                formData.append('source', 'AI Chat');
+
+                fetch('https://formspree.io/f/xovwbgqz', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        this.addMessage(`Your message has been sent directly to Om and Ritvik! They'll personally respond to you at ${email}.
+
+                        <strong>Our founders typically respond within:</strong><br>
+                        • Business inquiries: Same day<br>
+                        • Technical questions: 24 hours<br>
+                        • General questions: 48 hours<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>`, 'ai', true);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Formspree error:', error);
+                    this.addMessage('There was an issue submitting your request. Please email us directly at webgrant25@gmail.com or try again.', 'ai');
+                });
+            }
+
+            sendToFounders() {
+                const message = `
+                    <strong>Send Message to Our Founders</strong><br><br>
+                    
+                    <div class="form-field">
+                        <label>Your Name</label>
+                        <input type="text" id="founderName" placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" id="founderEmail" placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Message for Om & Ritvik</label>
+                        <textarea id="founderMessage" placeholder="What would you like to discuss with our founders?"></textarea>
+                    </div>
+                    
+                    <button class="cta-button" onclick="ai.submitFounderMessage()">Send Message</button>
+                `;
+                this.addMessage(message, 'ai');
+            }
+
+            sendMessage() {
+                const userInput = document.getElementById('userInput');
+                const message = userInput.value.trim();
+                
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                userInput.value = '';
+
+                // Process the message
+                this.processUserMessage(message);
+            }
+
+            processUserMessage(message) {
+                const lowerMessage = message.toLowerCase();
+
+                // Handle different conversation flows
+                if (this.context.step === 'completed' || this.context.step === 'initial') {
+                    // FAQ responses
+                    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+                        this.addMessage(`Our packages range from $400-$2500 AUD:
+
+                        <strong>Starter:</strong> $400-$700 (single page, mobile-friendly)<br>
+                        <strong>Growth:</strong> $800-$1100 (multi-page, animations)<br>
+                        <strong>Growth +:</strong> $1200-$2500 (custom design, advanced features)<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get Exact Quote</button>
+                        <button class="cta-button" onclick="ai.startPackageRecommendation()">Help Me Choose</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('turnaround') || lowerMessage.includes('how long') || lowerMessage.includes('timeline')) {
+                        this.addMessage(`Our average turnaround time is 1-2 weeks for normal projects. This includes:
+
+                        • Design phase: 3-5 days<br>
+                        • Development: 5-7 days<br>
+                        • Revisions: 2-3 days<br><br>
+                        
+                        Rush jobs available for additional fee!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get Timeline for My Project</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('update') || lowerMessage.includes('maintenance') || lowerMessage.includes('changes')) {
+                        this.addMessage(`Website updates and maintenance:
+
+                        • Minor updates: Included for 30 days after launch<br>
+                        • Content updates: $50-$100 per hour<br>
+                        • Feature additions: Custom quote<br>
+                        • Emergency fixes: Same day response<br><br>
+                        
+                        <button class="cta-button" onclick="ai.escalateToHuman()">Discuss Maintenance Plan</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('portfolio') || lowerMessage.includes('examples') || lowerMessage.includes('work')) {
+                        this.addMessage(`Check out our portfolio! We've built sites for:
+
+                        • La Tavola Italiana (restaurant)<br>
+                        • SydneyDine (fine dining)<br>
+                        • NextGen (tech company)<br>
+                        • Local Café (café)<br>
+                        • ShinySpark Cleaning Co.<br>
+                        • FrostAir Experts (HVAC)<br><br>
+                        
+                        View full portfolio on our website!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Your Preview</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('seo') || lowerMessage.includes('search') || lowerMessage.includes('google')) {
+                        this.addMessage(`SEO is included in all our packages:
+
+                        <strong>Starter:</strong> Basic SEO setup<br>
+                        <strong>Growth:</strong> Standard SEO optimization<br>
+                        <strong>Growth +:</strong> Advanced SEO with ongoing optimization<br><br>
+                        
+                        We optimize for Google, mobile search, and local SEO!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFullQuote()">Get SEO Quote</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('mobile') || lowerMessage.includes('responsive') || lowerMessage.includes('phone')) {
+                        this.addMessage(`All our websites are mobile-friendly and responsive:
+
+                        • Works perfectly on phones, tablets, desktops<br>
+                        • Fast loading on mobile networks<br>
+                        • Touch-friendly navigation<br>
+                        • Mobile-optimized images<br><br>
+                        
+                        Mobile-first design is our standard!<br><br>
+                        
+                        <button class="cta-button" onclick="ai.startFreePreview()">See Mobile Preview</button>`, 'ai', true);
+                    }
+                    else if (lowerMessage.includes('package') || lowerMessage.includes('which') || lowerMessage.includes('recommend')) {
+                        this.startPackageRecommendation();
+                    }
+                    else if (lowerMessage.includes('quote') || lowerMessage.includes('estimate')) {
+                        this.startFullQuote();
+                    }
+                    else if (lowerMessage.includes('preview') || lowerMessage.includes('free')) {
+                        this.startFreePreview();
+                    }
+                    else if (lowerMessage.includes('track') || lowerMessage.includes('order') || lowerMessage.includes('status')) {
+                        this.startOrderTracking();
+                    }
+                    else if (lowerMessage.includes('contact') || lowerMessage.includes('human') || lowerMessage.includes('team')) {
+                        this.escalateToHuman();
+                    }
+                    else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                        this.addMessage(`Hello! I'm here to help you with your website needs. What would you like to know?
+
+                        <button class="cta-button" onclick="ai.explainPackages()">View Packages</button>
+                        <button class="cta-button" onclick="ai.startFreePreview()">Get Free Preview</button>
+                        <button class="cta-button" onclick="ai.startFullQuote()">Request Quote</button>`, 'ai', true);
+                    }
+                    else {
+                        // Default helpful response
+                        this.addMessage(`I can help you with:
+
+                        • Package recommendations<br>
+                        • Free homepage previews<br>
+                        • Full project quotes<br>
+                        • Order tracking<br>
+                        • Connecting with our team<br><br>
+                        
+                        What interests you most?<br><br>
+                        
+                        <button class="cta-button" onclick="ai.explainPackages()">View Packages</button>
+                        <button class="cta-button" onclick="ai.startFreePreview()">Free Preview</button>`, 'ai', true);
+                    }
+                } else {
+                    // Handle context-specific responses
+                    this.addMessage("I'm processing your request. Please use the buttons above to continue, or let me know if you need something else!", 'ai');
+                }
+            }
+
+            // FAQ responses
+            getFAQResponse(topic) {
+                const faqs = {
+                    turnaround: "Average turnaround is 1-2 weeks for normal projects. Rush jobs available!",
+                    updates: "Minor updates included for 30 days. Additional updates: $50-$100/hour.",
+                    email: "Contact us at webgrant25@gmail.com",
+                    preview: "Free homepage previews delivered in 2-3 business days",
+                    social: "Follow us @webgrantofficial on Instagram"
+                };
+                return faqs[topic] || "I don't have specific information about that. Let me connect you with our team!";
+            }
+        }
+
+        // Initialize the AI assistant
+        const ai = new WebGrantAI();
+
+        // Global functions for button clicks
+        function selectOption(option) {
+            ai.selectOption(option);
+        }
+
+        function sendMessage() {
+            ai.sendMessage();
+        }
+
+// Enhanced toggle function that works properly on mobile
+function toggleChat() {
+    const panel = document.getElementById('chatPanel');
+    const btn = document.getElementById('openChatBtn');
+    
+    if (panel.classList.contains('open')) {
+        // Close the chat
+        panel.classList.remove('open');
+        btn.innerHTML = '💬';
+        btn.style.transform = 'scale(1)';
+    } else {
+        // Open the chat
+        panel.classList.add('open');
+        btn.innerHTML = '✕';
+        btn.style.transform = 'scale(1.1)';
+    }
+}
+
+        // Auto-hide initial options after first interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const userInput = document.getElementById('userInput');
+            userInput.addEventListener('focus', () => {
+                const initialOptions = document.getElementById('initialOptions');
+                if (initialOptions && initialOptions.style.display !== 'none') {
+                    // Don't hide immediately, let user choose
+                }
+            });
+        });
+
+        // Enhanced mobile responsiveness
+        window.addEventListener('resize', () => {
+            const chatPanel = document.getElementById('chatPanel');
+            if (window.innerWidth <= 768) {
+                chatPanel.style.width = '100%';
+                chatPanel.style.right = chatPanel.classList.contains('open') ? '0' : '-100%';
+            } else {
+                chatPanel.style.width = '500px';
+                chatPanel.style.right = chatPanel.classList.contains('open') ? '0' : '-600px';
+            }
+        });
+
+        // Simulate webhook responses for demo
+        function simulateWebhookResponse(data, type) {
+            console.log(`${type} webhook called with:`, data);
+            
+            // In a real implementation, you would make actual HTTP requests here:
+            // fetch('https://YOUR_DOMAIN/api/webgrant/lead', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+            
+            return {
+                success: true,
+                message: `${type} request processed successfully`
+            };
+        }
+
+        // Add some easter eggs and fun interactions
+        let konami = [];
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            konami.push(e.code);
+            if (konami.length > konamiCode.length) {
+                konami.shift();
+            }
+            
+            if (konami.join(',') === konamiCode.join(',')) {
+                ai.addMessage('🎉 Konami code activated! You found our secret! Here\'s a special 10% discount code: KONAMI2025', 'ai');
+                konami = [];
+            }
+        });
+
+        // Add some personality to the AI
+        const personalityQuips = [
+            "Building websites is like cooking - we make sure yours is perfectly seasoned!",
+            "We turn boring websites into digital masterpieces!",
+            "Your website should work as hard as you do - let's make it happen!",
+            "From startup to scale-up, we've got the web magic you need!",
+            "Why settle for ordinary when you can have extraordinary?"
+        ];
+
+        // Randomly add personality to responses (10% chance)
+        const originalAddMessage = ai.addMessage.bind(ai);
+        ai.addMessage = function(text, sender, showTyping = false) {
+            if (sender === 'ai' && Math.random() < 0.1 && !text.includes('<button')) {
+                const quip = personalityQuips[Math.floor(Math.random() * personalityQuips.length)];
+                text += `<br><br><em style="color: #999; font-size: 0.9em;">${quip}</em>`;
+            }
+            originalAddMessage(text, sender, showTyping);
+        };
+
+
+// ==============================================
+// 9. EXAMPLE USAGE INSTRUCTIONS
+// ==============================================
+
+/*
+TO MANUALLY UPDATE ORDERS:
+
+1. Open browser console (F12)
+2. Use these commands:
+
+// Add a new order:
+addNewOrder('WG-2025-123', {
+    progress: 25,
+    status: 'In Design',
+    description: 'Homepage wireframes completed, moving to visual design',
+    client: 'ABC Company',
+    email: 'client@abccompany.com',
+    package: 'Growth +',
+    eta: '2025-02-15'
+});
+
+// Update existing order:
+updateOrder('WG-2025-123', {
+    progress: 50,
+    status: 'Development Started',
+    description: 'Design approved, developer has started coding'
+});
+
+// View all orders:
+listAllOrders();
+
+COMMON STATUS VALUES:
+- 'Pending Review'
+- 'In Design' 
+- 'Design Review'
+- 'In Development'
+- 'Testing'
+- 'Client Review'
+- 'Revisions'
+- 'Ready to Launch'
+- 'Completed'
+- 'On Hold'
+
+PROGRESS VALUES:
+- 0-20: Initial review/planning
+- 21-40: Design phase
+- 41-60: Development phase  
+- 61-80: Testing/review
+- 81-100: Final touches/launch
+*/
+
+</script>
 </body>
 </html>
+
