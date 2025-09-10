@@ -2001,6 +2001,20 @@
                 transition: none !important;
             }
         }
+
+        /* iPhone 6/very small screens: Adjust chatbot position and size */
+        @media (max-width: 375px) {
+            .chatbot-container {
+                bottom: 140px;
+                right: var(--space-md);
+            }
+
+            .chatbot-window {
+                height: 450px;
+                bottom: 160px;
+                width: calc(100vw - 2rem);
+            }
+        }
     </style>
 </head>
 
